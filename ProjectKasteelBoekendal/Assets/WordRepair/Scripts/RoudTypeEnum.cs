@@ -1,6 +1,6 @@
 public enum RoundType
 {
-    Preaparation,
+    Preparation,
     Repair
 }
 

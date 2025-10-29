@@ -1536,7 +1536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   done: 100
   currentProgress: 0
-  feedbackText: {fileID: 0}
   feedbackPopupPrefab: {fileID: 5387264960716038083, guid: 677bcccb459d4eec49bb37a3ceefe9e3, type: 3}
   popupParent: {fileID: 2057054704}
   popupDuration: 2

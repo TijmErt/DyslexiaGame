@@ -24,7 +24,7 @@ public class RepairSystem : MonoBehaviour
         {
             switch (wordManager.currentRoundType)
             {
-                case RoundType.Preaparation:
+                case RoundType.Preparation:
                     customer.ProgressOrder(this.correct);
                     resultText.text = "Well done!";
                     materials += 1;
@@ -43,7 +43,7 @@ public class RepairSystem : MonoBehaviour
         {
             switch (wordManager.currentRoundType)
             {
-                case RoundType.Preaparation:
+                case RoundType.Preparation:
                     customer.ProgressOrder(wrong);
                     resultText.text = "Close!\nThe word was: " + wordManager.GetCurrentWord();
                     break;

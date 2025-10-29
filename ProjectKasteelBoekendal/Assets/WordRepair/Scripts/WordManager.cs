@@ -25,7 +25,7 @@ public class WordManager : MonoBehaviour
 
     void Start()
     {
-        currentRoundType = RoundType.Preaparation;
+        currentRoundType = RoundType.Preparation;
         LoadNextWord();
     }
 
@@ -93,7 +93,7 @@ public class WordManager : MonoBehaviour
     public void Next()
     {
         currentIndex++;
-        currentRoundType = currentRoundType == RoundType.Preaparation ? RoundType.Repair : RoundType.Preaparation;
+        currentRoundType = currentRoundType == RoundType.Preparation ? RoundType.Repair : RoundType.Preparation;
         Debug.Log("Next Round Type: " + currentRoundType);
         LoadNextWord();
     }

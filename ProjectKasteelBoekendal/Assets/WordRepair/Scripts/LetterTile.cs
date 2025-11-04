@@ -20,10 +20,10 @@ public class LetterTile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         switch (wm.currentRoundType)
         {
             case RoundType.Preparation:
-                this.GetComponent<Image>().color = new Color32(255, 240, 82, 242);
+                this.GetComponent<Image>().color = new Color32(255, 240, 82, 242); // Yellow
                 break;
             case RoundType.Repair:
-                this.GetComponent<Image>().color = new Color32(85, 255, 202, 242);
+                this.GetComponent<Image>().color = new Color32(85, 255, 202, 242); // Blue
                 break;
             default:
                 this.GetComponent<Image>().color = new Color32(255, 240, 82, 242);

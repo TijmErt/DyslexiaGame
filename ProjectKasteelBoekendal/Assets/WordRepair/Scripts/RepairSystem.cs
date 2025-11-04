@@ -27,6 +27,7 @@ public class RepairSystem : MonoBehaviour
                 case RoundType.Preparation:
                     customer.ProgressOrder(this.correct);
                     resultText.text = "Well done!";
+                    score += 1;
                     materials += 1;
                     break;
                 case RoundType.Repair :

@@ -17,19 +17,6 @@ public class LetterTile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void Setup(char c, WordManager wm)
     {
 
-        switch (wm.currentRoundType)
-        {
-            case RoundType.Preparation:
-                this.GetComponent<Image>().color = new Color32(255, 240, 82, 242); // Yellow
-                break;
-            case RoundType.Repair:
-                this.GetComponent<Image>().color = new Color32(85, 255, 202, 242); // Blue
-                break;
-            default:
-                this.GetComponent<Image>().color = new Color32(255, 240, 82, 242);
-                break;
-        }
-
         letterChar = c;
         if (letterText != null) letterText.text = c.ToString();
         wordManager = wm;

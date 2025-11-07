@@ -9,11 +9,7 @@ public class RepairSystem : MonoBehaviour
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI materialsText;
-
-    public int correct = 30;
-    public int wrong = 10;
     private int score = 0;
-
     private int materials = 5;
 
     public void CompleteWord()
@@ -25,13 +21,13 @@ public class RepairSystem : MonoBehaviour
             switch (wordManager.currentRoundType)
             {
                 case RoundType.Preparation:
-                    customer.ProgressOrder(this.correct);
+                    customer.ProgressOrder();
                     resultText.text = "Well done!";
                     score += 1;
                     materials += 1;
                     break;
                 case RoundType.Repair :
-                    customer.ProgressOrder(this.correct);
+                    customer.ProgressOrder();
                     resultText.text = "Perfect!";
                     score += 1;
                     materials -= 1;
@@ -45,11 +41,11 @@ public class RepairSystem : MonoBehaviour
             switch (wordManager.currentRoundType)
             {
                 case RoundType.Preparation:
-                    customer.ProgressOrder(wrong);
+                    customer.ProgressOrder();
                     resultText.text = "Close!\nThe word was: " + wordManager.GetCurrentWord();
                     break;
                 case RoundType.Repair:
-                    customer.ProgressOrder(wrong);
+                    customer.ProgressOrder();
                     materials -= 1;
                     resultText.text = "Close!\nThe word was: " + wordManager.GetCurrentWord();
                     break;

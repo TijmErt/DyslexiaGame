@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +14,10 @@ public class WordManager : MonoBehaviour
     }
 
     public List<WordData> words;
-    public Image wordImage;
     public Transform letterParent;
     public GameObject letterTilePrefab;
     public GameObject letterSlotPrefab;
+    public GameObject customer;
 
     private string currentWord;
     private List<LetterTile> currentTiles = new List<LetterTile>();
@@ -41,7 +42,9 @@ public class WordManager : MonoBehaviour
         // load new word
         WordData w = words[currentIndex];
         currentWord = w.word.ToUpper();
-        wordImage.sprite = w.image;
+
+        customer.GetComponent<Customer>().orderImage = w.image;
+        customer.GetComponent<Customer>().NewOrder();
 
         // mix up letters in word
         List<char> scrambled = new List<char>(currentWord.ToCharArray());

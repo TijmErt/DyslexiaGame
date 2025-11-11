@@ -1,46 +1,83 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Reflection;
 
 public class DialogueSystem : MonoBehaviour
 {
-    public GameObject feedbackPopupPrefab;
+    public GameObject popupPrefab;
+    public GameObject orderPopupPrefab;
     public Transform popupParent;
     public float popupDuration = 2f;
     private float popupYOffset;
-    private GameObject feedbackPopupInstance;
+    private float popupXOffset;
+    private GameObject popupInstance;
     private GameObject currentPopupOwner;
 
-    public void ShowFeedbackPopup(GameObject popupOwner, string message, float yOffset = 2f)
+    public void ShowFeedbackPopup(GameObject popupOwner, string message, float yOffset)
     {
+        HidePopup();
         currentPopupOwner = popupOwner;
         popupYOffset = yOffset;
+        popupXOffset = 0f;
 
-        if (feedbackPopupInstance == null)
+        if (popupInstance == null || popupInstance.CompareTag("OrderPopup"))
         {
             // instantiate under popupParent
-            feedbackPopupInstance = Instantiate(feedbackPopupPrefab, popupParent);
+            popupInstance = Instantiate(popupPrefab, popupParent);
         }
         else
         {
-            feedbackPopupInstance.SetActive(true);
+            popupInstance.SetActive(true);
         }
 
         PositionPopupAbove();
 
         // update text inside the instantiated prefab (find the TMP component)
-        var tmp = feedbackPopupInstance.GetComponentInChildren<TextMeshProUGUI>();
+        var tmp = popupInstance.GetComponentInChildren<TextMeshProUGUI>();
         if (tmp != null) tmp.text = message;
 
         Invoke(nameof(HidePopup), popupDuration);
     }
+
+    public void ShowOrderPopup(GameObject popupOwner, Sprite image, float xOffset, float yOffset)
+    {
+        HidePopup();
+        currentPopupOwner = popupOwner;
+        popupYOffset = yOffset;
+        popupXOffset = xOffset;
+
+        if (popupInstance == null || popupInstance.CompareTag("FeedbackPopup"))
+        {
+            popupInstance = Instantiate(orderPopupPrefab, popupParent);
+        }
+        else
+        {
+            popupInstance.SetActive(true);
+        }
+
+        // Find the specific Image inside the instantiated popup (child named "OrderImage")
+        Image img = null;
+        Transform child = popupInstance.transform.Find("Image");
+        if (child != null) img = child.GetComponent<Image>();
+
+        // fallback to first Image in children if specific child not found
+        if (img == null) img = popupInstance.GetComponentInChildren<Image>();
+
+        if (img != null)
+            img.sprite = image;
+        else
+            Debug.LogWarning("DialogueSystem: no Image found on order popup instance to set sprite.");
+        
+        PositionPopupAbove();
+    }
     
     private void PositionPopupAbove()
     {
-        if (feedbackPopupInstance == null || popupParent == null) return;
+        if (popupInstance == null || popupParent == null) return;
 
         // world position a bit above the customer
-        Vector3 worldPos = currentPopupOwner.transform.position + Vector3.up * popupYOffset;
+        Vector3 worldPos = currentPopupOwner.transform.position + Vector3.up * popupYOffset + Vector3.right * popupXOffset;
 
         // get parent rect and canvas to determine the camera for conversion
         RectTransform parentRect = popupParent as RectTransform;
@@ -59,7 +96,7 @@ public class DialogueSystem : MonoBehaviour
         Vector2 anchoredPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, screenPoint, uiCamera, out anchoredPos);
 
-        var popupRect = feedbackPopupInstance.GetComponent<RectTransform>();
+        var popupRect = popupInstance.GetComponent<RectTransform>();
         if (popupRect != null)
         {
             popupRect.anchoredPosition = anchoredPos;
@@ -67,15 +104,15 @@ public class DialogueSystem : MonoBehaviour
         else
         {
             // fallback: set world position (if popup is not a UI element)
-            feedbackPopupInstance.transform.position = worldPos;
+            popupInstance.transform.position = worldPos;
         }
     }
 
     private void HidePopup()
     {
-        if (feedbackPopupInstance != null)
+        if (popupInstance != null)
         {
-            feedbackPopupInstance.SetActive(false);
+            popupInstance.SetActive(false);
         }
     }
 }

@@ -631,10 +631,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5387264960716038083, guid: 677bcccb459d4eec49bb37a3ceefe9e3, type: 3}
       propertyPath: m_Name
-      value: FeedbackPopup
+      value: ScorePopup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 546921769749427401, guid: 677bcccb459d4eec49bb37a3ceefe9e3, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3789478516232311769, guid: 677bcccb459d4eec49bb37a3ceefe9e3, type: 3}
       insertIndex: -1
@@ -821,10 +822,10 @@ MonoBehaviour:
     image: {fileID: 2836554479157175418, guid: 792a75c1347a909ff8f9a3d5cbca50c3, type: 3}
   - word: metaal
     image: {fileID: -262108834630032882, guid: 7ade82dca076b20fa9e61cbc1a1d310d, type: 3}
-  wordImage: {fileID: 1450119940}
   letterParent: {fileID: 1486601197}
   letterTilePrefab: {fileID: 7826792600508144165, guid: 56edb02526a80d24d9ea9609bb768092, type: 3}
   letterSlotPrefab: {fileID: 1142993572988907319, guid: f7e364baa5b55cbcf9812667b7e27b13, type: 3}
+  customer: {fileID: 1950451381}
 --- !u!4 &570664665
 Transform:
   m_ObjectHideFlags: 0
@@ -1915,8 +1916,6 @@ MonoBehaviour:
   resultText: {fileID: 1873007659}
   scoreText: {fileID: 813214356}
   materialsText: {fileID: 870136045}
-  correct: 30
-  wrong: 10
 --- !u!4 &1258809052
 Transform:
   m_ObjectHideFlags: 0
@@ -2011,81 +2010,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1450119938
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1450119939}
-  - component: {fileID: 1450119941}
-  - component: {fileID: 1450119940}
-  m_Layer: 5
-  m_Name: WordImage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1450119939
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450119938}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2124, y: 2.2124, z: 2.2124}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 2057054704}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 36, y: 49}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &1450119940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450119938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1450119941
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450119938}
-  m_CullTransparentMesh: 1
 --- !u!1 &1486601196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,10 +2538,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef367ff384f4ae7bce7458e9f64da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Customer
-  done: 100
-  currentProgress: 0
   popupYOffset: 3
+  orderPopupYOffset: 2.8
+  orderPopupXOffset: 1.5
   dialogueSystem: {fileID: 2137446045}
+  orderImage: {fileID: 0}
 --- !u!1 &2057054700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,7 +2637,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1450119939}
   - {fileID: 1486601197}
   - {fileID: 1001993912}
   - {fileID: 1873007658}
@@ -2929,7 +2853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffcb271a5da23a6b8344518371a9155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem
-  feedbackPopupPrefab: {fileID: 5387264960716038083, guid: 677bcccb459d4eec49bb37a3ceefe9e3, type: 3}
+  popupPrefab: {fileID: 5387264960716038083, guid: 677bcccb459d4eec49bb37a3ceefe9e3, type: 3}
+  orderPopupPrefab: {fileID: 3389888477228769668, guid: 54fb833f263f5c00da2de5845a1b6eb7, type: 3}
   popupParent: {fileID: 2057054704}
   popupDuration: 2
 --- !u!4 &2137446046

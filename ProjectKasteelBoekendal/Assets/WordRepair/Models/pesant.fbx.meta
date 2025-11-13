@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ranger
-    second: {fileID: 8353225005662577125, guid: fda9a923166798d53a0caf6822a2b01f, type: 3}
+    second: {fileID: 8353225005662577125, guid: eba11a7155c5d810f997021536312d9f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

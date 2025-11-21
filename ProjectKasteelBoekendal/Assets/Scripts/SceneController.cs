@@ -11,5 +11,9 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void BackToMainRoom()
+    {
+        SceneManager.LoadScene("Combined");
+    }
     
 }

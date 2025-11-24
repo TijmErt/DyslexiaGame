@@ -124,8 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b972c122862838219db8f57aa5b7959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LetterTile
-  letterChar: 0
   letterText: {fileID: 8247727057120523026}
+  tileBackground: {fileID: 429186136304461164}
+  selectedColor: {r: 0.56, g: 0.93, b: 0.56, a: 1}
+  letterChar: 0
 --- !u!61 &3086503045117034273
 BoxCollider2D:
   m_ObjectHideFlags: 0

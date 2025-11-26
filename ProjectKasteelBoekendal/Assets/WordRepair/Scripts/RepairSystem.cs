@@ -55,9 +55,7 @@ public class RepairSystem : MonoBehaviour
             
         }
 
-        scoreText.text = "Completed: " + score;
-
-        materialsText.text = "Materials: " + materials;
+        scoreText.text = "Voltooid: " + score;
 
         Invoke(nameof(NextWord), 2f);
     }

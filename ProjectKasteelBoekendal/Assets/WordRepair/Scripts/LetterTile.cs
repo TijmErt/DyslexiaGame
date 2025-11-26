@@ -10,8 +10,8 @@ public class LetterTile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Canvas canvas;
-    private Transform slot;
-    private Vector2 lastAnchoredPos;
+    public Transform slot;
+    public Vector2 lastAnchoredPos;
     private WordManager wordManager;
 
     public void Setup(char c, WordManager wm)

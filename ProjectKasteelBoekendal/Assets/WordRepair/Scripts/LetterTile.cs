@@ -38,7 +38,6 @@ public class LetterTile : MonoBehaviour, IPointerClickHandler
             originalColor = tileBackground.color;
     }
 
-    // This Unity event fires automatically when clicked/tapped
     public void OnPointerClick(PointerEventData eventData)
     {
         if (controller != null)
@@ -47,15 +46,14 @@ public class LetterTile : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // Visual feedback for selection
     public void SetSelectedState(bool isSelected)
     {
         if (tileBackground != null)
         {
-            // Example: Turn Green when selected, or back to white
+            // change color to green when selected
             tileBackground.color = isSelected ? selectedColor : originalColor;
             
-            // Optional: Make it slightly bigger when selected
+            // make bigger when selected
             transform.localScale = isSelected ? Vector3.one * 1.2f : Vector3.one;
         }
     }

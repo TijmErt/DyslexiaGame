@@ -3,115 +3,58 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class LetterTile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+using UnityEngine;
+using UnityEngine.EventSystems;
+using TMPro;
+using UnityEngine.UI;
+
+public class LetterTile : MonoBehaviour, IPointerClickHandler
 {
-    public char letterChar;
+    [Header("UI References")]
     public TextMeshProUGUI letterText;
+    public Image tileBackground;
+    [Header("Appearance")]
+    public Color selectedColor = new Color(0.56f, 0.93f, 0.56f);
+
+    [Header("Data")]
+    public char letterChar;
+    
+    // Internal References
+    private TileController controller;
     private RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
-    private Canvas canvas;
-    public Transform slot;
-    public Vector2 lastAnchoredPos;
-    private WordManager wordManager;
+    private Color originalColor;
 
-    public void Setup(char c, WordManager wm)
+    public void Setup(char c, TileController tc)
     {
-
         letterChar = c;
-        if (letterText != null) letterText.text = c.ToString();
-        wordManager = wm;
+        controller = tc;
+        
+        if (letterText != null) 
+            letterText.text = c.ToString();
 
         rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
-        canvas = GetComponentInParent<Canvas>();
-
-        slot = transform.parent;
-        if (rectTransform != null)
-            lastAnchoredPos = rectTransform.anchoredPosition;
-        else
-            lastAnchoredPos = Vector2.zero;
+        
+        if (tileBackground != null) 
+            originalColor = tileBackground.color;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        // When the tile is dragged give feedback to player
-        if (canvasGroup != null)
+        if (controller != null)
         {
-            canvasGroup.alpha = 0.6f;
-            canvasGroup.blocksRaycasts = false;
-        }
-
-        // Move to top level of canvas to avoid being affected by other UI elements
-        if (canvas != null)
-        {
-            transform.SetParent(canvas.transform, true);
+            controller.OnTileClicked(this);
         }
     }
 
-
-    public void OnDrag(PointerEventData eventData)
+    public void SetSelectedState(bool isSelected)
     {
-        if (rectTransform == null || canvas == null) return;
-
-        // translate position to UI space
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (canvasGroup != null)
+        if (tileBackground != null)
         {
-            canvasGroup.alpha = 1f;
-            canvasGroup.blocksRaycasts = true;
-        }
-
-        // find a slot under the pointer among the managed slots
-        Transform foundSlot = FindSlotUnderPointer(eventData);
-
-        PlaceTileInSlot(foundSlot);
-    }
-
-    private Transform FindSlotUnderPointer(PointerEventData eventData)
-    {
-        foreach (Transform slot in wordManager.letterParent)
-        {
-            RectTransform slotRt = slot as RectTransform;
-            if (slotRt == null) continue;
-
-            Camera cam = (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceCamera) ? canvas.worldCamera : null;
-            if (RectTransformUtility.RectangleContainsScreenPoint(slotRt, eventData.position, cam))
-            {
-                return slot;
-            }
-        }
-        return null;
-    }
-
-    private void PlaceTileInSlot(Transform targetSlot)
-    {
-        if (targetSlot != null)
-        {
-            LetterTile other = targetSlot.GetComponentInChildren<LetterTile>();
-
-            transform.SetParent(targetSlot, false);
-            rectTransform.anchoredPosition = Vector2.zero;
-
-            if (other != null && other != this)
-            {
-                other.transform.SetParent(slot, false);
-                RectTransform otherRt = other.GetComponent<RectTransform>();
-                if (otherRt != null)
-                    otherRt.anchoredPosition = Vector2.zero;
-
-                other.slot = slot;
-                slot = targetSlot;
-            }
-        }
-        else
-        {
-            transform.SetParent(slot, false);
-            if (rectTransform != null)
-                rectTransform.anchoredPosition = lastAnchoredPos;
+            // change color to green when selected
+            tileBackground.color = isSelected ? selectedColor : originalColor;
+            
+            // make bigger when selected
+            transform.localScale = isSelected ? Vector3.one * 1.2f : Vector3.one;
         }
     }
 }

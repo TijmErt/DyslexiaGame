@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -17,43 +16,7 @@ public class RepairSystem : MonoBehaviour
         bool correct = wordManager.CheckAnswer();
 
         if (correct)
-        {
-            switch (wordManager.currentRoundType)
-            {
-                case RoundType.Preparation:
-                    customer.ProgressOrder();
-                    resultText.text = "Well done!";
-                    score += 1;
-                    materials += 1;
-                    break;
-                case RoundType.Repair :
-                    customer.ProgressOrder();
-                    resultText.text = "Perfect!";
-                    score += 1;
-                    materials -= 1;
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            switch (wordManager.currentRoundType)
-            {
-                case RoundType.Preparation:
-                    customer.ProgressOrder();
-                    resultText.text = "Close!\nThe word was: " + wordManager.GetCurrentWord();
-                    break;
-                case RoundType.Repair:
-                    customer.ProgressOrder();
-                    materials -= 1;
-                    resultText.text = "Close!\nThe word was: " + wordManager.GetCurrentWord();
-                    break;
-                default:
-                    break;
-            }
-            
-        }
+            score++;
 
         scoreText.text = "Voltooid: " + score;
 

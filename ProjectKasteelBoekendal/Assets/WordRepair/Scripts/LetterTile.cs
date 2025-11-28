@@ -3,11 +3,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-using UnityEngine;
-using UnityEngine.EventSystems;
-using TMPro;
-using UnityEngine.UI;
-
 public class LetterTile : MonoBehaviour, IPointerClickHandler
 {
     [Header("UI References")]
@@ -18,7 +13,7 @@ public class LetterTile : MonoBehaviour, IPointerClickHandler
 
     [Header("Data")]
     public char letterChar;
-    
+
     // Internal References
     private TileController controller;
     private RectTransform rectTransform;
@@ -28,13 +23,13 @@ public class LetterTile : MonoBehaviour, IPointerClickHandler
     {
         letterChar = c;
         controller = tc;
-        
-        if (letterText != null) 
+
+        if (letterText != null)
             letterText.text = c.ToString();
 
         rectTransform = GetComponent<RectTransform>();
-        
-        if (tileBackground != null) 
+
+        if (tileBackground != null)
             originalColor = tileBackground.color;
     }
 
@@ -52,7 +47,7 @@ public class LetterTile : MonoBehaviour, IPointerClickHandler
         {
             // change color to green when selected
             tileBackground.color = isSelected ? selectedColor : originalColor;
-            
+
             // make bigger when selected
             transform.localScale = isSelected ? Vector3.one * 1.2f : Vector3.one;
         }

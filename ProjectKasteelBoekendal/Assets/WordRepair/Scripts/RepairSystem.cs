@@ -16,6 +16,9 @@ public class RepairSystem : MonoBehaviour
     {
         bool correct = wordManager.CheckAnswer();
 
+        if (correct)
+            score++;
+
         scoreText.text = "Voltooid: " + score;
 
         Invoke(nameof(NextWord), 2f);

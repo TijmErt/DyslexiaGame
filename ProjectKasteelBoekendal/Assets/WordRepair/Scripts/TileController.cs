@@ -3,8 +3,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-using UnityEngine;
-
 public class TileController : MonoBehaviour
 {
     private LetterTile selectedTile;

@@ -1,7 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Reflection;
 
 public class Customer : MonoBehaviour
 {

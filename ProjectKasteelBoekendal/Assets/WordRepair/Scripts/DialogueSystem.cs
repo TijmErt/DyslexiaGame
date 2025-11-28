@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Reflection;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -68,10 +67,10 @@ public class DialogueSystem : MonoBehaviour
             img.sprite = image;
         else
             Debug.LogWarning("DialogueSystem: no Image found on order popup instance to set sprite.");
-        
+
         PositionPopupAbove();
     }
-    
+
     private void PositionPopupAbove()
     {
         if (popupInstance == null || popupParent == null) return;

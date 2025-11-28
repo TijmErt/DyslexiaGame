@@ -13,11 +13,10 @@ public class WordManager : MonoBehaviour
 
     [Header("Configuration")]
     public List<WordData> words;
-    public RoundType currentRoundType { get; private set; }
 
     [Header("References")]
     // 1. NEW: Reference to the TileController so we can pass it to new tiles
-    public TileController tileController; 
+    public TileController tileController;
     public Transform letterParent;
     public GameObject letterTilePrefab;
     public GameObject letterSlotPrefab;
@@ -29,7 +28,6 @@ public class WordManager : MonoBehaviour
 
     void Start()
     {
-        currentRoundType = RoundType.Preparation;
         LoadNextWord();
     }
 
@@ -74,7 +72,7 @@ public class WordManager : MonoBehaviour
 
             // 2. UPDATED: We now pass the TileController to the tile
             lt.Setup(c, tileController);
-            
+
             currentTiles.Add(lt);
         }
     }
@@ -101,7 +99,7 @@ public class WordManager : MonoBehaviour
     {
         string playerAnswer = GetPlayerAnswer();
         bool correct = playerAnswer == currentWord;
-        
+
         Debug.Log($"Checking: {playerAnswer} vs {currentWord} = {correct}");
 
         if (correct)
@@ -117,9 +115,7 @@ public class WordManager : MonoBehaviour
     public void Next()
     {
         currentIndex++;
-        // Toggle round type logic
-        currentRoundType = currentRoundType == RoundType.Preparation ? RoundType.Repair : RoundType.Preparation;
-        Debug.Log("Next Round Type: " + currentRoundType);
+
         LoadNextWord();
     }
 

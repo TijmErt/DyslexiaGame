@@ -56,11 +56,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
+            Debug.Log($"{name} (PlayerId {_playerInteraction.PlayerId}) hit {hitInfo.collider.name} on layer {LayerMask.LayerToName(hitInfo.collider.gameObject.layer)}");
+
             IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
 
             if (interactable != null)
             {
-                Vector3 target = interactable.GetPlayerPosPoint();
+                Vector3 target = interactable.GetPlayerPosPoint(_playerInteraction);
 
                 if (!IsPointOnThisAgentsNavMesh(target)) return;
 

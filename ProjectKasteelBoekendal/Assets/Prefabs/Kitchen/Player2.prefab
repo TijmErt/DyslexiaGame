@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 3425658905845016577}
   - component: {fileID: 5132685685563980536}
   - component: {fileID: 3109704778021444288}
+  - component: {fileID: 8373982296004043327}
+  - component: {fileID: 2729751151077466615}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -179,3 +181,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   inputReader: {fileID: 11400000, guid: cfd94b1381f9b344f9e29799088d3c8c, type: 2}
   _navMeshAgent: {fileID: 5132685685563980536}
+  _playerInteraction: {fileID: 2729751151077466615}
+--- !u!114 &8373982296004043327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122845676712347847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6bb0d600e533f4c9a11351975b0f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHand
+--- !u!114 &2729751151077466615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122845676712347847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8c4ae25ce33146bb3ac675fc8f01f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  _playerId: 1
+  _wordManager: {fileID: 0}

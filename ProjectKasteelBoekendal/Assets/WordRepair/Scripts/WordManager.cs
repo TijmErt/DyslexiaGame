@@ -13,7 +13,7 @@ public class WordManager : MonoBehaviour
 
     [Header("Configuration")]
     public List<WordData> words;
-    public RoundType currentRoundType { get; private set; }
+    //public RoundType currentRoundType { get; private set; }
 
     [Header("References")]
     // 1. NEW: Reference to the TileController so we can pass it to new tiles
@@ -29,7 +29,7 @@ public class WordManager : MonoBehaviour
 
     void Start()
     {
-        currentRoundType = RoundType.Preparation;
+        //currentRoundType = RoundType.Preparation;
         LoadNextWord();
     }
 
@@ -118,8 +118,8 @@ public class WordManager : MonoBehaviour
     {
         currentIndex++;
         // Toggle round type logic
-        currentRoundType = currentRoundType == RoundType.Preparation ? RoundType.Repair : RoundType.Preparation;
-        Debug.Log("Next Round Type: " + currentRoundType);
+        //currentRoundType = currentRoundType == RoundType.Preparation ? RoundType.Repair : RoundType.Preparation;
+        //Debug.Log("Next Round Type: " + currentRoundType);
         LoadNextWord();
     }
 

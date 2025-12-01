@@ -1,10 +1,12 @@
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Collider))]
 public class LetterItem : MonoBehaviour, IInteractable
 {
     [SerializeField] private char _letter = 'A';
     [SerializeField] private Transform _playerStandPoint;
+    [SerializeField] private TMP_Text _letterText;
 
     private Vector3 _homePosition;
     private Quaternion _homeRotation;
@@ -17,15 +19,35 @@ public class LetterItem : MonoBehaviour, IInteractable
         _homePosition = transform.position;
         _homeRotation = transform.rotation;
         _collider = GetComponent<Collider>();
+
+        UpdateVisual();
     }
 
     public void SetLetter(char newLetter)
     {
         _letter = newLetter;
-        // TODO: Update visuals here (TextMesh / TMP / mesh, etc.)
+        UpdateVisual();
     }
 
-    public Vector3 GetPlayerPosPoint()
+    private void UpdateVisual() 
+    {
+        if (_letterText != null) 
+        {
+            _letterText.text = _letter.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("LetterItem doesn't have a textbox assigned");
+        }
+    }
+
+    public void SetHomeToCurrentTransform()
+    {
+        _homePosition = transform.position;
+        _homeRotation = transform.rotation;
+    }
+
+    public Vector3 GetPlayerPosPoint(PlayerInteraction player)
     {
         return _playerStandPoint != null ? _playerStandPoint.position : transform.position;
     }

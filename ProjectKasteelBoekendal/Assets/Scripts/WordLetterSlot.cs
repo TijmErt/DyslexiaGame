@@ -3,8 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class WordLetterSlot : MonoBehaviour, IInteractable
 {
-    [SerializeField] private int _indexInWord = 0;
-    [SerializeField] private Transform targetPos;
+    [SerializeField] private Transform _playerPos;
+
+    private int _boardId;
+    private int _indexInWord;
 
     private CwW_WordManager _wordManager;
     private LetterItem _currentLetter;
@@ -15,9 +17,13 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
         _collider = GetComponent<Collider>();
     }
 
-    public void Init(CwW_WordManager manager, int index)
+    /// <summary>
+    /// Called by WordManager when setting up the current word.
+    /// </summary>
+    public void Init(CwW_WordManager manager, int boardId, int index)
     {
         _wordManager = manager;
+        _boardId = boardId;
         _indexInWord = index;
         ClearSlot();
     }
@@ -27,15 +33,19 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
         _currentLetter = null;
     }
 
-    public Vector3 GetPlayerPosPoint()
+    public Vector3 GetPlayerPosPoint(PlayerInteraction player)
     {
-        return targetPos.position;
+        if (_playerPos != null)
+            return _playerPos.position;
+
+        return transform.position;
     }
 
     public void Interact(PlayerInteraction player)
     {
         if (player == null || player.Hand == null) return;
 
+        // Player is trying to place held letter into this slot
         player.Hand.PlaceHeldIntoSlot(this);
     }
 
@@ -54,20 +64,14 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
             return false;
         }
 
-        string currentWord = _wordManager.CurrentWord;
-        if (string.IsNullOrEmpty(currentWord) ||
-            _indexInWord < 0 ||
-            _indexInWord >= currentWord.Length)
-        {
-            return false;
-        }
+        char required = _wordManager.GetRequiredLetter(_boardId, _indexInWord);
+        if (required == '\0') return false;
 
-        char required = char.ToUpperInvariant(currentWord[_indexInWord]);
         char provided = char.ToUpperInvariant(letter.Letter);
 
         if (provided != required)
         {
-            // wrong letter
+            // wrong letter; could add feedback here
             return false;
         }
 
@@ -78,12 +82,7 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
         letter.transform.localPosition = Vector3.zero;
         letter.transform.localRotation = Quaternion.identity;
 
-        //disable its collider so it’s not interactable anymore
-        Collider letterCol = letter.GetComponent<Collider>();
-        if (letterCol != null)
-            letterCol.enabled = false;
-
-        _wordManager.OnSlotFilledChanged();
+        _wordManager.OnSlotFilledChanged(_boardId);
         return true;
     }
 
@@ -91,15 +90,9 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
     {
         if (_currentLetter == null || _wordManager == null) return false;
 
-        string word = _wordManager.CurrentWord;
-        if (string.IsNullOrEmpty(word) ||
-            _indexInWord < 0 ||
-            _indexInWord >= word.Length)
-        {
-            return false;
-        }
+        char required = _wordManager.GetRequiredLetter(_boardId, _indexInWord);
+        if (required == '\0') return false;
 
-        char required = char.ToUpperInvariant(word[_indexInWord]);
         char provided = char.ToUpperInvariant(_currentLetter.Letter);
         return provided == required;
     }

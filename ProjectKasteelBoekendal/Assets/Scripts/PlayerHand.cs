@@ -4,6 +4,8 @@ public class PlayerHand : MonoBehaviour
 {
     public LetterItem HeldItem { get; private set; }
 
+    public bool HasItem => HeldItem != null;
+
     public void TryPickUp(LetterItem newItem)
     {
         if (newItem == null) return;
@@ -27,6 +29,13 @@ public class PlayerHand : MonoBehaviour
             HeldItem.DropToHome();
             HeldItem = null;
         }
+    }
+
+    public LetterItem RemoveHeldWithoutDropping()
+    {
+        LetterItem item = HeldItem;
+        HeldItem = null;
+        return item;
     }
 
     public void PlaceHeldIntoSlot(WordLetterSlot slot)

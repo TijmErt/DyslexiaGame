@@ -1012,13 +1012,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WordManager
   words:
   - word: sleutel
-    image: {fileID: -601167320069568822, guid: f9239142d6eaced1683d11a49941441a, type: 3}
+    image: {fileID: 21300000, guid: aebc5de5d47b64e2891497c8fb4deee0, type: 3}
   - word: hamer
     image: {fileID: 4301844918096825189, guid: e41af1b119f221b86a4e8ff9742cc5db, type: 3}
   - word: veer
     image: {fileID: 2836554479157175418, guid: 792a75c1347a909ff8f9a3d5cbca50c3, type: 3}
   - word: metaal
     image: {fileID: -262108834630032882, guid: 7ade82dca076b20fa9e61cbc1a1d310d, type: 3}
+  - word: koning
+    image: {fileID: 21300000, guid: b0c9ca5e62e0c2747a35b49ad907f42a, type: 3}
+  - word: plank
+    image: {fileID: 21300000, guid: 34d370af19a7bb8409102597a58e19f1, type: 3}
+  - word: krab
+    image: {fileID: 21300000, guid: b8e78cad7ff6e9941a5632114ddf2d90, type: 3}
+  - word: fiets
+    image: {fileID: 21300000, guid: 97960b0fb31579144baa491810e2eb84, type: 3}
   tileController: {fileID: 1370185908}
   letterParent: {fileID: 1486601197}
   letterTilePrefab: {fileID: 7826792600508144165, guid: 56edb02526a80d24d9ea9609bb768092, type: 3}
@@ -2515,8 +2523,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1486601197}
-  - component: {fileID: 1486601198}
   - component: {fileID: 1486601199}
+  - component: {fileID: 1486601200}
   m_Layer: 5
   m_Name: LetterParent
   m_TagString: Untagged
@@ -2540,35 +2548,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -109, y: 131}
+  m_AnchoredPosition: {x: -109, y: 170}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1486601198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486601196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 25
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &1486601199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2583,6 +2565,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &1486601200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486601196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 50, y: 40}
+  m_Constraint: 2
+  m_ConstraintCount: 3
 --- !u!4 &1506692972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 09bbf91ceab32cf4dba62739e8b4dc27, type: 3}

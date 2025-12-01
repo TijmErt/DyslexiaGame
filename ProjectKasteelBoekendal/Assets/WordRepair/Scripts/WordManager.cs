@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI; // Needed for Layout updates if you use them
 
 public class WordManager : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class WordManager : MonoBehaviour
     public List<WordData> words;
 
     [Header("References")]
-    // 1. NEW: Reference to the TileController so we can pass it to new tiles
+
     public TileController tileController;
     public Transform letterParent;
     public GameObject letterTilePrefab;
@@ -23,6 +23,7 @@ public class WordManager : MonoBehaviour
     public GameObject customer;
 
     private string currentWord;
+    private string[] otherWords = new string[2];
     private List<LetterTile> currentTiles = new List<LetterTile>();
     private int currentIndex = 0;
 
@@ -40,22 +41,50 @@ public class WordManager : MonoBehaviour
             Destroy(child.gameObject);
         currentTiles.Clear();
 
-        // load new word
-        WordData w = words[currentIndex];
-        currentWord = w.word.ToUpper();
+        // get current word data
+        WordData currentWordData = words[currentIndex];
+        currentWord = currentWordData.word.ToUpper();
 
+        GetOtherWords();
+
+        SetCustomerRequestImage(currentWordData);
+
+        MixUpTiles();
+    }
+
+    private void SetCustomerRequestImage(WordData currentWordData)
+    {
         if (customer != null)
         {
             Customer custScript = customer.GetComponent<Customer>();
             if (custScript != null)
             {
-                custScript.orderImage = w.image;
+                custScript.orderImage = currentWordData.image;
                 custScript.NewOrder();
             }
         }
+    }
 
-        // mix up letters in word
+    private void MixUpTiles()
+    {
         List<char> scrambled = new List<char>(currentWord.ToCharArray());
+        scrambled.AddRange(otherWords[0].ToUpper().ToCharArray());
+        scrambled.AddRange(otherWords[1].ToUpper().ToCharArray());
+
+        int max = GetLongestWordLength();
+
+        if (scrambled.Count < max * 3)
+        {
+            // add random letters until we have enough tiles
+            const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            System.Random rand = new System.Random();
+            while (scrambled.Count < max * 3)
+            {
+                char randomChar = alphabet[rand.Next(alphabet.Length)];
+                scrambled.Add(randomChar);
+            }
+        }
+
         scrambled.Shuffle();
 
         foreach (char c in scrambled)
@@ -70,23 +99,44 @@ public class WordManager : MonoBehaviour
                 continue;
             }
 
-            // 2. UPDATED: We now pass the TileController to the tile
             lt.Setup(c, tileController);
 
             currentTiles.Add(lt);
         }
     }
 
-    // ... (GetCurrentWord and GetPlayerAnswer remain the same) ...
-    public string GetCurrentWord() => currentWord;
+    private int GetLongestWordLength()
+    {
+        int maxLength = currentWord.Length;
+        for (int i = 0; i < otherWords.Length; i++)
+        {
+            if (otherWords[i].Length > maxLength)
+                maxLength = otherWords[i].Length;
+        }
+
+        return maxLength;
+    }
+
+    private void GetOtherWords()
+    {
+        int wordIndex = GetRandomWordIndex(currentIndex);
+
+        otherWords[0] = words[wordIndex].word;
+        otherWords[1] = words[GetRandomWordIndex(wordIndex)].word;
+    }
+
+    private int GetRandomWordIndex(int index)
+    {
+        return (index + 1) % words.Count;
+    }
 
     public string GetPlayerAnswer()
     {
         string result = "";
-        foreach (Transform child in letterParent)
+        foreach (Transform slotTransform in letterParent)
         {
             // child is the slot; find the tile inside it
-            LetterTile tile = child.GetComponentInChildren<LetterTile>();
+            LetterTile tile = slotTransform.GetComponentInChildren<LetterTile>();
             if (tile != null)
             {
                 result += tile.letterChar;
@@ -100,13 +150,13 @@ public class WordManager : MonoBehaviour
         string playerAnswer = GetPlayerAnswer();
         bool correct = playerAnswer == currentWord;
 
-        Debug.Log($"Checking: {playerAnswer} vs {currentWord} = {correct}");
-
         if (correct)
         {
-            // Optional: Auto-advance if correct?
             Debug.Log("Word Complete!");
-            // You might want to trigger a win animation here or call Next() after a delay
+        }
+        else
+        {
+            Debug.Log("Incorrect");
         }
 
         return correct;
@@ -119,7 +169,6 @@ public class WordManager : MonoBehaviour
         LoadNextWord();
     }
 
-    // ... (CreateSlot and CreateTile remain the same) ...
     private GameObject CreateSlot()
     {
         GameObject slot = Instantiate(letterSlotPrefab, letterParent);
@@ -137,7 +186,6 @@ public class WordManager : MonoBehaviour
     }
 }
 
-// Keep your extension class
 public static class Extensions
 {
     public static void Shuffle<T>(this IList<T> list)

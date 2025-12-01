@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class WordManager : MonoBehaviour
@@ -130,36 +131,59 @@ public class WordManager : MonoBehaviour
         return (index + 1) % words.Count;
     }
 
-    public string GetPlayerAnswer()
+    public (string, string, string) GetPlayerAnswer()
     {
-        string result = "";
+        string result1 = "";
+        string result2 = "";
+        string result3 = "";
+
+        int totalSlots = letterParent.childCount;
+        int totalRows = 3;
+
+        // Safety check to prevent division by zero
+        if (totalRows == 0 || totalSlots == 0) return ("", "", "");
+
+        int slotsPerRow = totalSlots / totalRows;
+
         foreach (Transform slotTransform in letterParent)
         {
-            // child is the slot; find the tile inside it
             LetterTile tile = slotTransform.GetComponentInChildren<LetterTile>();
+
             if (tile != null)
             {
-                result += tile.letterChar;
+                // find where this slot is in the list
+                int index = slotTransform.GetSiblingIndex();
+
+                // find the row index (0, 1, or 2)
+                int rowIndex = index / slotsPerRow;
+
+                // assign to the correct string based on exact row index
+                if (rowIndex == 0)
+                {
+                    result1 += tile.letterChar;
+                }
+                else if (rowIndex == 1)
+                {
+                    result2 += tile.letterChar;
+                }
+                else if (rowIndex == 2)
+                {
+                    result3 += tile.letterChar;
+                }
             }
         }
-        return result;
+        return (result1, result2, result3);
     }
 
     public bool CheckAnswer()
     {
-        string playerAnswer = GetPlayerAnswer();
-        bool correct = playerAnswer == currentWord;
+        (string, string, string) playerAnswer = GetPlayerAnswer();
 
-        if (correct)
-        {
-            Debug.Log("Word Complete!");
-        }
-        else
-        {
-            Debug.Log("Incorrect");
-        }
+        Debug.Log($"Player answers: {playerAnswer.Item1}, {playerAnswer.Item2}, {playerAnswer.Item3} for word {currentWord}");
 
-        return correct;
+        return playerAnswer.Item1.Contains(currentWord) ||
+               playerAnswer.Item2.Contains(currentWord) ||
+               playerAnswer.Item3.Contains(currentWord);
     }
 
     public void Next()

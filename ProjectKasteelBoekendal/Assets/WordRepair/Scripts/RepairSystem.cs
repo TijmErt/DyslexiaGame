@@ -20,7 +20,8 @@ public class RepairSystem : MonoBehaviour
 
         scoreText.text = "Voltooid: " + score;
 
-        Invoke(nameof(NextWord), 2f);
+        if (correct)
+            Invoke(nameof(NextWord), 2f);
     }
 
     private void NextWord()

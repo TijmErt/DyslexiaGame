@@ -6,22 +6,20 @@ using UnityEngine;
 public class WordManager : MonoBehaviour
 {
     [System.Serializable]
-    public class WordData
+    private class WordData
     {
         public string word;
         public Sprite image;
     }
 
-    [Header("Configuration")]
-    public List<WordData> words;
+    [SerializeField] private List<WordData> words;
 
-    [Header("References")]
-
-    public TileController tileController;
-    public Transform letterParent;
-    public GameObject letterTilePrefab;
-    public GameObject letterSlotPrefab;
-    public GameObject customer;
+    [SerializeField] private TileController tileController;
+    [SerializeField] private Transform answerParent;
+    [SerializeField] private Transform letterParent;
+    [SerializeField] private GameObject letterTilePrefab;
+    [SerializeField] private GameObject letterSlotPrefab;
+    [SerializeField] private GameObject customer;
 
     private string currentWord;
     private string[] otherWords = new string[2];
@@ -39,6 +37,8 @@ public class WordManager : MonoBehaviour
 
         // remove old slots/tiles
         foreach (Transform child in letterParent)
+            Destroy(child.gameObject);
+        foreach (Transform child in answerParent)
             Destroy(child.gameObject);
         currentTiles.Clear();
 
@@ -68,18 +68,19 @@ public class WordManager : MonoBehaviour
 
     private void MixUpTiles()
     {
+        int otherWordCount = 2;
+
         List<char> scrambled = new List<char>(currentWord.ToCharArray());
         scrambled.AddRange(otherWords[0].ToUpper().ToCharArray());
-        scrambled.AddRange(otherWords[1].ToUpper().ToCharArray());
 
         int max = GetLongestWordLength();
 
-        if (scrambled.Count < max * 3)
+        if (scrambled.Count < max * otherWordCount)
         {
             // add random letters until we have enough tiles
             const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             System.Random rand = new System.Random();
-            while (scrambled.Count < max * 3)
+            while (scrambled.Count < max * otherWordCount)
             {
                 char randomChar = alphabet[rand.Next(alphabet.Length)];
                 scrambled.Add(randomChar);
@@ -88,21 +89,48 @@ public class WordManager : MonoBehaviour
 
         scrambled.Shuffle();
 
-        foreach (char c in scrambled)
+        CreateAnswerTile();
+        CreateLetterTile(scrambled);
+
+    }
+
+    private void CreateLetterTile(List<char> charList)
+    {
+        foreach (char c in charList)
         {
             GameObject slot = CreateSlot();
             GameObject tile = CreateTile(slot.transform);
 
-            LetterTile lt = tile.GetComponent<LetterTile>();
-            if (lt == null)
+            LetterTile letterTile = tile.GetComponent<LetterTile>();
+            if (letterTile == null)
             {
                 Debug.LogError($"WordManager: prefab '{letterTilePrefab.name}' does not have a LetterTile component attached.");
                 continue;
             }
 
-            lt.Setup(c, tileController);
+            letterTile.Setup(c, tileController);
 
-            currentTiles.Add(lt);
+            currentTiles.Add(letterTile);
+        }
+    }
+
+    private void CreateAnswerTile()
+    {
+        foreach (char c in currentWord)
+        {
+            GameObject slot = CreateAnswerSlot();
+            GameObject tile = CreateTile(slot.transform);
+
+            LetterTile letterTile = tile.GetComponent<LetterTile>();
+            if (letterTile == null)
+            {
+                Debug.LogError($"WordManager: prefab '{letterTilePrefab.name}' does not have a LetterTile component attached.");
+                continue;
+            }
+
+            letterTile.SetUpEmpty(tileController);
+
+            currentTiles.Add(letterTile);
         }
     }
 
@@ -120,70 +148,40 @@ public class WordManager : MonoBehaviour
 
     private void GetOtherWords()
     {
-        int wordIndex = GetRandomWordIndex(currentIndex);
+        int wordIndex = GetRandomIndex(currentIndex);
 
         otherWords[0] = words[wordIndex].word;
-        otherWords[1] = words[GetRandomWordIndex(wordIndex)].word;
+        otherWords[1] = words[GetRandomIndex(wordIndex)].word;
     }
 
-    private int GetRandomWordIndex(int index)
+    private int GetRandomIndex(int index)
     {
         return (index + 1) % words.Count;
     }
 
-    public (string, string, string) GetPlayerAnswer()
+    public string GetPlayerAnswer()
     {
-        string result1 = "";
-        string result2 = "";
-        string result3 = "";
+        string result = "";
 
-        int totalSlots = letterParent.childCount;
-        int totalRows = 3;
-
-        // Safety check to prevent division by zero
-        if (totalRows == 0 || totalSlots == 0) return ("", "", "");
-
-        int slotsPerRow = totalSlots / totalRows;
-
-        foreach (Transform slotTransform in letterParent)
+        foreach (Transform slotTransform in answerParent)
         {
             LetterTile tile = slotTransform.GetComponentInChildren<LetterTile>();
 
             if (tile != null)
             {
-                // find where this slot is in the list
-                int index = slotTransform.GetSiblingIndex();
-
-                // find the row index (0, 1, or 2)
-                int rowIndex = index / slotsPerRow;
-
-                // assign to the correct string based on exact row index
-                if (rowIndex == 0)
-                {
-                    result1 += tile.letterChar;
-                }
-                else if (rowIndex == 1)
-                {
-                    result2 += tile.letterChar;
-                }
-                else if (rowIndex == 2)
-                {
-                    result3 += tile.letterChar;
-                }
+                result += tile.letterChar;
             }
         }
-        return (result1, result2, result3);
+        return result;
     }
 
     public bool CheckAnswer()
     {
-        (string, string, string) playerAnswer = GetPlayerAnswer();
+        string playerAnswer = GetPlayerAnswer();
 
-        Debug.Log($"Player answers: {playerAnswer.Item1}, {playerAnswer.Item2}, {playerAnswer.Item3} for word {currentWord}");
+        Debug.Log($"Player answers: {playerAnswer} for word {currentWord}");
 
-        return playerAnswer.Item1.Contains(currentWord) ||
-               playerAnswer.Item2.Contains(currentWord) ||
-               playerAnswer.Item3.Contains(currentWord);
+        return playerAnswer.Contains(currentWord);
     }
 
     public void Next()
@@ -196,6 +194,14 @@ public class WordManager : MonoBehaviour
     private GameObject CreateSlot()
     {
         GameObject slot = Instantiate(letterSlotPrefab, letterParent);
+        RectTransform slotRt = slot.GetComponent<RectTransform>();
+        if (slotRt != null) slotRt.anchoredPosition = Vector2.zero;
+        return slot;
+    }
+
+    private GameObject CreateAnswerSlot()
+    {
+        GameObject slot = Instantiate(letterSlotPrefab, answerParent);
         RectTransform slotRt = slot.GetComponent<RectTransform>();
         if (slotRt != null) slotRt.anchoredPosition = Vector2.zero;
         return slot;

@@ -3238,7 +3238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   popupYOffset: 3
-  orderPopupYOffset: 2.8
+  orderPopupYOffset: 2
   orderPopupXOffset: 1.5
   dialogueSystem: {fileID: 2137446045}
   orderImage: {fileID: 0}

@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TileController : MonoBehaviour
 {
+    [SerializeField] private WordManager wordManager;
+    [SerializeField] private RepairSystem repairSystem;
     private LetterTile selectedTile;
 
     // Called by LetterTile when the player taps it
@@ -17,7 +20,7 @@ public class TileController : MonoBehaviour
         {
             DeselectTile();
         }
-        // 3. If we have a selected tile and clicked a DIFFERENT one, swap them
+        // 3. If we have a selected tile and clicked a different one, swap them
         else
         {
             SwapTiles(selectedTile, clickedTile);
@@ -49,19 +52,17 @@ public class TileController : MonoBehaviour
         Transform parentB = tileB.transform.parent;
 
         // 2. Swap the parents
-        // We use SetParent(parent, false) to keep the local scale/rotation but reset position logic
         tileA.transform.SetParent(parentB, false);
         tileB.transform.SetParent(parentA, false);
 
         // 3. Reset positions so they snap to the center of the new slot
-        // (Assumes the slots are RectTransforms)
         tileA.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         tileB.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
         // 4. Clear the selection
         DeselectTile();
 
-        // Optional: Check for win condition here
-        // CheckWordValidity();
+        // Check for win condition here
+        repairSystem.CompleteWord();
     }
 }

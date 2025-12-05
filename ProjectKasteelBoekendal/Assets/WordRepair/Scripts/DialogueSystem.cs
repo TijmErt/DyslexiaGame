@@ -32,7 +32,7 @@ public class DialogueSystem : MonoBehaviour
 
         PositionPopupAbove();
 
-        // update text inside the instantiated prefab (find the TMP component)
+        // update text inside the instantiated prefab
         var tmp = popupInstance.GetComponentInChildren<TextMeshProUGUI>();
         if (tmp != null) tmp.text = message;
 
@@ -102,7 +102,6 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
-            // fallback: set world position (if popup is not a UI element)
             popupInstance.transform.position = worldPos;
         }
     }

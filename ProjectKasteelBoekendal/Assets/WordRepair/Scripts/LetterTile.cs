@@ -5,16 +5,16 @@ using TMPro;
 
 public class LetterTile : MonoBehaviour, IPointerClickHandler
 {
-    [Header("UI References")]
-    public TextMeshProUGUI letterText;
-    public Image tileBackground;
-    [Header("Appearance")]
-    public Color selectedColor = new Color(0.56f, 0.93f, 0.56f);
 
-    [Header("Data")]
+    [SerializeField] private TextMeshProUGUI letterText;
+    [SerializeField] private Image tileBackground;
+
+    [SerializeField] private Color selectedColor = new Color(0.56f, 0.93f, 0.56f);
+    [SerializeField] private Color emptyColor = new Color(0f, 0f, 0f);
+
+
     public char letterChar;
 
-    // Internal References
     private TileController controller;
     private RectTransform rectTransform;
     private Color originalColor;
@@ -28,6 +28,18 @@ public class LetterTile : MonoBehaviour, IPointerClickHandler
             letterText.text = c.ToString();
 
         rectTransform = GetComponent<RectTransform>();
+
+        if (tileBackground != null)
+            originalColor = tileBackground.color;
+    }
+
+    public void SetUpEmpty(TileController tc)
+    {
+        if (controller == null)
+            controller = tc;
+
+        if (letterText != null)
+            letterText.text = "_";
 
         if (tileBackground != null)
             originalColor = tileBackground.color;

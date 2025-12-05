@@ -18,6 +18,7 @@ public class WordManager : MonoBehaviour
     [SerializeField] private Transform answerParent;
     [SerializeField] private Transform letterParent;
     [SerializeField] private GameObject letterTilePrefab;
+    [SerializeField] private GameObject emptyTilePrefab;
     [SerializeField] private GameObject letterSlotPrefab;
     [SerializeField] private GameObject customer;
 
@@ -89,7 +90,7 @@ public class WordManager : MonoBehaviour
 
         scrambled.Shuffle();
 
-        CreateAnswerTile();
+        CreateEmptyTile();
         CreateLetterTile(scrambled);
 
     }
@@ -114,12 +115,12 @@ public class WordManager : MonoBehaviour
         }
     }
 
-    private void CreateAnswerTile()
+    private void CreateEmptyTile()
     {
         foreach (char c in currentWord)
         {
             GameObject slot = CreateAnswerSlot();
-            GameObject tile = CreateTile(slot.transform);
+            GameObject tile = CreateEmptyTile(slot.transform);
 
             LetterTile letterTile = tile.GetComponent<LetterTile>();
             if (letterTile == null)
@@ -210,6 +211,14 @@ public class WordManager : MonoBehaviour
     private GameObject CreateTile(Transform slot)
     {
         GameObject tile = Instantiate(letterTilePrefab, slot);
+        RectTransform tileRt = tile.GetComponent<RectTransform>();
+        if (tileRt != null) tileRt.anchoredPosition = Vector2.zero;
+        return tile;
+    }
+
+    private GameObject CreateEmptyTile(Transform slot)
+    {
+        GameObject tile = Instantiate(emptyTilePrefab, slot);
         RectTransform tileRt = tile.GetComponent<RectTransform>();
         if (tileRt != null) tileRt.anchoredPosition = Vector2.zero;
         return tile;

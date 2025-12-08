@@ -63,6 +63,11 @@ public class TileController : MonoBehaviour
         DeselectTile();
 
         // Check for win condition here
-        repairSystem.CompleteWord();
+        bool correct = wordManager.CheckAnswer();
+
+        if (correct)
+        {
+            repairSystem.CompleteWord();
+        }
     }
 }

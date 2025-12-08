@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -8,19 +6,21 @@ public class RepairSystem : MonoBehaviour
 {
     public WordManager wordManager;
     public Customer customer;
-    public TextMeshProUGUI resultText;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI materialsText;
+    public BlacksmithWordRepair blacksmith;
+    [SerializeField] private DialogueSystem dialogueSystem;
     private int score = 0;
 
-    private List<SmithMaterialEnum> allMaterials = new List<SmithMaterialEnum>
+    private Dictionary<SmithMaterialEnum, int> allMaterials = new Dictionary<SmithMaterialEnum, int>
     {
-        SmithMaterialEnum.Iron,
-        SmithMaterialEnum.Steel,
-        SmithMaterialEnum.Gold,
-        SmithMaterialEnum.Silver,
-        SmithMaterialEnum.Bronze
+        {SmithMaterialEnum.Iron, 5},
+        {SmithMaterialEnum.Steel, 3},
+        {SmithMaterialEnum.Gold, 2}
     };
+
+    private void Start()
+    {
+        blacksmith.ShowMaterials(allMaterials);
+    }
 
     private List<SmithItemEnum> allItems = new List<SmithItemEnum>();
 
@@ -40,24 +40,33 @@ public class RepairSystem : MonoBehaviour
                 EndRepairSession();
             }
             score++;
+
+            string resultText = "Goed gedaan! Het woord is correct.";
+            blacksmith.BlacksmithFeedback(resultText);
+
+            Invoke(nameof(NextWord), 2f);
+        }
+        else
+        {
+            string resultText = "Fout! Probeer het opnieuw.";
+            blacksmith.BlacksmithFeedback(resultText);
         }
 
-        scoreText.text = "Voltooid: " + score;
-
-        if (correct)
-            Invoke(nameof(NextWord), 2f);
+        blacksmith.ShowMaterials(allMaterials);
     }
+
 
     private void CompleteRepair()
     {
         // check before calling if allMaterils.Count > 0
-        allMaterials.RemoveAt(allMaterials.Count - 1);
+        allMaterials[0] -= 1;
         allItems.Add(SmithItemEnum.Hammer); // Example item, replace with actual logic
     }
 
     private void EndRepairSession()
     {
-        resultText.text = "Alle reparaties voltooid!";
+        string resultText = "Alle reparaties voltooid!";
+        blacksmith.BlacksmithFeedback(resultText);
         Debug.Log("Items repaired: " + allItems.Count);
         Debug.Log("Items: " + string.Join(", ", allItems));
     }
@@ -65,6 +74,5 @@ public class RepairSystem : MonoBehaviour
     private void NextWord()
     {
         wordManager.Next();
-        resultText.text = "";
     }
 }

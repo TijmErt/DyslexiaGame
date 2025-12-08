@@ -8,8 +8,9 @@ public class DialogueSystem : MonoBehaviour
     public GameObject orderPopupPrefab;
     public Transform popupParent;
     public float popupDuration = 2f;
-    private float popupYOffset;
-    private float popupXOffset;
+    [SerializeField] private GameObject materialsPopup;
+    [SerializeField] private GameObject feedbackPopup;
+
     private GameObject popupInstance;
     private GameObject currentPopupOwner;
 
@@ -17,8 +18,7 @@ public class DialogueSystem : MonoBehaviour
     {
         HidePopup();
         currentPopupOwner = popupOwner;
-        popupYOffset = yOffset;
-        popupXOffset = 0f;
+        float popupYOffset = yOffset;
 
         if (popupInstance == null || popupInstance.CompareTag("OrderPopup"))
         {
@@ -30,8 +30,6 @@ public class DialogueSystem : MonoBehaviour
             popupInstance.SetActive(true);
         }
 
-        PositionPopupAbove();
-
         // update text inside the instantiated prefab
         var tmp = popupInstance.GetComponentInChildren<TextMeshProUGUI>();
         if (tmp != null) tmp.text = message;
@@ -39,12 +37,40 @@ public class DialogueSystem : MonoBehaviour
         Invoke(nameof(HidePopup), popupDuration);
     }
 
+    public void ShowMaterialsPopup(string message)
+    {
+        HideFeedbackPopup();
+        if (materialsPopup == null) return;
+        materialsPopup.GetComponentInChildren<TextMeshProUGUI>().text = message;
+        materialsPopup.SetActive(true);
+    }
+
+    public void HideMaterialsPopup()
+    {
+        if (materialsPopup != null)
+            materialsPopup.SetActive(false);
+    }
+
+    public void ShowFeedback(string message)
+    {
+        HideMaterialsPopup();
+        if (feedbackPopup == null) return;
+        feedbackPopup.GetComponentInChildren<TextMeshProUGUI>().text = message;
+        feedbackPopup.SetActive(true);
+
+        Invoke(nameof(HideFeedbackPopup), popupDuration);
+    }
+
+    private void HideFeedbackPopup()
+    {
+        if (feedbackPopup != null)
+            feedbackPopup.SetActive(false);
+    }
+
     public void ShowOrderPopup(GameObject popupOwner, Sprite image, float xOffset, float yOffset)
     {
         HidePopup();
         currentPopupOwner = popupOwner;
-        popupYOffset = yOffset;
-        popupXOffset = xOffset;
 
         if (popupInstance == null || popupInstance.CompareTag("FeedbackPopup"))
         {
@@ -67,11 +93,9 @@ public class DialogueSystem : MonoBehaviour
             img.sprite = image;
         else
             Debug.LogWarning("DialogueSystem: no Image found on order popup instance to set sprite.");
-
-        PositionPopupAbove();
     }
 
-    private void PositionPopupAbove()
+    private void PositionPopup(int popupYOffset = 0, int popupXOffset = 0)
     {
         if (popupInstance == null || popupParent == null) return;
 

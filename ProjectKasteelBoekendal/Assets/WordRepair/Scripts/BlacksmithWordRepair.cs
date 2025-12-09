@@ -20,6 +20,6 @@ public class BlacksmithWordRepair : MonoBehaviour
     public void BlacksmithFeedback(string message)
     {
         if (dialogueSystem != null)
-            dialogueSystem.ShowFeedback(message);
+            dialogueSystem.ShowBlacksmithFeedback(message);
     }
 }

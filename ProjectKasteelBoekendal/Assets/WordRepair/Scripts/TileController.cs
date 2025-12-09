@@ -31,7 +31,6 @@ public class TileController : MonoBehaviour
     {
         selectedTile = tile;
         selectedTile.SetSelectedState(true); // Visual feedback
-        Debug.Log($"Selected: {tile.letterChar}");
     }
 
     private void DeselectTile()
@@ -45,8 +44,6 @@ public class TileController : MonoBehaviour
 
     private void SwapTiles(LetterTile tileA, LetterTile tileB)
     {
-        Debug.Log($"Swapping {tileA.letterChar} with {tileB.letterChar}");
-
         // 1. Get the parents (Slots)
         Transform parentA = tileA.transform.parent;
         Transform parentB = tileB.transform.parent;

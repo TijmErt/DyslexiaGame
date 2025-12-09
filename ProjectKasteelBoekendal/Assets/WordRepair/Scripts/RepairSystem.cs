@@ -12,9 +12,9 @@ public class RepairSystem : MonoBehaviour
 
     private Dictionary<SmithMaterialEnum, int> allMaterials = new Dictionary<SmithMaterialEnum, int>
     {
-        {SmithMaterialEnum.Iron, 5},
-        {SmithMaterialEnum.Steel, 3},
-        {SmithMaterialEnum.Gold, 2}
+        {SmithMaterialEnum.Ijzer, 2},
+        {SmithMaterialEnum.Staal, 3},
+        {SmithMaterialEnum.Goud, 2}
     };
 
     private void Start()
@@ -30,7 +30,7 @@ public class RepairSystem : MonoBehaviour
 
         if (correct)
         {
-            if (allMaterials.Count > 0)
+            if (allMaterials[0] > 0)
             {
                 CompleteRepair();
                 customer.ProgressOrder();
@@ -51,15 +51,20 @@ public class RepairSystem : MonoBehaviour
             string resultText = "Fout! Probeer het opnieuw.";
             blacksmith.BlacksmithFeedback(resultText);
         }
-
-        blacksmith.ShowMaterials(allMaterials);
     }
 
 
     private void CompleteRepair()
     {
-        // check before calling if allMaterils.Count > 0
-        allMaterials[0] -= 1;
+        foreach (var material in allMaterials.Keys)
+        {
+            if (allMaterials[material] > 0)
+            {
+                allMaterials[material] -= 1;
+                return;
+            }
+        }
+
         allItems.Add(SmithItemEnum.Hammer); // Example item, replace with actual logic
     }
 
@@ -74,5 +79,6 @@ public class RepairSystem : MonoBehaviour
     private void NextWord()
     {
         wordManager.Next();
+        blacksmith.ShowMaterials(allMaterials);
     }
 }

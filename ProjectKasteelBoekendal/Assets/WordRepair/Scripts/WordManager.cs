@@ -180,13 +180,15 @@ public class WordManager : MonoBehaviour
     {
         string playerAnswer = GetPlayerAnswer();
 
-        Debug.Log($"Player answers: {playerAnswer} for word {currentWord}");
-
         return playerAnswer.Contains(currentWord);
     }
 
     public void Next()
     {
+        string playerAnswer = GetPlayerAnswer();
+
+        Debug.Log($"Player answers: {playerAnswer} for word {currentWord}");
+
         currentIndex++;
 
         LoadNextWord();

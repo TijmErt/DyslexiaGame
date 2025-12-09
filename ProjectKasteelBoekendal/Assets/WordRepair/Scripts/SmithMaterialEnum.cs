@@ -1,8 +1,8 @@
 public enum SmithMaterialEnum
 {
-    Iron,
-    Steel,
-    Gold,
-    Silver,
-    Bronze
+    Ijzer,
+    Staal,
+    Goud,
+    Zilver,
+    Bronzen
 }

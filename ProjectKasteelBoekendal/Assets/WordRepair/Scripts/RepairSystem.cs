@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -14,13 +13,12 @@ public class RepairSystem : MonoBehaviour
 
     public void CompleteWord()
     {
-        bool correct = wordManager.CheckAnswer();
-
-        
+        bool correct = wordManager.CheckAnswer();        
 
         scoreText.text = "Voltooid: " + score;
 
-        Invoke(nameof(NextWord), 2f);
+        if (correct)
+            Invoke(nameof(NextWord), 2f);
     }
 
     private void NextWord()

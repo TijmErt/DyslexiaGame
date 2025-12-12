@@ -13,10 +13,7 @@ public class RepairSystem : MonoBehaviour
 
     public void CompleteWord()
     {
-        bool correct = wordManager.CheckAnswer();
-
-        if (correct)
-            score++;
+        bool correct = wordManager.CheckAnswer();        
 
         scoreText.text = "Voltooid: " + score;
 

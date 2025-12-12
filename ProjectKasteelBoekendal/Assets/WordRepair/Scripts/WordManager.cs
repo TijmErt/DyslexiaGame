@@ -13,7 +13,6 @@ public class WordManager : MonoBehaviour
     }
 
     [SerializeField] private List<WordData> words;
-
     [SerializeField] private TileController tileController;
     [SerializeField] private Transform answerParent;
     [SerializeField] private Transform letterParent;
@@ -188,7 +187,6 @@ public class WordManager : MonoBehaviour
     public void Next()
     {
         currentIndex++;
-
         LoadNextWord();
     }
 

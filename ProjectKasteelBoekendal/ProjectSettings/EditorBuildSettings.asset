@@ -15,5 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/WordRepair.unity
     guid: e68a04af05ca17b909378fcfd83f6d22
   m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: e2918c008e1ff144a80a18ac053cbf61, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

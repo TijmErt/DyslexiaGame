@@ -15,13 +15,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         Hand = GetComponent<PlayerHand>();
 
-        if (_wordManager == null)
-        {
-            _wordManager = FindFirstObjectByType<CwW_WordManager>();
-            if (_wordManager == null)
-            {
-                Debug.LogWarning("PlayerInteraction: No CwW_WordManager found in scene.");
-            }
-        }
+        if (_wordManager != null) return;
+        _wordManager = FindFirstObjectByType<CwW_WordManager>();
+
+        if (_wordManager != null) return;
+        Debug.LogWarning("PlayerInteraction: No CwW_WordManager found in scene.");
     }
 }

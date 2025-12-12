@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Unity.AI.Navigation;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Camera _mainCamera;
     private Vector2 currentMousePos;
+
+    private IInteractable _currentTargetInteractable;
+    private int _currentInteractionId = 0;
 
     private void OnEnable()
     {
@@ -30,23 +34,25 @@ public class PlayerMovement : MonoBehaviour
     {
         _mainCamera = Camera.main;
 
-        if (_playerInteraction == null)
-        {
-            _playerInteraction = GetComponent<PlayerInteraction>();
-            if (_playerInteraction == null)
-            {
-                Debug.LogError("PlayerMovement: No PlayerInteraction reference found.");
-            }
-        }
+        CheckPlayerInteraction();
+        CheckNavmeshAgent();
+    }
 
-        if (_navMeshAgent == null)
-        {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            if (_navMeshAgent == null)
-            {
-                Debug.LogError("PlayerMovement: No NavMeshAgent reference found.");
-            }
-        }
+    private void CheckPlayerInteraction()
+    {
+        if (_playerInteraction != null) return;
+        _playerInteraction = GetComponent<PlayerInteraction>();
+
+        if (_playerInteraction != null) return;
+        Debug.LogError("PlayerMovement: No PlayerInteraction reference found.");
+    }
+    private void CheckNavmeshAgent()
+    {
+        if (_navMeshAgent != null) return;
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        if (_navMeshAgent != null) return;
+        Debug.LogError("PlayerMovement: No NavMeshAgent reference found.");
     }
 
     // --- Core Tap Processing ---
@@ -61,23 +67,37 @@ public class PlayerMovement : MonoBehaviour
             IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
 
             if (interactable != null)
-            {
-                Vector3 target = interactable.GetPlayerPosPoint(_playerInteraction);
-
-                if (!IsPointOnThisAgentsNavMesh(target)) return;
-
-                _navMeshAgent.SetDestination(target);
-                StartCoroutine(WaitForArrival(interactable));
-            }
+                GoToInteractionAndInteract(interactable);
             else
-            {
-                Vector3 target = hitInfo.point;
-                if (!IsPointOnThisAgentsNavMesh(target)) return;
-
-                _navMeshAgent.SetDestination(target);
-            }
+                GoToLocation(hitInfo);
         }
     }
+
+    private void GoToInteractionAndInteract(IInteractable interactable)
+    {
+        Vector3 target = interactable.GetPlayerPosPoint(_playerInteraction);
+        if (!IsPointOnThisAgentsNavMesh(target)) return;
+
+        _navMeshAgent.SetDestination(target);
+
+        ChangeTarget(interactable);
+    }
+    private void GoToLocation(RaycastHit hitInfo)
+    {
+        Vector3 target = hitInfo.point;
+        if (!IsPointOnThisAgentsNavMesh(target)) return;
+
+        _navMeshAgent.SetDestination(target);
+
+        ChangeTarget();
+    }
+    private void ChangeTarget(IInteractable interactable = null)
+    {
+        _currentInteractionId++;
+        _currentTargetInteractable = interactable;
+        if (interactable != null) StartCoroutine(WaitForArrival(interactable, _currentInteractionId));
+    }
+
 
     private bool IsPointOnThisAgentsNavMesh(Vector3 point, float maxDistance = 0.2f)
     {
@@ -97,10 +117,9 @@ public class PlayerMovement : MonoBehaviour
         return true;
     }
 
-    private IEnumerator WaitForArrival(IInteractable interactable)
+    private IEnumerator WaitForArrival(IInteractable interactable, int interactionId)
     {
-        if (_navMeshAgent == null)
-            yield break;
+        if (_navMeshAgent == null) yield break;
 
         while (_navMeshAgent.pathPending ||
                _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance)
@@ -108,11 +127,14 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
+        if (interactionId != _currentInteractionId) yield break;
+
+        if (_currentTargetInteractable != interactable) yield break;
+
         if (_playerInteraction != null && interactable != null)
-        {
             interactable.Interact(_playerInteraction);
-        }
     }
+
 
     // --- Touch Input ---
     private void OnTouch(Vector2 screenPosition)

@@ -30,15 +30,7 @@ public class LetterExchangeTableLogic : MonoBehaviour
     private void PlaceFromPlayer(PlayerHand hand)
     {
         // Find first free slot
-        int freeIndex = -1;
-        for (int i = 0; i < _lettersOnSlots.Length; i++)
-        {
-            if (_lettersOnSlots[i] == null)
-            {
-                freeIndex = i;
-                break;
-            }
-        }
+        int freeIndex = CheckForLettersOnSlot();
 
         if (freeIndex == -1)
         {
@@ -51,9 +43,7 @@ public class LetterExchangeTableLogic : MonoBehaviour
 
         Transform slot = _slots[freeIndex];
 
-        letter.transform.SetParent(slot);
-        letter.transform.localPosition = Vector3.zero;
-        letter.transform.localRotation = Quaternion.identity;
+        SetLetterLocation(letter);
 
         // New home is here
         letter.SetHomeToCurrentTransform();
@@ -61,18 +51,17 @@ public class LetterExchangeTableLogic : MonoBehaviour
         _lettersOnSlots[freeIndex] = letter;
     }
 
+    private void SetLetterLocation(LetterItem letter)
+    {
+        letter.transform.SetParent(transform);
+        letter.transform.localPosition = Vector3.zero;
+        letter.transform.localRotation = Quaternion.identity;
+    }
+
     private void GiveToPlayer(PlayerHand hand)
     {
         // Find first occupied slot
-        int occupiedIndex = -1;
-        for (int i = 0; i < _lettersOnSlots.Length; i++)
-        {
-            if (_lettersOnSlots[i] != null)
-            {
-                occupiedIndex = i;
-                break;
-            }
-        }
+        int occupiedIndex = CheckForLettersOnSlot();
 
         if (occupiedIndex == -1)
         {
@@ -84,5 +73,17 @@ public class LetterExchangeTableLogic : MonoBehaviour
         _lettersOnSlots[occupiedIndex] = null;
 
         hand.TryPickUp(letter);
+    }
+
+    private int CheckForLettersOnSlot()
+    {
+        for (int i = 0; i < _lettersOnSlots.Length; i++)
+        {
+            if (_lettersOnSlots[i] != null)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }

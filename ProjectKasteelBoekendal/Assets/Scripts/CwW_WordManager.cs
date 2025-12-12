@@ -9,19 +9,20 @@ public class CwW_WordManager : MonoBehaviour
     [Header("Boards (one per player/section)")]
     [SerializeField] private List<WordBoard> _boards = new List<WordBoard>();
 
+    [Header("Shared spawn points (used by all boards)")]
+    [SerializeField] private List<Transform> _sharedSpawnPoints = new List<Transform>();
+    
     [Header("Letter Prefab")]
     [SerializeField] private LetterItem _letterPrefab;
 
     private void Start()
     {
-        // Start a word for each board
         for (int i = 0; i < _boards.Count; i++)
         {
             StartNextWord(i);
         }
     }
 
-    // Called by slots when they change state
     public void OnSlotFilledChanged(int boardId)
     {
         if (IsWordCompleted(boardId))
@@ -30,7 +31,6 @@ public class CwW_WordManager : MonoBehaviour
         }
     }
 
-    // Get required letter for a board & index (used by slots)
     public char GetRequiredLetter(int boardId, int indexInWord)
     {
         if (boardId < 0 || boardId >= _boards.Count) return '\0';
@@ -55,21 +55,28 @@ public class CwW_WordManager : MonoBehaviour
         if (boardId < 0 || boardId >= _boards.Count) return;
 
         ClearBoard(boardId);
+        string word = ChooseNextWord(boardId);
+        while (_boards[0].CurrentWord == _boards[1].CurrentWord)
+        {
+            word = ChooseNextWord(boardId);
+        }
 
+        SetupSlotsForWord(boardId, word);
+        SpawnLettersForWord(boardId, word);
+    }
+    private string ChooseNextWord(int boardId)
+    {
         string word = PickRandomWord();
         if (string.IsNullOrEmpty(word))
         {
-            Debug.LogError($"WordManager: No valid word for board {boardId}.");
-            return;
+            return ChooseNextWord(boardId);
         }
 
         word = word.ToUpperInvariant();
 
         var board = _boards[boardId];
         board.CurrentWord = word;
-
-        SetupSlotsForWord(boardId, word);
-        SpawnLettersForWord(boardId, word);
+        return word;
     }
 
     private string PickRandomWord()
@@ -77,7 +84,6 @@ public class CwW_WordManager : MonoBehaviour
         if (_possibleWords == null || _possibleWords.Count == 0)
             return null;
 
-        // You could filter here based on max length etc. For now, pick any non-empty.
         List<string> candidates = new List<string>();
         foreach (string w in _possibleWords)
         {
@@ -87,8 +93,8 @@ public class CwW_WordManager : MonoBehaviour
 
         if (candidates.Count == 0) return null;
 
-        int idx = Random.Range(0, candidates.Count);
-        return candidates[idx];
+        int index = Random.Range(0, candidates.Count);
+        return candidates[index];
     }
 
     private void SetupSlotsForWord(int boardId, string word)
@@ -115,21 +121,93 @@ public class CwW_WordManager : MonoBehaviour
         var board = _boards[boardId];
         int len = word.Length;
 
-        if (board.SpawnPoints.Count < len)
+        if (_sharedSpawnPoints == null || _sharedSpawnPoints.Count == 0)
         {
-            Debug.LogWarning($"WordManager: Board {boardId} doesn't have enough spawn points for word '{word}'.");
+            Debug.LogError("WordManager: No shared spawn points assigned.");
+            return;
         }
 
-        for (int i = 0; i < len; i++)
-        {
-            if (i >= board.SpawnPoints.Count) break;
+        // 1. Collect FREE spawnpoints (no LetterItem as child)
+        List<int> freeIndices = GetFreeSpawnPoints();
 
-            Transform spawnPoint = board.SpawnPoints[i];
-            LetterItem letterInstance = Instantiate(_letterPrefab, spawnPoint.position, spawnPoint.rotation);
+        if (!CheckFreeSpawnPoints(freeIndices, len, boardId, word)) return;
+
+        // 2. Shuffle the free indices
+        for (int i = 0; i < freeIndices.Count; i++)
+        {
+            int swapIndex = Random.Range(i, freeIndices.Count);
+            int temp = freeIndices[i];
+            freeIndices[i] = freeIndices[swapIndex];
+            freeIndices[swapIndex] = temp;
+        }
+
+        // 3. Spawn letters on the first N free points
+        int lettersToSpawn = Mathf.Min(len, freeIndices.Count);
+        for (int i = 0; i < lettersToSpawn; i++)
+        {
+            Transform spawnPoint = _sharedSpawnPoints[freeIndices[i]];
+
+            LetterItem letterInstance = Instantiate(
+                _letterPrefab,
+                spawnPoint.position,
+                spawnPoint.rotation
+            );
+
+            letterInstance.transform.SetParent(spawnPoint);
             letterInstance.SetLetter(word[i]);
 
             board.SpawnedLetters.Add(letterInstance);
         }
+    }
+
+    private List<int> GetFreeSpawnPoints()
+    {
+        List<int> freeIndices = new List<int>();
+        for (int i = 0; i < _sharedSpawnPoints.Count; i++)
+        {
+            Transform sp = _sharedSpawnPoints[i];
+            if (sp == null)
+                continue;
+
+            bool occupied = CheckLetterItemForChildren(sp);
+
+            if (!occupied)
+            {
+                freeIndices.Add(i);
+            }
+        }
+        return freeIndices;
+    }
+    private bool CheckFreeSpawnPoints(List<int> fsp, int len, int boardId, string word)
+    {
+        if (fsp.Count == 0)
+        {
+            Debug.LogWarning(
+                $"WordManager: No FREE spawn points available to spawn word '{word}' " +
+                $"for board {boardId}."
+            );
+            return false;
+        }
+        if (fsp.Count < len)
+        {
+            Debug.LogWarning(
+                $"WordManager: Not enough FREE spawn points ({fsp.Count}) " +
+                $"to spawn full word '{word}' (length {len}) for board {boardId}. " +
+                "Some letters will not be spawned."
+            );
+            return false;
+        }
+        return true;
+    }
+
+    private bool CheckLetterItemForChildren(Transform sp)
+    {
+        for (int c = 0; c < sp.childCount; c++)
+        {
+            if (sp.GetChild(c).GetComponent<LetterItem>() != null) 
+                return true;
+        }
+        return false;
     }
 
     private void ClearBoard(int boardId)
@@ -160,7 +238,6 @@ public class CwW_WordManager : MonoBehaviour
         if (string.IsNullOrEmpty(board.CurrentWord)) return false;
 
         int len = board.CurrentWord.Length;
-
         for (int i = 0; i < len; i++)
         {
             if (i >= board.Slots.Count) return false;
@@ -169,7 +246,6 @@ public class CwW_WordManager : MonoBehaviour
             if (slot == null || !slot.IsCorrect())
                 return false;
         }
-
         return true;
     }
 }
@@ -181,9 +257,6 @@ public class WordBoard
 
     [Tooltip("Slots that belong to this board (in word order).")]
     public List<WordLetterSlot> Slots = new List<WordLetterSlot>();
-
-    [Tooltip("Spawn points in this board's area for its letters.")]
-    public List<Transform> SpawnPoints = new List<Transform>();
 
     [HideInInspector] public string CurrentWord;
     [HideInInspector] public List<LetterItem> SpawnedLetters = new List<LetterItem>();

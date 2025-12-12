@@ -32,13 +32,9 @@ public class LetterItem : MonoBehaviour, IInteractable
     private void UpdateVisual() 
     {
         if (_letterText != null) 
-        {
             _letterText.text = _letter.ToString();
-        }
         else
-        {
             Debug.LogWarning("LetterItem doesn't have a textbox assigned");
-        }
     }
 
     public void SetHomeToCurrentTransform()

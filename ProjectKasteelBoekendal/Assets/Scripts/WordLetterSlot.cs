@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Collider))]
 public class WordLetterSlot : MonoBehaviour, IInteractable
@@ -17,9 +18,6 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
         _collider = GetComponent<Collider>();
     }
 
-    /// <summary>
-    /// Called by WordManager when setting up the current word.
-    /// </summary>
     public void Init(CwW_WordManager manager, int boardId, int index)
     {
         _wordManager = manager;
@@ -45,8 +43,23 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
     {
         if (player == null || player.Hand == null) return;
 
-        // Player is trying to place held letter into this slot
-        player.Hand.PlaceHeldIntoSlot(this);
+        var hand = player.Hand;
+
+        if (hand.HasItem)
+        {
+            hand.PlaceHeldIntoSlot(this);
+        }
+        else
+        {
+            if (_currentLetter == null) return;
+            LetterItem letter = _currentLetter;
+            _currentLetter = null;
+
+            hand.TryPickUp(letter);
+
+            if (_wordManager == null) return;
+            _wordManager.OnSlotFilledChanged(_boardId);
+        }
     }
 
     public bool TryPlaceLetter(LetterItem letter)
@@ -59,31 +72,26 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
         }
 
         if (_currentLetter != null)
-        {
-            // Slot already occupied
             return false;
-        }
 
         char required = _wordManager.GetRequiredLetter(_boardId, _indexInWord);
         if (required == '\0') return false;
 
         char provided = char.ToUpperInvariant(letter.Letter);
 
-        if (provided != required)
-        {
-            // wrong letter; could add feedback here
-            return false;
-        }
-
         _currentLetter = letter;
 
-        // Snap the letter into the slot
-        letter.transform.SetParent(transform);
-        letter.transform.localPosition = Vector3.zero;
-        letter.transform.localRotation = Quaternion.identity;
+        SetLetterLocation(letter);
 
         _wordManager.OnSlotFilledChanged(_boardId);
         return true;
+    }
+
+    private void SetLetterLocation(LetterItem letter)
+    {
+        letter.transform.SetParent(transform);
+        letter.transform.localPosition = Vector3.zero;
+        letter.transform.localRotation = Quaternion.identity;
     }
 
     public bool IsCorrect()

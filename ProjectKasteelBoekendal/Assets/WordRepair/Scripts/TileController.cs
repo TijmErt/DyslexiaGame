@@ -1,118 +1,68 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using TMPro;
 
 public class TileController : MonoBehaviour
 {
-    [SerializeField] InputReader inputReader = default;
-    private Camera _mainCamera;
-    private Vector2 currentMousePos;
+    [SerializeField] private WordManager wordManager;
+    [SerializeField] private RepairSystem repairSystem;
     private LetterTile selectedTile;
-    private LetterSlot destinationSlot;
-    private Transform slot;
-    private WordManager wordManager;
-    private Canvas canvas;
-    private RectTransform rectTransform;
 
-    private void OnEnable()
+    // Called by LetterTile when the player taps it
+    public void OnTileClicked(LetterTile clickedTile)
     {
-        inputReader.touchEvent += OnTouch;
-        inputReader.mousePosEvent += OnMouseMove;
-        inputReader.leftMouseButtonEvent += OnMouseTap;
-    }
-
-    private void OnDisable()
-    {
-        inputReader.touchEvent -= OnTouch;
-        inputReader.mousePosEvent -= OnMouseMove;
-        inputReader.leftMouseButtonEvent -= OnMouseTap;
-    }
-    private void Awake()
-    {
-        _mainCamera = Camera.main;
-    }
-
-    private void OnMouseMove(Vector2 position)
-    {
-        currentMousePos = position;
-    }
-
-    private void OnTouch(Vector2 screenPosition)
-    {
-        ProcessTap(screenPosition);
-    }
-
-    private void OnMouseTap()
-    {
-        ProcessTap(currentMousePos);
-    }
-
-    private void ProcessTap(Vector2 screenPosition)
-    {
-        Ray ray = _mainCamera.ScreenPointToRay(screenPosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        // 1. If nothing is selected yet, select the clicked tile
+        if (selectedTile == null)
         {
-            LetterTile tile = hitInfo.collider.GetComponent<LetterTile>();
-            if (tile != null)
-            {
-                selectedTile = tile;
-                // Additional logic for selecting the tile can be added here
-                return;
-            }
-
-            LetterSlot slot = hitInfo.collider.GetComponent<LetterSlot>();
-            if (slot != null && selectedTile != null)
-            {
-                destinationSlot = slot;
-                // Logic to move the selected tile to the destination slot
-                selectedTile.transform.SetParent(destinationSlot.transform, false);
-                selectedTile = null; // Deselect after moving
-            }
+            SelectTile(clickedTile);
         }
-    }
-
-    private Transform FindSlotUnderPointer(PointerEventData eventData)
-    {
-        foreach (Transform slot in wordManager.letterParent)
+        // 2. If the player clicked the SAME tile again, deselect it
+        else if (selectedTile == clickedTile)
         {
-            if (slot is not RectTransform slotRt) continue;
-
-            Camera cam = (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceCamera) ? canvas.worldCamera : null;
-            if (RectTransformUtility.RectangleContainsScreenPoint(slotRt, eventData.position, cam))
-            {
-                return slot;
-            }
+            DeselectTile();
         }
-        return null;
-    }
-
-    private void PlaceTileInSlot(Transform targetSlot)
-    {
-        if (targetSlot != null)
-        {
-            LetterTile other = targetSlot.GetComponentInChildren<LetterTile>();
-
-            transform.SetParent(targetSlot, false);
-            rectTransform.anchoredPosition = Vector2.zero;
-
-            if (other != null && other != this)
-            {
-                other.transform.SetParent(slot, false);
-                RectTransform otherRt = other.GetComponent<RectTransform>();
-                if (otherRt != null)
-                    otherRt.anchoredPosition = Vector2.zero;
-
-                other.slot = slot;
-                slot = targetSlot;
-            }
-        }
+        // 3. If we have a selected tile and clicked a different one, swap them
         else
         {
-            transform.SetParent(slot, false);
-            if (rectTransform != null)
-                rectTransform.anchoredPosition = selectedTile.lastAnchoredPos;
+            SwapTiles(selectedTile, clickedTile);
         }
     }
 
+    private void SelectTile(LetterTile tile)
+    {
+        selectedTile = tile;
+        selectedTile.SetSelectedState(true); // Visual feedback
+        Debug.Log($"Selected: {tile.letterChar}");
+    }
+
+    private void DeselectTile()
+    {
+        if (selectedTile != null)
+        {
+            selectedTile.SetSelectedState(false); // Remove visual feedback
+            selectedTile = null;
+        }
+    }
+
+    private void SwapTiles(LetterTile tileA, LetterTile tileB)
+    {
+        Debug.Log($"Swapping {tileA.letterChar} with {tileB.letterChar}");
+
+        // 1. Get the parents (Slots)
+        Transform parentA = tileA.transform.parent;
+        Transform parentB = tileB.transform.parent;
+
+        // 2. Swap the parents
+        tileA.transform.SetParent(parentB, false);
+        tileB.transform.SetParent(parentA, false);
+
+        // 3. Reset positions so they snap to the center of the new slot
+        tileA.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        tileB.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+        // 4. Clear the selection
+        DeselectTile();
+
+        // Check for win condition here
+        repairSystem.CompleteWord();
+    }
 }

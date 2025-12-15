@@ -29,6 +29,7 @@ public class WordManager : MonoBehaviour
 
     void Start()
     {
+        words.Shuffle();
         LoadNextWord();
     }
 
@@ -45,7 +46,7 @@ public class WordManager : MonoBehaviour
 
         // get current word data
         WordData currentWordData = words[currentIndex];
-        currentWord = currentWordData.word.ToUpper();
+        currentWord = currentWordData.word.ToLower();
 
         GetOtherWords();
 
@@ -72,14 +73,14 @@ public class WordManager : MonoBehaviour
         int otherWordCount = 2;
 
         List<char> scrambled = new List<char>(currentWord.ToCharArray());
-        scrambled.AddRange(otherWords[0].ToUpper().ToCharArray());
+        scrambled.AddRange(otherWords[0].ToLower().ToCharArray());
 
         int max = GetLongestWordLength();
 
         if (scrambled.Count < max * otherWordCount)
         {
             // add random letters until we have enough tiles
-            const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string alphabet = "abcdefghijklmnopqrstuvwxyz";
             System.Random rand = new System.Random();
             while (scrambled.Count < max * otherWordCount)
             {

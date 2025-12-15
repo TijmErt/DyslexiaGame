@@ -6,6 +6,7 @@ TagManager:
   tags:
   - OrderPopup
   - FeedbackPopup
+  - NPC
   layers:
   - Default
   - TransparentFX

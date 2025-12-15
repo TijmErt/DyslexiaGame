@@ -1,0 +1,10 @@
+﻿Id,Character,State,Text
+0,Chef Bonbon,Before,Hallo ik ben op zoek naar mijn pollepel maar ik kan hem nergens vinden. Kun jij mij helpen met zoeken naar mijn pollepel?
+1,Chef Bonbon,Found,Je hebt mijn lepel gevonden. Wat ben je toch een geweldige held.
+2,Chef Bonbon,Not found,Oh hallo daar. Ik zie dat je mijn pollepel nog niet hebt kunnen vinden.
+3,Sander de smid,Before,"Ik ben op zoek naar mijn hamer, maar ik kan hem nergens vinden. Kun jij mij helpen met zoeken naar mijn hamer?"
+4,Sander de smid,Found,"Oh haha oh, jij bent het die held. Oh jij hebt mijn hamer gevonden. Dankje wel nu kan ik weer aan de slag."
+5,Sander de smid,Not found,Hallo daar... oh ik was ook op zoek naar mijn hamer!
+6,Bram de koning,Before,"Ah de geëerde held welkom, welkom, je komt als geroepen, we hebben je hulp hard nodig. De schurk repelske heeft iedereen's magische gereedschap afgepakt. Wil jij ons misschien helpen?"
+7,Bram de koning,Found,"Oh ik zie dat je iedereen geholpen hebt. Goed gedaan, dit is waarom jij de held bent. Wat moesten we zonder jou, onze held"
+8,Bram de koning,Not found,Oh heb je het al met anderen geprobeerd? Ik ben op zoek naar mijn kroon zou je die kroon voor mij kunnen vinden alsjeblieft? :)

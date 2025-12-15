@@ -39,6 +39,16 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         //Cursor.visible = false;
     }
 
+    public void EnableUI()
+    {
+        inputActions.UI.Enable();
+        inputActions.UI.SetCallbacks(this);
+        DisableGameplay();
+        DisableCookingWithWords();
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+    }
+
     public void EnableCookingWithWords()
     {
         inputActions.CookingWithWords.Enable();
@@ -54,10 +64,6 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         throw new System.NotImplementedException();
     }
 
-    public void OnPoint(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void OnTouch(InputAction.CallbackContext context)
     {

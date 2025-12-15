@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private bool IsPointOnThisAgentsNavMesh(Vector3 point, float maxDistance = 0.2f)
+    private bool IsPointOnThisAgentsNavMesh(Vector3 point, float maxDistance = 0.5f)
     {
         NavMeshHit hit;
 

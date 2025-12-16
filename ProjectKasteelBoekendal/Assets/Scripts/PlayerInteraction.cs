@@ -15,6 +15,11 @@ public class PlayerInteraction : MonoBehaviour
     {
         Hand = GetComponent<PlayerHand>();
 
+        CheckWordmanager();
+    }
+
+    private void CheckWordmanager()
+    {
         if (_wordManager != null) return;
         _wordManager = FindFirstObjectByType<CwW_WordManager>();
 

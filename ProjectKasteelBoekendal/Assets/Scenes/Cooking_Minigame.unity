@@ -352,6 +352,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9a7078752455864599daaf91e52f73d, type: 3}
+--- !u!4 &256613466 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7437416914359593441, guid: 95501f08715030241913a87ccd55d29a, type: 3}
+  m_PrefabInstance: {fileID: 2108207479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &293202445
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,24 +611,6 @@ Transform:
   - {fileID: 1720706182}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &410309380 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2959961725878198970, guid: 95501f08715030241913a87ccd55d29a, type: 3}
-  m_PrefabInstance: {fileID: 2108207479}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &410309382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410309380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2b33d5b730e554cadfc45611b4b072, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _slots: []
 --- !u!4 &434593466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4329873838530907299, guid: d9a7078752455864599daaf91e52f73d, type: 3}
@@ -954,6 +941,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1631980210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &768005821 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1659605940055915856, guid: 95501f08715030241913a87ccd55d29a, type: 3}
+  m_PrefabInstance: {fileID: 2108207479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &778768664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1901,6 +1893,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3152272960000082933, guid: 95501f08715030241913a87ccd55d29a, type: 3}
+      propertyPath: _slots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3152272960000082933, guid: 95501f08715030241913a87ccd55d29a, type: 3}
+      propertyPath: '_slots.Array.data[0]'
+      value: 
+      objectReference: {fileID: 256613466}
+    - target: {fileID: 3152272960000082933, guid: 95501f08715030241913a87ccd55d29a, type: 3}
+      propertyPath: '_slots.Array.data[1]'
+      value: 
+      objectReference: {fileID: 768005821}
     - target: {fileID: 3428883637954864975, guid: 95501f08715030241913a87ccd55d29a, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
@@ -1988,10 +1992,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5764654570900836227, guid: 95501f08715030241913a87ccd55d29a, type: 3}
       insertIndex: 6
       addedObject: {fileID: 964529042}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2959961725878198970, guid: 95501f08715030241913a87ccd55d29a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 410309382}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95501f08715030241913a87ccd55d29a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

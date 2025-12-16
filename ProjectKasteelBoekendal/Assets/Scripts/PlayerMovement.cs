@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
     private void ProcessTap(Vector2 screenPosition)
     {
         Ray ray = _mainCamera.ScreenPointToRay(screenPosition);
-
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
             Debug.Log($"{name} (PlayerId {_playerInteraction.PlayerId}) hit {hitInfo.collider.name} on layer {LayerMask.LayerToName(hitInfo.collider.gameObject.layer)}");

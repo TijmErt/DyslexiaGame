@@ -1426,7 +1426,7 @@ MonoBehaviour:
   letterTilePrefab: {fileID: 7826792600508144165, guid: 56edb02526a80d24d9ea9609bb768092, type: 3}
   emptyTilePrefab: {fileID: 4690081963344035721, guid: d4ba3255e682ae643a1f5f31a2c9b081, type: 3}
   letterSlotPrefab: {fileID: 1142993572988907319, guid: f7e364baa5b55cbcf9812667b7e27b13, type: 3}
-  customer: {fileID: 0}
+  customer: {fileID: 590353471}
 --- !u!4 &570664665
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,12 +1435,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570664663}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -517.15375, y: 0, z: -1057.3807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1563598574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &590353470
 PrefabInstance:
@@ -2713,7 +2713,7 @@ GameObject:
   - component: {fileID: 1258809052}
   - component: {fileID: 1258809051}
   m_Layer: 0
-  m_Name: RepairSystem
+  m_Name: RepairManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2732,9 +2732,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepairSystem
   wordManager: {fileID: 570664664}
-  customer: {fileID: 0}
+  customer: {fileID: 590353472}
   blacksmith: {fileID: 1063901970}
-  dialogueSystem: {fileID: 2137446045}
   endPopupText: {fileID: 1943035403}
   uiToDisableOnEnd:
   - {fileID: 1486601196}
@@ -2748,12 +2747,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258809050}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.34478, y: -0.14147, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -518.49854, y: -0.14147, z: -1057.3807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1563598574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1370185907
 GameObject:
@@ -2766,7 +2765,7 @@ GameObject:
   - component: {fileID: 1370185909}
   - component: {fileID: 1370185908}
   m_Layer: 0
-  m_Name: TileController
+  m_Name: TileManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2794,12 +2793,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370185907}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41457, y: 0, z: 0.8537}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -517.5683, y: 0, z: -1056.527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1563598574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1414177535
 GameObject:
@@ -3493,6 +3492,41 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bdef28e3d4816c468a59f5b00805aea, type: 3}
+--- !u!1 &1563598573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1563598574}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1563598574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563598573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 517.15375, y: 0, z: 1057.3807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1258809052}
+  - {fileID: 570664665}
+  - {fileID: 2137446046}
+  - {fileID: 1370185909}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1568082625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,7 +4706,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem
   customerFeedbackPopup: {fileID: 1632942605}
   orderPopup: {fileID: 825131640}
-  popupParent: {fileID: 2057054704}
   popupDuration: 2
   materialsPopup: {fileID: 439726943}
   blacksmithFeedbackPopup: {fileID: 1414177535}
@@ -4684,12 +4717,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137446044}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -84.08, y: 0, z: 4.48312}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -601.23376, y: 0, z: -1052.8976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1563598574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -4700,13 +4733,10 @@ SceneRoots:
   - {fileID: 1422277588}
   - {fileID: 2124099358}
   - {fileID: 2057054704}
-  - {fileID: 570664665}
   - {fileID: 590353470}
-  - {fileID: 1258809052}
   - {fileID: 930086853}
   - {fileID: 114164067}
   - {fileID: 1816435177}
-  - {fileID: 2137446046}
   - {fileID: 1656886527}
   - {fileID: 1568082628}
-  - {fileID: 1370185909}
+  - {fileID: 1563598574}

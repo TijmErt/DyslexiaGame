@@ -13,6 +13,12 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private GameObject materialsPopup;
     [SerializeField] private GameObject blacksmithFeedbackPopup;
 
+    public void Start()
+    {
+        // Ensure all feedback popups are hidden at the start.
+        HidePopup(customerFeedbackPopup);
+        HidePopup(blacksmithFeedbackPopup);
+    }
 
     // Customer
 

@@ -71,11 +71,11 @@ public class WordManager : MonoBehaviour
     {
         if (customer != null)
         {
-            Customer custScript = customer.GetComponent<Customer>();
-            if (custScript != null)
+            Customer customerScript = customer.GetComponent<Customer>();
+            if (customerScript != null)
             {
-                custScript.orderImage = currentWordData.image;
-                custScript.NewOrder();
+                customerScript.orderImage = currentWordData.image;
+                customerScript.NewOrder();
             }
         }
     }

@@ -147,7 +147,7 @@ public class RepairSystem : MonoBehaviour
 
         // Build the end-session message showing count and list of collected items.
         string resultText = "alle reparaties voltooid!";
-        endPopupText.text = resultText + "\ngerepareerde items:" + allItems.Count + "\nItems:\n" + string.Join(", ", allItems);
+        endPopupText.text = resultText + "\ngerepareerde voorwerpen:" + allItems.Count + "\nvoorwerpen:\n" + string.Join(", ", allItems);
         // Activate the parent of the text element to show the popup in UI.
         endPopupText.transform.parent.gameObject.SetActive(true);
     }

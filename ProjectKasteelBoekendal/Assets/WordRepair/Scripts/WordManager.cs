@@ -231,7 +231,6 @@ public class WordManager : MonoBehaviour
         Debug.Log($"Player answers: {playerAnswer} for word {currentWord}");
 
         currentIndex++;
-
         LoadNextWord();
     }
 

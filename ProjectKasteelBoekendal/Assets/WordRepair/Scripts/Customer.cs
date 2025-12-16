@@ -8,17 +8,17 @@ public class Customer : MonoBehaviour
     public DialogueSystem dialogueSystem;
     public Sprite orderImage;
 
-    public void ProgressOrder()
+    public void CompleteOrder()
     {
         if (dialogueSystem != null)
-            dialogueSystem.ShowFeedbackPopup(gameObject, "Thank you!", popupYOffset);
+            dialogueSystem.ShowCustomerFeedbackPopup("Dank je wel!");
     }
 
     public void NewOrder()
     {
         if (dialogueSystem != null)
         {
-            dialogueSystem.ShowOrderPopup(gameObject, orderImage, orderPopupXOffset, orderPopupYOffset);
+            dialogueSystem.ShowOrderPopup(orderImage);
         }
     }
 }

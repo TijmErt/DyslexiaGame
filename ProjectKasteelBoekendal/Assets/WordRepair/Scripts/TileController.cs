@@ -1,69 +1,82 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controls tile selection and swapping behavior in the word-repair UI.
+// Receives clicks from LetterTile instances, manages a single selected tile,
+// performs swaps between slots, and triggers win/repair logic when appropriate.
 public class TileController : MonoBehaviour
 {
+    // Reference to the WordManager which validates the current assembled word.
     [SerializeField] private WordManager wordManager;
     [SerializeField] private RepairSystem repairSystem;
+
+    // Tracks the currently selected tile (null when nothing is selected).
     private LetterTile selectedTile;
 
-    // Called by LetterTile when the player taps it
+    // Entry point called by a `LetterTile` when the player taps it.
+    // Handles select/deselect and swapping logic depending on current state.
     public void OnTileClicked(LetterTile clickedTile)
     {
-        // 1. If nothing is selected yet, select the clicked tile
+        // If no tile is selected yet, select the clicked tile.
         if (selectedTile == null)
         {
             SelectTile(clickedTile);
         }
-        // 2. If the player clicked the SAME tile again, deselect it
+        // If the clicked tile is the one already selected, deselect it.
         else if (selectedTile == clickedTile)
         {
             DeselectTile();
         }
-        // 3. If we have a selected tile and clicked a different one, swap them
+        // If a different tile was clicked while one is selected, swap them.
         else
         {
             SwapTiles(selectedTile, clickedTile);
         }
     }
 
+    // Mark a tile as selected and update its visual state.
     private void SelectTile(LetterTile tile)
     {
         selectedTile = tile;
-        selectedTile.SetSelectedState(true); // Visual feedback
+        selectedTile.SetSelectedState(true); // provide visual feedback (color/scale)
     }
 
+    // Clear selection and restore the tile's visual state.
     private void DeselectTile()
     {
         if (selectedTile != null)
         {
-            selectedTile.SetSelectedState(false); // Remove visual feedback
+            selectedTile.SetSelectedState(false); // remove visual selection cue
             selectedTile = null;
         }
     }
 
+    // Swap the positions of two tiles by swapping their parent slot transforms.
+    // After swapping, re-center them in their new slots and clear selection.
+    // Finally, check if the current board now forms a correct word.
     private void SwapTiles(LetterTile tileA, LetterTile tileB)
     {
-        // 1. Get the parents (Slots)
+        // Remember each tile's parent (the slot it currently occupies).
         Transform parentA = tileA.transform.parent;
         Transform parentB = tileB.transform.parent;
 
-        // 2. Swap the parents
+        // Swap the parent transforms so the tiles exchange slots.
         tileA.transform.SetParent(parentB, false);
         tileB.transform.SetParent(parentA, false);
 
-        // 3. Reset positions so they snap to the center of the new slot
+        // Reset anchored positions so each tile snaps to the center of its new slot.
         tileA.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         tileB.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
-        // 4. Clear the selection
+        // Clear the selection now that the swap is complete.
         DeselectTile();
 
-        // Check for win condition here
+        // After swapping, verify whether the assembled tiles form the correct word.
         bool correct = wordManager.CheckAnswer();
 
         if (correct)
         {
+            // Notify the RepairSystem to process a successful repair/word completion.
             repairSystem.CompleteWord();
         }
     }

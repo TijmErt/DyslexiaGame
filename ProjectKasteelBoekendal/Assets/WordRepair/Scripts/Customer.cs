@@ -8,7 +8,7 @@ public class Customer : MonoBehaviour
     public DialogueSystem dialogueSystem;
     public Sprite orderImage;
 
-    public void ProgressOrder()
+    public void CompleteOrder()
     {
         if (dialogueSystem != null)
             dialogueSystem.ShowCustomerFeedbackPopup("Dank je wel!");

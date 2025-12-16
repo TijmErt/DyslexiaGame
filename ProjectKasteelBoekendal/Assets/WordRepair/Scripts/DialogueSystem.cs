@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Reflection;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -33,7 +32,7 @@ public class DialogueSystem : MonoBehaviour
 
         PositionPopupAbove();
 
-        // update text inside the instantiated prefab (find the TMP component)
+        // update text inside the instantiated prefab
         var tmp = popupInstance.GetComponentInChildren<TextMeshProUGUI>();
         if (tmp != null) tmp.text = message;
 
@@ -68,10 +67,10 @@ public class DialogueSystem : MonoBehaviour
             img.sprite = image;
         else
             Debug.LogWarning("DialogueSystem: no Image found on order popup instance to set sprite.");
-        
+
         PositionPopupAbove();
     }
-    
+
     private void PositionPopupAbove()
     {
         if (popupInstance == null || popupParent == null) return;
@@ -103,7 +102,6 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
-            // fallback: set world position (if popup is not a UI element)
             popupInstance.transform.position = worldPos;
         }
     }

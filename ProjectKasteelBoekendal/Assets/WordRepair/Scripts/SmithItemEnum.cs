@@ -1,8 +1,7 @@
 public enum SmithItemEnum
 {
-    Hammer,
-    Anvil,
-    Tongs,
-    Furnace,
-    Chisel
+    // blacksmith items in dutch
+    hammer,
+    spijker,
+    zwaard
 }

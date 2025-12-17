@@ -1408,10 +1408,6 @@ MonoBehaviour:
     image: {fileID: 4301844918096825189, guid: e41af1b119f221b86a4e8ff9742cc5db, type: 3}
   - word: veer
     image: {fileID: 2836554479157175418, guid: 792a75c1347a909ff8f9a3d5cbca50c3, type: 3}
-  - word: metaal
-    image: {fileID: -262108834630032882, guid: 7ade82dca076b20fa9e61cbc1a1d310d, type: 3}
-  - word: sleutel
-    image: {fileID: 21300000, guid: aebc5de5d47b64e2891497c8fb4deee0, type: 3}
   - word: koning
     image: {fileID: 21300000, guid: b0c9ca5e62e0c2747a35b49ad907f42a, type: 3}
   - word: plank
@@ -1719,6 +1715,7 @@ GameObject:
   - component: {fileID: 693827824}
   - component: {fileID: 693827823}
   - component: {fileID: 693827822}
+  - component: {fileID: 693827826}
   m_Layer: 5
   m_Name: EndWordRepairButton
   m_TagString: FeedbackPopup
@@ -1824,6 +1821,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693827820}
   m_CullTransparentMesh: 1
+--- !u!114 &693827826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693827820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4f4fc98bedfcc419c0ed3d93c94d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndWordRepairScript
+  sceneName: Combine_17-12_Playtest_Blacksmith
 --- !u!1001 &700181501
 PrefabInstance:
   m_ObjectHideFlags: 0

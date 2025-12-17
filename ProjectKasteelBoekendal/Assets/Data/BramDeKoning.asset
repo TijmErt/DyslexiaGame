@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BramDeKoning
   m_EditorClassIdentifier: Assembly-CSharp::DialogueCharacter
   characterName: Bram de koning
-  currentState: Before
-  IsSpokenTo: 0
+  currentState: Not Found
+  IsSpokenTo: 1
   entries:
   - State: Before
     Text: "Ah de ge\xEBerde held welkom, welkom, je komt als geroepen, we hebben

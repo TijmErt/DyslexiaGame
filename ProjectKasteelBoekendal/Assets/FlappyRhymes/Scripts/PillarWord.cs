@@ -40,7 +40,7 @@ public class PillarWord : MonoBehaviour
             if (wordManager == null || scoreManager == null)
                 return;
 
-            string word = GetComponent<TextMeshProUGUI>().text;
+            string word = GetComponentInChildren<TextMeshPro>().text;
 
             Debug.Log("Collision detected with " + word);
 

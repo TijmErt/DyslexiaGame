@@ -35,14 +35,10 @@ public class RhymeWordSpawner : MonoBehaviour
 
         (string, string) wordAndRhyme = wordManager.GetRandomWordAndRhyme();
 
-        // Instantiate, then set texts on the instantiated object's children
         GameObject instance = Instantiate(rhymeWordPrefab, transform.position, Quaternion.identity);
 
-        var texts = instance.GetComponentsInChildren<TextMeshProUGUI>(true);
-        foreach (var t in texts)
-        {
-            if (t != null)
-                t.text = wordAndRhyme.Item2;
-        }
+        var texts = instance.GetComponentsInChildren<TextMeshPro>(true);
+        texts[0].text = wordAndRhyme.Item1;
+        texts[1].text = wordAndRhyme.Item2;
     }
 }

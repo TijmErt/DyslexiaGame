@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Input/InputReader")]
-public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputActions.IUIActions, InputActions.ICookingWithWordsActions
+public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputActions.IUIActions, InputActions.ICookingWithWordsActions, InputActions.IFlappyRhymesActions
 {
     public InputActions inputActions { get; private set; }
 
@@ -28,6 +28,7 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
     private void DisableGameplay() => inputActions.Player.Disable();
     private void DisableUI() => inputActions.UI.Disable();
     private void DisableCookingWithWords() => inputActions.CookingWithWords.Disable();
+    private void DisableFlappyRhymes() => inputActions.FlappyRhymes.Disable();
 
     public void EnableGameplay()
     {
@@ -35,6 +36,7 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         inputActions.Player.SetCallbacks(this);
         DisableUI();
         DisableCookingWithWords();
+        DisableFlappyRhymes();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
     }
@@ -45,6 +47,7 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         inputActions.UI.SetCallbacks(this);
         DisableGameplay();
         DisableCookingWithWords();
+        DisableFlappyRhymes();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
     }
@@ -55,8 +58,18 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         inputActions.CookingWithWords.SetCallbacks(this);
         DisableUI();
         DisableGameplay();
+        DisableFlappyRhymes();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
+    }
+
+    public void EnableFlappyRhymes()
+    {
+        inputActions.FlappyRhymes.Enable();
+        inputActions.FlappyRhymes.SetCallbacks(this);
+        DisableUI();
+        DisableGameplay();
+        DisableCookingWithWords();
     }
 
     public void OnNavigate(InputAction.CallbackContext context)

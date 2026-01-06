@@ -5,7 +5,7 @@ public class RhymeWordSpawner : MonoBehaviour
 {
 
     [SerializeField] private GameObject rhymeWordPrefab;
-    [SerializeField] private float spawnInterval = 2f;
+    [SerializeField] private float spawnInterval = 3f;
 
     [SerializeField] private FlappyRhymesWordManager wordManager;
 
@@ -38,7 +38,25 @@ public class RhymeWordSpawner : MonoBehaviour
         GameObject instance = Instantiate(rhymeWordPrefab, transform.position, Quaternion.identity);
 
         var texts = instance.GetComponentsInChildren<TextMeshPro>(true);
-        texts[0].text = wordAndRhyme.Item1;
-        texts[1].text = wordAndRhyme.Item2;
+
+        if (texts != null && texts.Length >= 2)
+        {
+            if (Random.value < 0.5f)
+            {
+                texts[0].text = wordAndRhyme.Item1;
+                texts[1].text = wordAndRhyme.Item2;
+            }
+            else
+            {
+                texts[0].text = wordAndRhyme.Item2;
+                texts[1].text = wordAndRhyme.Item1;
+            }
+        }
+        else if (texts != null)
+        {
+            foreach (var t in texts)
+                if (t != null)
+                    t.text = wordAndRhyme.Item2;
+        }
     }
 }

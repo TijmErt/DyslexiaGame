@@ -1,5 +1,5 @@
 public class WordRhymes
 {
     public string word = "boek";
-    public string[] rhymes = { "Zoek", "Doek", "Koek", "Broek", "Hoek", "Bezoek", "Vloek", "Snoek", "Verzoek", "Onderzoek" };
+    public string[] rhymes = { "zoek", "doek", "koek", "broek", "hoek", "bezoek", "vloek", "snoek", "verzoek", "onderzoek" };
 }

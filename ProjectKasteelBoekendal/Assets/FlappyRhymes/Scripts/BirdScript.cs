@@ -1,11 +1,15 @@
-using System;
+using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BirdScript : MonoBehaviour
 {
-
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private Rigidbody rb;
     [SerializeField] private InputReader inputReader = default;
+    [SerializeField] private GameObject wordSpawner;
+    [SerializeField] private FlappyRhymesWordManager wordManager;
+
 
     void OnEnable()
     {
@@ -30,19 +34,12 @@ public class BirdScript : MonoBehaviour
 
     private void Flap()
     {
-        rigidbody.linearVelocity = Vector2.up * 5f;
+        rb.linearVelocity = Vector2.up * 5f;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         inputReader.EnableFlappyRhymes();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
 
     }
 }

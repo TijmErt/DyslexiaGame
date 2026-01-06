@@ -3,7 +3,7 @@ using UnityEngine;
 public class RhymeWordScript : MonoBehaviour
 {
 
-    [SerializeField] private int movementSpeed = 5;
+    [SerializeField] private int movementSpeed = 3;
 
     private int screenLeftBound = -20;
 

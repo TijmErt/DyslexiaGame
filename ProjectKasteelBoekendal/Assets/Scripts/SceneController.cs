@@ -15,5 +15,11 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("Combined");
     }
+
+    public void RemoveBeforeMerge()
+    {
+        if (string.IsNullOrEmpty(sceneName)) return;
+        SceneManager.LoadScene(sceneName);
+    }
     
 }

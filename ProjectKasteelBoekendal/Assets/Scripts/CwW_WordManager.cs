@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CwW_WordManager : MonoBehaviour
 {
@@ -15,19 +17,54 @@ public class CwW_WordManager : MonoBehaviour
     [Header("Letter Prefab")]
     [SerializeField] private LetterItem _letterPrefab;
 
+    [Header("UI (TMP)")]
+    [SerializeField] private TMP_Text _p1WordText;
+    [SerializeField] private TMP_Text _p2WordText;
+    [SerializeField] private TMP_Text _totalSolvedText;
+
+    [Header("End Game UI")]
+    [SerializeField] private GameObject _endPanel;
+    [SerializeField] private TMP_Text _endSolvedText;
+    [SerializeField] private string _nextSceneName;
+
+    [Header("Win Condition")]
+    [SerializeField] private int _targetSolvedWords = 10;
+
+    private int _totalSolvedWords = 0;
+    private bool _gameEnded = false;
+
     private void Start()
     {
+        if (_endPanel != null)
+            _endPanel.SetActive(false);
+
+        _totalSolvedWords = 0;
+        UpdateTotalSolvedUI();
+
         for (int i = 0; i < _boards.Count; i++)
         {
             StartNextWord(i);
+            UpdateWordUI(i);
         }
     }
 
     public void OnSlotFilledChanged(int boardId)
     {
+        if (_gameEnded) return;
+
         if (IsWordCompleted(boardId))
         {
+            _totalSolvedWords++;
+            UpdateTotalSolvedUI();
+
+            if (_totalSolvedWords >= _targetSolvedWords)
+            {
+                EndGame();
+                return;
+            }
+
             StartNextWord(boardId);
+            UpdateWordUI(boardId);
         }
     }
 
@@ -53,6 +90,7 @@ public class CwW_WordManager : MonoBehaviour
     private void StartNextWord(int boardId)
     {
         if (boardId < 0 || boardId >= _boards.Count) return;
+        if (_gameEnded) return;
 
         ClearBoard(boardId);
         string word = ChooseNextWord(boardId);
@@ -63,6 +101,8 @@ public class CwW_WordManager : MonoBehaviour
 
         SetupSlotsForWord(boardId, word);
         SpawnLettersForWord(boardId, word);
+
+        UpdateWordUI(boardId);
     }
     private string ChooseNextWord(int boardId)
     {
@@ -247,6 +287,43 @@ public class CwW_WordManager : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    // ---------- UI ----------
+    private void UpdateWordUI(int boardId)
+    {
+        if (boardId == 0 && _p1WordText != null)
+            _p1WordText.text = GetCurrentWord(0) ?? "";
+
+        if (boardId == 1 && _p2WordText != null)
+            _p2WordText.text = GetCurrentWord(1) ?? "";
+    }
+
+    private void UpdateTotalSolvedUI()
+    {
+        if (_totalSolvedText != null)
+            _totalSolvedText.text = $"Solved: {_totalSolvedWords}/{_targetSolvedWords}";
+    }
+
+    private void EndGame()
+    {
+        _gameEnded = true;
+
+        if (_endPanel != null)
+            _endPanel.SetActive(true);
+
+        if (_endSolvedText != null)
+            _endSolvedText.text = $"Solved: {_totalSolvedWords}/{_targetSolvedWords}";
+    }
+    public void FinishMinigame()
+    {
+        if (!_gameEnded) return;
+        
+        if (!string.IsNullOrEmpty(_nextSceneName))
+            SceneManager.LoadScene(_nextSceneName);
+        else
+            Debug.LogWarning("WordManager: Next scene name is empty.");
+        
     }
 }
 

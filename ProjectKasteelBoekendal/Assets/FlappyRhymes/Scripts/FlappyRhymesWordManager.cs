@@ -30,4 +30,10 @@ public class FlappyRhymesWordManager : MonoBehaviour
         return System.Array.Exists(currentWordRhymes.rhymes,
             rhyme => string.Equals(rhyme, word, System.StringComparison.OrdinalIgnoreCase));
     }
+
+    internal void SetNewWord()
+    {
+        currentWordRhymes = new WordRhymes();
+        wordText.text = currentWordRhymes.word;
+    }
 }

@@ -12,15 +12,16 @@ public class FlappyRhymeScoreManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        scoreText.text = "Score: " + score;
-    }
-
     [ContextMenu("Increase Score")]
     public void IncreaseScore()
     {
         score++;
+        scoreText.text = "Score: " + score;
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        scoreText.text = "Score: " + score;
     }
 }

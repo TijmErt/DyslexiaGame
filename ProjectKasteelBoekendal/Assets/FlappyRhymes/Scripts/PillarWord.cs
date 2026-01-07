@@ -8,12 +8,14 @@ public class PillarWord : MonoBehaviour
 
     private FlappyRhymeScoreManager scoreManager;
     private FlappyRhymesWordManager wordManager;
+    private FlappyRhymesHealthManager healthManager;
 
-    // Public initializer to set manager references on instantiated prefabs
-    public void Initialize(FlappyRhymesWordManager wm, FlappyRhymeScoreManager sm)
+    // Public initializer to set manager references on instantiated prefabs, use if more than one managers are in the scene
+    public void Initialize(FlappyRhymesWordManager wm, FlappyRhymeScoreManager sm, FlappyRhymesHealthManager hm)
     {
         wordManager = wm;
         scoreManager = sm;
+        healthManager = hm;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,6 +27,9 @@ public class PillarWord : MonoBehaviour
 
         if (scoreManager == null)
             scoreManager = FindFirstObjectByType<FlappyRhymeScoreManager>();
+
+        if (healthManager == null)
+            healthManager = FindFirstObjectByType<FlappyRhymesHealthManager>();
     }
 
     // Update is called once per frame
@@ -37,15 +42,19 @@ public class PillarWord : MonoBehaviour
     {
         if (other.GetComponent<BirdScript>() != null)
         {
-            if (wordManager == null || scoreManager == null)
+            if (wordManager == null || scoreManager == null || healthManager == null)
                 return;
 
             string word = GetComponentInChildren<TextMeshPro>().text;
 
-            Debug.Log("Collision detected with " + word);
-
             if (wordManager.IsRhyme(word))
+            {
                 scoreManager.IncreaseScore();
+            }
+            else
+            {
+                healthManager.DecreaseHealth();
+            }
         }
     }
 

@@ -10,6 +10,16 @@ public class BirdScript : MonoBehaviour
     [SerializeField] private GameObject wordSpawner;
     [SerializeField] private FlappyRhymesWordManager wordManager;
 
+    private int topBoundary = 7;
+    private int bottomBoundary = -5;
+
+    void Update()
+    {
+        if (transform.position.y < bottomBoundary || transform.position.y > topBoundary)
+        {
+            rb.linearVelocity *= -1;
+        }
+    }
 
     void OnEnable()
     {

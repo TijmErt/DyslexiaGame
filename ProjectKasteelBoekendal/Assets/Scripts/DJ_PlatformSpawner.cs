@@ -26,7 +26,7 @@ public class DJ_PlatformSpawner : MonoBehaviour
         if (cam == null) cam = Camera.main;
 
         // Start spawning a bit above the player
-        nextRowY = player.position.y + 1f;
+        nextRowY = player.position.y + 4f;
 
         // Create a few starter rows
         for (int i = 0; i < 10; i++)
@@ -43,7 +43,7 @@ public class DJ_PlatformSpawner : MonoBehaviour
 
     private void HandlePlatformSpawning()
     {
-        if (DJ_GameManager.I != null && DJ_GameManager.I.isGameOver) return;
+        if (DJ_GameManager.I != null && (DJ_GameManager.I.isGameOver || DJ_GameManager.I.isWin)) return;
 
         float camTopY = cam.transform.position.y + spawnAheadY;
         while (nextRowY < camTopY)

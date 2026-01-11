@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DJ_PlayerController : MonoBehaviour
@@ -15,6 +16,8 @@ public class DJ_PlayerController : MonoBehaviour
     [SerializeField] private float gameOverBelowCamera = 7f; // if player is this far below camera -> game over
 
     private Rigidbody rb;
+
+    private bool isPressed = false;
     private int moveDir = 0;
 
     private Vector2 currentMousePos;
@@ -30,65 +33,62 @@ public class DJ_PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputReader.touchEvent += OnTouch;
+        inputReader.touchPressEvent += OnTouchPress;
+
         inputReader.mousePosEvent += OnMouseMove;
-        inputReader.leftMouseButtonEvent += OnMouseTap;
+        inputReader.mousePressEvent += OnMouseTap;
     }
     private void OnDisable()
     {
         inputReader.touchEvent -= OnTouch;
-        inputReader.mousePosEvent -= OnMouseMove;
-        inputReader.leftMouseButtonEvent -= OnMouseTap;
-    }
+        inputReader.touchPressEvent -= OnTouchPress;
 
-    private void Update()
-    {
-        moveDir = 0;
+        inputReader.mousePosEvent -= OnMouseMove;
+        inputReader.mousePressEvent -= OnMouseTap;
     }
 
     private void FixedUpdate()
     {
-        if (DJ_GameManager.I != null && DJ_GameManager.I.isGameOver) return;
-
-        rb.linearVelocity = new Vector2(moveDir * moveSpeed, rb.linearVelocity.y);
+        float vx = isPressed ? moveDir * moveSpeed : 0f;
+        rb.linearVelocity = new Vector3(vx, rb.linearVelocity.y, 0f);
     }
 
-    private void ProcessTap(Vector2 pressPos)
+    private void UpdateMoveDirFromPos(Vector2 pos)
     {
-        if (DJ_GameManager.I != null && DJ_GameManager.I.isGameOver) return;
-
-        moveDir = (pressPos.x < Screen.width * 0.5f) ? -1 : 1;
-
-        // Game over check (falling too much)
-        if (cam != null)
-        {
-            float camY = cam.transform.position.y;
-            if (transform.position.y < camY - gameOverBelowCamera)
-            {
-                DJ_GameManager.I?.GameOver();
-            }
-        }
+        moveDir = (pos.x < Screen.width * 0.5f) ? -1 : 1;
     }
 
     // Called by platforms when a correct landing happens
     public void Bounce()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpVelocity, 0f);
     }
 
     // --- Touch Input ---
-    private void OnTouch(Vector2 screenPosition)
+    private void OnTouch(Vector2 pos)
     {
-        ProcessTap(screenPosition);
+        currentMousePos = pos;
+        if (isPressed) UpdateMoveDirFromPos(pos);
+    }
+
+    private void OnTouchPress(bool pressed)
+    {
+        isPressed = pressed;
+        if (!pressed) moveDir = 0;
+        //else UpdateMoveDirFromPos(currentMousePos); // optional
     }
 
     // --- Mouse Input ---
-    private void OnMouseMove(Vector2 position)
+    private void OnMouseMove(Vector2 pos)
     {
-        currentMousePos = position;
+        currentMousePos = pos;
+        if (isPressed) UpdateMoveDirFromPos(pos);
     }
 
-    private void OnMouseTap()
+    private void OnMouseTap(bool pressed)
     {
-        ProcessTap(currentMousePos);
+        isPressed = pressed;
+        if (!pressed) moveDir = 0;
+        else UpdateMoveDirFromPos(currentMousePos);
     }
 }

@@ -8,10 +8,10 @@ public class DJ_WordPlatform : MonoBehaviour
     [SerializeField] private TextMeshPro wordText;
 
     [Header("State")]
-    [SerializeField] private bool isCorrect = true;
+    [SerializeField] public bool isCorrect = true;
 
     private Collider col;
-    private bool used = false;
+    private bool scored = false;
 
     private void Awake()
     {
@@ -21,43 +21,51 @@ public class DJ_WordPlatform : MonoBehaviour
 
     public void Setup(string word, bool correct)
     {
-        used = false;
         isCorrect = correct;
+        scored = false;
 
-        if (wordText != null) wordText.text = word;
+        if (wordText != null) wordText.text = word;        
 
-        col.enabled = true;
+        if (correct)
+        {
+            col.enabled = true;
+        }
+        else
+        {
+            col.enabled = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("GROUND HIT: " + collision.collider.name);
+
         HandleCollision(collision);
     }
 
     private void HandleCollision(Collision collision)
     {
-        if (used) return;
         if (!collision.collider.CompareTag("Player")) return;
 
-        // Only count as "landing" if player is coming down onto it
-        Rigidbody prb = collision.collider.GetComponent<Rigidbody>();
-        if (prb != null && prb.linearVelocity.y > 0f) return;
+        Rigidbody prb = collision.rigidbody; // player's rigidbody
+        if (prb != null && prb.linearVelocity.y > 0f) return; // only when falling/downward
 
-        used = true;
-
-        DJ_PlayerController player = collision.collider.GetComponent<DJ_PlayerController>();
+        var player = collision.collider.GetComponent<DJ_PlayerController>();
         if (player == null) return;
 
         if (isCorrect)
         {
-            DJ_GameManager.I?.AddCorrect();
-            player.Bounce();
+            if (!scored)
+            {
+                scored = true;
+                DJ_GameManager.I?.AddCorrect(); // score only once
+            }
+
+            player.Bounce(); // ALWAYS bounce on correct
         }
         else
         {
-            // Break: disable collision so player falls through
-            col.enabled = false;
-            // Optional: play crack animation/sound here
+            // Wrong: break once and fall through
         }
     }
 }

@@ -12,8 +12,15 @@ public class DJ_GameManager : MonoBehaviour
     [SerializeField] public int minTier = 1;
     [SerializeField] public int maxTier = 1;
 
-    [Header("Game Over")]
-    [SerializeField] public bool isGameOver = false;
+    [Header("Win Condition")]
+    [SerializeField] private int targetScoreToWin = 20;
+
+    [Header("Scenes")]
+    [SerializeField] private string overworldSceneName = "Overworld";
+
+    [Header("State")]
+    public bool isGameOver = false;
+    public bool isWin = false;
 
     private void Awake()
     {
@@ -23,11 +30,17 @@ public class DJ_GameManager : MonoBehaviour
 
     public void AddCorrect()
     {
+        if (isGameOver || isWin) return;
+
         scoreCorrect++;
 
-        // Simple difficulty ramp: every 10 correct, expand tier range
-        if (scoreCorrect == 10) maxTier = 2;
-        if (scoreCorrect == 25) maxTier = 3;
+        if (scoreCorrect >= targetScoreToWin)
+        {
+            Win();
+        }
+
+        //if (scoreCorrect == 10) maxTier = 2;
+        //if (scoreCorrect == 25) maxTier = 3;
     }
 
     public void GameOver()
@@ -35,8 +48,15 @@ public class DJ_GameManager : MonoBehaviour
         if (isGameOver) return;
         isGameOver = true;
 
-        // Jam-simple restart: reload scene after short delay
         Invoke(nameof(Restart), 1.0f);
+    }
+
+    private void Win()
+    {
+        if (isWin || isGameOver) return;
+        isWin = true;
+
+        SceneManager.LoadScene(overworldSceneName);
     }
 
     public void Restart()

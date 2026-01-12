@@ -405,6 +405,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TouchPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""58605b6e-d9d6-45d0-a6d1-e0ac7af8d3c5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -438,6 +447,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a69d6248-fd1d-4f6f-8179-5758d46711f7"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -569,6 +589,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_FlappyRhymes = asset.FindActionMap("FlappyRhymes", throwIfNotFound: true);
         m_FlappyRhymes_Touch = m_FlappyRhymes.FindAction("Touch", throwIfNotFound: true);
         m_FlappyRhymes_Mouse = m_FlappyRhymes.FindAction("Mouse", throwIfNotFound: true);
+        m_CookingWithWords_TouchPress = m_CookingWithWords.FindAction("TouchPress", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -836,6 +857,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_CookingWithWords_Touch;
     private readonly InputAction m_CookingWithWords_Mouse;
     private readonly InputAction m_CookingWithWords_MousePos;
+    private readonly InputAction m_CookingWithWords_TouchPress;
     /// <summary>
     /// Provides access to input actions defined in input action map "CookingWithWords".
     /// </summary>
@@ -859,6 +881,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "CookingWithWords/MousePos".
         /// </summary>
         public InputAction @MousePos => m_Wrapper.m_CookingWithWords_MousePos;
+        /// <summary>
+        /// Provides access to the underlying input action "CookingWithWords/TouchPress".
+        /// </summary>
+        public InputAction @TouchPress => m_Wrapper.m_CookingWithWords_TouchPress;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -894,6 +920,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePos.started += instance.OnMousePos;
             @MousePos.performed += instance.OnMousePos;
             @MousePos.canceled += instance.OnMousePos;
+            @TouchPress.started += instance.OnTouchPress;
+            @TouchPress.performed += instance.OnTouchPress;
+            @TouchPress.canceled += instance.OnTouchPress;
         }
 
         /// <summary>
@@ -914,6 +943,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePos.started -= instance.OnMousePos;
             @MousePos.performed -= instance.OnMousePos;
             @MousePos.canceled -= instance.OnMousePos;
+            @TouchPress.started -= instance.OnTouchPress;
+            @TouchPress.performed -= instance.OnTouchPress;
+            @TouchPress.canceled -= instance.OnTouchPress;
         }
 
         /// <summary>
@@ -1170,6 +1202,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePos(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TouchPress" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTouchPress(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "FlappyRhymes" which allows adding and removing callbacks.

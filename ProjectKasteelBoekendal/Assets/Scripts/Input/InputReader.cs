@@ -8,8 +8,11 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
     public InputActions inputActions { get; private set; }
 
     public event UnityAction<Vector2> touchEvent;
+    public event UnityAction<bool> touchPressEvent;
+
     public event UnityAction leftMouseButtonEvent;
     public event UnityAction<Vector2> mousePosEvent;
+    public event UnityAction<bool> mousePressEvent;
 
     private void OnEnable()
     {
@@ -83,12 +86,28 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         touchEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
+    public void OnTouchPress(InputAction.CallbackContext context)
+    {
+        bool pressed = context.ReadValue<float>() > 0.5f;
+
+        if (context.phase == InputActionPhase.Started ||
+            context.phase == InputActionPhase.Performed ||
+            context.phase == InputActionPhase.Canceled)
+        {
+            touchPressEvent?.Invoke(pressed);
+        }
+    }
+
     public void OnMouse(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
             leftMouseButtonEvent?.Invoke();
         }
+
+        // started = pressed, canceled = released
+        if (context.phase == InputActionPhase.Started) mousePressEvent?.Invoke(true);
+        if (context.phase == InputActionPhase.Canceled) mousePressEvent?.Invoke(false);
     }
 
     public void OnMousePos(InputAction.CallbackContext context)

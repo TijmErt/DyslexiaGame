@@ -5,6 +5,7 @@ public class SceneController : MonoBehaviour
 {
     [SerializeField] private string sceneName = "";
 
+
     void OnTriggerEnter(Collider other)
     {
         if (string.IsNullOrEmpty(sceneName)) return;
@@ -14,6 +15,24 @@ public class SceneController : MonoBehaviour
     public void BackToMainRoom()
     {
         SceneManager.LoadScene("Combined");
+    }
+
+    public void RemoveBeforeMerge()
+    {
+        if (string.IsNullOrEmpty(sceneName)) return;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadRoomScene(string roomSceneName)
+    {
+        if (string.IsNullOrEmpty(roomSceneName)) return;
+        SceneManager.LoadScene(roomSceneName);
+    }
+
+    public void LoadMinigameScene(string minigameSceneName)
+    {
+        if (string.IsNullOrEmpty(minigameSceneName)) return;
+        SceneManager.LoadScene(minigameSceneName);
     }
     
 }

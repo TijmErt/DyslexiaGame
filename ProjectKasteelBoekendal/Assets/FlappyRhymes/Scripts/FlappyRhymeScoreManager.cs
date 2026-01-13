@@ -9,19 +9,19 @@ public class FlappyRhymeScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = score.ToString();
     }
 
     [ContextMenu("Increase Score")]
     public void IncreaseScore()
     {
         score++;
-        scoreText.text = "Score: " + score;
+        scoreText.text = score.ToString();
     }
 
     public void ResetScore()
     {
         score = 0;
-        scoreText.text = "Score: " + score;
+        scoreText.text = score.ToString();
     }
 }

@@ -12,7 +12,7 @@ public class FlappyRhymesHealthManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        healthText.text = "Health: " + health;
+        healthText.text = health.ToString();
     }
 
     [ContextMenu("Decrease Health")]
@@ -22,7 +22,7 @@ public class FlappyRhymesHealthManager : MonoBehaviour
             return;
 
         health--;
-        healthText.text = "Health: " + health;
+        healthText.text = health.ToString();
 
         if (health <= 0)
         {
@@ -33,7 +33,7 @@ public class FlappyRhymesHealthManager : MonoBehaviour
     public void ResetHealth()
     {
         health = 3;
-        healthText.text = "Health: " + health;
+        healthText.text = health.ToString();
     }
 
     [ContextMenu("End Game")]

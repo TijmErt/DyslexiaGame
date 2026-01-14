@@ -457,12 +457,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CwW_WordManager
   _possibleWords:
-  - Day
-  - Word
-  - Light
+  - Dag
+  - Woord
+  - Licht
   - Water
-  - Cloud
-  - Smile
+  - Wolk
+  - Lach
   _boards:
   - Name: Player1
     Slots:

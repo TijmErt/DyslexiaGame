@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Combine_17-12_Playtest_Throneroom.unity
+    guid: 4ec26b184c0ea4e4dbe9ba25d929cafb
+  - enabled: 1
     path: Assets/Scenes/Combined.unity
     guid: f6e7d4f0b93d4aec784ed796e972f38b
   - enabled: 1
@@ -18,12 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Combine_17-12_Playtest_Kitchen.unity
     guid: 095a7944947eac94a92ddfba9784e498
   - enabled: 1
-    path: Assets/Scenes/Combine_17-12_Playtest_Throneroom.unity
-    guid: 4ec26b184c0ea4e4dbe9ba25d929cafb
-  - enabled: 1
     path: Assets/Scenes/Combine_17-12_Playtest_Blacksmith.unity
     guid: 6cdc50f287e0dab4f97326ad1cebe786
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6e4ae210701dfc14686f5fc00db89862, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d433c0470eee1a24497baddccdeb9e3f, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: e2918c008e1ff144a80a18ac053cbf61, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

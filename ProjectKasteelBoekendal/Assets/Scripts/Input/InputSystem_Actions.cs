@@ -405,6 +405,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TouchPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""58605b6e-d9d6-45d0-a6d1-e0ac7af8d3c5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -438,6 +447,65 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a69d6248-fd1d-4f6f-8179-5758d46711f7"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""FlappyRhymes"",
+            ""id"": ""83fdb598-6b99-44cf-b16c-898064156fc9"",
+            ""actions"": [
+                {
+                    ""name"": ""Touch"",
+                    ""type"": ""Value"",
+                    ""id"": ""fdbc157f-bfc5-43fe-9613-77633138c965"",
+                    ""expectedControlType"": ""Touch"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d11f283-8180-401e-b1df-8bce0df731b0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7ee8d8ad-3baf-4b0f-8f19-e90b1986bb40"",
+                    ""path"": ""<Touchscreen>/primaryTouch"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Touch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4be618c-51b6-474b-b10c-ee81291060d5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -517,6 +585,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_CookingWithWords_Touch = m_CookingWithWords.FindAction("Touch", throwIfNotFound: true);
         m_CookingWithWords_Mouse = m_CookingWithWords.FindAction("Mouse", throwIfNotFound: true);
         m_CookingWithWords_MousePos = m_CookingWithWords.FindAction("MousePos", throwIfNotFound: true);
+        m_CookingWithWords_TouchPress = m_CookingWithWords.FindAction("TouchPress", throwIfNotFound: true);
+        // FlappyRhymes
+        m_FlappyRhymes = asset.FindActionMap("FlappyRhymes", throwIfNotFound: true);
+        m_FlappyRhymes_Touch = m_FlappyRhymes.FindAction("Touch", throwIfNotFound: true);
+        m_FlappyRhymes_Mouse = m_FlappyRhymes.FindAction("Mouse", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -524,6 +597,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputActions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_CookingWithWords.enabled, "This will cause a leak and performance issues, InputActions.CookingWithWords.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_FlappyRhymes.enabled, "This will cause a leak and performance issues, InputActions.FlappyRhymes.Disable() has not been called.");
     }
 
     /// <summary>
@@ -783,6 +857,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_CookingWithWords_Touch;
     private readonly InputAction m_CookingWithWords_Mouse;
     private readonly InputAction m_CookingWithWords_MousePos;
+    private readonly InputAction m_CookingWithWords_TouchPress;
     /// <summary>
     /// Provides access to input actions defined in input action map "CookingWithWords".
     /// </summary>
@@ -806,6 +881,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "CookingWithWords/MousePos".
         /// </summary>
         public InputAction @MousePos => m_Wrapper.m_CookingWithWords_MousePos;
+        /// <summary>
+        /// Provides access to the underlying input action "CookingWithWords/TouchPress".
+        /// </summary>
+        public InputAction @TouchPress => m_Wrapper.m_CookingWithWords_TouchPress;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -841,6 +920,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePos.started += instance.OnMousePos;
             @MousePos.performed += instance.OnMousePos;
             @MousePos.canceled += instance.OnMousePos;
+            @TouchPress.started += instance.OnTouchPress;
+            @TouchPress.performed += instance.OnTouchPress;
+            @TouchPress.canceled += instance.OnTouchPress;
         }
 
         /// <summary>
@@ -861,6 +943,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePos.started -= instance.OnMousePos;
             @MousePos.performed -= instance.OnMousePos;
             @MousePos.canceled -= instance.OnMousePos;
+            @TouchPress.started -= instance.OnTouchPress;
+            @TouchPress.performed -= instance.OnTouchPress;
+            @TouchPress.canceled -= instance.OnTouchPress;
         }
 
         /// <summary>
@@ -894,6 +979,113 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="CookingWithWordsActions" /> instance referencing this action map.
     /// </summary>
     public CookingWithWordsActions @CookingWithWords => new CookingWithWordsActions(this);
+
+    // FlappyRhymes
+    private readonly InputActionMap m_FlappyRhymes;
+    private List<IFlappyRhymesActions> m_FlappyRhymesActionsCallbackInterfaces = new List<IFlappyRhymesActions>();
+    private readonly InputAction m_FlappyRhymes_Touch;
+    private readonly InputAction m_FlappyRhymes_Mouse;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "FlappyRhymes".
+    /// </summary>
+    public struct FlappyRhymesActions
+    {
+        private @InputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public FlappyRhymesActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "FlappyRhymes/Touch".
+        /// </summary>
+        public InputAction @Touch => m_Wrapper.m_FlappyRhymes_Touch;
+        /// <summary>
+        /// Provides access to the underlying input action "FlappyRhymes/Mouse".
+        /// </summary>
+        public InputAction @Mouse => m_Wrapper.m_FlappyRhymes_Mouse;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_FlappyRhymes; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="FlappyRhymesActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(FlappyRhymesActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="FlappyRhymesActions" />
+        public void AddCallbacks(IFlappyRhymesActions instance)
+        {
+            if (instance == null || m_Wrapper.m_FlappyRhymesActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_FlappyRhymesActionsCallbackInterfaces.Add(instance);
+            @Touch.started += instance.OnTouch;
+            @Touch.performed += instance.OnTouch;
+            @Touch.canceled += instance.OnTouch;
+            @Mouse.started += instance.OnMouse;
+            @Mouse.performed += instance.OnMouse;
+            @Mouse.canceled += instance.OnMouse;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="FlappyRhymesActions" />
+        private void UnregisterCallbacks(IFlappyRhymesActions instance)
+        {
+            @Touch.started -= instance.OnTouch;
+            @Touch.performed -= instance.OnTouch;
+            @Touch.canceled -= instance.OnTouch;
+            @Mouse.started -= instance.OnMouse;
+            @Mouse.performed -= instance.OnMouse;
+            @Mouse.canceled -= instance.OnMouse;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="FlappyRhymesActions.UnregisterCallbacks(IFlappyRhymesActions)" />.
+        /// </summary>
+        /// <seealso cref="FlappyRhymesActions.UnregisterCallbacks(IFlappyRhymesActions)" />
+        public void RemoveCallbacks(IFlappyRhymesActions instance)
+        {
+            if (m_Wrapper.m_FlappyRhymesActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="FlappyRhymesActions.AddCallbacks(IFlappyRhymesActions)" />
+        /// <seealso cref="FlappyRhymesActions.RemoveCallbacks(IFlappyRhymesActions)" />
+        /// <seealso cref="FlappyRhymesActions.UnregisterCallbacks(IFlappyRhymesActions)" />
+        public void SetCallbacks(IFlappyRhymesActions instance)
+        {
+            foreach (var item in m_Wrapper.m_FlappyRhymesActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_FlappyRhymesActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="FlappyRhymesActions" /> instance referencing this action map.
+    /// </summary>
+    public FlappyRhymesActions @FlappyRhymes => new FlappyRhymesActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -1010,5 +1202,34 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePos(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TouchPress" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTouchPress(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "FlappyRhymes" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="FlappyRhymesActions.AddCallbacks(IFlappyRhymesActions)" />
+    /// <seealso cref="FlappyRhymesActions.RemoveCallbacks(IFlappyRhymesActions)" />
+    public interface IFlappyRhymesActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Touch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTouch(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Mouse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMouse(InputAction.CallbackContext context);
     }
 }

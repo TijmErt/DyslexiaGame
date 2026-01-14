@@ -3,13 +3,16 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Input/InputReader")]
-public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputActions.IUIActions, InputActions.ICookingWithWordsActions
+public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputActions.IUIActions, InputActions.ICookingWithWordsActions, InputActions.IFlappyRhymesActions
 {
     public InputActions inputActions { get; private set; }
 
     public event UnityAction<Vector2> touchEvent;
+    public event UnityAction<bool> touchPressEvent;
+
     public event UnityAction leftMouseButtonEvent;
     public event UnityAction<Vector2> mousePosEvent;
+    public event UnityAction<bool> mousePressEvent;
 
     private void OnEnable()
     {
@@ -28,6 +31,7 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
     private void DisableGameplay() => inputActions.Player.Disable();
     private void DisableUI() => inputActions.UI.Disable();
     private void DisableCookingWithWords() => inputActions.CookingWithWords.Disable();
+    private void DisableFlappyRhymes() => inputActions.FlappyRhymes.Disable();
 
     public void EnableGameplay()
     {
@@ -35,6 +39,7 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         inputActions.Player.SetCallbacks(this);
         DisableUI();
         DisableCookingWithWords();
+        DisableFlappyRhymes();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
     }
@@ -45,6 +50,7 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         inputActions.UI.SetCallbacks(this);
         DisableGameplay();
         DisableCookingWithWords();
+        DisableFlappyRhymes();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
     }
@@ -55,8 +61,18 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         inputActions.CookingWithWords.SetCallbacks(this);
         DisableUI();
         DisableGameplay();
+        DisableFlappyRhymes();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
+    }
+
+    public void EnableFlappyRhymes()
+    {
+        inputActions.FlappyRhymes.Enable();
+        inputActions.FlappyRhymes.SetCallbacks(this);
+        DisableUI();
+        DisableGameplay();
+        DisableCookingWithWords();
     }
 
     public void OnNavigate(InputAction.CallbackContext context)
@@ -70,12 +86,28 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
         touchEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
+    public void OnTouchPress(InputAction.CallbackContext context)
+    {
+        bool pressed = context.ReadValue<float>() > 0.5f;
+
+        if (context.phase == InputActionPhase.Started ||
+            context.phase == InputActionPhase.Performed ||
+            context.phase == InputActionPhase.Canceled)
+        {
+            touchPressEvent?.Invoke(pressed);
+        }
+    }
+
     public void OnMouse(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
             leftMouseButtonEvent?.Invoke();
         }
+
+        // started = pressed, canceled = released
+        if (context.phase == InputActionPhase.Started) mousePressEvent?.Invoke(true);
+        if (context.phase == InputActionPhase.Canceled) mousePressEvent?.Invoke(false);
     }
 
     public void OnMousePos(InputAction.CallbackContext context)

@@ -9,6 +9,12 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     [SerializeField]
     private Transform playerPositionPoint;
 
+    void Start()
+    {
+      dialogueCharacter.BuildLookup();
+      dialogueCharacter.ChangeState("Before");
+      dialogueCharacter.IsSpokenTo = false;
+    }
 
     public string GetDialogueLine(DialogueCharacter character)
     {

@@ -1,116 +1,139 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using System.Collections;
 
+// Manages small UI popups used by in-game interactions (customers, orders, blacksmith).
 public class DialogueSystem : MonoBehaviour
 {
-    public GameObject popupPrefab;
-    public GameObject orderPopupPrefab;
-    public Transform popupParent;
-    public float popupDuration = 2f;
-    private float popupYOffset;
-    private float popupXOffset;
-    private GameObject popupInstance;
-    private GameObject currentPopupOwner;
+    [SerializeField] private GameObject customerFeedbackPopup;
+    [SerializeField] private GameObject orderPopup;
+    [SerializeField] private float popupDuration = 2f;
+    [SerializeField] private GameObject materialsPopup;
+    [SerializeField] private GameObject blacksmithFeedbackPopup;
 
-    public void ShowFeedbackPopup(GameObject popupOwner, string message, float yOffset)
+    public void Start()
     {
-        HidePopup();
-        currentPopupOwner = popupOwner;
-        popupYOffset = yOffset;
-        popupXOffset = 0f;
-
-        if (popupInstance == null || popupInstance.CompareTag("OrderPopup"))
-        {
-            // instantiate under popupParent
-            popupInstance = Instantiate(popupPrefab, popupParent);
-        }
-        else
-        {
-            popupInstance.SetActive(true);
-        }
-
-        PositionPopupAbove();
-
-        // update text inside the instantiated prefab
-        var tmp = popupInstance.GetComponentInChildren<TextMeshProUGUI>();
-        if (tmp != null) tmp.text = message;
-
-        Invoke(nameof(HidePopup), popupDuration);
+        // Ensure all feedback popups are hidden at the start.
+        HidePopup(customerFeedbackPopup);
+        HidePopup(blacksmithFeedbackPopup);
     }
 
-    public void ShowOrderPopup(GameObject popupOwner, Sprite image, float xOffset, float yOffset)
+    // Customer
+
+    // Show a short feedback popup for the customer (e.g., "Dank je wel!").
+    // The method checks the assignment, updates the TextMeshProUGUI inside the
+    // popup, displays it, and starts a coroutine to hide it after `popupDuration`.
+    public void ShowCustomerFeedbackPopup(string message)
     {
-        HidePopup();
-        currentPopupOwner = popupOwner;
-        popupYOffset = yOffset;
-        popupXOffset = xOffset;
-
-        if (popupInstance == null || popupInstance.CompareTag("FeedbackPopup"))
+        if (customerFeedbackPopup == null)
         {
-            popupInstance = Instantiate(orderPopupPrefab, popupParent);
-        }
-        else
-        {
-            popupInstance.SetActive(true);
+            Debug.LogWarning("DialogueSystem: customerFeedbackPopup is not assigned.");
+            return;
         }
 
-        // Find the specific Image inside the instantiated popup (child named "OrderImage")
+        // If an order popup is currently visible, hide it when showing feedback.
+        HidePopup(orderPopup);
+
+        // Update the text element found inside the popup (uses TextMeshProUGUI).
+        var tmp = customerFeedbackPopup.GetComponentInChildren<TextMeshProUGUI>();
+        if (tmp != null) tmp.text = message;
+
+        ShowPopup(customerFeedbackPopup);
+
+        StartCoroutine(HidePopupAfterDelay(customerFeedbackPopup, popupDuration));
+    }
+
+    // Show an order popup showing the requested item image.
+    // Looks for an Image component inside the `orderPopup` and assigns the provided sprite.
+    public void ShowOrderPopup(Sprite image)
+    {
+        if (orderPopup == null)
+        {
+            Debug.LogWarning("DialogueSystem: orderPopup is not assigned.");
+            return;
+        }
+
+        // Hide any customer feedback while showing the order popup.
+        HidePopup(customerFeedbackPopup);
+
+        // Try to find a child named "Image" first and get its Image component.
         Image img = null;
-        Transform child = popupInstance.transform.Find("Image");
+        Transform child = orderPopup.transform.Find("Image");
         if (child != null) img = child.GetComponent<Image>();
 
-        // fallback to first Image in children if specific child not found
-        if (img == null) img = popupInstance.GetComponentInChildren<Image>();
+        // If not found by name, fall back to the first Image in children.
+        if (img == null) img = orderPopup.GetComponentInChildren<Image>();
 
+        // If an Image component was found, set its sprite; otherwise log a warning.
         if (img != null)
             img.sprite = image;
         else
             Debug.LogWarning("DialogueSystem: no Image found on order popup instance to set sprite.");
 
-        PositionPopupAbove();
+        ShowPopup(orderPopup);
     }
 
-    private void PositionPopupAbove()
+    // Blacksmith
+
+    // Display the materials popup with the provided message text.
+    // This assumes the popup contains a TextMeshProUGUI text element to receive the string.
+    public void ShowMaterialsPopup(string message)
     {
-        if (popupInstance == null || popupParent == null) return;
+        if (materialsPopup == null) return;
 
-        // world position a bit above the customer
-        Vector3 worldPos = currentPopupOwner.transform.position + Vector3.up * popupYOffset + Vector3.right * popupXOffset;
+        HidePopup(blacksmithFeedbackPopup);
 
-        // get parent rect and canvas to determine the camera for conversion
-        RectTransform parentRect = popupParent as RectTransform;
-        Canvas parentCanvas = popupParent.GetComponentInParent<Canvas>();
+        // Update the text element and show the popup.
+        materialsPopup.GetComponentInChildren<TextMeshProUGUI>().text = message;
 
-        // screen point from world
-        Vector3 screenPoint = Camera.main != null
-            ? Camera.main.WorldToScreenPoint(worldPos)
-            : new Vector3(worldPos.x, worldPos.y, 0f);
+        ShowPopup(materialsPopup);
+    }
 
-        // choose camera for ScreenPointToLocalPointInRectangle: null for Overlay, canvas.worldCamera otherwise
-        Camera uiCamera = (parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
-            ? parentCanvas.worldCamera
-            : null;
+    // Display a transient blacksmith feedback message and hide other blacksmith-related popups.
+    // The message is shown and then automatically hidden after `popupDuration`.
+    public void ShowBlacksmithFeedback(string message)
+    {
+        if (blacksmithFeedbackPopup == null) return;
 
-        Vector2 anchoredPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, screenPoint, uiCamera, out anchoredPos);
+        Debug.Log("Showing blacksmith feedback: " + message);
+        HidePopup(materialsPopup);
 
-        var popupRect = popupInstance.GetComponent<RectTransform>();
-        if (popupRect != null)
+        // Update the text element inside the blacksmith feedback popup.
+        var tmp = blacksmithFeedbackPopup.GetComponentInChildren<TextMeshProUGUI>();
+        if (tmp != null) tmp.text = message;
+
+        ShowPopup(blacksmithFeedbackPopup);
+
+        StartCoroutine(HidePopupAfterDelay(blacksmithFeedbackPopup, popupDuration));
+    }
+
+    // --- Utility helpers used by multiple popup methods ---
+
+    // Deactivates a popup GameObject if it's not null.
+    private void HidePopup(GameObject dialoguePopup)
+    {
+        if (dialoguePopup != null)
         {
-            popupRect.anchoredPosition = anchoredPos;
-        }
-        else
-        {
-            popupInstance.transform.position = worldPos;
+            Debug.Log("Hiding popup: " + dialoguePopup.name);
+            dialoguePopup.SetActive(false);
         }
     }
 
-    private void HidePopup()
+    // Coroutine that waits for `delay` seconds then hides the provided popup.
+    private IEnumerator HidePopupAfterDelay(GameObject dialoguePopup, float delay)
     {
-        if (popupInstance != null)
+        yield return new WaitForSeconds(delay);
+        HidePopup(dialoguePopup);
+    }
+
+    // Activates a popup GameObject if it's not null.
+    private void ShowPopup(GameObject dialoguePopup)
+    {
+        if (dialoguePopup != null)
         {
-            popupInstance.SetActive(false);
+            dialoguePopup.SetActive(true);
         }
     }
 }

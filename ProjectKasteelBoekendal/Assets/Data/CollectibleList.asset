@@ -15,3 +15,4 @@ MonoBehaviour:
   _collectibleList:
   - {fileID: 11400000, guid: 900fcda8def19154f968d3dd1a133c26, type: 2}
   - {fileID: 11400000, guid: caf1363187115db43973c5507f2c1a0b, type: 2}
+  - {fileID: 11400000, guid: 11f17c4adc7dd514f9d951d74c01630e, type: 2}

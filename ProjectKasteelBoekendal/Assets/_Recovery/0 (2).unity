@@ -1754,8 +1754,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1735583811}
   - {fileID: 2020002768}
+  - {fileID: 1735583811}
   - {fileID: 1828463763}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1834,10 +1834,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.05
       objectReference: {fileID: 0}
-    - target: {fileID: 3832431177762616200, guid: 1803e694513ab4340b525a901842f113, type: 3}
-      propertyPath: item
-      value: 
-      objectReference: {fileID: 11400000, guid: 11f17c4adc7dd514f9d951d74c01630e, type: 2}
     - target: {fileID: 5886858835429553569, guid: 1803e694513ab4340b525a901842f113, type: 3}
       propertyPath: m_Name
       value: king

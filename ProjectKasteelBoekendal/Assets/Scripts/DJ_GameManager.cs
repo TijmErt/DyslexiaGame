@@ -23,6 +23,7 @@ public class DJ_GameManager : MonoBehaviour
     public bool isWin = false;
 
     [SerializeField] private GameObject minigameEndMenu;
+    [SerializeField] private Rigidbody rb;
 
     private void Awake()
     {
@@ -58,10 +59,8 @@ public class DJ_GameManager : MonoBehaviour
         if (isWin || isGameOver) return;
         isWin = true;
 
-        //SceneManager.LoadScene(overworldSceneName);
-        //add reference to minigameendmenu
         minigameEndMenu.SetActive(true);
-        Time.timeScale = 0.0f;
+        rb.isKinematic = true;
     }
 
     public void Restart()

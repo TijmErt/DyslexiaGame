@@ -585,11 +585,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_CookingWithWords_Touch = m_CookingWithWords.FindAction("Touch", throwIfNotFound: true);
         m_CookingWithWords_Mouse = m_CookingWithWords.FindAction("Mouse", throwIfNotFound: true);
         m_CookingWithWords_MousePos = m_CookingWithWords.FindAction("MousePos", throwIfNotFound: true);
+        m_CookingWithWords_TouchPress = m_CookingWithWords.FindAction("TouchPress", throwIfNotFound: true);
         // FlappyRhymes
         m_FlappyRhymes = asset.FindActionMap("FlappyRhymes", throwIfNotFound: true);
         m_FlappyRhymes_Touch = m_FlappyRhymes.FindAction("Touch", throwIfNotFound: true);
         m_FlappyRhymes_Mouse = m_FlappyRhymes.FindAction("Mouse", throwIfNotFound: true);
-        m_CookingWithWords_TouchPress = m_CookingWithWords.FindAction("TouchPress", throwIfNotFound: true);
     }
 
     ~@InputActions()

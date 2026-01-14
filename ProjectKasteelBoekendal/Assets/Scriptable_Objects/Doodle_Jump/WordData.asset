@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: WordData
   m_EditorClassIdentifier: Assembly-CSharp::SO_DJ_WordData
   entries:
-  - correct: Cat
+  - correct: Kat
     wrongVariants:
-    - Kat
+    - Cat
+    - Qat
     tier: 1
-  - correct: Nap
+  - correct: Hond
     wrongVariants:
-    - Nab
+    - Hont
     tier: 1

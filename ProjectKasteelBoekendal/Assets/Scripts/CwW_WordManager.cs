@@ -24,8 +24,6 @@ public class CwW_WordManager : MonoBehaviour
 
     [Header("End Game UI")]
     [SerializeField] private GameObject _endPanel;
-    [SerializeField] private TMP_Text _endSolvedText;
-    [SerializeField] private string _nextSceneName;
 
     [Header("Win Condition")]
     [SerializeField] private int _targetSolvedWords = 10;
@@ -311,19 +309,6 @@ public class CwW_WordManager : MonoBehaviour
 
         if (_endPanel != null)
             _endPanel.SetActive(true);
-
-        if (_endSolvedText != null)
-            _endSolvedText.text = $"Solved: {_totalSolvedWords}/{_targetSolvedWords}";
-    }
-    public void FinishMinigame()
-    {
-        if (!_gameEnded) return;
-        
-        if (!string.IsNullOrEmpty(_nextSceneName))
-            SceneManager.LoadScene(_nextSceneName);
-        else
-            Debug.LogWarning("WordManager: Next scene name is empty.");
-        
     }
 }
 

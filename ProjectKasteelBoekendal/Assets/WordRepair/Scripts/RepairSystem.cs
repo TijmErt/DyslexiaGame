@@ -17,8 +17,7 @@ public class RepairSystem : MonoBehaviour
     public BlacksmithWordRepair blacksmith;
 
 
-    // Text element used to show the end-of-session popup text.
-    [SerializeField] private TextMeshProUGUI endPopupText;
+    [SerializeField] private GameObject gameOverScreen;
 
     // UI elements that should be disabled when the repair session ends.
     [SerializeField] private List<GameObject> uiToDisableOnEnd = new List<GameObject>();
@@ -145,11 +144,8 @@ public class RepairSystem : MonoBehaviour
             ui.SetActive(false);
         }
 
-        // Build the end-session message showing count and list of collected items.
-        string resultText = "alle reparaties voltooid!";
-        endPopupText.text = resultText + "\ngerepareerde voorwerpen:" + allItems.Count + "\nvoorwerpen:\n" + string.Join(", ", allItems);
         // Activate the parent of the text element to show the popup in UI.
-        endPopupText.transform.parent.gameObject.SetActive(true);
+        gameOverScreen.SetActive(true);
     }
 
     // Advance to the next word and refresh the displayed material counts.

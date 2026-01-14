@@ -5,6 +5,7 @@ public class SceneController : MonoBehaviour
 {
     [SerializeField] private string sceneName = "";
 
+    [SerializeField] private Collectible item;
 
     void OnTriggerEnter(Collider other)
     {
@@ -25,6 +26,8 @@ public class SceneController : MonoBehaviour
 
     public void LoadRoomScene(string roomSceneName)
     {
+        item.hasBeenFound = true;
+
         if (string.IsNullOrEmpty(roomSceneName)) return;
         Time.timeScale = 1f;
         SceneManager.LoadScene(roomSceneName);

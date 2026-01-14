@@ -9,6 +9,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     [SerializeField]
     private Transform playerPositionPoint;
 
+    [SerializeField]
+    private Collectible item;
     void Start()
     {
       dialogueCharacter.BuildLookup();
@@ -23,9 +25,13 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     
     private void DialogueCharacterSpokenTo()
     {
-        if(dialogueCharacter.IsSpokenTo)
+        if(dialogueCharacter.IsSpokenTo && !item.hasBeenFound)
         {
             dialogueCharacter.ChangeState("Not Found");
+        }
+        else if(dialogueCharacter.IsSpokenTo && item.hasBeenFound)
+        {
+            dialogueCharacter.ChangeState("Found");
         }
     }
 

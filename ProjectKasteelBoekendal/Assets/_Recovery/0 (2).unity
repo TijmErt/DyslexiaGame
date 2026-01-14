@@ -462,7 +462,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -485,8 +485,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1, y: 2.3399203, z: 1}
+  m_Center: {x: 1.4607171e-10, y: 1.1270231, z: 0}
 --- !u!1 &334972191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,8 +1754,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1735583811}
   - {fileID: 2020002768}
+  - {fileID: 1735583811}
   - {fileID: 1828463763}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1834,10 +1834,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.05
       objectReference: {fileID: 0}
-    - target: {fileID: 3832431177762616200, guid: 1803e694513ab4340b525a901842f113, type: 3}
-      propertyPath: item
-      value: 
-      objectReference: {fileID: 11400000, guid: 11f17c4adc7dd514f9d951d74c01630e, type: 2}
     - target: {fileID: 5886858835429553569, guid: 1803e694513ab4340b525a901842f113, type: 3}
       propertyPath: m_Name
       value: king

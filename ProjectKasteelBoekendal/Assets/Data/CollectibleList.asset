@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3d040902d032f4eb4f352b95d14dc6, type: 3}
+  m_Name: CollectibleList
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleList
+  _collectibleList:
+  - {fileID: 11400000, guid: 900fcda8def19154f968d3dd1a133c26, type: 2}
+  - {fileID: 11400000, guid: caf1363187115db43973c5507f2c1a0b, type: 2}
+  - {fileID: 11400000, guid: 11f17c4adc7dd514f9d951d74c01630e, type: 2}

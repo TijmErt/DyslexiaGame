@@ -26,13 +26,15 @@ public class SceneController : MonoBehaviour
     public void LoadRoomScene(string roomSceneName)
     {
         if (string.IsNullOrEmpty(roomSceneName)) return;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(roomSceneName);
     }
 
     public void LoadMinigameScene(string minigameSceneName)
     {
         if (string.IsNullOrEmpty(minigameSceneName)) return;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(minigameSceneName);
     }
-    
+
 }

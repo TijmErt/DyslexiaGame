@@ -22,6 +22,8 @@ public class DJ_GameManager : MonoBehaviour
     public bool isGameOver = false;
     public bool isWin = false;
 
+    [SerializeField] private GameObject minigameEndMenu;
+
     private void Awake()
     {
         if (I != null && I != this) { Destroy(gameObject); return; }
@@ -56,7 +58,10 @@ public class DJ_GameManager : MonoBehaviour
         if (isWin || isGameOver) return;
         isWin = true;
 
-        SceneManager.LoadScene(overworldSceneName);
+        //SceneManager.LoadScene(overworldSceneName);
+        //add reference to minigameendmenu
+        minigameEndMenu.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 
     public void Restart()

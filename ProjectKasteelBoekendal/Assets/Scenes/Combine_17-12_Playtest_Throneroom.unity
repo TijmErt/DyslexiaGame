@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca95db6ebcd24174d92687aaf8d9054b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
-  sceneName: Doodle_Jump
+  sceneName: Baracks
 --- !u!65 &70112758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca95db6ebcd24174d92687aaf8d9054b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
-  sceneName: Memory_Puzzle
+  sceneName: Alchemy_Room
 --- !u!65 &294594723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca95db6ebcd24174d92687aaf8d9054b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
-  sceneName: Flappy_Rhymes
+  sceneName: Library
 --- !u!65 &1402603779
 BoxCollider:
   m_ObjectHideFlags: 0

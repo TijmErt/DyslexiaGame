@@ -1792,6 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   sceneName: Combine_17-12_Playtest_Throneroom
+  item: {fileID: 0}
 --- !u!65 &1899501943
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2041,7 +2042,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5843218425456098392, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_Name
-      value: Knight
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6131082120441828902, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: _playerInteraction

@@ -32,6 +32,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Memory_Puzzle.unity
     guid: 9946af2a01543dd4fa6bd7e849c74ff0
+  - enabled: 1
+    path: Assets/Scenes/Library.unity
+    guid: 97ae8a78f4be14c4ba666ea9d7dcefae
+  - enabled: 1
+    path: Assets/Scenes/Baracks.unity
+    guid: eae5da9491a27df4e8b4df960311e5cc
+  - enabled: 1
+    path: Assets/Scenes/Alchemy_Room.unity
+    guid: d897a9b577abf35459d32cdf35970aa0
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6e4ae210701dfc14686f5fc00db89862, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d433c0470eee1a24497baddccdeb9e3f, type: 2}

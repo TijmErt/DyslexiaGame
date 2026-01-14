@@ -346,7 +346,7 @@ Transform:
   m_GameObject: {fileID: 70112755}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.27, y: 0, z: 0.59}
+  m_LocalPosition: {x: 10.24, y: 0, z: 1.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   sceneName: Baracks
+  item: {fileID: 0}
 --- !u!65 &70112758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -544,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   sceneName: Alchemy_Room
+  item: {fileID: 0}
 --- !u!65 &294594723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -746,6 +748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   sceneName: Combine_17-12_Playtest_Blacksmith
+  item: {fileID: 0}
 --- !u!1 &373397962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,6 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   sceneName: Combine_17-12_Playtest_Kitchen
+  item: {fileID: 0}
 --- !u!1 &1251723110 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8353525727407644248, guid: b29da05302761de4db566bf2e6e5a679, type: 3}
@@ -1769,7 +1773,7 @@ Transform:
   m_GameObject: {fileID: 1402603776}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.68, y: 0, z: -0.53}
+  m_LocalPosition: {x: 10.1, y: 0, z: -1.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1788,6 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   sceneName: Library
+  item: {fileID: 0}
 --- !u!65 &1402603779
 BoxCollider:
   m_ObjectHideFlags: 0

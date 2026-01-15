@@ -35,7 +35,7 @@ public class PlayerInventoryControl : MonoBehaviour
 
     private void GetCrown()
     {
-        if (FoundCollectibles.Count >= 2)
+        if (FoundCollectibles.Count >= 5)
         {
             CollectibleStateHolder.RuntimeOf(collectibleList.Collectibles[2]).hasBeenFound = true;
             //collectibleList.Collectibles[2].hasBeenFound = true;

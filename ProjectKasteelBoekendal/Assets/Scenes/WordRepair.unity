@@ -4085,10 +4085,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: c85b9af1b7e3c484c991ded795cc7ac4, type: 3}
-      propertyPath: m_Name
-      value: Knight
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c85b9af1b7e3c484c991ded795cc7ac4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -41
@@ -4129,6 +4125,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c85b9af1b7e3c484c991ded795cc7ac4, type: 3}
+      propertyPath: m_Name
+      value: Knight
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4144,7 +4144,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3363670210815829973, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Combine_17-12_Playtest_Blacksmith
+      value: Combine_17-12_Playtest_Throneroom
       objectReference: {fileID: 0}
     - target: {fileID: 3635877665322728446, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_Pivot.x
@@ -4226,6 +4226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3876268778523919489, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 900fcda8def19154f968d3dd1a133c26, type: 2}
     - target: {fileID: 5002139109740287253, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: WordRepair

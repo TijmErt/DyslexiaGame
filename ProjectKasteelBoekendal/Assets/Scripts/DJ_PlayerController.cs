@@ -1,7 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DJ_PlayerController : MonoBehaviour
@@ -73,9 +72,10 @@ public class DJ_PlayerController : MonoBehaviour
 
     private void OnTouchPress(bool pressed)
     {
+        Debug.LogWarning("THIS IS WHAT THE ONTOUCHPRESS EVENT IS:" + pressed);
         isPressed = pressed;
         if (!pressed) moveDir = 0;
-        //else UpdateMoveDirFromPos(currentMousePos); // optional
+        else UpdateMoveDirFromPos(currentMousePos); // optional
     }
 
     // --- Mouse Input ---

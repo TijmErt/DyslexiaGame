@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00ee82b7f9023d240b6785f06cd74f02, type: 3}
-  m_Name: Pollepel
+  m_Name: Kroon
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  ItemName: Pollepel
+  ItemName: Kroon
   Icon: {fileID: 0}
-  ownerName: ChefBonbon
-  hasBeenFound: 1
+  ownerName: BramDeKoning
+  hasBeenFound: 0

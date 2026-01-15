@@ -381,12 +381,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Touch"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""4e3dc310-e192-452d-be04-1f38bd30cae3"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Mouse"",
@@ -453,10 +453,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a69d6248-fd1d-4f6f-8179-5758d46711f7"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""path"": ""<Touchscreen>/touch0/press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Touch"",
                     ""action"": ""TouchPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -471,7 +471,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Touch"",
                     ""type"": ""Value"",
                     ""id"": ""fdbc157f-bfc5-43fe-9613-77633138c965"",
-                    ""expectedControlType"": ""Touch"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -490,7 +490,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7ee8d8ad-3baf-4b0f-8f19-e90b1986bb40"",
-                    ""path"": ""<Touchscreen>/primaryTouch"",
+                    ""path"": ""<Touchscreen>/touch0/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Touch"",

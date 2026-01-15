@@ -209,6 +209,7 @@ MonoBehaviour:
   dialogueCharacter: {fileID: 11400000, guid: b707fd85ed7c1cf4da20d59a61985947, type: 2}
   inputReader: {fileID: 11400000, guid: cfd94b1381f9b344f9e29799088d3c8c, type: 2}
   playerPositionPoint: {fileID: 2473451437776028113}
+  item: {fileID: 11400000, guid: 11f17c4adc7dd514f9d951d74c01630e, type: 2}
 --- !u!65 &6228521045800999529
 BoxCollider:
   m_ObjectHideFlags: 0

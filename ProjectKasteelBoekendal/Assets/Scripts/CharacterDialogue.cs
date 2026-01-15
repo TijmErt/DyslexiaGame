@@ -24,12 +24,12 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     }
     
     private void DialogueCharacterSpokenTo()
-    {
-        if(dialogueCharacter.IsSpokenTo && !item.hasBeenFound)
+    {        
+        if(dialogueCharacter.IsSpokenTo && !CollectibleStateHolder.RuntimeOf(item).hasBeenFound)
         {
             dialogueCharacter.ChangeState("Not Found");
         }
-        else if(dialogueCharacter.IsSpokenTo && item.hasBeenFound)
+        else if(dialogueCharacter.IsSpokenTo && CollectibleStateHolder.RuntimeOf(item).hasBeenFound)
         {
             dialogueCharacter.ChangeState("Found");
         }

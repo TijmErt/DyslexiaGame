@@ -1258,6 +1258,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3876268778523919489, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 900fcda8def19154f968d3dd1a133c26, type: 2}
     - target: {fileID: 5002139109740287253, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Flappy_Rhymes
@@ -1566,7 +1570,8 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 316aac75c744e43489284748ff425eeb, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7750340782633568105, guid: 45be076c22b1ad54eaca687eb226d37a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ac7be785f01ce47a96fdc4979f49ba, type: 3}
+  m_Name: Soldaat
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueCharacter
+  characterName: Soldaat
+  currentState: Before
+  IsSpokenTo: 0
+  entries:
+  - State: Before
+    Text: Daar is de held, we zijn aan het trainen maar we kunnen niet alleen Fopselik
+      verslaan. Kun jij mij helpen door mijn zwaart te vinden?
+  - State: Found
+    Text: Je kunt het, speel de minigames en dan vindt je mischien wel mijn zwaard.
+  - State: Not Found
+    Text: Oh, je hebt mijn zwaard goed gedaan, nu kan ik het kasteel weer veilig
+      houden

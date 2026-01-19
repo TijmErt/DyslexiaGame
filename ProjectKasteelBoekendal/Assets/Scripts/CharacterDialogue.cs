@@ -11,11 +11,13 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     [SerializeField]
     private Collectible item;
+
     void Start()
     {
       dialogueCharacter.BuildLookup();
       dialogueCharacter.ChangeState("Before");
       dialogueCharacter.IsSpokenTo = false;
+        CollectibleStateHolder.RuntimeOf(item);
     }
 
     public string GetDialogueLine(DialogueCharacter character)

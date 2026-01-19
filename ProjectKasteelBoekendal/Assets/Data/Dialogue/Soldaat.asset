@@ -20,7 +20,7 @@ MonoBehaviour:
     Text: Daar is de held, we zijn aan het trainen maar we kunnen niet alleen Fopselik
       verslaan. Kun jij mij helpen door mijn zwaart te vinden?
   - State: Found
-    Text: Je kunt het, speel de minigames en dan vindt je mischien wel mijn zwaard.
-  - State: Not Found
     Text: Oh, je hebt mijn zwaard goed gedaan, nu kan ik het kasteel weer veilig
       houden
+  - State: Not Found
+    Text: Je kunt het, speel de minigames en dan vindt je mischien wel mijn zwaard.

@@ -20,6 +20,6 @@ MonoBehaviour:
     Text: Hallo Held, Ik heb je hulp nodig want mijn kruiden zijn verdwenen. kan
       je ze vinden?
   - State: Found
-    Text: Misschien zijn mijn kruiden naar een andere kamer getoverd.
-  - State: Not Found
     Text: Oh, je hebt de kruiden gevonden. Nu kan ik weer verder met drankjes maken.
+  - State: Not Found
+    Text: Misschien zijn mijn kruiden naar een andere kamer getoverd.

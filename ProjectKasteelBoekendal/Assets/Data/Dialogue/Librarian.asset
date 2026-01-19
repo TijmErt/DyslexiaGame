@@ -21,7 +21,7 @@ MonoBehaviour:
       heeft al mijn boeken door elkaar gehaald en gestolen. Vind de gestolen boeken
       en maak ze alsjeblieft weer netjes voor mij.
   - State: Found
-    Text: Het is hier nog steeds een puinhoop. Help me alsjeblieft de boeken te ordenen.
-  - State: Not Found
     Text: Oh, dank je! Ik had het niet zonder jou gekund! Je bent een ware held in
       deze bibliotheek.
+  - State: Not Found
+    Text: Het is hier nog steeds een puinhoop. Help me alsjeblieft de boeken te ordenen.

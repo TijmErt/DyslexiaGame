@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ee82b7f9023d240b6785f06cd74f02, type: 3}
   m_Name: Boeken
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  ItemName: 
+  ItemName: Boeken
   Icon: {fileID: 0}
   ownerName: 
   hasBeenFound: 0

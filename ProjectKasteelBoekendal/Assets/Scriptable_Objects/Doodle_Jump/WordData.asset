@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: WordData
   m_EditorClassIdentifier: Assembly-CSharp::SO_DJ_WordData
   entries:
-  - correct: Kat
+  - correct: Teen
     wrongVariants:
-    - Cat
-    - Qat
+    - Ten
     tier: 1
-  - correct: Hond
+  - correct: Meer
     wrongVariants:
-    - Hont
+    - Mer
+    tier: 1
+  - correct: Bomen
+    wrongVariants:
+    - Boomen
     tier: 1

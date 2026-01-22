@@ -88,14 +88,8 @@ public class InputReader : ScriptableObject, InputActions.IPlayerActions, InputA
 
     public void OnTouchPress(InputAction.CallbackContext context)
     {
-        bool pressed = context.ReadValue<float>() > 0.5f;
-
-        if (context.phase == InputActionPhase.Started ||
-            context.phase == InputActionPhase.Performed ||
-            context.phase == InputActionPhase.Canceled)
-        {
-            touchPressEvent?.Invoke(pressed);
-        }
+        if (context.phase == InputActionPhase.Started || context.phase == InputActionPhase.Performed) touchPressEvent?.Invoke(true);
+        if (context.phase == InputActionPhase.Canceled) touchPressEvent?.Invoke(false);
     }
 
     public void OnMouse(InputAction.CallbackContext context)

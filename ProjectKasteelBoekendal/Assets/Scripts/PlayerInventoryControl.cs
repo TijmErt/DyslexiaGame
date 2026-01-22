@@ -19,15 +19,27 @@ public class PlayerInventoryControl : MonoBehaviour
     {
         FoundCollectibles = new List<Collectible>();
 
-       foreach (Collectible collectible in collectibleList.Collectibles)
-       {
-         if(collectible.hasBeenFound)
-         {
+        foreach (Collectible collectible in collectibleList.Collectibles)
+        {
+            if(CollectibleStateHolder.RuntimeOf(collectible).hasBeenFound)
+            {
                 FoundCollectibles.Add(collectible);
+                GetCrown();
                 GameObject go = Instantiate(itemPrefab, contentParent);
-               go.GetComponentInChildren<TextMeshProUGUI>().text = collectible.ItemName;
-         }
-       }
+                go.GetComponentInChildren<TextMeshProUGUI>().text = collectible.ItemName;
+                Debug.Log("HERE IS THE POINT OF COLLECTIBLES BEING ADDED TO THE FOUND LIST");
+            }
+            Debug.Log(collectible.ItemName);
+        }
+    }
+
+    private void GetCrown()
+    {
+        if (FoundCollectibles.Count >= 5)
+        {
+            CollectibleStateHolder.RuntimeOf(collectibleList.Collectibles[2]).hasBeenFound = true;
+            //collectibleList.Collectibles[2].hasBeenFound = true;
+        }
     }
 
     // Update is called once per frame

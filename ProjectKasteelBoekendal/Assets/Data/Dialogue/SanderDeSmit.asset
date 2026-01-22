@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ac7be785f01ce47a96fdc4979f49ba, type: 3}
+  m_Name: SanderDeSmit
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueCharacter
+  characterName: Sander de smit
+  currentState: Before
+  IsSpokenTo: 0
+  entries:
+  - State: Before
+    Text: Ik ben op zoek naar mijn hamer, maar ik kan hem nergens vinden. Kun jij
+      mij helpen met zoeken naar mijn hamer?
+  - State: Found
+    Text: Oh haha oh, jij bent het die held. Oh jij hebt mijn hamer gevonden. Dankje
+      wel nu kan ik weer aan de slag.
+  - State: Not Found
+    Text: Hallo daar... oh ik was ook op zoek naar mijn hamer!

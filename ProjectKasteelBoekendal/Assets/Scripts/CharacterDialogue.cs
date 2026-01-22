@@ -11,11 +11,13 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     [SerializeField]
     private Collectible item;
+
     void Start()
     {
       dialogueCharacter.BuildLookup();
       dialogueCharacter.ChangeState("Before");
       dialogueCharacter.IsSpokenTo = false;
+        CollectibleStateHolder.RuntimeOf(item);
     }
 
     public string GetDialogueLine(DialogueCharacter character)
@@ -24,12 +26,12 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     }
     
     private void DialogueCharacterSpokenTo()
-    {
-        if(dialogueCharacter.IsSpokenTo && !item.hasBeenFound)
+    {        
+        if(dialogueCharacter.IsSpokenTo && !CollectibleStateHolder.RuntimeOf(item).hasBeenFound)
         {
             dialogueCharacter.ChangeState("Not Found");
         }
-        else if(dialogueCharacter.IsSpokenTo && item.hasBeenFound)
+        else if(dialogueCharacter.IsSpokenTo && CollectibleStateHolder.RuntimeOf(item).hasBeenFound)
         {
             dialogueCharacter.ChangeState("Found");
         }

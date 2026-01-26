@@ -1,5 +1,32 @@
 {
   "dependencies": {
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.adaptiveperformance": {
+      "version": "5.1.6",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.profiling.core": "1.0.2",
+        "com.unity.modules.subsystems": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.adaptiveperformance.google.android": {
+      "version": "5.1.6",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.modules.subsystems": "1.0.0",
+        "com.unity.adaptiveperformance": "5.1.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.9",
       "depth": 0,
@@ -20,7 +47,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.10.0",
+      "version": "2.10.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -33,8 +60,8 @@
       "dependencies": {
         "com.unity.burst": "1.8.23",
         "com.unity.mathematics": "1.3.2",
-        "com.unity.nuget.mono-cecil": "1.11.5",
         "com.unity.test-framework": "1.4.6",
+        "com.unity.nuget.mono-cecil": "1.11.5",
         "com.unity.test-framework.performance": "3.0.3"
       },
       "url": "https://packages.unity.com"
@@ -44,6 +71,16 @@
       "depth": 1,
       "source": "builtin",
       "dependencies": {}
+    },
+    "com.unity.feature.mobile": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.mobile.android-logcat": "1.4.6",
+        "com.unity.adaptiveperformance": "5.1.6",
+        "com.unity.mobile.notifications": "2.4.2"
+      }
     },
     "com.unity.ide.rider": {
       "version": "3.0.38",
@@ -79,6 +116,22 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.mobile.android-logcat": {
+      "version": "1.4.6",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.mobile.notifications": {
+      "version": "2.4.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.androidjni": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.multiplayer.center": {
       "version": "1.0.0",
       "depth": 0,
@@ -90,6 +143,13 @@
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.5",
       "depth": 3,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.profiling.core": {
+      "version": "1.0.2",
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -153,6 +213,22 @@
         "com.unity.searcher": "4.9.3"
       }
     },
+    "com.unity.sysroot": {
+      "version": "2.0.10",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.sysroot.linux-x86_64": {
+      "version": "2.0.9",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.sysroot": "2.0.10"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.test-framework": {
       "version": "1.6.0",
       "depth": 0,
@@ -185,6 +261,16 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.toolchain.linux-x86_64": {
+      "version": "2.0.11",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.sysroot": "2.0.10",
+        "com.unity.sysroot.linux-x86_64": "2.0.9"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ugui": {
       "version": "2.0.0",
       "depth": 0,
@@ -195,7 +281,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.8",
+      "version": "1.9.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {

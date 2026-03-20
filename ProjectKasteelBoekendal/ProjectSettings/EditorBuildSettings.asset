@@ -42,6 +42,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Alchemy_Room.unity
     guid: d897a9b577abf35459d32cdf35970aa0
   m_configObjects:
+    com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: 52cba5b31df3cc74b80f5bbecad2b357, type: 2}
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6e4ae210701dfc14686f5fc00db89862, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d433c0470eee1a24497baddccdeb9e3f, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: e2918c008e1ff144a80a18ac053cbf61, type: 2}

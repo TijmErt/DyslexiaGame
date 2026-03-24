@@ -6,11 +6,12 @@ using TMPro;
 
 public class WordFormer : MonoBehaviour
 {
-    List<string> bomen;
+    // List<string> bomen;
     List<string> wordParts;
     List<List<char>> lettersPerSyllable;
-    List<GameObject> buttons;
-    List<GameObject> letters;
+    public List<GameObject> buttons;
+    public List<GameObject> letters;
+    public List<GameObject> splitParts;
 
     public GameObject letterPrefab;
     public GameObject slicePrefab;
@@ -21,26 +22,29 @@ public class WordFormer : MonoBehaviour
 
     float xOffset = 0;
     float spacing = 30f;
-    float duration = 5f;
-
-    public Color oldButtoncolor;
-    public Color oldLetterColor;
+    float duration = 3f;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bomen = new List<string>{"bo", "men"};
-        wordParts = bomen;
-        buttons = new List<GameObject>();
-        letters = new List<GameObject>();
-        FormWord();
+        // bomen = new List<string>{"bo", "men"};
+        // wordParts = bomen;
+        //FormWord();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ReceiveWord(List<string> receivedWord)
+    {
+        wordParts = receivedWord;
+        buttons = new List<GameObject>();
+        letters = new List<GameObject>();
+        FormWord();
     }
 
     public void FormWord()
@@ -112,11 +116,21 @@ public class WordFormer : MonoBehaviour
             
             GameObject syllableObj = Instantiate(letterPrefab, canvas);
 
+            splitParts.Add(syllableObj);
+
             RectTransform syllableRect = syllableObj.GetComponent<RectTransform>();
             syllableRect.anchoredPosition = new Vector2(xOffset, 0);
 
+            Rigidbody2D rb = syllableObj.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 20f;
+
+            BoxCollider2D col = syllableObj.AddComponent<BoxCollider2D>();
+
             xOffset += 2*spacing;
         }
+
+        StartCoroutine(DeleteFallingParts());
+        xOffset = 0;
     }
     public void HidePreviousPrefabs()
     {
@@ -133,6 +147,15 @@ public class WordFormer : MonoBehaviour
         letters.Clear();
     }
 
+    public void HidePreviousSplits()
+    {
+        foreach(GameObject part in splitParts)
+        {
+            Destroy(part);
+        }
+        splitParts.Clear();
+    }
+
     public void WrongWord()
     {
         foreach(GameObject button in buttons)
@@ -144,7 +167,7 @@ public class WordFormer : MonoBehaviour
                 StartCoroutine(SwitchColorBackButton(buttonImage));
             }
         }
-        buttons.Clear();
+        
         foreach(GameObject letter in letters)
         {
             Image letterImage = letter.GetComponent<Image>();
@@ -154,7 +177,7 @@ public class WordFormer : MonoBehaviour
                 StartCoroutine(SwitchColorBackLetter(letterImage));
             }
         }
-        letters.Clear();
+        
 
     }
     public void RightWord()
@@ -188,5 +211,10 @@ public class WordFormer : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         image.color = Color.white;
+    }
+    private IEnumerator DeleteFallingParts()
+    {
+        yield return new WaitForSeconds(duration);
+        HidePreviousSplits();
     }
 }

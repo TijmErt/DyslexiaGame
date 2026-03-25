@@ -21,13 +21,14 @@ public class LivesWordSplit : MonoBehaviour
         
     }
 
+    // Calculates the amount of lives left and triggers end of game logic
     public void DecreaseLives()
     {
         lives--;
         if (lives <= 0)
         {
             Debug.Log("Game Over!");
-            // You can add additional game over logic here, such as restarting the game or showing a game over screen.
+            // Logic for game over
         }
     }
 }

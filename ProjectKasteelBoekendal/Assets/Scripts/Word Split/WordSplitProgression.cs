@@ -17,7 +17,7 @@ public class WordSplitProgression : MonoBehaviour
     public int score = 0;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // First word of the game
     void Start()
     {
         GetNewWord();
@@ -29,6 +29,7 @@ public class WordSplitProgression : MonoBehaviour
         
     }
 
+    // Checks the amount of previous words if under the required 10, triggers the code for the next word
     public void GetNewWord()
     {
         if (wordIndex < 10)
@@ -40,10 +41,11 @@ public class WordSplitProgression : MonoBehaviour
         }
         else
         {
-            Debug.Log("You won, YAYYYY!!!!");
+            Debug.Log("You won!");
         }
     }
 
+    // Calculates and show the score
     public void Scores()
     {
         score++;

@@ -23,14 +23,16 @@ public class AnswerCheck : MonoBehaviour
         
     }
 
+    // This method is called in the WordFormer script which triggers the animations for the correct answer
     public void CorrectAnswer()
     {
         Debug.Log("Correct Answer");
         wordFormer.SplitWord();
-        wordFormer.RightWord();
         wordSplitProgression.Scores();
         StartCoroutine(CountdownNewWord());
     }
+
+    // This method is called in the WordFormer script which triggers the animations for the wrong answer
 
     public void WrongAnswer()
     {
@@ -38,6 +40,7 @@ public class AnswerCheck : MonoBehaviour
         wordFormer.WrongWord();
         livesWordSplit.DecreaseLives();
     }
+    // IEnumerator used for the delay between correct answer and next word
     private IEnumerator CountdownNewWord()
     {
         yield return new WaitForSeconds(duration);

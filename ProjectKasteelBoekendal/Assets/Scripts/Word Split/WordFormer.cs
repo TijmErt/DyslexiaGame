@@ -6,9 +6,7 @@ using TMPro;
 
 public class WordFormer : MonoBehaviour
 {
-    // List<string> bomen;
     List<string> wordParts;
-    List<List<char>> lettersPerSyllable;
     public List<GameObject> buttons;
     public List<GameObject> letters;
     public List<GameObject> splitParts;
@@ -28,9 +26,7 @@ public class WordFormer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // bomen = new List<string>{"bo", "men"};
-        // wordParts = bomen;
-        //FormWord();
+
     }
 
     // Update is called once per frame
@@ -39,6 +35,7 @@ public class WordFormer : MonoBehaviour
         
     }
 
+    // This method is called in the WordSplitProgression script which receives the new word and triggers the code to form the new word
     public void ReceiveWord(List<string> receivedWord)
     {
         wordParts = receivedWord;
@@ -47,6 +44,7 @@ public class WordFormer : MonoBehaviour
         FormWord();
     }
 
+    // This method goes through the syllables and letters of the word and spawns the prefabs for the letters and buttons in the correct order
     public void FormWord()
     {
         // Go through each syllable
@@ -59,7 +57,7 @@ public class WordFormer : MonoBehaviour
             {
                 char letter = syllable[j];
 
-                // Spawn letter
+                // Shows letter in debug log
                 Debug.Log(letter);
 
                 // Get the TextMeshPro component and set the letter
@@ -75,10 +73,12 @@ public class WordFormer : MonoBehaviour
 
                 xOffset += spacing;
 
+                // Check if it's the last letter of the last syllable
                 if (i == wordParts.Count - 1 && j == syllable.Length - 1)
                 {
                     Debug.Log("End");
                 }
+                // Checks if this is where the split needs to be, triggers correct answer method
                 else if (j == syllable.Length - 1)
                 {
                     GameObject sliceObj = Instantiate(slicePrefab, canvas);
@@ -88,6 +88,7 @@ public class WordFormer : MonoBehaviour
                     xOffset += spacing;
                     sliceObj.GetComponent<Button>().onClick.AddListener(answerCheck.CorrectAnswer);
                 }
+                // Checks if this isn't the split, triggers wrong answer method
                 else
                 {
                     GameObject sliceObj = Instantiate(slicePrefab, canvas);
@@ -101,6 +102,7 @@ public class WordFormer : MonoBehaviour
         }
     }
 
+    // If its the correct answer, it splits into the syllables and triggers the animations
     public void SplitWord()
     {
         HidePreviousPrefabs();
@@ -132,8 +134,11 @@ public class WordFormer : MonoBehaviour
         StartCoroutine(DeleteFallingParts());
         xOffset = 0;
     }
+
+    // Hides the previous prefabs for the letters and buttons
     public void HidePreviousPrefabs()
     {
+        //Destroy all the button and letter gameobjects and clear the lists
         foreach(GameObject button in buttons)
         {
             Destroy(button);
@@ -147,6 +152,7 @@ public class WordFormer : MonoBehaviour
         letters.Clear();
     }
 
+    //Hides the falling split parts, so they don't clog up the scene
     public void HidePreviousSplits()
     {
         foreach(GameObject part in splitParts)
@@ -156,6 +162,7 @@ public class WordFormer : MonoBehaviour
         splitParts.Clear();
     }
 
+    // If its the wrong answer, turn everything red (and later triggers animation)
     public void WrongWord()
     {
         foreach(GameObject button in buttons)
@@ -180,28 +187,7 @@ public class WordFormer : MonoBehaviour
         
 
     }
-    public void RightWord()
-    {
-        foreach(GameObject button in buttons)
-        {
-            Image buttonImage = button.GetComponent<Image>();
-            if (buttonImage != null)
-            {
-                buttonImage.color = Color.green;
-            }
-        }
-        buttons.Clear();
-
-        foreach(GameObject letter in letters)
-        {
-            Image letterImage = letter.GetComponent<Image>();
-            if (letterImage != null)
-            {
-                letterImage.color = Color.green;
-            }
-        }
-        letters.Clear();
-    }
+    // IEnumerators used for the delay between wrong answer and switching the color back to white and deleting the falling parts
     private IEnumerator SwitchColorBackButton(Image image)
     {
         yield return new WaitForSeconds(duration);

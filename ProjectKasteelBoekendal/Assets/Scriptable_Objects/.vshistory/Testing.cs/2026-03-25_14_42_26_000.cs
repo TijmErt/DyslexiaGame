@@ -1,20 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 
 public class Testing : MonoBehaviour
 {
     [SerializeField] private WordCollection wordCollection;
     private List<NewWord> chosenWords;
-    private List<string> wordParts;
 
     private void Start()
     {
-        wordParts = wordCollection.GetWordSyllables();
-        foreach (string part in wordParts)
-        { 
-            Debug.Log(part);
-        }
+        List<string> parts = wordCollection.GetWordParts();
+        Debug.Log(parts);
+
         //chosenWords = wordCollection.GetRandomUniqueWords(4);
 
         //foreach (NewWord entry in wordCollection.words)

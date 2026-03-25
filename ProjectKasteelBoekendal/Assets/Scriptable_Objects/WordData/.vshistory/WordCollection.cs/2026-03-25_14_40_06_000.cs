@@ -15,11 +15,15 @@ public class WordCollection : ScriptableObject
             .ToList();
     }
 
-    public List<string> GetWordSyllables()
+    public List<string> GetWordParts()
     {
-        NewWord word = GetRandomUniqueWords(1)[0];
-
-        return new List<string>(word.syllablesParts);
+        List<NewWord> word = GetRandomUniqueWords(1);
+        List<string> parts = new List<string>();
+        foreach (NewWord part in word) 
+        { 
+            parts.Add(part.ToString());
+        }
+        return parts;
     }
 }
 

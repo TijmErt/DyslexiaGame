@@ -19,7 +19,7 @@ public class WordCollection : ScriptableObject
     {
         NewWord word = GetRandomUniqueWords(1)[0];
 
-        return new List<string>(word.syllablesParts);
+        return new List<string>(word.syllableParts);
     }
 }
 

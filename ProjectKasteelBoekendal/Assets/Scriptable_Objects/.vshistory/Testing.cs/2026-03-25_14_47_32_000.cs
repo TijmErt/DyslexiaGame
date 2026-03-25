@@ -10,11 +10,8 @@ public class Testing : MonoBehaviour
 
     private void Start()
     {
-        wordParts = wordCollection.GetWordSyllables();
-        foreach (string part in wordParts)
-        { 
-            Debug.Log(part);
-        }
+        wordParts = wordCollection.GetWordParts();
+
         //chosenWords = wordCollection.GetRandomUniqueWords(4);
 
         //foreach (NewWord entry in wordCollection.words)

@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: Kern1
   m_EditorClassIdentifier: Assembly-CSharp::WordCollection
   words:
-  - aap
-  - aas
-  - kaak
-  - kaas
-  - kip
-  - maar
-  - maas
-  - mep
-  - mes
-  - paar
-  - raak
-  - raam
-  - raap
-  - raar
-  - rek
-  - sip
-  - vaas
-  - ver
-  - vis
+  - word: banaan
+    syllablesCount: 2
+    syllablesParts:
+    - ba
+    - naan
+  - word: appel
+    syllablesCount: 2
+    syllablesParts:
+    - ap
+    - pel
+  - word: taart
+    syllablesCount: 1
+    syllablesParts:
+    - taart
+  - word: zebra
+    syllablesCount: 2
+    syllablesParts:
+    - ze
+    - bra

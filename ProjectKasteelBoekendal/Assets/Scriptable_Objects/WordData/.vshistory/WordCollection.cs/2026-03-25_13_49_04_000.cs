@@ -14,19 +14,11 @@ public class WordCollection : ScriptableObject
             .Take(count)
             .ToList();
     }
-
-    public List<string> GetWordSyllables()
-    {
-        NewWord word = GetRandomUniqueWords(1)[0];
-
-        return new List<string>(word.syllablesParts);
-    }
 }
 
 [System.Serializable]
 public class NewWord
 {
     public string word;
-    public int syllablesCount;
-    public List<string> syllablesParts;
+    public int syllables;
 }

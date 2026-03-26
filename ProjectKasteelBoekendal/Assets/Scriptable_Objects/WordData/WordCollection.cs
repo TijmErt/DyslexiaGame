@@ -21,12 +21,21 @@ public class WordCollection : ScriptableObject
 
         return new List<string>(word.syllablesParts);
     }
-}
 
-[System.Serializable]
-public class NewWord
-{
-    public string word;
-    public int syllablesCount;
-    public List<string> syllablesParts;
+    public List<MemoryWordData> GetMemoryData()
+    {
+        List<NewWord> selectedWords = GetRandomUniqueWords(4);
+        List<MemoryWordData> wordData = new List<MemoryWordData>();
+
+        int counter = 0;
+
+        foreach (NewWord entry in selectedWords)
+        {
+            // Add pair (two cards with same ID)
+            wordData.Add(new MemoryWordData(counter, entry.word, entry.image));
+
+            counter++;
+        }
+        return wordData;
+    }   
 }

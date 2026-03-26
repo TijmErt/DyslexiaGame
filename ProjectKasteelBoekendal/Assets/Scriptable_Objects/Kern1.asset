@@ -18,17 +18,21 @@ MonoBehaviour:
     syllablesParts:
     - ba
     - naan
+    image: {fileID: 21300000, guid: fa043e07845c1bb49988c0de8657024f, type: 3}
   - word: appel
     syllablesCount: 2
     syllablesParts:
     - ap
     - pel
+    image: {fileID: 21300000, guid: f57f00b5e875fc0448c6faebcccd4137, type: 3}
   - word: taart
     syllablesCount: 1
     syllablesParts:
     - taart
+    image: {fileID: 21300000, guid: dfc1afd4d70386745aa07244f4277ced, type: 3}
   - word: zebra
     syllablesCount: 2
     syllablesParts:
     - ze
     - bra
+    image: {fileID: 21300000, guid: b9a767f7d4dde1243a95977b15f2a3ab, type: 3}

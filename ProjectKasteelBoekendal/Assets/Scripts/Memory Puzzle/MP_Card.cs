@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,6 +13,11 @@ public class MP_Card : MonoBehaviour
     public bool isSelected;
 
     public MP_CardsController cardController;
+
+    public void Start()
+    {
+        this.transform.localScale = Vector3.one;
+    }
 
     public void OnCardClick()
     {

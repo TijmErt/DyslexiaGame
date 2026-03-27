@@ -43,6 +43,7 @@ public class MP_CardsController : MonoBehaviour
             MP_Card card = Instantiate(cardPrefab, gridTransform);
             card.SetCardWord(wordPairs[i]);
             card.cardController = this;
+            card.transform.localScale = Vector3.one;
         }
     }
 

@@ -337,10 +337,14 @@ MonoBehaviour:
   cardPrefab: {fileID: 7037171327026900727, guid: cfa864f3a38bb3846921a074596c8c95, type: 3}
   gridTransform: {fileID: 1956120377}
   words:
-  - Leven
-  - School
-  - Boom
-  - Auto
+  - word: School
+    image: {fileID: 21300000, guid: e3960578c0d229d4f87c67d765b1f577, type: 3}
+  - word: Boom
+    image: {fileID: 21300000, guid: d7dbba1bd17222146a5084eb7c6bad8e, type: 3}
+  - word: Appel
+    image: {fileID: 21300000, guid: badd011ff7edfd345a13368f6e0626e5, type: 3}
+  - word: Auto
+    image: {fileID: 21300000, guid: cef453ea83ccc844fa1fc846ad8b0caf, type: 3}
   minigameEndMenu: {fileID: 158157274}
 --- !u!4 &284961583
 Transform:
@@ -798,7 +802,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1936872777}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.997854
+  m_Size: 0.9994072
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1425,7 +1429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -3.6664362, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1956120378

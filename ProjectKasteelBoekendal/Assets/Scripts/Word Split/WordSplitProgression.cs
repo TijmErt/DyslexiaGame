@@ -9,7 +9,7 @@ public class WordSplitProgression : MonoBehaviour
     public WordFormer wordFormer;
     public AnswerCheck answerCheck;
 
-    List<string> bomen;
+    public List<string> bomen  = new List<string>{"cra", "zy"};
     List<string> wordParts;
 
     int wordIndex = 0;
@@ -34,7 +34,6 @@ public class WordSplitProgression : MonoBehaviour
     {
         if (wordIndex < 10)
         {
-            bomen = new List<string>{"bo", "men"};
             wordParts = bomen;
             wordFormer.ReceiveWord(wordParts);
             wordIndex++;

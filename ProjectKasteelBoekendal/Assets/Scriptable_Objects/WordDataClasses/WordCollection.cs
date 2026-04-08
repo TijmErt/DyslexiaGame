@@ -1,0 +1,41 @@
+using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+
+[CreateAssetMenu(fileName = "WordCollection", menuName = "Scriptable Objects/WordCollection")]
+public class WordCollection : ScriptableObject
+{
+    public List<NewWord> words;
+
+    public List<NewWord> GetRandomUniqueWords(int count)
+    {
+        return words
+            .OrderBy(x => UnityEngine.Random.value)
+            .Take(count)
+            .ToList();
+    }
+
+    public List<string> GetWordSyllables()
+    {
+        NewWord word = GetRandomUniqueWords(1)[0];
+
+        return new List<string>(word.syllablesParts);
+    }
+
+    public List<MemoryWordData> GetMemoryData()
+    {
+        List<NewWord> selectedWords = GetRandomUniqueWords(4);
+        List<MemoryWordData> wordData = new List<MemoryWordData>();
+
+        int counter = 0;
+
+        foreach (NewWord entry in selectedWords)
+        {
+            // Add pair (two cards with same ID)
+            wordData.Add(new MemoryWordData(counter, entry.word, entry.image));
+
+            counter++;
+        }
+        return wordData;
+    }   
+}

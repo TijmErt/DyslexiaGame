@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: cb9f7b42d6cee8c428a09d147a762d61
+  - enabled: 1
     path: Assets/Scenes/Combine_17-12_Playtest_Throneroom.unity
     guid: 4ec26b184c0ea4e4dbe9ba25d929cafb
   - enabled: 1

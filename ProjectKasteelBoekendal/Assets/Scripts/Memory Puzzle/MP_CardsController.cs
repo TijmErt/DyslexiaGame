@@ -1,22 +1,26 @@
+using System;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MP_CardsController : MonoBehaviour
 {
     [SerializeField] MP_Card cardPrefab;
     [SerializeField] Transform gridTransform;
-    [SerializeField] private string[] words;
+    [SerializeField] private TempWordPair[] words;
     [SerializeField] private GameObject minigameEndMenu;
 
+    private List<CardData> cardList;
     private List<string> wordPairs;
 
     private MP_Card firstSelected;
     private MP_Card secondSelected;
 
-    private int matchCounts;
 
+    private int matchCounts;
+    private bool isChecking;
     private void Start()
     {
         PrepareCards();
@@ -25,78 +29,105 @@ public class MP_CardsController : MonoBehaviour
 
     private void PrepareCards()
     {
-        wordPairs = new List<string>();
-        for (int i = 0; i < words.Length; i++)
+        cardList = new List<CardData>();
+
+        foreach (var pair in words)
         {
-            // Added 2 times to make pairs
-            wordPairs.Add(words[i]);
-            wordPairs.Add(words[i]);
+            // Text card
+            cardList.Add(new CardData
+            {
+                matchKey = pair.word,
+                word = pair.word,
+                isImage = false
+            });
+
+            // Image card (if exists)
+            if (pair.image != null)
+            {
+                cardList.Add(new CardData
+                {
+                    matchKey = pair.word,
+                    image = pair.image,
+                    isImage = true
+                });
+            }
+            else
+            {
+                // fallback: duplicate word if no image
+                cardList.Add(new CardData
+                {
+                    matchKey = pair.word,
+                    word = pair.word,
+                    isImage = false
+                });
+            }
         }
 
-        ShuffleWords(wordPairs);
+        Shuffle(cardList);
     }
 
     private void CreateCards()
     {
-        for (int i = 0; i < wordPairs.Count; i++)
+        foreach (var data in cardList)
         {
             MP_Card card = Instantiate(cardPrefab, gridTransform);
-            card.SetCardWord(wordPairs[i]);
+            card.Setup(data);
             card.cardController = this;
         }
     }
 
     public void SetSelected(MP_Card card)
     {
-        if (card.isSelected == false)
-        {
-            card.Show();
+        if (isChecking || card.isSelected) return;
 
-            if (firstSelected == null)
-            {
-                firstSelected = card;
-                return;
-            }
-            if (secondSelected == null)
-            {
-                secondSelected = card;
-                StartCoroutine(CheckMatching(firstSelected, secondSelected));
-                firstSelected = null;
-                secondSelected = null;
-            }
+        card.Show();
+
+        if (firstSelected == null)
+        {
+            firstSelected = card;
+            return;
         }
+
+        secondSelected = card;
+        StartCoroutine(CheckMatching(firstSelected, secondSelected));
+
+        firstSelected = null;
+        secondSelected = null;
     }
 
     IEnumerator CheckMatching(MP_Card a, MP_Card b)
     {
+        isChecking = true;
+
         yield return new WaitForSeconds(0.3f);
-        if (a.cardText == b.cardText)
+
+        Debug.Log(a.MatchKey + " is " + b.MatchKey);
+        if (a.MatchKey == b.MatchKey)
         {
-            // Matched
             matchCounts++;
-            if (matchCounts >= wordPairs.Count / 2)
+
+            if (matchCounts >= cardList.Count / 2)
             {
-                // Level complete
                 minigameEndMenu.SetActive(true);
             }
         }
         else
         {
-            // Not matched
             a.Hide();
             b.Hide();
         }
+
+        isChecking = false;
     }
 
-    private void ShuffleWords(List<string> wordList)
-    {
-        for (int i = wordList.Count - 1; i > 0; i--)
-        {
-            int randomIndex = Random.Range(0, i + 1);
 
-            string temp = wordList[i];
-            wordList[i] = wordList[randomIndex];
-            wordList[randomIndex] = temp;
+
+    private void Shuffle(List<CardData> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int rand = Random.Range(0, i + 1);
+            (list[i], list[rand]) = (list[rand], list[i]);
         }
     }
 }

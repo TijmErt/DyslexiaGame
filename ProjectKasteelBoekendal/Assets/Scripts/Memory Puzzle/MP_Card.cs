@@ -8,6 +8,12 @@ public class MP_Card : MonoBehaviour
     [SerializeField] private TextMeshProUGUI iconImage;
     [SerializeField] private Image imageDisplay;
 
+    [SerializeField] private Image bookIcon;
+    [SerializeField] private Sprite closedBook;
+    [SerializeField] private Sprite openBook;
+    [SerializeField] private Vector2 closedSize;
+    [SerializeField] private Vector2 openSize;
+
     private string matchKey;
     private bool isImageCard;
     
@@ -55,6 +61,10 @@ public class MP_Card : MonoBehaviour
         iconImage.gameObject.SetActive(!isImageCard);
         imageDisplay.gameObject.SetActive(isImageCard);
 
+        bookIcon.sprite = openBook;
+
+        bookIcon.rectTransform.sizeDelta = openSize;
+
         isSelected = true;
     }
 
@@ -62,6 +72,10 @@ public class MP_Card : MonoBehaviour
     {
         iconImage.gameObject.SetActive(false);
         imageDisplay.gameObject.SetActive(false);
+
+        bookIcon.sprite = closedBook; // 👈 switch back
+
+        bookIcon.rectTransform.sizeDelta = closedSize;
 
         isSelected = false;
     }

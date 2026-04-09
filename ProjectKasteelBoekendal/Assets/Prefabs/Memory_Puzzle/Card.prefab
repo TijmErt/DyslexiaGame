@@ -247,7 +247,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5267704710415645466
 CanvasRenderer:
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 18afcf65ed8a6e2448ffca6ff8d83118, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 812e112408e520e43b8912d7386f27f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -381,6 +381,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   iconImage: {fileID: 5522383634219908806}
   imageDisplay: {fileID: 2624019478798023981}
+  bookIcon: {fileID: 1697616866138800423}
+  closedBook: {fileID: 21300000, guid: 812e112408e520e43b8912d7386f27f7, type: 3}
+  openBook: {fileID: 21300000, guid: 45bb30d264375e14390c2ce699887a2b, type: 3}
+  closedSize: {x: 250, y: 250}
+  openSize: {x: 390, y: 250}
   hiddenCardText: 
   cardText: 
   isSelected: 0

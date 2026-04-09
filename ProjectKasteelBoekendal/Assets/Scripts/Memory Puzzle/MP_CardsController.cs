@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class MP_CardsController : MonoBehaviour
 {
     [SerializeField] MP_Card cardPrefab;
-    [SerializeField] Transform gridTransform;
+    [SerializeField] private Transform[] cardSlots;
     [SerializeField] private TempWordPair[] words;
     [SerializeField] private GameObject minigameEndMenu;
 
@@ -68,9 +68,53 @@ public class MP_CardsController : MonoBehaviour
 
     private void CreateCards()
     {
+        List<Transform> wordSlots = new List<Transform>();
+        List<Transform> imageSlots = new List<Transform>();
+
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            if (i < 6) wordSlots.Add(cardSlots[i]);
+            else imageSlots.Add(cardSlots[i]);
+        }
+
+        ShuffleTransforms(wordSlots);
+        ShuffleTransforms(imageSlots);
+
+        int wordIndex = 0;
+        int imageIndex = 0;
+
         foreach (var data in cardList)
         {
-            MP_Card card = Instantiate(cardPrefab, gridTransform);
+            Transform parentSlot;
+
+            if (data.isImage)
+            {
+                if (imageIndex >= imageSlots.Count)
+                {
+                    Debug.LogError("Not enough IMAGE slots for the number of image cards!");
+                    continue;
+                }
+
+                parentSlot = imageSlots[imageIndex];
+                imageIndex++;
+            }
+            else
+            {
+                if (wordIndex >= wordSlots.Count)
+                {
+                    Debug.LogError("Not enough WORD slots for the number of word cards!");
+                    continue;
+                }
+
+                parentSlot = wordSlots[wordIndex];
+                wordIndex++;
+            }
+
+            MP_Card card = Instantiate(cardPrefab, parentSlot);
+
+            RectTransform rt = card.GetComponent<RectTransform>();
+            rt.anchoredPosition = Vector2.zero;
+
             card.Setup(data);
             card.cardController = this;
         }
@@ -120,7 +164,14 @@ public class MP_CardsController : MonoBehaviour
         isChecking = false;
     }
 
-
+    private void ShuffleTransforms(List<Transform> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int rand = Random.Range(0, i + 1);
+            (list[i], list[rand]) = (list[rand], list[i]);
+        }
+    }
 
     private void Shuffle(List<CardData> list)
     {

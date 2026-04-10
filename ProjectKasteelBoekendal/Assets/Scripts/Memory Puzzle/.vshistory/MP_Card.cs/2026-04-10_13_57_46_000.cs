@@ -25,7 +25,6 @@ public class MP_Card : MonoBehaviour
     
     public string hiddenCardText;
     public string cardText;
-    private BookTheme selectedTheme;
 
     public bool isSelected;
 
@@ -36,17 +35,16 @@ public class MP_Card : MonoBehaviour
         matchKey = data.matchKey;
         isImageCard = data.isImage;
 
-        // picks a random book color
-        selectedTheme = bookThemes[UnityEngine.Random.Range(0, bookThemes.Length)];
-
         if (isImageCard)
         {
+            Debug.LogWarning("Image");
             imageDisplay.sprite = data.image;
         }
         else
         {
             iconImage.text = data.word;
         }
+
         Hide();
     }
     public void Start()
@@ -69,7 +67,8 @@ public class MP_Card : MonoBehaviour
         iconImage.gameObject.SetActive(!isImageCard);
         imageDisplay.gameObject.SetActive(isImageCard);
 
-        bookIcon.sprite = selectedTheme.openBook;
+        bookIcon.sprite = openBook;
+
         bookIcon.rectTransform.sizeDelta = openSize;
 
         isSelected = true;
@@ -80,7 +79,8 @@ public class MP_Card : MonoBehaviour
         iconImage.gameObject.SetActive(false);
         imageDisplay.gameObject.SetActive(false);
 
-        bookIcon.sprite = selectedTheme.closedBook;
+        bookIcon.sprite = closedBook;
+
         bookIcon.rectTransform.sizeDelta = closedSize;
 
         isSelected = false;

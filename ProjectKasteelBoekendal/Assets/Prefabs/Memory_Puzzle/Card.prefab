@@ -382,8 +382,13 @@ MonoBehaviour:
   iconImage: {fileID: 5522383634219908806}
   imageDisplay: {fileID: 2624019478798023981}
   bookIcon: {fileID: 1697616866138800423}
-  closedBook: {fileID: 21300000, guid: 812e112408e520e43b8912d7386f27f7, type: 3}
-  openBook: {fileID: 21300000, guid: 45bb30d264375e14390c2ce699887a2b, type: 3}
+  bookThemes:
+  - closedBook: {fileID: 21300000, guid: 812e112408e520e43b8912d7386f27f7, type: 3}
+    openBook: {fileID: 21300000, guid: 45bb30d264375e14390c2ce699887a2b, type: 3}
+  - closedBook: {fileID: 21300000, guid: 206ca02ff0948074e91c0942c2162e64, type: 3}
+    openBook: {fileID: 21300000, guid: 34f45bcc0a1e59644959c03f864f6167, type: 3}
+  - closedBook: {fileID: 21300000, guid: f6bed027ce319f444b329328aee78f79, type: 3}
+    openBook: {fileID: 21300000, guid: 6b1f80254362c7141a52acfbdbf98d54, type: 3}
   closedSize: {x: 250, y: 250}
   openSize: {x: 390, y: 250}
   hiddenCardText: 

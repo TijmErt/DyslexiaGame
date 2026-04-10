@@ -47,6 +47,7 @@ public class MP_Card : MonoBehaviour
         {
             iconImage.text = data.word;
         }
+
         Hide();
     }
     public void Start()
@@ -69,7 +70,8 @@ public class MP_Card : MonoBehaviour
         iconImage.gameObject.SetActive(!isImageCard);
         imageDisplay.gameObject.SetActive(isImageCard);
 
-        bookIcon.sprite = selectedTheme.openBook;
+        bookIcon.sprite = openBook;
+
         bookIcon.rectTransform.sizeDelta = openSize;
 
         isSelected = true;
@@ -80,7 +82,8 @@ public class MP_Card : MonoBehaviour
         iconImage.gameObject.SetActive(false);
         imageDisplay.gameObject.SetActive(false);
 
-        bookIcon.sprite = selectedTheme.closedBook;
+        bookIcon.sprite = closedBook;
+
         bookIcon.rectTransform.sizeDelta = closedSize;
 
         isSelected = false;

@@ -80,7 +80,8 @@ public class MP_Card : MonoBehaviour
         iconImage.gameObject.SetActive(false);
         imageDisplay.gameObject.SetActive(false);
 
-        bookIcon.sprite = selectedTheme.closedBook;
+        bookIcon.sprite = closedBook;
+
         bookIcon.rectTransform.sizeDelta = closedSize;
 
         isSelected = false;

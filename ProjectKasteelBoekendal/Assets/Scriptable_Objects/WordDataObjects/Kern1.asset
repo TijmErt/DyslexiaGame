@@ -35,3 +35,8 @@ MonoBehaviour:
     syllablesParts:
     - boom
     image: {fileID: 21300000, guid: d7dbba1bd17222146a5084eb7c6bad8e, type: 3}
+  - word: bom
+    syllablesCount: 1
+    syllablesParts:
+    - boom
+    image: {fileID: 21300000, guid: db31b61896542744098dae94eaff0e55, type: 3}

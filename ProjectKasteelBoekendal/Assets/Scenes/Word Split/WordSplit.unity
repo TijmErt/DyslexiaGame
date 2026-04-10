@@ -1124,6 +1124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnswerCheck
   slicePrefab: {fileID: 5004816305574079834, guid: 13673574671d0cb479580d977afc8199, type: 3}
+  confirmationPanelPrefab: {fileID: 5815298174596923056, guid: f0c2e0025164b7643a7c6e8f8ef9b7ed, type: 3}
+  canvas: {fileID: 1692063134}
   wordFormer: {fileID: 602285454}
   wordSplitProgression: {fileID: 1669118846}
   livesWordSplit: {fileID: 1310368306}

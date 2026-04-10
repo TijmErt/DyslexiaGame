@@ -20,7 +20,7 @@ public class Testing : MonoBehaviour
 
     // GET MEMORY PUZZLE DATA
 
-        memoryData = wordCollection.GetMemoryData();
+        memoryData = wordCollection.GetMemoryData(4);
         foreach (var item in memoryData)
         {
             Debug.Log($"ID: {item.id}, Word: {item.word}");

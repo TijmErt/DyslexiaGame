@@ -13,26 +13,25 @@ MonoBehaviour:
   m_Name: Kern1
   m_EditorClassIdentifier: Assembly-CSharp::WordCollection
   words:
-  - word: banaan
-    syllablesCount: 2
-    syllablesParts:
-    - ba
-    - naan
-    image: {fileID: 21300000, guid: fa043e07845c1bb49988c0de8657024f, type: 3}
   - word: appel
     syllablesCount: 2
     syllablesParts:
     - ap
     - pel
-    image: {fileID: 21300000, guid: f57f00b5e875fc0448c6faebcccd4137, type: 3}
-  - word: taart
+    image: {fileID: 21300000, guid: badd011ff7edfd345a13368f6e0626e5, type: 3}
+  - word: auto
+    syllablesCount: 2
+    syllablesParts:
+    - au
+    - to
+    image: {fileID: 21300000, guid: cef453ea83ccc844fa1fc846ad8b0caf, type: 3}
+  - word: school
     syllablesCount: 1
     syllablesParts:
     - taart
-    image: {fileID: 21300000, guid: dfc1afd4d70386745aa07244f4277ced, type: 3}
-  - word: zebra
-    syllablesCount: 2
+    image: {fileID: 21300000, guid: e3960578c0d229d4f87c67d765b1f577, type: 3}
+  - word: boom
+    syllablesCount: 1
     syllablesParts:
-    - ze
-    - bra
-    image: {fileID: 21300000, guid: b9a767f7d4dde1243a95977b15f2a3ab, type: 3}
+    - boom
+    image: {fileID: 21300000, guid: d7dbba1bd17222146a5084eb7c6bad8e, type: 3}

@@ -347,15 +347,8 @@ MonoBehaviour:
   - {fileID: 1752239058}
   - {fileID: 748299983}
   - {fileID: 1900097764}
-  words:
-  - word: School
-    image: {fileID: 21300000, guid: e3960578c0d229d4f87c67d765b1f577, type: 3}
-  - word: Boom
-    image: {fileID: 21300000, guid: d7dbba1bd17222146a5084eb7c6bad8e, type: 3}
-  - word: Appel
-    image: {fileID: 21300000, guid: badd011ff7edfd345a13368f6e0626e5, type: 3}
-  - word: Auto
-    image: {fileID: 21300000, guid: cef453ea83ccc844fa1fc846ad8b0caf, type: 3}
+  wordCollection: {fileID: 11400000, guid: c62f6eda5385f044583c27e8c9410b57, type: 2}
+  pairCount: 4
   minigameEndMenu: {fileID: 158157274}
 --- !u!4 &284961583
 Transform:

@@ -9,7 +9,8 @@ public class MP_CardsController : MonoBehaviour
 {
     [SerializeField] MP_Card cardPrefab;
     [SerializeField] private Transform[] cardSlots;
-    [SerializeField] private TempWordPair[] words;
+    [SerializeField] private WordCollection wordCollection;
+    [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
 
     private List<CardData> cardList;
@@ -31,33 +32,36 @@ public class MP_CardsController : MonoBehaviour
     {
         cardList = new List<CardData>();
 
-        foreach (var pair in words)
+        // 👇 CALL IT HERE
+        List<MemoryWordData> memoryData = wordCollection.GetMemoryData(pairCount);
+
+        foreach (var entry in memoryData)
         {
-            // Text card
+            // TEXT card
             cardList.Add(new CardData
             {
-                matchKey = pair.word,
-                word = pair.word,
+                matchKey = entry.id.ToString(),
+                word = entry.word,
                 isImage = false
             });
 
-            // Image card (if exists)
-            if (pair.image != null)
+            // IMAGE card
+            if (entry.image != null)
             {
                 cardList.Add(new CardData
                 {
-                    matchKey = pair.word,
-                    image = pair.image,
+                    matchKey = entry.id.ToString(),
+                    image = entry.image,
                     isImage = true
                 });
             }
             else
             {
-                // fallback: duplicate word if no image
+                // fallback
                 cardList.Add(new CardData
                 {
-                    matchKey = pair.word,
-                    word = pair.word,
+                    matchKey = entry.id.ToString(),
+                    word = entry.word,
                     isImage = false
                 });
             }

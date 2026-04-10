@@ -7,14 +7,14 @@ public class DialogueCharacter : ScriptableObject
     public string characterName;
     public string currentState;
     public bool IsSpokenTo;
-    public List<DialogueEntry> entries;         
+    public List<string> entries;         
     private Dictionary<string, string> _lookup; 
     
     public void BuildLookup() 
     { 
-        _lookup = new Dictionary<string, string>(); 
-        foreach (DialogueEntry e in entries) 
-            _lookup[e.State] = e.Text; 
+        // _lookup = new Dictionary<string, string>(); 
+        // foreach (string e in entries) 
+        //     _lookup[e.State] = e.Text; 
     } 
     
     public string Get()

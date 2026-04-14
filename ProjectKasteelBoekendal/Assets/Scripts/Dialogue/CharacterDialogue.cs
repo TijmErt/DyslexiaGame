@@ -1,54 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
-public class CharacterDialogue : MonoBehaviour, IInteractable 
+
+/// <summary>
+/// Keeps track of all the dialogue for a single interaction
+/// </summary>
+public class CharacterDialogue : MonoBehaviour
 {
-    [SerializeField]
-    private DialogueCharacter dialogueCharacter;
-    [SerializeField]
-    private InputReader inputReader;
-    [SerializeField]
-    private Transform playerPositionPoint;
-
-    [SerializeField]
-    private Collectible item;
-
-    void Start()
-    {
-      dialogueCharacter.BuildLookup();
-      dialogueCharacter.ChangeState("Before");
-      dialogueCharacter.IsSpokenTo = false;
-        CollectibleStateHolder.RuntimeOf(item);
-    }
-
-    public string GetDialogueLine(DialogueCharacter character)
-    {
-        return character.Get();
-    }
-    
-    private void DialogueCharacterSpokenTo()
-    {        
-        if(dialogueCharacter.IsSpokenTo && !CollectibleStateHolder.RuntimeOf(item).hasBeenFound)
-        {
-            dialogueCharacter.ChangeState("Not Found");
-        }
-        else if(dialogueCharacter.IsSpokenTo && CollectibleStateHolder.RuntimeOf(item).hasBeenFound)
-        {
-            dialogueCharacter.ChangeState("Found");
-        }
-    }
-
-    public Vector3 GetPlayerPosPoint(PlayerInteraction player)
-    {
-        return playerPositionPoint.position;
-    }
-
-    public void Interact(PlayerInteraction player)
-    {
-        DialogueCharacterSpokenTo();
-        string dialogueLine = GetDialogueLine(dialogueCharacter);
-        DialogueUI dialogueUI = Object.FindFirstObjectByType<DialogueUI>();
-        dialogueUI.UpdateDialogue(GetDialogueLine(dialogueCharacter));
-        inputReader.EnableUI();
-        dialogueCharacter.IsSpokenTo = true;
-    }
+	/// <summary>
+	/// List of dialogue
+	/// </summary>
+	[field: SerializeField] public List<Dialogue> Dialogue { get; set; }
 }

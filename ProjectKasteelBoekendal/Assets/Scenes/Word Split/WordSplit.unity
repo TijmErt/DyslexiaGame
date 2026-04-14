@@ -522,9 +522,10 @@ GameObject:
   - component: {fileID: 308249410}
   - component: {fileID: 308249409}
   - component: {fileID: 308249408}
-  m_Layer: 5
+  - component: {fileID: 308249411}
+  m_Layer: 6
   m_Name: Knife
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,13 +537,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308249406}
-  m_LocalRotation: {x: -0, y: -0, z: -0.60876125, w: 0.7933535}
+  m_LocalRotation: {x: -0.4330126, y: 0.25, z: -0.6123722, w: 0.6123728}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1692063134}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -75}
+  m_LocalEulerAnglesHint: {x: -12.953, y: 59.132, z: -97.369}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 311, y: 80}
@@ -555,7 +556,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308249406}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -612,7 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -636,6 +637,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308249406}
   m_CullTransparentMesh: 1
+--- !u!114 &308249411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308249406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11ef926ef76fcf4884300cd4d913ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Slicing
+  knife: {fileID: 308249409}
+  slicingEnabled: 1
+  rayDistance: 0.1
+  sliceLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  mousePosition: {x: 0, y: 0}
+  worldPos: {x: 0, y: 0}
 --- !u!1 &424184386
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2090ab91836ea4a8a58078cf956043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WordFormer
+  slicing: {fileID: 308249411}
   buttons: []
   letters: []
   letterChars: []

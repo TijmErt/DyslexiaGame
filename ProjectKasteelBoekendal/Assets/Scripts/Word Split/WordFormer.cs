@@ -26,7 +26,8 @@ public class WordFormer : MonoBehaviour
     float xOffset = 0;
     float spacing = 30f;
     float duration = 3f;
-    
+
+    int colorIndex = 0;    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,9 +64,6 @@ public class WordFormer : MonoBehaviour
             for (int j = 0; j < syllable.Length; j++)
             {
                 letter = syllable[j];
-
-                // Shows letter in debug log
-                Debug.Log(letter);
 
                 // Get the TextMeshPro component and set the letter
                 TextMeshProUGUI textMesh = textMeshObj.GetComponentInChildren<TextMeshProUGUI>();
@@ -122,17 +120,14 @@ public class WordFormer : MonoBehaviour
         {
             string newChar = letterChars[i];
             split1 = split1 + newChar;
-            Debug.Log("Split1: " + split1);
         }
         for (int j = splitPoint + 1; j < letters.Count; j++)
         {
             string newChar = letterChars[j];
             split2 = split2 + newChar;
-            Debug.Log("Split2: " + split2);
         }
         splits.Add(split1);
         splits.Add(split2);
-        Debug.Log(splitPoint);
     }
 
     // If its the correct answer, it splits into the syllables and triggers the animations
@@ -230,6 +225,7 @@ public class WordFormer : MonoBehaviour
         {
             Destroy(part);
         }
+        splitParts.Clear();
         ResetSplits();
         FormWord();
         answerCheck.DeleteConfirmationPanel();
@@ -240,7 +236,12 @@ public class WordFormer : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         image.color = Color.white;
-        RestitchWord(); 
+        colorIndex++;
+        if (colorIndex >= splitParts.Count)
+        {
+            colorIndex = 0;
+            RestitchWord();
+        }
     }
     private IEnumerator SwitchColorBackLetter(Image image)
     {

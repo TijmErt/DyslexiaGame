@@ -7,7 +7,7 @@ using TMPro;
 public class AnswerCheck : MonoBehaviour
 {
     public GameObject slicePrefab;
-    public GameObject confirmationPanelPrefab;
+    public GameObject confirmationPanelPrefab; 
     private GameObject yesButton;
     private GameObject noButton;
     private GameObject confirmationObj;
@@ -42,12 +42,10 @@ public class AnswerCheck : MonoBehaviour
         if (isCorrect == true)
         {
             yesButton.GetComponent<Button>().onClick.AddListener(CorrectAnswer);
-            Debug.Log("Correct!");
         }
         else if (isCorrect == false)
         {
             yesButton.GetComponent<Button>().onClick.AddListener(WrongAnswer);
-            Debug.Log("Wrong!");
         }
         
         noButton.GetComponent<Button>().onClick.AddListener(wordFormer.RestitchWord);
@@ -66,7 +64,6 @@ public class AnswerCheck : MonoBehaviour
         wordSplitUI.UpdateSlicedCounter();
         StartCoroutine(CountdownNewWord());
         DeleteConfirmationPanel();
-    
     }
 
     // This method is called in the WordFormer script which triggers the animations for the wrong answer
@@ -76,8 +73,9 @@ public class AnswerCheck : MonoBehaviour
         wordFormer.WrongWord();
         wordSplitUI.BreakKnives();
         livesWordSplit.DecreaseLives();
-        Destroy(confirmationObj);
+        DeleteConfirmationPanel();
     }
+
     // IEnumerator used for the delay between correct answer and next word
     private IEnumerator CountdownNewWord()
     {

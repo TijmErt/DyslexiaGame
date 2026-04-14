@@ -6,6 +6,9 @@ using TMPro;
 
 public class WordFormer : MonoBehaviour
 {
+    
+    public Slicing slicing;
+
     List<string> wordParts;
     public List<GameObject> buttons;
     public List<GameObject> letters;
@@ -112,6 +115,9 @@ public class WordFormer : MonoBehaviour
                 splitIndex++;
             }   
         }
+
+        slicing.slicingEnabled = true;
+        
     }
 
     public void SetSplits(int splitPoint)
@@ -229,6 +235,7 @@ public class WordFormer : MonoBehaviour
         ResetSplits();
         FormWord();
         answerCheck.DeleteConfirmationPanel();
+        slicing.slicingEnabled = true;
     }
 
     // IEnumerators used for the delay between wrong answer and switching the color back to white and deleting the falling parts

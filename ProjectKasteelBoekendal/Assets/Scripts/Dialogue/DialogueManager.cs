@@ -57,7 +57,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void NextDialogue() {
         this.DialogueIndex++;
-
         // If there is no more dialogue, end the dialogue
         if (this.DialogueIndex > this.CharacterDialogue.Dialogue.Count - 1) {
             EndDialogue();

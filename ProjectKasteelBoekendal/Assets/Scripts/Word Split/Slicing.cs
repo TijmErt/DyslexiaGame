@@ -26,26 +26,40 @@ public class Slicing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.isPressed && slicingEnabled == true)
+        Vector2 inputPosition = Vector2.zero;
+        bool isInputActive = false;
+
+        if (Mouse.current != null && Mouse.current.leftButton.isPressed)
         {
-            UpdatePosition();
-            DetectSlice();
+            inputPosition = Mouse.current.position.ReadValue();
+            isInputActive = true;
+        }
+        else if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+        {
+            inputPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+            isInputActive = true;
+        }
+
+        if (isInputActive && slicingEnabled == true)
+        {
+            UpdatePosition(inputPosition);
+            DetectSlice(inputPosition);
         }
     }
 
-    public void UpdatePosition()
+    public void UpdatePosition(Vector2 screenPosition)
     {
-        mousePosition = Mouse.current.position.ReadValue();
-        worldPos = Camera.main.ScreenToWorldPoint(mousePosition);
+        mousePosition = screenPosition;
+        worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
 
-        knife.transform.position = mousePosition;
+        knife.transform.position = screenPosition;
     }
 
-    public void DetectSlice()
+    public void DetectSlice(Vector2 screenPosition)
     {
 
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Mouse.current.position.ReadValue();
+        pointerData.position = screenPosition;
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
@@ -62,18 +76,5 @@ public class Slicing : MonoBehaviour
                 break; // prevents multiple triggers per frame
             }
         }
-
-
-        //RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero, rayDistance, sliceLayer);
-        //Debug.Log(hit);
-        //if (hit.collider != null)
-        //{
-            //Debug.Log("Hit: " + hit.collider.name);
-            //Button btn = hit.collider.GetComponent<Button>();
-            //if (btn != null)
-            //{
-                //btn.onClick.Invoke();
-            //}
-        //}
     }
 }

@@ -10,6 +10,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 	/// </summary>
 	[field: SerializeField] public DialogueManager DialogueManager { get; set; }
 	
+	[field: SerializeField] public CharacterDialogue CharacterDialogue { get; set; }
+	
 	/// <summary>
 	/// When an object with the <c>Player1</c> tag enters the trigger, start the dialogue
 	/// </summary>
@@ -27,12 +29,11 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
 	public void Interact(PlayerInteraction player)
 	{
-
 		StartDialogue();
 	}
 
 	private void StartDialogue()
 	{
-		this.DialogueManager.StartDialogue();
+		this.DialogueManager.StartDialogue(this.CharacterDialogue);
 	}
 }

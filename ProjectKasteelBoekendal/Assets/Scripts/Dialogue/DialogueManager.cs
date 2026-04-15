@@ -91,7 +91,6 @@ public class DialogueManager : MonoBehaviour
     /// Updates the gameobjects with the values of the dialogue at the current <c>DialogueIndex</c>
     /// </summary>
     private void ShowDialogue() {
-        Debug.Log("Dialogue Index: " + this.DialogueIndex);
         var currentDialogue = this.CharacterDialogue.Dialogue[this.DialogueIndex];
 
         // Get components from gameobjects

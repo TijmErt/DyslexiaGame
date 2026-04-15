@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         _navMeshAgent.SetDestination(target);
 
         ChangeTarget(interactable);
+        
     }
     private void GoToLocation(RaycastHit hitInfo)
     {
@@ -129,7 +130,9 @@ public class PlayerMovement : MonoBehaviour
         if (_currentTargetInteractable != interactable) yield break;
 
         if (_playerInteraction != null && interactable != null)
+        {
             interactable.Interact(_playerInteraction);
+        }
     }
 
 

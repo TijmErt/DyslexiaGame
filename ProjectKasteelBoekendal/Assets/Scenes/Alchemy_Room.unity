@@ -635,13 +635,13 @@ MonoBehaviour:
         - m_Target: {fileID: 1941169012}
           m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
           m_MethodName: LoadScene
-          m_Mode: 2
+          m_Mode: 5
           m_Arguments:
-            m_ObjectArgument: {fileID: 102900000, guid: 20a91534b9abe104f9f7ea4af4ddf712, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEditor.SceneAsset, UnityEditor.CoreModule
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Memory_Puzzle
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!4 &257833344
@@ -900,7 +900,11 @@ PrefabInstance:
     - target: {fileID: 2704059168420466681, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
       propertyPath: <CharacterDialogue>k__BackingField
       value: 
-      objectReference: {fileID: 257833343}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498560473291095393, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5314151378255901662, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -980,6 +984,14 @@ PrefabInstance:
     - target: {fileID: 5314151378255901662, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274114759524897046, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202893528915360199, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1316,6 +1328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 1941169012}
+  <CharacterDialogue>k__BackingField: {fileID: 257833343}
 --- !u!64 &1299024132
 MeshCollider:
   m_ObjectHideFlags: 0

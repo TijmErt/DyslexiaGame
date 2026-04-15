@@ -1,27 +1,30 @@
 using System;
 using NUnit.Framework;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MP_CardsController : MonoBehaviour
+public class MP_CardsController_Model : MonoBehaviour
 {
-    [SerializeField] MP_Card cardPrefab;
+    [SerializeField] MP_Card_Model cardPrefab;
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private WordCollection wordCollection;
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
+    [SerializeField] private int roundsToPlay = 3;
+    private int roundsPlayed = 0;
+
 
     private List<CardData> cardList;
-    private List<string> wordPairs;
 
-    private MP_Card firstSelected;
-    private MP_Card secondSelected;
-
+    private MP_Card_Model firstSelected;
+    private MP_Card_Model secondSelected;
 
     private int matchCounts;
     private bool isChecking;
+
     private void Start()
     {
         PrepareCards();
@@ -113,7 +116,7 @@ public class MP_CardsController : MonoBehaviour
                 wordIndex++;
             }
 
-            MP_Card card = Instantiate(cardPrefab, parentSlot);
+            MP_Card_Model card = Instantiate(cardPrefab, parentSlot);
 
             RectTransform rt = card.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
@@ -123,45 +126,71 @@ public class MP_CardsController : MonoBehaviour
         }
     }
 
-    public void SetSelected(MP_Card card)
+    public void SetSelected(MP_Card_Model card)
     {
-        if (isChecking || card.isSelected) return;
+        Debug.Log($"[SET SELECTED] Received click from {card.name}. isChecking = {isChecking}, card.isSelected = {card.isSelected}");
 
-        card.Show();
+        if (isChecking || card.isSelected)
+        {
+            Debug.Log("[SET SELECTED] Ignored click (either checking or already selected).");
+            return;
+        }
+
+        // CLOSE the card immediately on click
+        card.Hide();
+        card.isSelected = true;
+
+        Debug.Log($"[SET SELECTED] Closed card {card.name}");
 
         if (firstSelected == null)
         {
             firstSelected = card;
+            Debug.Log($"[SET SELECTED] First selected set to {card.name}");
             return;
         }
 
         secondSelected = card;
+        Debug.Log($"[SET SELECTED] Second selected set to {card.name}. Starting CheckMatching.");
+
         StartCoroutine(CheckMatching(firstSelected, secondSelected));
 
         firstSelected = null;
         secondSelected = null;
     }
 
-    IEnumerator CheckMatching(MP_Card a, MP_Card b)
+    IEnumerator CheckMatching(MP_Card_Model a, MP_Card_Model b)
     {
         isChecking = true;
+        Debug.Log($"[CHECK MATCHING] Comparing {a.name} ({a.MatchKey}) and {b.MatchKey})");
 
         yield return new WaitForSeconds(0.3f);
 
-        Debug.Log(a.MatchKey + " is " + b.MatchKey);
         if (a.MatchKey == b.MatchKey)
         {
+            Debug.Log("[CHECK MATCHING] MATCH!");
+
+            // They are already closed from clicking
             matchCounts++;
 
             if (matchCounts >= cardList.Count / 2)
             {
+                Debug.Log("[CHECK MATCHING] All pairs matched. Showing end menu.");
                 minigameEndMenu.SetActive(true);
             }
         }
         else
         {
-            a.Hide();
-            b.Hide();
+            Debug.Log("[CHECK MATCHING] NO MATCH. Reopening books.");
+
+            a.Show();
+            b.Show();
+
+            a.isSelected = false;
+            b.isSelected = false;
+
+            // Re-enable clicking
+            a.GetComponent<Button>().interactable = true;
+            b.GetComponent<Button>().interactable = true;
         }
 
         isChecking = false;

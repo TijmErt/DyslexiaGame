@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MP_CardsController : MonoBehaviour
+public class MP_CardsController_Model : MonoBehaviour
 {
-    [SerializeField] MP_Card cardPrefab;
+    [SerializeField] MP_Card_Model cardPrefab;
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private WordCollection wordCollection;
     [SerializeField] private int pairCount = 4;
@@ -16,8 +16,8 @@ public class MP_CardsController : MonoBehaviour
     private List<CardData> cardList;
     private List<string> wordPairs;
 
-    private MP_Card firstSelected;
-    private MP_Card secondSelected;
+    private MP_Card_Model firstSelected;
+    private MP_Card_Model secondSelected;
 
 
     private int matchCounts;
@@ -68,7 +68,6 @@ public class MP_CardsController : MonoBehaviour
 
         Shuffle(cardList);
     }
-
     private void CreateCards()
     {
         List<Transform> wordSlots = new List<Transform>();
@@ -113,7 +112,7 @@ public class MP_CardsController : MonoBehaviour
                 wordIndex++;
             }
 
-            MP_Card card = Instantiate(cardPrefab, parentSlot);
+            MP_Card_Model card = Instantiate(cardPrefab, parentSlot);
 
             RectTransform rt = card.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
@@ -122,10 +121,9 @@ public class MP_CardsController : MonoBehaviour
             card.cardController = this;
         }
     }
-
-    public void SetSelected(MP_Card card)
+    public void SetSelected(MP_Card_Model card)
     {
-        if (isChecking || card.isSelected) return;
+        if (isChecking || card.isMatched || card.isSelected) return;
 
         card.Show();
 
@@ -141,17 +139,22 @@ public class MP_CardsController : MonoBehaviour
         firstSelected = null;
         secondSelected = null;
     }
-
-    IEnumerator CheckMatching(MP_Card a, MP_Card b)
+    IEnumerator CheckMatching(MP_Card_Model a, MP_Card_Model b)
     {
         isChecking = true;
 
         yield return new WaitForSeconds(0.3f);
 
-        Debug.Log(a.MatchKey + " is " + b.MatchKey);
         if (a.MatchKey == b.MatchKey)
         {
             matchCounts++;
+
+            a.Hide();
+            b.Hide();
+
+            // OPTIONAL: disable interaction
+            a.isSelected = true;
+            b.isSelected = true;
 
             if (matchCounts >= cardList.Count / 2)
             {
@@ -160,13 +163,12 @@ public class MP_CardsController : MonoBehaviour
         }
         else
         {
-            a.Hide();
-            b.Hide();
+            a.Show();
+            b.Show();
         }
 
         isChecking = false;
     }
-
     private void ShuffleTransforms(List<Transform> list)
     {
         for (int i = list.Count - 1; i > 0; i--)

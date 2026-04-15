@@ -32,6 +32,7 @@ public class MP_CardsController : MonoBehaviour
     {
         cardList = new List<CardData>();
 
+        // 👇 CALL IT HERE
         List<MemoryWordData> memoryData = wordCollection.GetMemoryData(pairCount);
 
         foreach (var entry in memoryData)

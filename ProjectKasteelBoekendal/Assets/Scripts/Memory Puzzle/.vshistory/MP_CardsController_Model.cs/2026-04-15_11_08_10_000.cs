@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MP_CardsController : MonoBehaviour
+public class MP_CardsController_Model : MonoBehaviour
 {
     [SerializeField] MP_Card cardPrefab;
     [SerializeField] private Transform[] cardSlots;
@@ -68,7 +68,6 @@ public class MP_CardsController : MonoBehaviour
 
         Shuffle(cardList);
     }
-
     private void CreateCards()
     {
         List<Transform> wordSlots = new List<Transform>();
@@ -122,7 +121,6 @@ public class MP_CardsController : MonoBehaviour
             card.cardController = this;
         }
     }
-
     public void SetSelected(MP_Card card)
     {
         if (isChecking || card.isSelected) return;
@@ -141,7 +139,6 @@ public class MP_CardsController : MonoBehaviour
         firstSelected = null;
         secondSelected = null;
     }
-
     IEnumerator CheckMatching(MP_Card a, MP_Card b)
     {
         isChecking = true;
@@ -166,7 +163,6 @@ public class MP_CardsController : MonoBehaviour
 
         isChecking = false;
     }
-
     private void ShuffleTransforms(List<Transform> list)
     {
         for (int i = list.Count - 1; i > 0; i--)

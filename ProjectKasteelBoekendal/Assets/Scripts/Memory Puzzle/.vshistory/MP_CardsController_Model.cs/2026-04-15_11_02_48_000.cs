@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MP_CardsController : MonoBehaviour
+public class MP_CardsController_Model : MonoBehaviour
 {
     [SerializeField] MP_Card cardPrefab;
     [SerializeField] private Transform[] cardSlots;
@@ -68,7 +68,6 @@ public class MP_CardsController : MonoBehaviour
 
         Shuffle(cardList);
     }
-
     private void CreateCards()
     {
         List<Transform> wordSlots = new List<Transform>();
@@ -120,68 +119,6 @@ public class MP_CardsController : MonoBehaviour
 
             card.Setup(data);
             card.cardController = this;
-        }
-    }
-
-    public void SetSelected(MP_Card card)
-    {
-        if (isChecking || card.isSelected) return;
-
-        card.Show();
-
-        if (firstSelected == null)
-        {
-            firstSelected = card;
-            return;
-        }
-
-        secondSelected = card;
-        StartCoroutine(CheckMatching(firstSelected, secondSelected));
-
-        firstSelected = null;
-        secondSelected = null;
-    }
-
-    IEnumerator CheckMatching(MP_Card a, MP_Card b)
-    {
-        isChecking = true;
-
-        yield return new WaitForSeconds(0.3f);
-
-        Debug.Log(a.MatchKey + " is " + b.MatchKey);
-        if (a.MatchKey == b.MatchKey)
-        {
-            matchCounts++;
-
-            if (matchCounts >= cardList.Count / 2)
-            {
-                minigameEndMenu.SetActive(true);
-            }
-        }
-        else
-        {
-            a.Hide();
-            b.Hide();
-        }
-
-        isChecking = false;
-    }
-
-    private void ShuffleTransforms(List<Transform> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
-        {
-            int rand = Random.Range(0, i + 1);
-            (list[i], list[rand]) = (list[rand], list[i]);
-        }
-    }
-
-    private void Shuffle(List<CardData> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
-        {
-            int rand = Random.Range(0, i + 1);
-            (list[i], list[rand]) = (list[rand], list[i]);
         }
     }
 }

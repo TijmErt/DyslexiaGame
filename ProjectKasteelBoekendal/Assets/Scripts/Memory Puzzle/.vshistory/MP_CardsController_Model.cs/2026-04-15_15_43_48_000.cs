@@ -1,27 +1,29 @@
 using System;
 using NUnit.Framework;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MP_CardsController : MonoBehaviour
+public class MP_CardsController_Model : MonoBehaviour
 {
-    [SerializeField] MP_Card cardPrefab;
+    [SerializeField] MP_Card_Model cardPrefab;
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private WordCollection wordCollection;
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
+    [SerializeField] private int roundsToPlay = 3;
+    private int roundsPlayed = 0;
 
     private List<CardData> cardList;
-    private List<string> wordPairs;
 
-    private MP_Card firstSelected;
-    private MP_Card secondSelected;
-
+    private MP_Card_Model firstSelected;
+    private MP_Card_Model secondSelected;
 
     private int matchCounts;
     private bool isChecking;
+
     private void Start()
     {
         PrepareCards();
@@ -36,7 +38,6 @@ public class MP_CardsController : MonoBehaviour
 
         foreach (var entry in memoryData)
         {
-            // TEXT card
             cardList.Add(new CardData
             {
                 matchKey = entry.id.ToString(),
@@ -44,7 +45,6 @@ public class MP_CardsController : MonoBehaviour
                 isImage = false
             });
 
-            // IMAGE card
             if (entry.image != null)
             {
                 cardList.Add(new CardData
@@ -56,7 +56,6 @@ public class MP_CardsController : MonoBehaviour
             }
             else
             {
-                // fallback
                 cardList.Add(new CardData
                 {
                     matchKey = entry.id.ToString(),
@@ -93,10 +92,7 @@ public class MP_CardsController : MonoBehaviour
             if (data.isImage)
             {
                 if (imageIndex >= imageSlots.Count)
-                {
-                    Debug.LogError("Not enough IMAGE slots for the number of image cards!");
                     continue;
-                }
 
                 parentSlot = imageSlots[imageIndex];
                 imageIndex++;
@@ -104,16 +100,13 @@ public class MP_CardsController : MonoBehaviour
             else
             {
                 if (wordIndex >= wordSlots.Count)
-                {
-                    Debug.LogError("Not enough WORD slots for the number of word cards!");
                     continue;
-                }
 
                 parentSlot = wordSlots[wordIndex];
                 wordIndex++;
             }
 
-            MP_Card card = Instantiate(cardPrefab, parentSlot);
+            MP_Card_Model card = Instantiate(cardPrefab, parentSlot);
 
             RectTransform rt = card.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
@@ -123,11 +116,13 @@ public class MP_CardsController : MonoBehaviour
         }
     }
 
-    public void SetSelected(MP_Card card)
+    public void SetSelected(MP_Card_Model card)
     {
-        if (isChecking || card.isSelected) return;
+        if (isChecking || card.isSelected)
+            return;
 
-        card.Show();
+        card.Hide();
+        card.isSelected = true;
 
         if (firstSelected == null)
         {
@@ -142,26 +137,40 @@ public class MP_CardsController : MonoBehaviour
         secondSelected = null;
     }
 
-    IEnumerator CheckMatching(MP_Card a, MP_Card b)
+    IEnumerator CheckMatching(MP_Card_Model a, MP_Card_Model b)
     {
         isChecking = true;
 
         yield return new WaitForSeconds(0.3f);
 
-        Debug.Log(a.MatchKey + " is " + b.MatchKey);
         if (a.MatchKey == b.MatchKey)
         {
             matchCounts++;
 
             if (matchCounts >= cardList.Count / 2)
             {
-                minigameEndMenu.SetActive(true);
+                roundsPlayed++;
+
+                if (roundsPlayed < roundsToPlay)
+                {
+                    ResetBoard();
+                }
+                else
+                {
+                    minigameEndMenu.SetActive(true);
+                }
             }
         }
         else
         {
-            a.Hide();
-            b.Hide();
+            a.Show();
+            b.Show();
+
+            a.isSelected = false;
+            b.isSelected = false;
+
+            a.GetComponent<Button>().interactable = true;
+            b.GetComponent<Button>().interactable = true;
         }
 
         isChecking = false;
@@ -183,5 +192,22 @@ public class MP_CardsController : MonoBehaviour
             int rand = Random.Range(0, i + 1);
             (list[i], list[rand]) = (list[rand], list[i]);
         }
+    }
+
+    private void ResetBoard()
+    {
+        foreach (Transform slot in cardSlots)
+        {
+            if (slot.childCount > 0)
+                Destroy(slot.GetChild(0).gameObject);
+        }
+
+        firstSelected = null;
+        secondSelected = null;
+        matchCounts = 0;
+        isChecking = false;
+
+        PrepareCards();
+        CreateCards();
     }
 }

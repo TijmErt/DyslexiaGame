@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -72,6 +73,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     private void EndDialogue() {
         Time.timeScale = 1;
+        this.DialogueIndex = 0; 
         this.gameObject.SetActive(false);
     }
 
@@ -89,6 +91,7 @@ public class DialogueManager : MonoBehaviour
     /// Updates the gameobjects with the values of the dialogue at the current <c>DialogueIndex</c>
     /// </summary>
     private void ShowDialogue() {
+        Debug.Log("Dialogue Index: " + this.DialogueIndex);
         var currentDialogue = this.CharacterDialogue.Dialogue[this.DialogueIndex];
 
         // Get components from gameobjects

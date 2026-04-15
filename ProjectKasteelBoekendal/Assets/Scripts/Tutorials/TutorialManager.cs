@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
@@ -117,5 +118,10 @@ public class TutorialManager : MonoBehaviour
     public void GoToPreviousDialogue(int skip = 0) {
         this.CurrentDialogue -= skip;
         this.ShowNextDialogue();
+    }
+
+    public void LoadScene(string scenename) {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(scenename);
     }
 }

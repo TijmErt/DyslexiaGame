@@ -948,6 +948,10 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 11400000, guid: 17adbb7cb052b814a81d812e8ed4c2a6, type: 2}
+    - target: {fileID: 3876268778523919489, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
+      propertyPath: sceneName
+      value: Memory_Puzzle
+      objectReference: {fileID: 0}
     - target: {fileID: 5002139109740287253, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Memory_Puzzle

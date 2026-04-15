@@ -26,7 +26,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadRoomScene(string roomSceneName)
     {
-        CollectibleStateHolder.RuntimeOf(item).hasBeenFound = true;
+        // CollectibleStateHolder.RuntimeOf(item).hasBeenFound = true;
 
         if (string.IsNullOrEmpty(roomSceneName)) return;
         Time.timeScale = 1f;

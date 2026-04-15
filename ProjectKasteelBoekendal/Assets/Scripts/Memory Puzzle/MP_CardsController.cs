@@ -1,5 +1,3 @@
-using System;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +10,8 @@ public class MP_CardsController : MonoBehaviour
     [SerializeField] private WordCollection wordCollection;
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
+
+    private Dictionary<Transform, MP_Card> cards = new Dictionary<Transform, MP_Card>();
 
     private List<CardData> cardList;
     private List<string> wordPairs;
@@ -28,6 +28,10 @@ public class MP_CardsController : MonoBehaviour
         CreateCards();
     }
 
+    public void ShowCardAtTransform(Transform transform) {
+        this.cards[transform].Show();
+    }
+    
     private void PrepareCards()
     {
         cardList = new List<CardData>();
@@ -76,7 +80,7 @@ public class MP_CardsController : MonoBehaviour
 
         for (int i = 0; i < cardSlots.Length; i++)
         {
-            if (i < 6) wordSlots.Add(cardSlots[i]);
+            if (i < this.cardSlots.Length / 2) wordSlots.Add(cardSlots[i]);
             else imageSlots.Add(cardSlots[i]);
         }
 
@@ -114,6 +118,7 @@ public class MP_CardsController : MonoBehaviour
             }
 
             MP_Card card = Instantiate(cardPrefab, parentSlot);
+            this.cards.Add(parentSlot, card);
 
             RectTransform rt = card.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
@@ -146,8 +151,6 @@ public class MP_CardsController : MonoBehaviour
     {
         isChecking = true;
 
-        yield return new WaitForSeconds(0.3f);
-
         Debug.Log(a.MatchKey + " is " + b.MatchKey);
         if (a.MatchKey == b.MatchKey)
         {
@@ -160,6 +163,8 @@ public class MP_CardsController : MonoBehaviour
         }
         else
         {
+            yield return new WaitForSeconds(1.25f);
+            
             a.Hide();
             b.Hide();
         }

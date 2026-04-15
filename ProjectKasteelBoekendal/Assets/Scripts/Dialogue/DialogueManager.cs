@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     /// <summary>
     /// List of all the dialogue for this interaction
     /// </summary>
-    [field: SerializeField] public CharacterDialogue CharacterDialogue { get; set; }
+    public CharacterDialogue CharacterDialogue { private set; get; }
 
     /// <summary>
     /// Current position in the <c>CharacterDialogue</c> List
@@ -78,7 +78,8 @@ public class DialogueManager : MonoBehaviour
     /// <summary>
     /// Shows the dialogue and pauses the game
     /// </summary>
-    public void StartDialogue() {
+    public void StartDialogue(CharacterDialogue characterDialogue) {
+        this.CharacterDialogue = characterDialogue;
         Time.timeScale = 0;
         this.gameObject.SetActive(true);
         ShowDialogue();

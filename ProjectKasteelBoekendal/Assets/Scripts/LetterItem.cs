@@ -57,6 +57,8 @@ public class LetterItem : MonoBehaviour, IInteractable
         Debug.Log(_letter);
     }
 
+    public float InteractionDistance { get; set;}
+
     public void OnPickedUp(PlayerHand hand)
     {
         if (_collider != null)

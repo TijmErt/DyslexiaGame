@@ -24,4 +24,6 @@ public class LetterExchangeTable : MonoBehaviour, IInteractable
 
         _sharedLogic.InteractWith(player.Hand);
     }
+
+    public float InteractionDistance { get; set; }
 }

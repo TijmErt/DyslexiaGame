@@ -395,6 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 20112477}
+  <InteractionDistance>k__BackingField: 0
 --- !u!4 &20112480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -3303,6 +3304,7 @@ GameObject:
   - component: {fileID: 266043877}
   - component: {fileID: 266043876}
   - component: {fileID: 266043875}
+  - component: {fileID: 266043879}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3380,7 +3382,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 11.588265
+  m_FocalLength: 44.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -3393,9 +3395,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 36.3
-  far clip plane: 1000
-  field of view: 30
+  near clip plane: 0.01
+  far clip plane: 100
+  field of view: 20
   orthographic: 0
   orthographic size: 20
   m_Depth: -1
@@ -3421,13 +3423,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266043874}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.7, y: 39.62, z: -3.9}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 12, y: 39.62, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &266043879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266043874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa81b8170bb72c42b2e45d781f5f5ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  cam: {fileID: 266043877}
+  target: {fileID: 402856201}
 --- !u!1001 &266342373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3662,6 +3678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 280697425}
+  <InteractionDistance>k__BackingField: 0
 --- !u!4 &280697428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -5154,6 +5171,11 @@ BoxCollider:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7da86d4e70c252d4fab01f4e7a3d9758, type: 3}
   m_PrefabInstance: {fileID: 401466865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &402856201 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
+  m_PrefabInstance: {fileID: 1415457966}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &408817942
 PrefabInstance:
@@ -6672,6 +6694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 557283452}
+  <InteractionDistance>k__BackingField: 0
 --- !u!114 &557283452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14166,6 +14189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 1049682059}
+  <InteractionDistance>k__BackingField: 0
 --- !u!4 &1049682062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -15345,6 +15369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 1112769139}
+  <InteractionDistance>k__BackingField: 0
 --- !u!4 &1112769142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -19554,6 +19579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 1410503293}
+  <InteractionDistance>k__BackingField: 0
 --- !u!4 &1410503296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -19612,7 +19638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19620,7 +19646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalRotation.w

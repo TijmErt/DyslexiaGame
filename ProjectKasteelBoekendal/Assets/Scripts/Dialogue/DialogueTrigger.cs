@@ -11,15 +11,18 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 	[field: SerializeField] public DialogueManager DialogueManager { get; set; }
 	
 	[field: SerializeField] public CharacterDialogue CharacterDialogue { get; set; }
+
+	[field: SerializeField] public float InteractionDistance { get; set; } = 2f;
+	
 	
 	/// <summary>
 	/// When an object with the <c>Player1</c> tag enters the trigger, start the dialogue
 	/// </summary>
 	/// <param name="col">Gameobject that entered the trigger area</param>
 	private void OnTriggerEnter(Collider col) {
-		if (!col.CompareTag("Player1")) return;
-
-		StartDialogue();
+		// if (!col.CompareTag("Player1")) return;
+		//
+		// StartDialogue();
 	}
 
 	public Vector3 GetPlayerPosPoint(PlayerInteraction player)
@@ -31,6 +34,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 	{
 		StartDialogue();
 	}
+
+
 
 	private void StartDialogue()
 	{

@@ -334,21 +334,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1134121056}
-          m_TargetAssemblyTypeName: GameState, Assembly-CSharp
-          m_MethodName: set_name
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Kitchen/KitchenArea
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: LoadScene
+        - m_Target: {fileID: 1596636025}
+          m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+          m_MethodName: LoadMinigameScene
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -395,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 20112477}
-  <InteractionDistance>k__BackingField: 0
+  <InteractionDistance>k__BackingField: 2
 --- !u!4 &20112480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -3605,42 +3593,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogue
   <Dialogue>k__BackingField:
-  - <Name>k__BackingField: Serveerder
-    <Text>k__BackingField: It is open now
+  - <Name>k__BackingField: 
+    <Text>k__BackingField: 
     <Expression>k__BackingField: {fileID: 0}
     <onClick>k__BackingField:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Serveerder
-    <Text>k__BackingField: It is closed now
+        m_Calls: []
+  - <Name>k__BackingField: 
+    <Text>k__BackingField: 
     <Expression>k__BackingField: {fileID: 0}
     <onClick>k__BackingField:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!136 &280697426
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15488,27 +15452,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134121057}
-  - component: {fileID: 1134121056}
+  - component: {fileID: 1134121058}
   m_Layer: 0
-  m_Name: GameState
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1134121056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134121055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5b9a10f0345ba478b694d645aea518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameState
-  LastScene: 
 --- !u!4 &1134121057
 Transform:
   m_ObjectHideFlags: 0
@@ -15524,6 +15475,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1134121058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134121055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593102b879ca63940843dabc1df62fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  persistentObjects:
+  - {fileID: 1596636024}
 --- !u!1001 &1138636327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19624,6 +19589,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3796826084841712488, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5843218425456098392, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_Name
       value: Player
@@ -21914,6 +21883,51 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1669421788}
   m_SourcePrefab: {fileID: 100100000, guid: fdfa0b6c2b6c6c24090fc30e784faf20, type: 3}
+--- !u!1 &1596636024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1596636026}
+  - component: {fileID: 1596636025}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1596636025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596636024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca95db6ebcd24174d92687aaf8d9054b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneController
+  CurrentScene: 
+--- !u!4 &1596636026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596636024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.02409, y: 0, z: 2.0478}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598706620 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1438641afea096542bb4d0b56aa602c8, type: 3}
@@ -31153,6 +31167,8 @@ BoxCollider:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1134121057}
+  - {fileID: 1596636026}
   - {fileID: 266043878}
   - {fileID: 2103850250}
   - {fileID: 129957356}
@@ -31160,4 +31176,3 @@ SceneRoots:
   - {fileID: 1058594640}
   - {fileID: 757022209}
   - {fileID: 132575440}
-  - {fileID: 1134121057}

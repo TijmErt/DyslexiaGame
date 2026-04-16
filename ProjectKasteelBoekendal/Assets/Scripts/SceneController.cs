@@ -1,43 +1,42 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] private string sceneName = "";
+    [SerializeField] private string CurrentScene = "";
+    private Transform playerPosition;
+    private string previousScene = "";
 
-    [SerializeField] private Collectible item;
-
-    void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (string.IsNullOrEmpty(sceneName)) return;
+        CurrentScene = SceneManager.GetActiveScene().name;
+    }
+
+    public void LoadAreaScene()
+    {
+
+        SceneManager.sceneLoaded += (scene, mode) =>
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.transform.SetPositionAndRotation(playerPosition.position, playerPosition.transform.rotation);
+        };
+
+        SceneManager.LoadScene(previousScene);
+    }
+
+    public void LoadMinigameScene(string sceneName)
+    {
+        string previousScene;
+        if(CurrentScene.Equals("")) previousScene = SceneManager.GetActiveScene().name;
+        else previousScene = CurrentScene;
+        playerPosition = GameObject.FindGameObjectWithTag("Player1").transform;
+        CurrentScene = sceneName;
         SceneManager.LoadScene(sceneName);
     }
 
-    public void BackToMainRoom()
+    public void reloadScene()
     {
-        SceneManager.LoadScene("Combined");
+        SceneManager.LoadScene(CurrentScene);
     }
-
-    public void RemoveBeforeMerge()
-    {
-        if (string.IsNullOrEmpty(sceneName)) return;
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void LoadRoomScene(string roomSceneName)
-    {
-        CollectibleStateHolder.RuntimeOf(item).hasBeenFound = true;
-
-        if (string.IsNullOrEmpty(roomSceneName)) return;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(roomSceneName);
-    }
-
-    public void LoadMinigameScene(string minigameSceneName)
-    {
-        if (string.IsNullOrEmpty(minigameSceneName)) return;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(minigameSceneName);
-    }
-
 }

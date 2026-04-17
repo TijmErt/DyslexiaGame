@@ -50,10 +50,25 @@ public class Slicing : MonoBehaviour
     public void UpdatePosition(Vector2 screenPosition)
     {
         mousePosition = screenPosition;
-        worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
 
-        knife.transform.position = screenPosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle
+        (
+            knife.canvas.transform as RectTransform,
+            screenPosition,
+            knife.canvas.worldCamera,
+            out var localPoint
+        );
+
+        knife.rectTransform.localPosition = localPoint;
     }
+    
+    // public void UpdatePosition(Vector2 screenPosition)
+    // {
+    //     mousePosition = screenPosition;
+    //     worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
+
+    //     knife.transform.position = screenPosition;
+    // }
 
     public void DetectSlice(Vector2 screenPosition)
     {

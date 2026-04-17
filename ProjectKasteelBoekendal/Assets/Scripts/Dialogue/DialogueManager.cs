@@ -115,9 +115,5 @@ public class DialogueManager : MonoBehaviour
     /// <param name="scene">Name of the scene to load</param>
     public void LoadScene(string scene) {
         SceneManager.LoadScene(scene);
-    }    
-    
-    public void LoadMinigameScene(string scene) {
-        SceneManager.LoadScene(scene);
     }
 }

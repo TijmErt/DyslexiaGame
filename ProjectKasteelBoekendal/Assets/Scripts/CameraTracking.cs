@@ -13,8 +13,6 @@ public class CameraTracking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Target Pos: "+target.position);
         cam.transform.position = new Vector3( target.position.x, cam.transform.position.y, target.position.z);
-        Debug.Log("Camera Pos: " +cam.transform.position);
     }
 }

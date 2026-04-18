@@ -334,18 +334,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1134121056}
-          m_TargetAssemblyTypeName: GameState, Assembly-CSharp
-          m_MethodName: set_name
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Kitchen/KitchenArea
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 899884989}
           m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
           m_MethodName: LoadScene
@@ -395,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 20112477}
-  <InteractionDistance>k__BackingField: 0
+  <InteractionDistance>k__BackingField: 2
 --- !u!4 &20112480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -1094,10 +1082,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 557283451}
+      addedObject: {fileID: 557283449}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 557283449}
+      addedObject: {fileID: 557283454}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 557283452}
@@ -3678,7 +3666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 280697425}
-  <InteractionDistance>k__BackingField: 0
+  <InteractionDistance>k__BackingField: 2
 --- !u!4 &280697428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -6680,21 +6668,6 @@ CapsuleCollider:
   m_Height: 3.52
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &557283451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557283448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <DialogueManager>k__BackingField: {fileID: 899884989}
-  <CharacterDialogue>k__BackingField: {fileID: 557283452}
-  <InteractionDistance>k__BackingField: 0
 --- !u!114 &557283452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6749,6 +6722,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 76786572}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &557283454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557283448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
+  <DialogueManager>k__BackingField: {fileID: 899884989}
+  <CharacterDialogue>k__BackingField: {fileID: 557283452}
+  <InteractionDistance>k__BackingField: 2
 --- !u!1 &558392900 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 992800e53660aa245acc2551834bb0ff, type: 3}
@@ -14189,7 +14177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 1049682059}
-  <InteractionDistance>k__BackingField: 0
+  <InteractionDistance>k__BackingField: 2
 --- !u!4 &1049682062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -15369,7 +15357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 1112769139}
-  <InteractionDistance>k__BackingField: 0
+  <InteractionDistance>k__BackingField: 2
 --- !u!4 &1112769142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -15488,27 +15476,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134121057}
-  - component: {fileID: 1134121056}
+  - component: {fileID: 1134121058}
   m_Layer: 0
-  m_Name: GameState
+  m_Name: SceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1134121056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134121055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5b9a10f0345ba478b694d645aea518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameState
-  LastScene: 
 --- !u!4 &1134121057
 Transform:
   m_ObjectHideFlags: 0
@@ -15524,6 +15499,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1134121058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134121055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c76533500604046b7eaa72b9166158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  currentScene: 
+  previousScene: 
 --- !u!1001 &1138636327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19579,7 +19568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   <DialogueManager>k__BackingField: {fileID: 899884989}
   <CharacterDialogue>k__BackingField: {fileID: 1410503293}
-  <InteractionDistance>k__BackingField: 0
+  <InteractionDistance>k__BackingField: 2
 --- !u!4 &1410503296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -19638,7 +19627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19646,7 +19635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6511246972503172834, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_LocalRotation.w

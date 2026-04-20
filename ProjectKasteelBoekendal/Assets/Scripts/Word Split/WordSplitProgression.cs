@@ -6,6 +6,7 @@ using TMPro;
 
 public class WordSplitProgression : MonoBehaviour
 {
+    public EndScreenManager endScreenManager;
     public WordFormer wordFormer;
     public AnswerCheck answerCheck;
     public WordSplitUI wordSplitUI;
@@ -15,6 +16,7 @@ public class WordSplitProgression : MonoBehaviour
 
     int wordIndex = 0;
     public int totalWords;
+    public bool isInfinite;
 
     public int score = 0;
 
@@ -58,5 +60,12 @@ public class WordSplitProgression : MonoBehaviour
     {
         score++;
         Debug.Log("Current Score: " + score);
+    }
+
+    public void EndGame()
+    {
+        string dynamicText = "Groente gesneden";
+        int coins = score * 100;
+        endScreenManager.InstantiateEndScreen(dynamicText, score, coins);
     }
 }

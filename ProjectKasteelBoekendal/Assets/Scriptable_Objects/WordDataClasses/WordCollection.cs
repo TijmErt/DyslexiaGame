@@ -15,11 +15,18 @@ public class WordCollection : ScriptableObject
             .ToList();
     }
 
-    public List<string> GetWordSyllables()
+    public List<string> GetRandomWordPartsBySyllableCount(int syllablesCount)
     {
-        NewWord word = GetRandomUniqueWords(1)[0];
+        List<NewWord> matchingWords = words
+            .Where(w => w.syllablesCount == syllablesCount)
+            .ToList();
 
-        return new List<string>(word.syllablesParts);
+        if (matchingWords.Count == 0)
+            return new List<string>();
+
+        NewWord selected = matchingWords[Random.Range(0, matchingWords.Count)];
+
+        return selected.syllablesParts;
     }
 
     public List<MemoryWordData> GetMemoryData(int count)

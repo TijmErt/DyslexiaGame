@@ -33,24 +33,17 @@ public class WordFormer : MonoBehaviour
 
     int colorIndex = 0;    
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // This method is called in the WordSplitProgression script which receives the new word and triggers the code to form the new word
     public void ReceiveWord(List<string> receivedWord)
     {
         wordParts = receivedWord;
+
         buttons = new List<GameObject>();
         letters = new List<GameObject>();
+
+        letterChars.Clear();
+        ResetSplits();
+
         FormWord();
     }
 

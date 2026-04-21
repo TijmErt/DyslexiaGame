@@ -1511,6 +1511,7 @@ MonoBehaviour:
   wordFormer: {fileID: 602285454}
   answerCheck: {fileID: 1091471329}
   wordSplitUI: {fileID: 276717562}
+  wordCollection: {fileID: 11400000, guid: c62f6eda5385f044583c27e8c9410b57, type: 2}
   bomen:
   - cra
   - zy

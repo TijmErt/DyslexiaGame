@@ -28,7 +28,7 @@ MonoBehaviour:
   - word: school
     syllablesCount: 1
     syllablesParts:
-    - taart
+    - school
     image: {fileID: 21300000, guid: e3960578c0d229d4f87c67d765b1f577, type: 3}
   - word: boom
     syllablesCount: 1
@@ -39,4 +39,10 @@ MonoBehaviour:
     syllablesCount: 1
     syllablesParts:
     - boom
+    image: {fileID: 21300000, guid: db31b61896542744098dae94eaff0e55, type: 3}
+  - word: bommen
+    syllablesCount: 2
+    syllablesParts:
+    - bom
+    - men
     image: {fileID: 21300000, guid: db31b61896542744098dae94eaff0e55, type: 3}

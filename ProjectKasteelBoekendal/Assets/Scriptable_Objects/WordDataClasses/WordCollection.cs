@@ -22,20 +22,19 @@ public class WordCollection : ScriptableObject
         return new List<string>(word.syllablesParts);
     }
 
-    public List<MemoryWordData> GetMemoryData()
+    public List<MemoryWordData> GetMemoryData(int count)
     {
-        List<NewWord> selectedWords = GetRandomUniqueWords(4);
+        List<NewWord> selectedWords = GetRandomUniqueWords(count);
         List<MemoryWordData> wordData = new List<MemoryWordData>();
 
         int counter = 0;
 
         foreach (NewWord entry in selectedWords)
         {
-            // Add pair (two cards with same ID)
             wordData.Add(new MemoryWordData(counter, entry.word, entry.image));
-
             counter++;
         }
+
         return wordData;
-    }   
+    }  
 }

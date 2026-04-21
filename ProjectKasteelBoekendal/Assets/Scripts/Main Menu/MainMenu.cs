@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Combine_17-12_Playtest_Throneroom");
+        SceneManager.LoadScene("Alchemy_Room");
     }
     public void QuitGame()
     {

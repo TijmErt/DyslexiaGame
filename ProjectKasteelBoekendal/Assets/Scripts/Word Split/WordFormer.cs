@@ -21,6 +21,8 @@ public class WordFormer : MonoBehaviour
     
     public GameObject letterPrefab;
     public GameObject slicePrefab;
+    public GameObject VegetableTopPrefab;
+    public GameObject VegetableBottomPrefab;
     public Transform canvas;
 
     public GameObject textMeshObj;
@@ -56,6 +58,8 @@ public class WordFormer : MonoBehaviour
         }
 
         int splitIndex = 0;
+        
+        // GameObject VegetableTopObj = Instantiate(VegetableTopPrefab, canvas);
 
         // Go through each syllable
         for (int i = 0; i < wordParts.Count; i++)
@@ -112,8 +116,10 @@ public class WordFormer : MonoBehaviour
                 }
 
                 splitIndex++;
-            }   
+            }
+              
         }
+        // GameObject VegetableBottomObj = Instantiate(VegetableBottomPrefab, canvas);
 
         slicing.slicingEnabled = true;
         

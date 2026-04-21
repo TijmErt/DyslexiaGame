@@ -798,6 +798,8 @@ MonoBehaviour:
   split2: 
   letterPrefab: {fileID: 8276802220843137218, guid: 8c59187e4dceb7447b06c404d7173be0, type: 3}
   slicePrefab: {fileID: 5004816305574079834, guid: 13673574671d0cb479580d977afc8199, type: 3}
+  VegetableTopPrefab: {fileID: 5576964821311493300, guid: d8d3dad8ee534904e990b3997314634c, type: 3}
+  VegetableBottomPrefab: {fileID: 2348866517610404918, guid: 0d4dcae01413d99438920f35e122684b, type: 3}
   canvas: {fileID: 1692063134}
   textMeshObj: {fileID: 8276802220843137218, guid: 8c59187e4dceb7447b06c404d7173be0, type: 3}
   answerCheck: {fileID: 1091471329}
@@ -1512,9 +1514,6 @@ MonoBehaviour:
   answerCheck: {fileID: 1091471329}
   wordSplitUI: {fileID: 276717562}
   wordCollection: {fileID: 11400000, guid: c62f6eda5385f044583c27e8c9410b57, type: 2}
-  bomen:
-  - cra
-  - zy
   totalWords: 10
   isInfinite: 1
   score: 0

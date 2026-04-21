@@ -13,12 +13,18 @@ public class WordSplitUI : MonoBehaviour
 
     public Sprite brokenKnife;
 
+    int totalWords;
+    bool noTotalWords;
+
     string slicedAmount;
     int knifeAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         knifeAmount = livesWordSplit.lives;
+        totalWords = wordSplitProgression.totalWords;
+        noTotalWords = wordSplitProgression.isInfinite;
+        UpdateSlicedCounter();
     }
 
     // Update is called once per frame
@@ -30,7 +36,14 @@ public class WordSplitUI : MonoBehaviour
     public void UpdateSlicedCounter()
     {
         slicedAmount = wordSplitProgression.score.ToString();
-        slicedText.GetComponent<TMPro.TextMeshProUGUI>().text = slicedAmount + " / 10";
+        if (noTotalWords == true)
+        {
+            slicedText.GetComponent<TMPro.TextMeshProUGUI>().text = slicedAmount;;
+        }
+        else if (noTotalWords == false)
+        {
+            slicedText.GetComponent<TMPro.TextMeshProUGUI>().text = slicedAmount + "/ " + totalWords;
+        }
     }
 
     public void BreakKnives()

@@ -6,8 +6,9 @@ using TMPro;
 
 public class LivesWordSplit : MonoBehaviour
 {
-
+    public WordSplitProgression wordSplitProgression;
     public int lives = 3;
+    public bool isGameOver = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,10 +26,14 @@ public class LivesWordSplit : MonoBehaviour
     public void DecreaseLives()
     {
         lives--;
+    }
+
+    public void CheckLives()
+    {
         if (lives <= 0)
         {
-            Debug.Log("Game Over!");
-            // Logic for game over
+            isGameOver = true;
+            wordSplitProgression.EndGame();
         }
     }
 }

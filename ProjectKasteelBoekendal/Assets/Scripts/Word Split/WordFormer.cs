@@ -31,6 +31,7 @@ public class WordFormer : MonoBehaviour
 
     float xOffset = 0;
     float spacing = 30f;
+    float spacingEnd = 70f;
     float duration = 3f;
 
     int colorIndex = 0;    
@@ -59,7 +60,7 @@ public class WordFormer : MonoBehaviour
 
         int splitIndex = 0;
         
-        // GameObject VegetableTopObj = Instantiate(VegetableTopPrefab, canvas);
+        //GameObject VegetableTopObj = Instantiate(VegetableTopPrefab, canvas);
 
         // Go through each syllable
         for (int i = 0; i < wordParts.Count; i++)
@@ -77,6 +78,13 @@ public class WordFormer : MonoBehaviour
                 textMesh.text = character;
                 letterChars.Add(character);
 
+                if (j == 0 && i == 0)
+                {
+                    GameObject VegetableTopObj = Instantiate(VegetableTopPrefab, canvas);
+
+                    RectTransform vegetableRect = VegetableTopObj.GetComponent<RectTransform>();
+                    vegetableRect.anchoredPosition = new Vector2(-270f, 40);
+                }
                 GameObject letterObj = Instantiate(letterPrefab, canvas);
                 letters.Add(letterObj);
 
@@ -89,6 +97,13 @@ public class WordFormer : MonoBehaviour
                 if (i == wordParts.Count - 1 && j == syllable.Length - 1)
                 {
                     Debug.Log("End");
+                    
+                    xOffset += spacingEnd;
+                    
+                    GameObject VegetableBottomObj = Instantiate(VegetableBottomPrefab, canvas);
+
+                    RectTransform vegetableRect = VegetableBottomObj.GetComponent<RectTransform>();
+                    vegetableRect.anchoredPosition = new Vector2(xOffset, 0);
                 }
                 // Checks if this is where the split needs to be, triggers correct answer method
                 else if (j == syllable.Length - 1)
@@ -119,7 +134,6 @@ public class WordFormer : MonoBehaviour
             }
               
         }
-        // GameObject VegetableBottomObj = Instantiate(VegetableBottomPrefab, canvas);
 
         slicing.slicingEnabled = true;
         

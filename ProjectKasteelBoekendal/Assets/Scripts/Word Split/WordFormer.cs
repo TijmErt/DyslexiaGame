@@ -25,6 +25,7 @@ public class WordFormer : MonoBehaviour
 
     public GameObject textMeshObj;
     public AnswerCheck answerCheck;
+    public LivesWordSplit livesWordSplit;
 
     float xOffset = 0;
     float spacing = 30f;
@@ -56,6 +57,11 @@ public class WordFormer : MonoBehaviour
     // This method goes through the syllables and letters of the word and spawns the prefabs for the letters and buttons in the correct order
     public void FormWord()
     {
+        if (livesWordSplit.isGameOver == true)
+        {
+            return;
+        }
+
         int splitIndex = 0;
 
         // Go through each syllable
@@ -247,6 +253,7 @@ public class WordFormer : MonoBehaviour
         if (colorIndex >= splitParts.Count)
         {
             colorIndex = 0;
+            livesWordSplit.CheckLives();
             RestitchWord();
         }
     }

@@ -119,9 +119,8 @@ public class TutorialManager : MonoBehaviour
         this.CurrentDialogue -= skip;
         this.ShowNextDialogue();
     }
-
-    public void LoadScene(string scenename) {
+    
+    public void FinishDialogue() {
         Time.timeScale = 1;
-        SceneManager.LoadScene(scenename);
     }
 }

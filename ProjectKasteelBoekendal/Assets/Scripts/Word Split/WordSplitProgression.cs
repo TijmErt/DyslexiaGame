@@ -10,8 +10,7 @@ public class WordSplitProgression : MonoBehaviour
     public WordFormer wordFormer;
     public AnswerCheck answerCheck;
     public WordSplitUI wordSplitUI;
-
-    public List<string> bomen  = new List<string>{"cra", "zy"};
+    [SerializeField] private WordCollection wordCollection;
     List<string> wordParts;
 
     int wordIndex = 0;
@@ -45,7 +44,7 @@ public class WordSplitProgression : MonoBehaviour
     {
         if (wordIndex < totalWords)
         {
-            wordParts = bomen;
+            wordParts = wordCollection.GetRandomWordPartsBySyllableCount(2);
             wordFormer.ReceiveWord(wordParts);
             wordIndex++;
         }
@@ -54,7 +53,6 @@ public class WordSplitProgression : MonoBehaviour
             Debug.Log("You won!");
         }
     }
-
     // Calculates and show the score
     public void Scores()
     {

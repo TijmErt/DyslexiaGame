@@ -12,6 +12,7 @@ public class WordFormer : MonoBehaviour
     List<string> wordParts;
     public List<GameObject> buttons;
     public List<GameObject> letters;
+    public List<GameObject> vegetables;
     public List<string> letterChars;
     public List<string> splits;
     public List<GameObject> splitParts;
@@ -21,6 +22,8 @@ public class WordFormer : MonoBehaviour
     
     public GameObject letterPrefab;
     public GameObject slicePrefab;
+    public GameObject VegetableTopPrefab;
+    public GameObject VegetableBottomPrefab;
     public Transform canvas;
 
     public GameObject textMeshObj;
@@ -29,28 +32,23 @@ public class WordFormer : MonoBehaviour
 
     float xOffset = 0;
     float spacing = 30f;
+    float spacingEnd = 70f;
     float duration = 3f;
 
     int colorIndex = 0;    
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // This method is called in the WordSplitProgression script which receives the new word and triggers the code to form the new word
     public void ReceiveWord(List<string> receivedWord)
     {
         wordParts = receivedWord;
+
         buttons = new List<GameObject>();
         letters = new List<GameObject>();
+        vegetables = new List<GameObject>();
+
+        letterChars.Clear();
+        ResetSplits();
+
         FormWord();
     }
 
@@ -63,6 +61,8 @@ public class WordFormer : MonoBehaviour
         }
 
         int splitIndex = 0;
+        
+        //GameObject VegetableTopObj = Instantiate(VegetableTopPrefab, canvas);
 
         // Go through each syllable
         for (int i = 0; i < wordParts.Count; i++)
@@ -80,6 +80,14 @@ public class WordFormer : MonoBehaviour
                 textMesh.text = character;
                 letterChars.Add(character);
 
+                if (j == 0 && i == 0)
+                {
+                    GameObject VegetableTopObj = Instantiate(VegetableTopPrefab, canvas);
+
+                    RectTransform vegetableRect = VegetableTopObj.GetComponent<RectTransform>();
+                    vegetableRect.anchoredPosition = new Vector2(-270f, 40);
+                    vegetables.Add(VegetableTopObj);
+                }
                 GameObject letterObj = Instantiate(letterPrefab, canvas);
                 letters.Add(letterObj);
 
@@ -92,6 +100,14 @@ public class WordFormer : MonoBehaviour
                 if (i == wordParts.Count - 1 && j == syllable.Length - 1)
                 {
                     Debug.Log("End");
+                    
+                    xOffset += spacingEnd;
+                    
+                    GameObject VegetableBottomObj = Instantiate(VegetableBottomPrefab, canvas);
+                    vegetables.Add(VegetableBottomObj);
+
+                    RectTransform vegetableRect = VegetableBottomObj.GetComponent<RectTransform>();
+                    vegetableRect.anchoredPosition = new Vector2(xOffset, 0);
                 }
                 // Checks if this is where the split needs to be, triggers correct answer method
                 else if (j == syllable.Length - 1)
@@ -119,7 +135,8 @@ public class WordFormer : MonoBehaviour
                 }
 
                 splitIndex++;
-            }   
+            }
+              
         }
 
         slicing.slicingEnabled = true;
@@ -185,6 +202,12 @@ public class WordFormer : MonoBehaviour
             Destroy(letter);
         }
         letters.Clear();
+
+        foreach(GameObject vegetable in vegetables)
+        {
+            Destroy(vegetable);
+        }
+        vegetables.Clear();
     }
 
     //Hides the falling split parts, so they don't clog up the scene

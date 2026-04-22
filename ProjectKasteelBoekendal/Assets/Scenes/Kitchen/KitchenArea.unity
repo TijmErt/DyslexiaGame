@@ -285,67 +285,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 979062013}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &20112477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20112476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4126c18b90d464fbf13e2f264fbb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogue
-  <Dialogue>k__BackingField:
-  - <Name>k__BackingField: Sous-Chef
-    <Text>k__BackingField: It is open now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Sous-Chef
-    <Text>k__BackingField: It is closed now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: LoadScene
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Memory_Puzzle
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!136 &20112478
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -381,9 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <DialogueManager>k__BackingField: {fileID: 899884989}
-  <CharacterDialogue>k__BackingField: {fileID: 20112477}
   <InteractionDistance>k__BackingField: 2
+  <DialogueOverlay>k__BackingField: {fileID: 0}
 --- !u!4 &20112480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -1088,7 +1026,10 @@ PrefabInstance:
       addedObject: {fileID: 557283454}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 557283452}
+      addedObject: {fileID: 557283456}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 557283455}
   m_SourcePrefab: {fileID: 100100000, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
 --- !u!1001 &84137821
 PrefabInstance:
@@ -3580,55 +3521,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 1682029850}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &280697425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280697424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4126c18b90d464fbf13e2f264fbb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogue
-  <Dialogue>k__BackingField:
-  - <Name>k__BackingField: Serveerder
-    <Text>k__BackingField: It is open now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Serveerder
-    <Text>k__BackingField: It is closed now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!136 &280697426
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3664,9 +3556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <DialogueManager>k__BackingField: {fileID: 899884989}
-  <CharacterDialogue>k__BackingField: {fileID: 280697425}
   <InteractionDistance>k__BackingField: 2
+  <DialogueOverlay>k__BackingField: {fileID: 0}
 --- !u!4 &280697428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -6668,109 +6559,6 @@ CapsuleCollider:
   m_Height: 3.52
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &557283452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557283448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4126c18b90d464fbf13e2f264fbb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogue
-  <Dialogue>k__BackingField:
-  - <Name>k__BackingField: Hoofd-Chef
-    <Text>k__BackingField: It is open now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1481695282}
-          m_TargetAssemblyTypeName: EventFlagMediator, Assembly-CSharp
-          m_MethodName: enableFlag
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Kitchen.Sous.Talked.1
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Hoofd-Chef
-    <Text>k__BackingField: It is closed now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1481695282}
-          m_TargetAssemblyTypeName: EventFlagMediator, Assembly-CSharp
-          m_MethodName: enableFlag
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Kitchen.Sous.Talked.2
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Hoofd-Chef
-    <Text>k__BackingField: It is closed now 2
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1481695282}
-          m_TargetAssemblyTypeName: EventFlagMediator, Assembly-CSharp
-          m_MethodName: disableFlag
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Kitchen.Sous.Talked.2
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!4 &557283453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -6788,9 +6576,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <DialogueManager>k__BackingField: {fileID: 899884989}
-  <CharacterDialogue>k__BackingField: {fileID: 557283452}
   <InteractionDistance>k__BackingField: 2
+  <DialogueOverlay>k__BackingField: {fileID: 2119169915}
+--- !u!114 &557283455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557283448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualScripting.Flow::Unity.VisualScripting.ScriptMachine
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 018fa1b817017ee49bba899658be013e, type: 2}
+--- !u!114 &557283456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557283448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualScripting.Core::Unity.VisualScripting.Variables
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"DialogueOverlay","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _objectReferences:
+    - {fileID: 2119169915}
 --- !u!1 &558392900 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 992800e53660aa245acc2551834bb0ff, type: 3}
@@ -6990,9 +6810,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1410503294}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1410503293}
   m_SourcePrefab: {fileID: 100100000, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
 --- !u!1 &569107894
 GameObject:
@@ -9485,7 +9302,7 @@ PrefabInstance:
     - target: {fileID: 1565279001354962157, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 899884989}
+      objectReference: {fileID: 0}
     - target: {fileID: 1565279001354962157, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -11728,17 +11545,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6281424698479989189, guid: efc3112cf86a54b4dab2aa7e0a4a59e7, type: 3}
---- !u!114 &899884989 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2704059168420466681, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
-  m_PrefabInstance: {fileID: 757022209}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64a60739823a884fa338bd0d9ba51c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
 --- !u!1001 &900172407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13118,9 +12924,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 20112478}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 20112477}
   m_SourcePrefab: {fileID: 100100000, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
 --- !u!1001 &979611066
 PrefabInstance:
@@ -14145,55 +13948,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 1727782768}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1049682059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049682058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4126c18b90d464fbf13e2f264fbb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogue
-  <Dialogue>k__BackingField:
-  - <Name>k__BackingField: Leerling 1
-    <Text>k__BackingField: It is open now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Leerling 1
-    <Text>k__BackingField: It is closed now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!136 &1049682060
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14229,9 +13983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <DialogueManager>k__BackingField: {fileID: 899884989}
-  <CharacterDialogue>k__BackingField: {fileID: 1049682059}
   <InteractionDistance>k__BackingField: 2
+  <DialogueOverlay>k__BackingField: {fileID: 0}
 --- !u!4 &1049682062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -15325,55 +15078,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 2011595109}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1112769139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112769138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4126c18b90d464fbf13e2f264fbb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogue
-  <Dialogue>k__BackingField:
-  - <Name>k__BackingField: Schoonmaker
-    <Text>k__BackingField: It is open now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Schoonmaker
-    <Text>k__BackingField: It is closed now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!136 &1112769140
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15409,9 +15113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <DialogueManager>k__BackingField: {fileID: 899884989}
-  <CharacterDialogue>k__BackingField: {fileID: 1112769139}
   <InteractionDistance>k__BackingField: 2
+  <DialogueOverlay>k__BackingField: {fileID: 0}
 --- !u!4 &1112769142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -15521,6 +15224,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c740bb1e8fbdfd744a6002387f42631e, type: 3}
   m_PrefabInstance: {fileID: 1180614377}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1134121055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1134121057}
+  - component: {fileID: 1134121058}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1134121057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134121055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.75, y: 0.84778, z: 2.61833}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1134121058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134121055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c76533500604046b7eaa72b9166158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  currentScene: 
+  previousScene: 
 --- !u!1001 &1138636327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17834,6 +17583,66 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 992800e53660aa245acc2551834bb0ff, type: 3}
   m_PrefabInstance: {fileID: 1966250412}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1329365131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329365134}
+  - component: {fileID: 1329365133}
+  - component: {fileID: 1329365132}
+  m_Layer: 0
+  m_Name: VisualScripting SceneVariables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1329365132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329365131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 765181c9ef4b24d32a4f7cbd2ef370dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualScripting.Core::Unity.VisualScripting.SceneVariables
+--- !u!114 &1329365133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329365131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualScripting.Core::Unity.VisualScripting.Variables
+  _data:
+    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!4 &1329365134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329365131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1340148983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19490,55 +19299,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 568467518}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1410503293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410503292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4126c18b90d464fbf13e2f264fbb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogue
-  <Dialogue>k__BackingField:
-  - <Name>k__BackingField: Leerling 2
-    <Text>k__BackingField: It is open now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - <Name>k__BackingField: Leerling 2
-    <Text>k__BackingField: It is closed now
-    <Expression>k__BackingField: {fileID: 0}
-    <onClick>k__BackingField:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899884989}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!136 &1410503294
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19574,9 +19334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <DialogueManager>k__BackingField: {fileID: 899884989}
-  <CharacterDialogue>k__BackingField: {fileID: 1410503293}
   <InteractionDistance>k__BackingField: 2
+  <DialogueOverlay>k__BackingField: {fileID: 0}
 --- !u!4 &1410503296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
@@ -20701,17 +20460,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ddb627d654199754290d2647551a5b89, type: 3}
   m_PrefabInstance: {fileID: 1012610427}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1481695282 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7051401876370791110, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-  m_PrefabInstance: {fileID: 1015775066278224693}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefc6b59f55df8f40b385dce444711bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EventFlagMediator
 --- !u!1 &1487862376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1438641afea096542bb4d0b56aa602c8, type: 3}
@@ -23581,9 +23329,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 280697426}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 280697425}
   m_SourcePrefab: {fileID: 100100000, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
 --- !u!1001 &1683794276
 PrefabInstance:
@@ -24185,9 +23930,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1049682060}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1049682059}
   m_SourcePrefab: {fileID: 100100000, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
 --- !u!1001 &1732435789
 PrefabInstance:
@@ -29032,9 +28774,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1112769140}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1112769139}
   m_SourcePrefab: {fileID: 100100000, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
 --- !u!4 &2015933039 stripped
 Transform:
@@ -30522,6 +30261,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 59284d555dd205b43b7b9bb96975325c, type: 3}
   m_PrefabInstance: {fileID: 1450061625}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2119169915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1911568120863716859, guid: 63b7c427f67dddf408a0f85d9481eff2, type: 3}
+  m_PrefabInstance: {fileID: 757022209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2124074074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31157,177 +30901,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.15000066, z: 4}
   m_Center: {x: 0, y: -0.025000004, z: 0}
---- !u!1001 &1015775066278224693
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.0328
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420580075603434629, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5849529065349217275, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
-      propertyPath: m_Name
-      value: Mediator
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
---- !u!1001 &1174588026756176382
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.84778
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.61833
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811536771474669739, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6452185085508852509, guid: e1f7650a518711c48919439c02561e10, type: 3}
-      propertyPath: m_Name
-      value: SceneManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e1f7650a518711c48919439c02561e10, type: 3}
---- !u!1001 &5148790169512207932
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.0328
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819549376613840129, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7674977618422577200, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
-      propertyPath: m_Name
-      value: EventFlagManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a199b841d3e53714e8df6056daca6a78, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -31339,6 +30912,5 @@ SceneRoots:
   - {fileID: 1058594640}
   - {fileID: 757022209}
   - {fileID: 132575440}
-  - {fileID: 1174588026756176382}
-  - {fileID: 5148790169512207932}
-  - {fileID: 1015775066278224693}
+  - {fileID: 1134121057}
+  - {fileID: 1329365134}

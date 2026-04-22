@@ -6,22 +6,32 @@ using TMPro;
 
 public class WordFormer : MonoBehaviour
 {
+    
+    public Slicing slicing;
+
     List<string> wordParts;
     public List<GameObject> buttons;
     public List<GameObject> letters;
+    public List<string> letterChars;
+    public List<string> splits;
     public List<GameObject> splitParts;
-
+    public char letter;
+    public string split1;
+    public string split2;
+    
     public GameObject letterPrefab;
     public GameObject slicePrefab;
     public Transform canvas;
 
     public GameObject textMeshObj;
     public AnswerCheck answerCheck;
+    public LivesWordSplit livesWordSplit;
 
     float xOffset = 0;
     float spacing = 30f;
     float duration = 3f;
-    
+
+    int colorIndex = 0;    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,6 +57,13 @@ public class WordFormer : MonoBehaviour
     // This method goes through the syllables and letters of the word and spawns the prefabs for the letters and buttons in the correct order
     public void FormWord()
     {
+        if (livesWordSplit.isGameOver == true)
+        {
+            return;
+        }
+
+        int splitIndex = 0;
+
         // Go through each syllable
         for (int i = 0; i < wordParts.Count; i++)
         {
@@ -55,15 +72,13 @@ public class WordFormer : MonoBehaviour
             // Go through each letter in each syllable
             for (int j = 0; j < syllable.Length; j++)
             {
-                char letter = syllable[j];
-
-                // Shows letter in debug log
-                Debug.Log(letter);
+                letter = syllable[j];
 
                 // Get the TextMeshPro component and set the letter
                 TextMeshProUGUI textMesh = textMeshObj.GetComponentInChildren<TextMeshProUGUI>();
                 string character = letter.ToString();
                 textMesh.text = character;
+                letterChars.Add(character);
 
                 GameObject letterObj = Instantiate(letterPrefab, canvas);
                 letters.Add(letterObj);
@@ -86,7 +101,9 @@ public class WordFormer : MonoBehaviour
                     RectTransform sliceRect = sliceObj.GetComponent<RectTransform>();
                     sliceRect.anchoredPosition = new Vector2(xOffset, 0);
                     xOffset += spacing;
-                    sliceObj.GetComponent<Button>().onClick.AddListener(answerCheck.CorrectAnswer);
+                    int capturedSplitPoint = splitIndex; // Capture the current value of j
+                    sliceObj.GetComponent<Button>().onClick.AddListener(() => SetSplits(capturedSplitPoint));
+                    sliceObj.GetComponent<Button>().onClick.AddListener(() => answerCheck.ConfirmAnswer(true));
                 }
                 // Checks if this isn't the split, triggers wrong answer method
                 else
@@ -96,10 +113,33 @@ public class WordFormer : MonoBehaviour
                     RectTransform sliceRect = sliceObj.GetComponent<RectTransform>();
                     sliceRect.anchoredPosition = new Vector2(xOffset, 0);
                     xOffset += spacing;
-                    sliceObj.GetComponent<Button>().onClick.AddListener(answerCheck.WrongAnswer);
+                    int capturedSplitPoint = splitIndex; // Capture the current value of j
+                    sliceObj.GetComponent<Button>().onClick.AddListener(() => SetSplits(capturedSplitPoint));
+                    sliceObj.GetComponent<Button>().onClick.AddListener(() => answerCheck.ConfirmAnswer(false));
                 }
+
+                splitIndex++;
             }   
         }
+
+        slicing.slicingEnabled = true;
+        
+    }
+
+    public void SetSplits(int splitPoint)
+    {
+        for (int i = 0; i <= splitPoint; i++)
+        {
+            string newChar = letterChars[i];
+            split1 = split1 + newChar;
+        }
+        for (int j = splitPoint + 1; j < letters.Count; j++)
+        {
+            string newChar = letterChars[j];
+            split2 = split2 + newChar;
+        }
+        splits.Add(split1);
+        splits.Add(split2);
     }
 
     // If its the correct answer, it splits into the syllables and triggers the animations
@@ -109,9 +149,11 @@ public class WordFormer : MonoBehaviour
 
         xOffset = 0;
 
-        for (int i = 0; i < wordParts.Count; i++)
+        // de juiste "syllables" maken
+
+        for (int i = 0; i < splits.Count; i++)
         {
-            string syllable = wordParts[i];
+            string syllable = splits[i];
 
             TextMeshProUGUI textMesh = textMeshObj.GetComponentInChildren<TextMeshProUGUI>();
             textMesh.text = syllable;
@@ -123,15 +165,8 @@ public class WordFormer : MonoBehaviour
             RectTransform syllableRect = syllableObj.GetComponent<RectTransform>();
             syllableRect.anchoredPosition = new Vector2(xOffset, 0);
 
-            Rigidbody2D rb = syllableObj.AddComponent<Rigidbody2D>();
-            rb.gravityScale = 20f;
-
-            BoxCollider2D col = syllableObj.AddComponent<BoxCollider2D>();
-
             xOffset += 2*spacing;
         }
-
-        StartCoroutine(DeleteFallingParts());
         xOffset = 0;
     }
 
@@ -162,36 +197,65 @@ public class WordFormer : MonoBehaviour
         splitParts.Clear();
     }
 
+    public void CorrectWord()
+    {
+        foreach(GameObject part in splitParts)
+        {
+            Rigidbody2D rb = part.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 20f;
+
+            BoxCollider2D col = part.AddComponent<BoxCollider2D>();
+        }
+        
+        StartCoroutine(DeleteFallingParts());
+    }
+
     // If its the wrong answer, turn everything red (and later triggers animation)
     public void WrongWord()
     {
-        foreach(GameObject button in buttons)
+        foreach(GameObject parts in splitParts)
         {
-            Image buttonImage = button.GetComponent<Image>();
-            if (buttonImage != null)
+            Image partsImage = parts.GetComponent<Image>();
+            if (partsImage != null)
             {
-                buttonImage.color = Color.red;
-                StartCoroutine(SwitchColorBackButton(buttonImage));
+                partsImage.color = Color.red;
+                StartCoroutine(SwitchColorBackButton(partsImage));
             }
         }
-        
-        foreach(GameObject letter in letters)
-        {
-            Image letterImage = letter.GetComponent<Image>();
-            if (letterImage != null)
-            {
-                letterImage.color = Color.red;
-                StartCoroutine(SwitchColorBackLetter(letterImage));
-            }
-        }
-        
-
     }
+
+    public void ResetSplits()
+    {
+        split1 = "";
+        split2 = "";
+        splits.Clear();
+    }
+
+    public void RestitchWord()
+    {
+        foreach(GameObject part in splitParts)
+        {
+            Destroy(part);
+        }
+        splitParts.Clear();
+        ResetSplits();
+        FormWord();
+        answerCheck.DeleteConfirmationPanel();
+        slicing.slicingEnabled = true;
+    }
+
     // IEnumerators used for the delay between wrong answer and switching the color back to white and deleting the falling parts
     private IEnumerator SwitchColorBackButton(Image image)
     {
         yield return new WaitForSeconds(duration);
         image.color = Color.white;
+        colorIndex++;
+        if (colorIndex >= splitParts.Count)
+        {
+            colorIndex = 0;
+            livesWordSplit.CheckLives();
+            RestitchWord();
+        }
     }
     private IEnumerator SwitchColorBackLetter(Image image)
     {

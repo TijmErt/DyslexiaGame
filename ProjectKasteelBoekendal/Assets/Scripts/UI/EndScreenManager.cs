@@ -4,13 +4,7 @@ using UnityEngine.UI;
 public class EndScreenManager : MonoBehaviour
 {
     public GameObject endScreenPrefab;
-
-    public Image endScreenWinBG;
-    public Image endScreenLoseBG;
-    public Image quitIcon;
-    public Image nextIcon;
-    public Image restartIcon;
-
+    public Transform canvas;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,13 +18,11 @@ public class EndScreenManager : MonoBehaviour
         
     }
 
-    public void WinEndScreen()
+    public void InstantiateEndScreen(string dynamicText, int dynamicNumber, int coinsCollected)
     {
-        //GameObject endScreen = Instantiate(endScreenPrefab, canvas);
-    }
+        GameObject endScreen = Instantiate(endScreenPrefab, canvas);
 
-    public void LoseEndScreen()
-    {
-        
+        EndScreenEdit editscript = endScreen.GetComponent<EndScreenEdit>();
+        editscript.SetEndScreen(dynamicText, dynamicNumber.ToString(), coinsCollected.ToString());
     }
 }

@@ -6,13 +6,17 @@ using TMPro;
 
 public class WordSplitProgression : MonoBehaviour
 {
+    public EndScreenManager endScreenManager;
     public WordFormer wordFormer;
     public AnswerCheck answerCheck;
+    public WordSplitUI wordSplitUI;
 
     public List<string> bomen  = new List<string>{"cra", "zy"};
     List<string> wordParts;
 
     int wordIndex = 0;
+    public int totalWords;
+    public bool isInfinite;
 
     public int score = 0;
 
@@ -20,6 +24,7 @@ public class WordSplitProgression : MonoBehaviour
     // First word of the game
     void Start()
     {
+        SetTotalWords(totalWords);
         GetNewWord();
     }
 
@@ -29,10 +34,16 @@ public class WordSplitProgression : MonoBehaviour
         
     }
 
+    public void SetTotalWords(int total)
+    {
+        totalWords = total;
+        wordSplitUI.UpdateSlicedCounter();
+    }
+
     // Checks the amount of previous words if under the required 10, triggers the code for the next word
     public void GetNewWord()
     {
-        if (wordIndex < 10)
+        if (wordIndex < totalWords)
         {
             wordParts = bomen;
             wordFormer.ReceiveWord(wordParts);
@@ -49,5 +60,12 @@ public class WordSplitProgression : MonoBehaviour
     {
         score++;
         Debug.Log("Current Score: " + score);
+    }
+
+    public void EndGame()
+    {
+        string dynamicText = "Groente gesneden";
+        int coins = score * 100;
+        endScreenManager.InstantiateEndScreen(dynamicText, score, coins);
     }
 }

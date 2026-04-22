@@ -12,6 +12,7 @@ public class WordFormer : MonoBehaviour
     List<string> wordParts;
     public List<GameObject> buttons;
     public List<GameObject> letters;
+    public List<GameObject> vegetables;
     public List<string> letterChars;
     public List<string> splits;
     public List<GameObject> splitParts;
@@ -43,6 +44,7 @@ public class WordFormer : MonoBehaviour
 
         buttons = new List<GameObject>();
         letters = new List<GameObject>();
+        vegetables = new List<GameObject>();
 
         letterChars.Clear();
         ResetSplits();
@@ -84,6 +86,7 @@ public class WordFormer : MonoBehaviour
 
                     RectTransform vegetableRect = VegetableTopObj.GetComponent<RectTransform>();
                     vegetableRect.anchoredPosition = new Vector2(-270f, 40);
+                    vegetables.Add(VegetableTopObj);
                 }
                 GameObject letterObj = Instantiate(letterPrefab, canvas);
                 letters.Add(letterObj);
@@ -101,6 +104,7 @@ public class WordFormer : MonoBehaviour
                     xOffset += spacingEnd;
                     
                     GameObject VegetableBottomObj = Instantiate(VegetableBottomPrefab, canvas);
+                    vegetables.Add(VegetableBottomObj);
 
                     RectTransform vegetableRect = VegetableBottomObj.GetComponent<RectTransform>();
                     vegetableRect.anchoredPosition = new Vector2(xOffset, 0);
@@ -198,6 +202,12 @@ public class WordFormer : MonoBehaviour
             Destroy(letter);
         }
         letters.Clear();
+
+        foreach(GameObject vegetable in vegetables)
+        {
+            Destroy(vegetable);
+        }
+        vegetables.Clear();
     }
 
     //Hides the falling split parts, so they don't clog up the scene

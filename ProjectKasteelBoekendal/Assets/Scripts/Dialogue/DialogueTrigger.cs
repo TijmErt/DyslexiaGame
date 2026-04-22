@@ -18,6 +18,6 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 	public void Interact(PlayerInteraction player)
 	{
 		// Trigger dialogue to start
-		EventBus.Trigger("OnDialogueStart");
+		EventBus.Trigger(new EventHook("OnDialogueStart", this.gameObject));
 	}
 }

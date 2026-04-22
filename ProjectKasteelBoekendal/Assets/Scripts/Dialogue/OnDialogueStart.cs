@@ -9,6 +9,6 @@ public class OnDialogueStart : EventUnit<EmptyEventArgs>
 	
 	public override EventHook GetHook(GraphReference reference)
 	{
-		return new EventHook("OnDialogueStart");
+		return new EventHook("OnDialogueStart", reference.self);
 	}
 }

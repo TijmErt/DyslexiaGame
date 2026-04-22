@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: Temp_mem_trigger
+  m_EditorClassIdentifier: Unity.VisualScripting.Flow::Unity.VisualScripting.ScriptGraphAsset
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[{"name":"CharacterState","value":{"$content":"NeverTalked","$type":"CharacterState"},"typeHandle":{"Identification":"CharacterState,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":"Temporary
+      memory trigger","summary":"","pan":{"x":-353.6618,"y":-170.4101},"zoom":1.0,"elements":[{"coroutine":true,"defaultValues":{},"position":{"x":-864.0,"y":-168.0},"guid":"c3309067-4774-40ce-8ec0-0dab090c490f","$version":"A","$type":"OnDialogueStart","$id":"10"},{"specifyFallback":false,"kind":"Object","defaultValues":{"name":{"$content":"SceneManager","$type":"System.String"},"object":null},"position":{"x":-528.0,"y":-60.0},"guid":"7b0229dd-2855-401a-8e1d-5fb87f4d0d53","$version":"A","$type":"Unity.VisualScripting.GetVariable","$id":"12"},{"chainable":false,"parameterNames":["scene"],"member":{"name":"LoadMinigameScene","parameterTypes":["System.String"],"targetType":"SceneSwitchManager","targetTypeName":"SceneSwitchManager","$version":"A"},"defaultValues":{"target":null,"%scene":{"$content":"Memory_Puzzle","$type":"System.String"}},"position":{"x":-276.0,"y":-143.0},"guid":"53f38534-6192-48fe-a752-b4550d285a2e","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"14"},{"sourceUnit":{"$ref":"10"},"sourceKey":"trigger","destinationUnit":{"$ref":"14"},"destinationKey":"enter","guid":"7d2d2ee7-3dc5-4663-b7e5-0b6936b733e3","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"12"},"sourceKey":"value","destinationUnit":{"$ref":"14"},"destinationKey":"target","guid":"af75745f-f01a-40f8-ad61-96754b7b859e","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

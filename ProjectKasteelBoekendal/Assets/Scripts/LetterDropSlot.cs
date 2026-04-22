@@ -35,6 +35,8 @@ public class LetterDropSpot : MonoBehaviour, IInteractable
         if (col != null) col.enabled = true;
     }
 
+    public float InteractionDistance { get; set;}
+
     private void MoveItem(LetterItem letter)
     {
         letter.transform.SetParent(transform);

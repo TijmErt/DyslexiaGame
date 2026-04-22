@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         _navMeshAgent.SetDestination(target);
 
         ChangeTarget(interactable);
+        
     }
     private void GoToLocation(RaycastHit hitInfo)
     {
@@ -117,19 +118,23 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator WaitForArrival(IInteractable interactable, int interactionId)
     {
         if (_navMeshAgent == null) yield break;
-
+        
+        _navMeshAgent.stoppingDistance = interactable.InteractionDistance;
         while (_navMeshAgent.pathPending ||
-               _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance)
+               _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance ||
+               _navMeshAgent.velocity.sqrMagnitude > 0.01f)
         {
             yield return null;
         }
 
         if (interactionId != _currentInteractionId) yield break;
-
         if (_currentTargetInteractable != interactable) yield break;
 
         if (_playerInteraction != null && interactable != null)
+        {
             interactable.Interact(_playerInteraction);
+            _navMeshAgent.ResetPath();
+        }
     }
 
 

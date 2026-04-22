@@ -11,8 +11,8 @@ public class DJ_PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;          // horizontal speed
     [SerializeField] private float jumpVelocity = 12f;      // vertical bounce strength
 
-    [Header("Fall Game Over")]
-    [SerializeField] private float gameOverBelowCamera = 7f; // if player is this far below camera -> game over
+    // [Header("Fall Game Over")]
+    // [SerializeField] private float gameOverBelowCamera = 7f; // if player is this far below camera -> game over
 
     private Rigidbody rb;
 

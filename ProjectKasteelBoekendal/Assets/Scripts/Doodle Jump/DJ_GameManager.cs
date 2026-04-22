@@ -15,8 +15,8 @@ public class DJ_GameManager : MonoBehaviour
     [Header("Win Condition")]
     [SerializeField] private int targetScoreToWin = 20;
 
-    [Header("Scenes")]
-    [SerializeField] private string overworldSceneName = "Overworld";
+    // [Header("Scenes")]
+    // [SerializeField] private string overworldSceneName = "Overworld";
 
     [Header("State")]
     public bool isGameOver = false;

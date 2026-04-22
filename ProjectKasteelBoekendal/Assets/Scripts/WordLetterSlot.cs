@@ -62,6 +62,8 @@ public class WordLetterSlot : MonoBehaviour, IInteractable
         }
     }
 
+    public float InteractionDistance { get; set;}
+
     public bool TryPlaceLetter(LetterItem letter)
     {
         if (letter == null) return false;

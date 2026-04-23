@@ -45,7 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   eventFlags:
-  - Name: Kitchen.Sous.Talked.1
-    Enabled: 0
-  - Name: Kitchen.Sous.Talked.2
+  - Name: Kitchen.npc.headC.
     Enabled: 0

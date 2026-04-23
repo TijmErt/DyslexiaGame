@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitchManager : MonoBehaviour
@@ -8,8 +9,8 @@ public class SceneSwitchManager : MonoBehaviour
     
     [SerializeField] private string currentScene;
     [SerializeField] private string previousScene;
-    private Vector3 PlayerPosition;
-    private Quaternion PlayerRotation;
+    [SerializeField] private Vector3 PlayerPosition;
+    [SerializeField] private Quaternion PlayerRotation;
     private void Awake()
     {
 
@@ -24,33 +25,68 @@ public class SceneSwitchManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
     }
 
-    public void LoadMinigameScene(string scene)
-    {
-        previousScene = currentScene.Equals("") ? SceneManager.GetActiveScene().name : currentScene;
-        Transform player = GameObject.FindGameObjectWithTag("Player1").transform;
-        PlayerPosition = player.position;
-        PlayerRotation = player.rotation;
-        SceneManager.sceneLoaded += (scene, mode) =>
+    #region MinigameScene
+        public void LoadMinigameScene(string sceneName)
         {
-            currentScene = SceneManager.GetActiveScene().name;
-        };
-        SceneManager.LoadScene(scene);
-        
+            previousScene = string.IsNullOrEmpty(currentScene)
+                ? SceneManager.GetActiveScene().name
+                : currentScene;
 
-    }
+            Transform player = GameObject.FindGameObjectWithTag("Player1").transform;
+            PlayerPosition = player.position;
+            PlayerRotation = player.rotation;
+
+            SceneManager.sceneLoaded += OnMinigameLoaded;
+            SceneManager.LoadScene(sceneName);
+        }
+        private void OnMinigameLoaded(Scene scene, LoadSceneMode mode)
+        {
+            SceneManager.sceneLoaded -= OnMinigameLoaded;
+            currentScene = scene.name;
+        }
+        
+    #endregion
+
+    #region PreviousScene
+
     public void LoadPreviousScene()
     {
-        SceneManager.sceneLoaded += (scene, mode) =>
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player1"); 
-            player.transform.SetPositionAndRotation(PlayerPosition, PlayerRotation);
-        };
+        //swaps values around as the previous scene will become the current scene and vice versa
 
+        SceneManager.sceneLoaded += OnPreviousSceneLoaded;
         SceneManager.LoadScene(previousScene);
     }
+    private void OnPreviousSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnPreviousSceneLoaded;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player1");
+
+        if (player != null)
+        {
+            player.transform.SetPositionAndRotation(PlayerPosition, PlayerRotation);
+
+            // IMPORTANT: fix NavMeshAgent snapping
+            var agent = player.GetComponent<NavMeshAgent>();
+            if (agent != null)
+            {
+                agent.Warp(PlayerPosition);
+            }
+        }
+        previousScene = currentScene;
+        currentScene = SceneManager.GetActiveScene().name;
+        
+    }
+
+    #endregion
 
     public void ReloadScene()
     {
         SceneManager.LoadScene(currentScene);
     }
+    
+    
+
+
+    
 }

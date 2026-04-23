@@ -8,8 +8,10 @@ using System.Collections;
 public class Slicing : MonoBehaviour
 {
 
+    public WordSplitProgression wordSplitProgression;
+    
     public Image knife;
-    public bool slicingEnabled = true;
+    public bool slicingEnabled;
     private Collider2D sliceCollider;
     public float rayDistance = 0.1f;
     public LayerMask sliceLayer;
@@ -26,6 +28,7 @@ public class Slicing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Vector2 inputPosition = Vector2.zero;
         bool isInputActive = false;
 
@@ -40,7 +43,7 @@ public class Slicing : MonoBehaviour
             isInputActive = true;
         }
 
-        if (isInputActive && slicingEnabled == true)
+        if (isInputActive && slicingEnabled == true && wordSplitProgression.isTutorial == false)
         {
             UpdatePosition(inputPosition);
             DetectSlice(inputPosition);

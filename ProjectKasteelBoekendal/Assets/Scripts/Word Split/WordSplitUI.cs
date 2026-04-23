@@ -42,7 +42,7 @@ public class WordSplitUI : MonoBehaviour
         }
         else if (noTotalWords == false)
         {
-            slicedText.GetComponent<TMPro.TextMeshProUGUI>().text = slicedAmount + "/ " + totalWords;
+            slicedText.GetComponent<TMPro.TextMeshProUGUI>().text = slicedAmount + " / " + totalWords;
         }
     }
 

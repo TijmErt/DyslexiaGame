@@ -13,6 +13,10 @@ public class LivesWordSplit : MonoBehaviour
     // Calculates the amount of lives left and triggers end of game logic
     public void DecreaseLives()
     {
+        if (wordSplitProgression.isModelling == true)
+        {
+            return; // Don't decrease lives if the player is currently modelling
+        }
         lives--;
     }
 

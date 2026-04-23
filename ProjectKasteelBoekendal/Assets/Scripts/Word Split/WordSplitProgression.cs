@@ -16,6 +16,8 @@ public class WordSplitProgression : MonoBehaviour
     int wordIndex = 0;
     public int totalWords;
     public bool isInfinite;
+    public bool isTutorial;
+    public bool isModelling;
 
     public int score = 0;
 
@@ -35,7 +37,14 @@ public class WordSplitProgression : MonoBehaviour
 
     public void SetTotalWords(int total)
     {
-        totalWords = total;
+        if (isInfinite)
+        {
+            totalWords = int.MaxValue;
+        }
+        else
+        {
+            totalWords = total;
+        }
         wordSplitUI.UpdateSlicedCounter();
     }
 
@@ -44,20 +53,28 @@ public class WordSplitProgression : MonoBehaviour
     {
         if (wordIndex < totalWords)
         {
-            wordParts = wordCollection.GetRandomWordPartsBySyllableCount(2);
+            if (isTutorial == true)
+            {
+                List<string> tutorialWord = new List<string> {"ap", "pel"};
+                wordParts = tutorialWord;
+            }
+            else
+            {
+                wordParts = wordCollection.GetRandomWordPartsBySyllableCount(2);
+            }
             wordFormer.ReceiveWord(wordParts);
             wordIndex++;
         }
         else
         {
-            Debug.Log("You won!");
+            EndGame();
         }
     }
+    
     // Calculates and show the score
     public void Scores()
     {
         score++;
-        Debug.Log("Current Score: " + score);
     }
 
     public void EndGame()

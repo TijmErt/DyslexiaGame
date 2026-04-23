@@ -823,7 +823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &647778510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1127,7 +1127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &919320361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1516,10 +1516,10 @@ MonoBehaviour:
   answerCheck: {fileID: 1091471329}
   wordSplitUI: {fileID: 276717562}
   wordCollection: {fileID: 11400000, guid: c62f6eda5385f044583c27e8c9410b57, type: 2}
-  totalWords: 10
-  isInfinite: 1
+  totalWords: 2
+  isInfinite: 0
   isTutorial: 0
-  isModelling: 0
+  isModelling: 1
   score: 0
 --- !u!4 &1669118847
 Transform:

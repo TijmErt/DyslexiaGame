@@ -47,7 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Word Split/WordSplit.unity
     guid: 472194fddd940894e9dbdedb397d3fc3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Word Split/WordSplit ModP2.unity
     guid: fda837e00f135174ea5e8ad68ff33ae8
   - enabled: 1
@@ -56,6 +56,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Memory_Puzzle/Memory_Puzzle_Tutorial.unity
     guid: b0356fab5388883469693022eb5b023b
+  - enabled: 1
+    path: Assets/Scenes/Kitchen/KitchenArea.unity
+    guid: 1748f79dd9e4ed644b7c65ede51c935f
   m_configObjects:
     com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: 52cba5b31df3cc74b80f5bbecad2b357, type: 2}
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6e4ae210701dfc14686f5fc00db89862, type: 2}

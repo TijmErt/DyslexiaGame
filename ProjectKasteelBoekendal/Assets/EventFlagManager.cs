@@ -11,7 +11,22 @@ internal class Flag
 public class EventFlagManager : MonoBehaviour
 {
     public static EventFlagManager instance;
-    [SerializeField]private List<Flag> eventFlags;
+    [SerializeField]private List<Flag> eventFlags; 
+    /*
+        Potential alternative. Swapping this our with a hierarchy system 
+        
+        example class
+        
+        internal class FlagComp{
+            public string Name;
+            public bool Enabled
+            public list<FlagComp> subFlag
+        }
+        
+        Scene->Type (think area or npc)->name-> subtype (main, tutorial, etc.) -> state 
+        then use the collective name of that hierarchy for the dictionary.
+     */
+    
     private Dictionary<string, bool> eventFlagDictionary= new Dictionary<string, bool>();
 
     private void Awake()
@@ -26,11 +41,26 @@ public class EventFlagManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         InitializeDictionary();
     }
+    private void OnValidate()
+    {
+        RevalidateDictionary();
+    }
+
+    private void RevalidateDictionary()
+    {
+        foreach (Flag flag in eventFlags)
+        {
+            if (eventFlagDictionary.ContainsKey(flag.Name))
+            {
+                eventFlagDictionary[flag.Name] = flag.Enabled;
+            }
+        }
+    }
     private void InitializeDictionary()
     {
         eventFlagDictionary.Clear();
 
-        foreach (var flag in eventFlags)
+        foreach (Flag flag in eventFlags)
         {
             if (!eventFlagDictionary.ContainsKey(flag.Name))
             {
@@ -44,15 +74,28 @@ public class EventFlagManager : MonoBehaviour
     public bool IsFlagEnabled(string flagName)
     {
         if (eventFlagDictionary.TryGetValue(flagName, out bool value))
+        {
             return value;
-
+        }
         return false;
     }
 
     public void ChangeFLagState(string flagName, bool enabled)
     {
-        eventFlagDictionary[flagName] = enabled;
-        eventFlags[eventFlags.FindIndex(flag => flag.Name == flagName)].Enabled = enabled;
+        if (eventFlagDictionary.ContainsKey(flagName))
+        {
+            eventFlagDictionary[flagName] = enabled;
+
+            int index = eventFlags.FindIndex(flag => flag.Name == flagName);
+            if (index >= 0)
+            {
+                eventFlags[index].Enabled = enabled;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Flag '{flagName}' not found.");
+        }
     }
 }
 

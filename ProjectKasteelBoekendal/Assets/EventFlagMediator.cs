@@ -14,4 +14,9 @@ public class EventFlagMediator : MonoBehaviour
     {
         EventFlagManager.instance.ChangeFLagState(flagName, false);
     }
+
+    public bool getFlagState(string flagName)
+    {
+        return EventFlagManager.instance.IsFlagEnabled(flagName);
+    }
 }

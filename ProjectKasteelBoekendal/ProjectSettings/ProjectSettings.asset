@@ -838,6 +838,7 @@ PlayerSettings:
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
     Android: RESTRICT_EVENT_TYPES
+    Standalone: RESTRICT_EVENT_TYPES
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

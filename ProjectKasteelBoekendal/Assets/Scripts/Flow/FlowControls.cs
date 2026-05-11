@@ -62,6 +62,7 @@ public class FlowControls : MonoBehaviour
         foreach (var result in results)
         {
             Image hit = result.gameObject.GetComponent<Image>();
+            Debug.Log(hit);
 
             if (hit != null)
             {
@@ -74,19 +75,25 @@ public class FlowControls : MonoBehaviour
                 
                 if (hitName.Contains("Empty"))
                 {
-                    if (hit != previousHit)
+                    if (flowLine.currentLine.Contains(hit))
+                    {
+                        return;
+                    }
+                    else
                     {
                         flowLine.EmptyHit(hit);
                     }
-                    previousHit = hit;
                 }
-                else if (hitName.Contains("EndPoint"))
+                else if (hitName.Contains("Endpoint"))
                 {
-                    if (hit != previousHit)
+                    if (flowLine.currentLine.Contains(hit))
+                    {
+                        return;
+                    }
+                    else
                     {
                         flowLine.EndPointHit(hit);
                     }
-                    previousHit = hit;
                 }
                 else
                 {

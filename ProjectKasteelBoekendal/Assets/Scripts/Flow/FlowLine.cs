@@ -14,6 +14,7 @@ public class FlowLine : MonoBehaviour
     public bool lineActive = false;
     
     public List<Image> coloredSquares = new List<Image>();
+    public List<Image> currentLine = new List<Image>();
 
 
     public Canvas canvas;
@@ -35,13 +36,11 @@ public class FlowLine : MonoBehaviour
         {
             ColorEmpty(emptyBox);
         }
-        //check if empty is empty
-        //check if empty is next to previous object
     }
 
     public void ColorEmpty (Image emptyBox)
     {
-        Debug.Log("Color Empty");
+        currentLine.Add(emptyBox);
         emptyColor = emptyBox.transform.GetChild(0).GetComponent<Image>();
         emptyColor.color = Color.white;
         coloredSquares.Add(emptyColor);
@@ -60,22 +59,26 @@ public class FlowLine : MonoBehaviour
             {
                 square.color = Color.blue;
             }
+            currentLine.Add(endPoint);
             coloredSquares.Clear();
             lineActive = false;
+            ResetLine();
         }
+
         else if (lineActive == false)
         {
             startPoint = endPoint; 
+            currentLine.Add(endPoint);
             lineActive = true;
         }
-
-        Debug.Log("EndPoint Hit");
     }
 
     public void ResetLine()
     {
         lineActive = false;
-        emptyColor.color = Color.clear;
+        startPoint = null;
+        currentLine.Clear();
+
         if (coloredSquares.Count == 0)
         {
             return;
@@ -85,6 +88,7 @@ public class FlowLine : MonoBehaviour
         {
             square.color = Color.clear;
         }
+
         coloredSquares.Clear();
     }
 }

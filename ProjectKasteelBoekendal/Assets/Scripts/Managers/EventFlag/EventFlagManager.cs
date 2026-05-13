@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Managers.Saving;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,10 +9,11 @@ internal class Flag
     public string Name;
     public bool Enabled;
 }
-public class EventFlagManager : MonoBehaviour
+public class EventFlagManager : MonoBehaviour, ISaveable
 {
     public static EventFlagManager instance;
     [SerializeField]private List<Flag> eventFlags; 
+    public string UID => "EventFlagManager";
     /*
         Potential alternative. Swapping this our with a hierarchy system 
         
@@ -96,6 +98,53 @@ public class EventFlagManager : MonoBehaviour
         {
             Debug.LogWarning($"Flag '{flagName}' not found.");
         }
+    }
+
+
+    public object CaptureState()
+    {
+        EventFlagData data = new EventFlagData
+        {
+            Flags = new List<Flag>()
+        };
+
+        foreach (Flag flag in eventFlags)
+        {
+            data.Flags.Add(new Flag
+            {
+                Name = flag.Name,
+                Enabled = flag.Enabled
+            });
+        }
+
+        return data;
+    }
+
+    public void RestoreState(string state)
+    {
+        EventFlagData data = JsonUtility.FromJson<EventFlagData>(state);
+
+        if (data.Flags == null)
+            return;
+
+        eventFlags.Clear();
+        eventFlagDictionary.Clear();
+
+        foreach (Flag flag in data.Flags)
+        {
+            eventFlags.Add(new Flag
+            {
+                Name = flag.Name,
+                Enabled = flag.Enabled
+            });
+
+            eventFlagDictionary[flag.Name] = flag.Enabled;
+        }
+    }
+
+    private struct EventFlagData
+    {
+        public List<Flag> Flags;
     }
 }
 

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SceneMediator : MonoBehaviour
 {
-	public static SceneMediator instance;
 	public void LoadMinigameScene(string scene)
 	{
 		SceneSwitchManager.instance.LoadMinigameScene(scene);

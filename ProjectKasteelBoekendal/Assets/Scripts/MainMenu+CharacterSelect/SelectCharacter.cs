@@ -6,6 +6,19 @@ public class SelectCharacter : MonoBehaviour
 {
     public GameObject[] characters; // Array to hold character GameObjects
     public int Number; // Index of the currently selected character
+    public GameObject confirmationPanel; // Panel to confirm character selection
+    
+    private void Start()
+    {
+        // Only hide panel if it exists
+        if (confirmationPanel != null)
+        {
+            confirmationPanel.SetActive(false);
+        }
+
+        Number = PlayerPrefs.GetInt("SelectedCharacter");
+        ShowCharacter(); // Display the currently selected character
+    }
     
     public void ChangeCharacter(int Num)
     {
@@ -28,9 +41,36 @@ public class SelectCharacter : MonoBehaviour
         characters[Number].SetActive(true); // Activate the selected character
     }
 
+    void ShowCharacter()
+    {
+        for (int i = 0; i < characters.Length; i++)
+        {
+            characters[i].SetActive(false);
+        }
+
+        characters[Number].SetActive(true);
+    }
+
     public void ConfirmCharacter()
+    {
+        // Only show panel if it exists
+        if (confirmationPanel != null)
+        {
+            confirmationPanel.SetActive(true); // Show the confirmation panel
+        }
+    }
+
+    public void ConfirmSelection()
     {
         PlayerPrefs.SetInt("SelectedCharacter", Number); // Save the selected character index
         SceneManager.LoadScene("KitchenArea"); // Load the first area scene
+    }
+    public void CancelSelection()
+    {
+        // Only hide panel if it exists
+        if (confirmationPanel != null)
+        {
+            confirmationPanel.SetActive(false); // Hide the confirmation panel
+        }
     }
 }

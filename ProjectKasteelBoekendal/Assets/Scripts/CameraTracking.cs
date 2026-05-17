@@ -2,17 +2,26 @@ using UnityEngine;
 
 public class CameraTracking : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [Header("Camera Settings")]
+    [SerializeField] private Vector3 offset = new Vector3(0, 6, -16);
+
+    [SerializeField] private float smoothSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 5f;
+
+    private void LateUpdate()
     {
-        cam.transform.position = new Vector3( target.position.x, cam.transform.position.y, target.position.z);
+        if (target == null) return;
+
+        Vector3 desiredPosition = target.position + new Vector3(0, 10, 30);
+
+        transform.position = Vector3.Lerp(
+            transform.position,
+            desiredPosition,
+            smoothSpeed * Time.deltaTime
+        );
+
+        transform.LookAt(target);
     }
 }

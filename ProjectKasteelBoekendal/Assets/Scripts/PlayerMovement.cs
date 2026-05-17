@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputReader inputReader = default;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private PlayerInteraction _playerInteraction;
+    [SerializeField] private LayerMask groundMask;
 
     private Camera _mainCamera;
     private Vector2 currentMousePos;
@@ -53,11 +54,10 @@ public class PlayerMovement : MonoBehaviour
         Debug.LogError("PlayerMovement: No NavMeshAgent reference found.");
     }
 
-    // --- Core Tap Processing ---
     private void ProcessTap(Vector2 screenPosition)
     {
         Ray ray = _mainCamera.ScreenPointToRay(screenPosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, groundMask))
         {
             Debug.Log($"{name} (PlayerId {_playerInteraction.PlayerId}) hit {hitInfo.collider.name} on layer {LayerMask.LayerToName(hitInfo.collider.gameObject.layer)}");
 
@@ -137,14 +137,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-    // --- Touch Input ---
     private void OnTouch(Vector2 screenPosition)
     {
         ProcessTap(screenPosition);
     }
 
-    // --- Mouse Input ---
     private void OnMouseMove(Vector2 position)
     {
         currentMousePos = position;

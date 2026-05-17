@@ -20495,6 +20495,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6131082120441828902, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131082120441828902, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: _playerInteraction
       value: 
       objectReference: {fileID: 0}

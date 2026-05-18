@@ -31,6 +31,8 @@ public class VegetableManager : MonoBehaviour
 	/// </summary>
 	/// <param name="word">The word to display</param>
 	public void ShowWord(string word) {
+		this.Clear();
+		
 		for (var i = 0; i < word.Length; i++) {
 			var letter = word[i];
 			var textBox = CreateTextBox(letter.ToString(), this.LetterSpacer.gameObject);
@@ -41,6 +43,15 @@ public class VegetableManager : MonoBehaviour
 					rectmask.padding = rectmask.padding == Vector4.zero ? Vector4.one * 100 : Vector4.zero;
 				});
 			}
+		}
+	}
+
+	
+	private void Clear() {
+		this.Letters.Clear();
+		this.Buttons.Clear();
+		foreach (Transform child in this.LetterSpacer.transform) {
+			Destroy(child.gameObject);
 		}
 	}
 

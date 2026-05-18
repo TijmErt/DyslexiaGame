@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 15157952}
   - component: {fileID: 15157951}
   m_Layer: 5
-  m_Name: SlicedBar
+  m_Name: ScoreBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1022,7 +1022,7 @@ GameObject:
   - component: {fileID: 806817455}
   - component: {fileID: 806817454}
   m_Layer: 5
-  m_Name: SlicedIcon
+  m_Name: ScoreIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 886347094}
   - component: {fileID: 886347093}
   m_Layer: 5
-  m_Name: Knife2
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 986945264}
   - component: {fileID: 986945263}
   m_Layer: 5
-  m_Name: Knife3
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1423,6 +1423,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WordsplitManager
   <WordList>k__BackingField: {fileID: 11400000, guid: c62f6eda5385f044583c27e8c9410b57, type: 2}
   <Vegetable>k__BackingField: {fileID: 11696083}
+  <HealthBar>k__BackingField: {fileID: 919320360}
+  <ScoreBar>k__BackingField: {fileID: 15157949}
 --- !u!4 &1287041547
 Transform:
   m_ObjectHideFlags: 0
@@ -1658,8 +1660,8 @@ RectTransform:
   - {fileID: 919320361}
   - {fileID: 647778510}
   - {fileID: 1577521609}
-  - {fileID: 308249407}
   - {fileID: 1979908285}
+  - {fileID: 308249407}
   - {fileID: 784149175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1680,7 +1682,7 @@ GameObject:
   - component: {fileID: 1922407314}
   - component: {fileID: 1922407313}
   m_Layer: 5
-  m_Name: Knife1
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

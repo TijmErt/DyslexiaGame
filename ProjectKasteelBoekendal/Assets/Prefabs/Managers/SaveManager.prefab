@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a8ed6c80e8b154da24a7da83ebc72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Saving.SaveManager
-  saveFileName: savefile.sav
+  saveFileName: savefile

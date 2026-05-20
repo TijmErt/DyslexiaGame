@@ -6,7 +6,8 @@ namespace Managers.Saving
     {
         public static SaveManager instance;
         
-        [SerializeField] private string saveFileName = "savefile.sav";
+        [SerializeField] private string saveFileName = "savefile";
+        private string FullSaveFileName => saveFileName + ".sav"; //Ensures that the save files all use the correct file type
         
         private readonly SavingSystem savingSystem = new();
         
@@ -22,9 +23,10 @@ namespace Managers.Saving
             DontDestroyOnLoad(gameObject);
         }
         
+        public void ChangeSaveFile(string newSaveFileName) => saveFileName = newSaveFileName;
         public void Save()
         {
-            if(savingSystem.SaveGameToFile(saveFileName))
+            if(savingSystem.SaveGameToFile(FullSaveFileName))
             {
                 Debug.Log("Save file saved successfully");
             }
@@ -37,7 +39,7 @@ namespace Managers.Saving
 
         public void Load()
         {
-            if (savingSystem.LoadGameFromFile(saveFileName))
+            if (savingSystem.LoadGameFromFile(FullSaveFileName))
             {
                 Debug.Log("Save file Loaded successfully");
             }
@@ -49,7 +51,7 @@ namespace Managers.Saving
 
         public void Remove()
         {
-            if (savingSystem.RemoveGameSave(saveFileName))
+            if (savingSystem.RemoveGameSave(FullSaveFileName))
             {
                 Debug.Log("Save file deleted successfully");
             }

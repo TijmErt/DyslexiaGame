@@ -25,7 +25,7 @@ public class SaveMenuUI : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.f5Key.wasPressedThisFrame)
         {
             if (!savingMediator)
             {

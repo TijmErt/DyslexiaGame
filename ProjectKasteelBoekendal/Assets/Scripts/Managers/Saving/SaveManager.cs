@@ -23,7 +23,7 @@ namespace Managers.Saving
             DontDestroyOnLoad(gameObject);
         }
         
-        public void ChangeSaveFile(string newSaveFileName) => saveFileName = newSaveFileName;
+      
         public void Save()
         {
             if(savingSystem.SaveGameToFile(FullSaveFileName))
@@ -59,6 +59,18 @@ namespace Managers.Saving
             {
                 Debug.Log("Failed to delete the save file");
             }
+        }
+        
+        public void ChangeSaveFile(string newSaveFileName)
+        {
+            if (string.IsNullOrWhiteSpace(newSaveFileName))
+                return;
+
+            saveFileName = newSaveFileName.Trim();
+        }
+        public string[] GetAllSaveFiles()
+        {
+            return savingSystem.GetAllSaveFiles();
         }
     }
 }

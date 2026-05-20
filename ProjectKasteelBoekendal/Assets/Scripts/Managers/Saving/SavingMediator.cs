@@ -19,5 +19,33 @@ namespace Managers.Saving
         {
             SaveManager.instance.Remove();
         }
+
+        public void ChangeSaveFile(string newSaveFileName)
+        {
+            SaveManager.instance.ChangeSaveFile(newSaveFileName);
+        }
+        
+        public void LoadSave(string saveName)
+        {
+            ChangeSaveFile(saveName);
+            Load();
+        }
+
+        public void DeleteSave(string saveName)
+        {
+            ChangeSaveFile(saveName);
+            Remove();
+        }
+
+        public void CreateSave(string saveName)
+        {
+            ChangeSaveFile(saveName);
+            Save();
+        }
+
+        public string[] GetAllSaveFiles()
+        {
+            return SaveManager.instance.GetAllSaveFiles();
+        }
     }
 }

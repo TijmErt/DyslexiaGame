@@ -122,5 +122,17 @@ namespace Managers.Saving
                 return false;
             }
         }
+        
+        public string[] GetAllSaveFiles()
+        {
+            string[] files = Directory.GetFiles(Application.persistentDataPath, "*.sav");
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                files[i] = Path.GetFileNameWithoutExtension(files[i]);
+            }
+
+            return files;
+        }
     }
 }

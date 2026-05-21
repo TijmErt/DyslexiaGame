@@ -40,13 +40,20 @@ public class SaveMenuUI : MonoBehaviour
         bool active = !panel.activeSelf;
 
         panel.SetActive(active);
-
         if (active)
         {
             RefreshSaveList();
+            Time. timeScale = 0; 
+        }
+        else
+        {
+            Invoke(nameof(ResumeTime), 2f); // this makes sure that nothing can happen until after the 'Close' button has closed the menu
         }
     }
-
+    void ResumeTime()
+    {
+        Time.timeScale = 1f;
+    }
     public void RefreshSaveList()
     {
         foreach (Transform child in saveListParent)

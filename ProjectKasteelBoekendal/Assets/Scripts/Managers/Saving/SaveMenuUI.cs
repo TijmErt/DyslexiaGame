@@ -47,12 +47,8 @@ public class SaveMenuUI : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(ResumeTime), 2f); // this makes sure that nothing can happen until after the 'Close' button has closed the menu
+            Time.timeScale = 1f;
         }
-    }
-    void ResumeTime()
-    {
-        Time.timeScale = 1f;
     }
     public void RefreshSaveList()
     {

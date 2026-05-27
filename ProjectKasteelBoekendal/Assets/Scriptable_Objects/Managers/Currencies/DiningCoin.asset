@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27754caa60f05e24abcc5143cc1744f9, type: 3}
   m_Name: DiningCoin
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Currency.CurrencyData
-  currencyID: KitchCoinss
-  displayName: Goude Chefs
+  currencyID: DiningCoin
+  displayName: Zilvere Lepel
   icon: {fileID: 0}

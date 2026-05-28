@@ -1,23 +1,24 @@
-using Managers.Currency;
 using UnityEngine;
 
-/// <summary>
-/// The CurrencyMediator acts as a middle layer between other scripts/UI systems
-/// and the CurrencyManager.
-///
-/// This prevents direct dependency on the CurrencyManager singleton instance,
-/// reducing the chance of null reference errors if the manager has not yet
-/// been initialized or is temporarily unavailable.
-///
-/// It also provides UI-friendly wrapper methods that can easily be connected
-/// to Unity Events through the Inspector.
-/// </summary>
-public class CurrencyMediator : MonoBehaviour
+namespace Managers.Currency
 {
-    [SerializeField] private string currentCurrencyID = "";
+    /// <summary>
+    /// The CurrencyMediator acts as a middle layer between other scripts/UI systems
+    /// and the CurrencyManager.
+    ///
+    /// This prevents direct dependency on the CurrencyManager singleton instance,
+    /// reducing the chance of null reference errors if the manager has not yet
+    /// been initialized or is temporarily unavailable.
+    ///
+    /// It also provides UI-friendly wrapper methods that can easily be connected
+    /// to Unity Events through the Inspector.
+    /// </summary>
+    public class CurrencyMediator : MonoBehaviour
+    {
+        [SerializeField] private string currentCurrencyID = "";
 
-    #region UI Methods
-    /*
+        #region UI Methods
+        /*
     
      Methods intended for Unity UI interaction.
     
@@ -29,22 +30,22 @@ public class CurrencyMediator : MonoBehaviour
      the mediator.
     
     */
-    public void UIChangeCurrencyID(string newCurrencyID)
-    {
-        currentCurrencyID = newCurrencyID;
-    }
-    public void UIAddCurrency(int amount)
-    {
-        AddCurrency(currentCurrencyID, amount);
-    }
-    public void UIRemoveCurrency(int amount)
-    {
-        RemoveCurrency(currentCurrencyID, amount);
-    }
-    #endregion
+        public void UIChangeCurrencyID(string newCurrencyID)
+        {
+            currentCurrencyID = newCurrencyID;
+        }
+        public void UIAddCurrency(int amount)
+        {
+            AddCurrency(currentCurrencyID, amount);
+        }
+        public void UIRemoveCurrency(int amount)
+        {
+            RemoveCurrency(currentCurrencyID, amount);
+        }
+        #endregion
     
-    #region Standard Methods
-    /*
+        #region Standard Methods
+        /*
      
      Standard wrapper methods for interacting with the CurrencyManager.
     
@@ -53,29 +54,30 @@ public class CurrencyMediator : MonoBehaviour
      the CurrencyManager singleton.
     
     */
-    public void AddCurrency(string id, int amount)
-    {
-        CurrencyManager.instance.AddCurrency( id,  amount);
-    }
+        public void AddCurrency(string id, int amount)
+        {
+            CurrencyManager.instance.AddCurrency( id,  amount);
+        }
 
-    public void RemoveCurrency(string id, int amount)
-    {
-        CurrencyManager.instance.RemoveCurrency( id,  amount);
-    }
+        public void RemoveCurrency(string id, int amount)
+        {
+            CurrencyManager.instance.RemoveCurrency( id,  amount);
+        }
 
-    public int GetCurrencyAmount(string id)
-    {
-        return CurrencyManager.instance.GetCurrencyAmount(id);
-    }
-    public bool HasEnoughCurrency(string id, int amount)
-    {
-        return CurrencyManager.instance.HasEnoughCurrency(id, amount);
-    }
+        public int GetCurrencyAmount(string id)
+        {
+            return CurrencyManager.instance.GetCurrencyAmount(id);
+        }
+        public bool HasEnoughCurrency(string id, int amount)
+        {
+            return CurrencyManager.instance.HasEnoughCurrency(id, amount);
+        }
     
-    public CurrencyEntry GetCurrency(string id)
-    {
-        return CurrencyManager.instance.GetCurrency(id);
-    } 
+        public CurrencyEntry GetCurrency(string id)
+        {
+            return CurrencyManager.instance.GetCurrency(id);
+        } 
     
-    #endregion
+        #endregion
+    }
 }

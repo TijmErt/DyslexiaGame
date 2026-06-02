@@ -1,154 +1,127 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private InputReader inputReader = default;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
-    [SerializeField] private PlayerInteraction _playerInteraction;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private PlayerInteraction playerInteraction;
+    [SerializeField] private Rigidbody rb;
 
-    private Camera _mainCamera;
-    private Vector2 currentMousePos;
+    [Header("Movement")]
+    [SerializeField] private float movementSpeed = 6f;
+    [SerializeField] private float rotationSpeed = 10f;
 
-    private IInteractable _currentTargetInteractable;
-    private int _currentInteractionId = 0;
+    private Vector2 movementInput;
+    private Vector3 finalMoveDirection;
 
     private void OnEnable()
     {
-        inputReader.touchEvent += OnTouch;
-        inputReader.mousePosEvent += OnMouseMove;
-        inputReader.leftMouseButtonEvent += OnMouseTap;
+        inputReader.moveEvent += OnMove;
     }
 
     private void OnDisable()
     {
-        inputReader.touchEvent -= OnTouch;
-        inputReader.mousePosEvent -= OnMouseMove;
-        inputReader.leftMouseButtonEvent -= OnMouseTap;
+        inputReader.moveEvent -= OnMove;
     }
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
-
         CheckPlayerInteraction();
-        CheckNavmeshAgent();
+        CheckRigidbody();
+
+        // IMPORTANT: ensure physics behaves correctly
+        rb.freezeRotation = true;
+
+        // If you still have NavMeshAgent on the object, fully disable it
+        var agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (agent != null)
+            agent.enabled = false;
+    }
+
+    private void Update()
+    {
+        HandleRotation();
+    }
+
+    private void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    private void HandleMovement()
+    {
+        Vector3 moveDirection = new Vector3(
+            movementInput.x,
+            0f,
+            movementInput.y
+        );
+
+        moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
+
+        if (moveDirection.sqrMagnitude > 0.01f)
+        {
+            Camera cam = Camera.main;
+
+            Vector3 cameraForward = cam.transform.forward;
+            Vector3 cameraRight = cam.transform.right;
+
+            cameraForward.y = 0f;
+            cameraRight.y = 0f;
+
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            finalMoveDirection =
+                cameraForward * moveDirection.z +
+                cameraRight * moveDirection.x;
+
+            rb.MovePosition(rb.position +
+                finalMoveDirection * movementSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            finalMoveDirection = Vector3.zero;
+        }
+    }
+
+    private void HandleRotation()
+    {
+        if (finalMoveDirection.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(finalMoveDirection);
+
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+        }
+    }
+
+    private void OnMove(Vector2 input)
+    {
+        movementInput = input;
     }
 
     private void CheckPlayerInteraction()
     {
-        if (_playerInteraction != null) return;
-        _playerInteraction = GetComponent<PlayerInteraction>();
+        if (playerInteraction != null) return;
 
-        if (_playerInteraction != null) return;
-        Debug.LogError("PlayerMovement: No PlayerInteraction reference found.");
-    }
-    private void CheckNavmeshAgent()
-    {
-        if (_navMeshAgent != null) return;
-        _navMeshAgent = GetComponent<NavMeshAgent>();
+        playerInteraction = GetComponent<PlayerInteraction>();
 
-        if (_navMeshAgent != null) return;
-        Debug.LogError("PlayerMovement: No NavMeshAgent reference found.");
+        if (playerInteraction == null)
+            Debug.LogError("PlayerMovement: No PlayerInteraction reference found.");
     }
 
-    private void ProcessTap(Vector2 screenPosition)
+    private void CheckRigidbody()
     {
-        Ray ray = _mainCamera.ScreenPointToRay(screenPosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, groundMask))
-        {
-            Debug.Log($"{name} (PlayerId {_playerInteraction.PlayerId}) hit {hitInfo.collider.name} on layer {LayerMask.LayerToName(hitInfo.collider.gameObject.layer)}");
+        if (rb != null) return;
 
-            IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
+        rb = GetComponent<Rigidbody>();
 
-            if (interactable != null)
-                GoToInteractionAndInteract(interactable);
-            else
-                GoToLocation(hitInfo);
-        }
-    }
-
-    private void GoToInteractionAndInteract(IInteractable interactable)
-    {
-        Vector3 target = interactable.GetPlayerPosPoint(_playerInteraction);
-        if (!IsPointOnThisAgentsNavMesh(target)) return;
-
-        _navMeshAgent.SetDestination(target);
-
-        ChangeTarget(interactable);
-        
-    }
-    private void GoToLocation(RaycastHit hitInfo)
-    {
-        Vector3 target = hitInfo.point;
-        if (!IsPointOnThisAgentsNavMesh(target)) return;
-
-        _navMeshAgent.SetDestination(target);
-
-        ChangeTarget();
-    }
-    private void ChangeTarget(IInteractable interactable = null)
-    {
-        _currentInteractionId++;
-        _currentTargetInteractable = interactable;
-        if (interactable != null) StartCoroutine(WaitForArrival(interactable, _currentInteractionId));
-    }
-
-
-    private bool IsPointOnThisAgentsNavMesh(Vector3 point, float maxDistance = 0.2f)
-    {
-        NavMeshHit hit;
-
-        var filter = new NavMeshQueryFilter
-        {
-            agentTypeID = _navMeshAgent.agentTypeID,
-            areaMask = NavMesh.AllAreas
-        };
-
-        if (!NavMesh.SamplePosition(point, out hit, maxDistance, filter))
-            return false;
-        if (Vector3.Distance(hit.position, point) > maxDistance)
-            return false;
-
-        return true;
-    }
-
-    private IEnumerator WaitForArrival(IInteractable interactable, int interactionId)
-    {
-        if (_navMeshAgent == null) yield break;
-        
-        _navMeshAgent.stoppingDistance = interactable.InteractionDistance;
-        while (_navMeshAgent.pathPending ||
-               _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance ||
-               _navMeshAgent.velocity.sqrMagnitude > 0.01f)
-        {
-            yield return null;
-        }
-
-        if (interactionId != _currentInteractionId) yield break;
-        if (_currentTargetInteractable != interactable) yield break;
-
-        if (_playerInteraction != null && interactable != null)
-        {
-            interactable.Interact(_playerInteraction);
-            _navMeshAgent.ResetPath();
-        }
-    }
-
-    private void OnTouch(Vector2 screenPosition)
-    {
-        ProcessTap(screenPosition);
-    }
-
-    private void OnMouseMove(Vector2 position)
-    {
-        currentMousePos = position;
-    }
-
-    private void OnMouseTap()
-    {
-        ProcessTap(currentMousePos);
+        if (rb == null)
+            Debug.LogError("PlayerMovement: No Rigidbody found on Player.");
     }
 }

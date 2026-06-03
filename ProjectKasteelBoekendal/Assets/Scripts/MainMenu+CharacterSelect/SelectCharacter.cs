@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
@@ -72,5 +73,11 @@ public class SelectCharacter : MonoBehaviour
         {
             confirmationPanel.SetActive(false); // Hide the confirmation panel
         }
+    }
+
+    private void OnValidate() //Editor only function, allows of live visual change of character model
+    {
+        PlayerPrefs.SetInt("SelectedCharacter", Number);
+        ShowCharacter();
     }
 }

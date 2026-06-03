@@ -1,13 +1,16 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using Managers.Saving;
 using UnityEngine.SceneManagement;
 
-public class SelectCharacter : MonoBehaviour
+public class SelectCharacter : MonoBehaviour, ISaveable
 {
     public GameObject[] characters; // Array to hold character GameObjects
     public int Number; // Index of the currently selected character
     public GameObject confirmationPanel; // Panel to confirm character selection
+
+    public string UID => "SelectCharacter";
     
     private void Start()
     {
@@ -80,4 +83,31 @@ public class SelectCharacter : MonoBehaviour
         PlayerPrefs.SetInt("SelectedCharacter", Number);
         ShowCharacter();
     }
+
+
+    #region Saving
+
+    public object CaptureState()
+    {
+        SelectCharacterSaveData data = new SelectCharacterSaveData
+        {
+            IndexCharacter = Number
+        };
+        return data;
+    }
+
+    public void RestoreState(string state)
+    {
+        SelectCharacterSaveData data = JsonUtility.FromJson<SelectCharacterSaveData>(state);
+        ChangeCharacter(data.IndexCharacter);
+        PlayerPrefs.SetInt("SelectedCharacter", data.IndexCharacter);
+    }
+    private struct SelectCharacterSaveData
+    {
+        public int IndexCharacter;
+
+    } 
+
+    #endregion
+
 }

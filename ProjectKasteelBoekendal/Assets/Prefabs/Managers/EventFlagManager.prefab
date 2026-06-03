@@ -45,5 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   eventFlags:
-  - Name: Kitchen.npc.headC.
+  - Name: Kitchen.MiniG.MemPuz.Tut.Open
+    Enabled: 0
+  - Name: Kitchen.MiniG.MemPuz.Mod.Open
+    Enabled: 0
+  - Name: Kitchen.MiniG.MemPuz.Main.Open
+    Enabled: 0
+  - Name: Kitchen.MiniG.MemPuz.Main.Finish
+    Enabled: 0
+  - Name: Kitchen.MiniG.WordSp.Tut.Open
+    Enabled: 0
+  - Name: Kitchen.MiniG.WordSp.Mod.Open
+    Enabled: 0
+  - Name: Kitchen.MiniG.WordSp.Main.Open
+    Enabled: 0
+  - Name: Kitchen.MiniG.WordSp.Main.Finish
     Enabled: 0

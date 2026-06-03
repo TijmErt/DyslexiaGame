@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("KitchenArea");
+        SceneManager.LoadScene("Alchemy_Room");
     }
     public void QuitGame()
     {

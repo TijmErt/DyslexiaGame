@@ -39,7 +39,10 @@ public class InputReader : ScriptableObject,
         if (inputActions != null)
         {
             inputActions.Disable();
-            inputActions.Dispose();
+            if (Application.isPlaying)
+            {
+                inputActions.Dispose();
+            }
             inputActions = null;
         }
     }
@@ -136,6 +139,7 @@ public class InputReader : ScriptableObject,
         if (context.phase == InputActionPhase.Started)
             mousePressEvent?.Invoke(true);
 
+        if (context.phase == InputActionPhase.Canceled)
         if (context.phase == InputActionPhase.Canceled)
             mousePressEvent?.Invoke(false);
     }

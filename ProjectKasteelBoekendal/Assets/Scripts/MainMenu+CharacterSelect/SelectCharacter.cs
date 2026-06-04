@@ -47,6 +47,8 @@ public class SelectCharacter : MonoBehaviour, ISaveable
 
     void ShowCharacter()
     {
+        if (characters == null || characters.Length == 0)
+            return;
         for (int i = 0; i < characters.Length; i++)
         {
             characters[i].SetActive(false);
@@ -81,6 +83,8 @@ public class SelectCharacter : MonoBehaviour, ISaveable
     private void OnValidate() //Editor only function, allows of live visual change of character model
     {
         PlayerPrefs.SetInt("SelectedCharacter", Number);
+        if (characters == null || characters.Length == 0)
+            return;
         ShowCharacter();
     }
 

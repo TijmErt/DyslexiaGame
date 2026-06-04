@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 movementInput;
     private Vector3 finalMoveDirection;
+    private bool useDirectGamepad;
 
     private void OnEnable()
     {
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        HandleGamepadFallback();
         HandleRotation();
     }
 
@@ -124,5 +126,29 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb == null)
             Debug.LogError("PlayerMovement: No Rigidbody found on Player.");
+    }
+
+    private void HandleGamepadFallback()
+    {
+        // If InputReader is already giving input, don't override it
+        if (movementInput.sqrMagnitude > 0.01f)
+        {
+            useDirectGamepad = false;
+            return;
+        }
+
+        // Try reading directly from virtual/real gamepad
+        if (Gamepad.current != null)
+        {
+            Vector2 stick = Gamepad.current.leftStick.ReadValue();
+
+            if (stick.sqrMagnitude > 0.01f)
+            {
+                movementInput = stick;
+                useDirectGamepad = true;
+
+                Debug.Log("Using Gamepad fallback: " + stick);
+            }
+        }
     }
 }

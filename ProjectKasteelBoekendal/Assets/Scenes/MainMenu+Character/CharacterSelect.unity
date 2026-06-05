@@ -3029,6 +3029,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 334731744733900767, guid: a3027357a424cfb46aef360d0e714cd8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3559701031035680853, guid: a3027357a424cfb46aef360d0e714cd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00748
@@ -3916,6 +3920,10 @@ PrefabInstance:
       propertyPath: confirmationPanel
       value: 
       objectReference: {fileID: 820956481}
+    - target: {fileID: 9012493163901157513, guid: a41afbac55477cb4ba984037fd9902d3, type: 3}
+      propertyPath: characters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9012493163901157513, guid: a41afbac55477cb4ba984037fd9902d3, type: 3}
       propertyPath: 'characters.Array.data[0]'
       value: 

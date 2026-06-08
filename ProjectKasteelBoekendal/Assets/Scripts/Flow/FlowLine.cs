@@ -8,6 +8,7 @@ using System.Collections;
 public class FlowLine : MonoBehaviour
 {
 
+    public FlowAnswerCheck flowAnswerCheck;
     [SerializeField] private Image emptyColor;
     [SerializeField] private Image startPoint;
 
@@ -55,14 +56,8 @@ public class FlowLine : MonoBehaviour
 
         if (lineActive == true)
         {
-            foreach (var square in coloredSquares)
-            {
-                square.color = Color.blue;
-            }
             currentLine.Add(endPoint);
-            coloredSquares.Clear();
-            lineActive = false;
-            ResetLine();
+            flowAnswerCheck.CheckAnswer(startPoint, endPoint);
         }
 
         else if (lineActive == false)
@@ -73,6 +68,16 @@ public class FlowLine : MonoBehaviour
         }
     }
 
+    public void CorrectLine(Image endPoint)
+    {
+        foreach (var square in coloredSquares)
+        {
+            square.color = Color.blue;
+        }
+        coloredSquares.Clear();
+        lineActive = false;
+        ResetLine();
+    }
     public void ResetLine()
     {
         lineActive = false;

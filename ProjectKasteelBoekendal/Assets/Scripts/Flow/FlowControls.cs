@@ -62,7 +62,6 @@ public class FlowControls : MonoBehaviour
         foreach (var result in results)
         {
             Image hit = result.gameObject.GetComponent<Image>();
-            Debug.Log(hit);
 
             if (hit != null)
             {

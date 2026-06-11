@@ -93,7 +93,10 @@ public class FlowLine : MonoBehaviour
         correctLines.Add(connectionIndex, lineParts);
         foreach (var part in lineParts)
         {
-            searchingDictionary.Add(part, connectionIndex);
+            if (!searchingDictionary.ContainsKey(part))
+            {
+                searchingDictionary.Add(part, connectionIndex);
+            }
         }
 
         connectionIndex++;

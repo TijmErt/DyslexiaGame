@@ -14,6 +14,7 @@ public class FlowAnswerCheck : MonoBehaviour
     public string wordpart1;
     public string wordpart2;
     public string word;
+    public string reverseWord;
 
     public int correctWords = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,7 +36,7 @@ public class FlowAnswerCheck : MonoBehaviour
 
         if (name1.Contains("Start") && name2.Contains("Start") || name1.Contains("End") && name2.Contains("End"))
         {
-            return;
+            flowLine.ResetLine();
         }
         
         wordpart1 = point1.GetComponentInChildren<TMPro.TMP_Text>().text;
@@ -45,10 +46,8 @@ public class FlowAnswerCheck : MonoBehaviour
         wordpart2 = wordpart2.Replace(".", "");
 
         word = wordpart1 + wordpart2;
+        reverseWord = wordpart2 + wordpart1;
 
-        Debug.Log(wordpart1);
-        Debug.Log(wordpart2);
-        Debug.Log(word);
 
         if (flowList.requiredList.Contains(word))
         {
@@ -59,16 +58,28 @@ public class FlowAnswerCheck : MonoBehaviour
                 Debug.Log("All correct!");
             }
         }
-
+        else if (flowList.requiredList.Contains(reverseWord))
+        {
+            flowLine.CorrectLine(point2);
+            correctWords++;
+            if (correctWords == flowList.requiredList.Count)
+            {
+                Debug.Log("All correct!");
+            }
+        }
         else if (flowList.bonusList.Contains(word) && !flowList.bonusFoundList.Contains(word))
         {
             Debug.Log("Bonus!");
             flowList.bonusFoundList.Add(word);
         }
-
+        else if (flowList.bonusList.Contains(reverseWord) && !flowList.bonusFoundList.Contains(reverseWord))
+        {
+            Debug.Log("Bonus!");
+            flowList.bonusFoundList.Add(reverseWord);
+        }
         else
         {
-            Debug.Log("Wrong!");
+            flowLine.ResetLine();
         }
     }
 }

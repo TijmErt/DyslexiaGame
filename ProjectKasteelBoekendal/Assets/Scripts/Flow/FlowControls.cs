@@ -40,10 +40,13 @@ public class FlowControls : MonoBehaviour
             inputPosition = Touchscreen.current.primaryTouch.position.ReadValue();
             isInputActive = true;
         }
-        else if (flowLine.lineActive == true)
+        else 
         {
             previousHit = null;
-            flowLine.ResetLine();
+            if (flowLine.lineActive == true)
+            {
+                flowLine.ResetLine();
+            }
         }
 
         if (isInputActive == true)
@@ -63,7 +66,6 @@ public class FlowControls : MonoBehaviour
         foreach (var result in results)
         {
             Image hit = result.gameObject.GetComponent<Image>();
-            Debug.Log(previousHit);
 
             if (hit != null)
             {
@@ -76,9 +78,9 @@ public class FlowControls : MonoBehaviour
                 
                 if (hitName.Contains("Empty"))
                 {
-                    if (flowLine.currentLine.Contains(hit))
+                    if (flowLine.searchingDictionary.ContainsKey(hit))
                     {
-                        return;
+                        flowLine.ResetLine();
                     }
                     else
                     {

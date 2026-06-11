@@ -9,7 +9,7 @@ using Debug = UnityEngine.Debug;
 
 public class FlowControls : MonoBehaviour
 {
-    Image previousHit;
+    public Image previousHit;
 
     public FlowLine flowLine;
 
@@ -42,6 +42,7 @@ public class FlowControls : MonoBehaviour
         }
         else if (flowLine.lineActive == true)
         {
+            previousHit = null;
             flowLine.ResetLine();
         }
 
@@ -62,6 +63,7 @@ public class FlowControls : MonoBehaviour
         foreach (var result in results)
         {
             Image hit = result.gameObject.GetComponent<Image>();
+            Debug.Log(previousHit);
 
             if (hit != null)
             {
@@ -83,9 +85,17 @@ public class FlowControls : MonoBehaviour
                         flowLine.EmptyHit(hit);
                     }
                 }
-                else if (hitName.Contains("Endpoint"))
+                else if (hitName.Contains("End") || hitName.Contains("Start"))
                 {
-                    if (flowLine.currentLine.Contains(hit))
+                    if (hit == previousHit)
+                    {
+                        return;
+                    }
+                    if (flowLine.searchingDictionary.TryGetValue(hit, out int connectionId))
+                    {
+                        flowLine.DestroyConnection(connectionId);
+                    }
+                    else if (flowLine.currentLine.Contains(hit))
                     {
                         return;
                     }
@@ -98,6 +108,8 @@ public class FlowControls : MonoBehaviour
                 {
                     Debug.Log("Unknown Hit");
                 }
+
+                previousHit = hit;
             }
         }
     }

@@ -9,13 +9,21 @@ public class FlowLine : MonoBehaviour
 {
 
     public FlowAnswerCheck flowAnswerCheck;
+    public FlowControls flowControls;
+
     [SerializeField] private Image emptyColor;
     [SerializeField] private Image startPoint;
 
     public bool lineActive = false;
+    public int connectionIndex = 0;
     
     public List<Image> coloredSquares = new List<Image>();
     public List<Image> currentLine = new List<Image>();
+    public Dictionary<int, List<Image>> correctLines = new Dictionary<int, List<Image>>();
+    public Dictionary<Image, int> searchingDictionary = new Dictionary<Image, int>();
+
+    public float lastConnectionTime;
+    public float connectionCooldown = 0.2f;
 
 
     public Canvas canvas;
@@ -76,8 +84,23 @@ public class FlowLine : MonoBehaviour
         }
         coloredSquares.Clear();
         lineActive = false;
+
+        List<Image> lineParts = new List<Image>();
+        foreach (var part in currentLine)
+        {
+            lineParts.Add(part);
+        }
+        correctLines.Add(connectionIndex, lineParts);
+        foreach (var part in lineParts)
+        {
+            searchingDictionary.Add(part, connectionIndex);
+        }
+
+        connectionIndex++;
+        lastConnectionTime = Time.time;
         ResetLine();
     }
+
     public void ResetLine()
     {
         lineActive = false;
@@ -95,5 +118,21 @@ public class FlowLine : MonoBehaviour
         }
 
         coloredSquares.Clear();
+    }
+
+    public void DestroyConnection(int connectionId)
+    {
+        if (correctLines.TryGetValue(connectionId, out List<Image> lineParts))
+        {
+            foreach (var part in lineParts)
+            {
+                if (part.name.Contains("Empty"))
+                {
+                    part.transform.GetChild(0).GetComponent<Image>().color = Color.clear;
+                }
+                searchingDictionary.Remove(part);
+            }
+            correctLines.Remove(connectionId);
+        }
     }
 }

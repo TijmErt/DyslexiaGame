@@ -6,6 +6,8 @@ public class FlowList : MonoBehaviour
 
     public List<string> requiredList = new List<string>();
     public List<string> bonusList = new List<string>();
+    public List<string> bonusFoundList = new List<string>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

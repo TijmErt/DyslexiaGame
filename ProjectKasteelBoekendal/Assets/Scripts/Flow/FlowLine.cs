@@ -10,6 +10,7 @@ public class FlowLine : MonoBehaviour
 
     public FlowAnswerCheck flowAnswerCheck;
     public FlowControls flowControls;
+    public FlowList flowList;
 
     [SerializeField] private Image emptyColor;
     [SerializeField] private Image startPoint;
@@ -78,9 +79,10 @@ public class FlowLine : MonoBehaviour
 
     public void CorrectLine(Image endPoint)
     {
+        var randomColor = flowList.colorList[Random.Range(0, flowList.colorList.Count)];
         foreach (var square in coloredSquares)
         {
-            square.color = Color.blue;
+            square.color = randomColor;
         }
         coloredSquares.Clear();
         lineActive = false;
@@ -136,6 +138,7 @@ public class FlowLine : MonoBehaviour
                 searchingDictionary.Remove(part);
             }
             correctLines.Remove(connectionId);
+            flowAnswerCheck.correctWords--;
         }
     }
 }

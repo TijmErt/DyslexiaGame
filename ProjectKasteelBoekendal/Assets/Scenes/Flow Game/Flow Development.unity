@@ -752,6 +752,7 @@ MonoBehaviour:
   wordpart1: 
   wordpart2: 
   word: 
+  reverseWord: 
   correctWords: 0
 --- !u!4 &359301873
 Transform:
@@ -816,6 +817,21 @@ MonoBehaviour:
   bonusList:
   - BOMMEN
   bonusFoundList: []
+  colorList:
+  - {r: 1, g: 0, b: 0.013530254, a: 0}
+  - {r: 0.142591, g: 0, b: 1, a: 0}
+  - {r: 0, g: 1, b: 0.124981165, a: 0}
+  - {r: 0.94494784, g: 1, b: 0, a: 0}
+  - {r: 0, g: 1, b: 0.88530445, a: 0}
+  - {r: 1, g: 0, b: 0.9991145, a: 0}
+  - {r: 1, g: 0.58320034, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0.44996452, a: 0}
+  - {r: 0, g: 0.5540314, b: 1, a: 0}
+  - {r: 0.09217633, g: 0.6603774, b: 0.008721931, a: 1}
+  - {r: 0.6301887, g: 0.48811576, b: 0.07490919, a: 1}
+  - {r: 0.6150943, g: 0, b: 0.075718574, a: 1}
+  - {r: 0.38610774, g: 0, b: 0.6156863, a: 1}
+  usedColors: []
 --- !u!4 &551616170
 Transform:
   m_ObjectHideFlags: 0
@@ -2636,11 +2652,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlowLine
   flowAnswerCheck: {fileID: 359301872}
+  flowControls: {fileID: 2048381201}
+  flowList: {fileID: 551616169}
   emptyColor: {fileID: 0}
   startPoint: {fileID: 0}
   lineActive: 0
+  connectionIndex: 0
   coloredSquares: []
   currentLine: []
+  lastConnectionTime: 0
+  connectionCooldown: 0.2
   canvas: {fileID: 1875824916}
 --- !u!4 &1753460626
 Transform:
@@ -3273,6 +3294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2ca6fea745c3243a51fb5980364a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlowControls
+  previousHit: {fileID: 0}
   flowLine: {fileID: 1753460625}
 --- !u!4 &2048381202
 Transform:

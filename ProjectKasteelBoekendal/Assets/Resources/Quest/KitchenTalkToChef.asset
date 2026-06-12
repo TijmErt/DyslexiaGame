@@ -19,7 +19,7 @@ MonoBehaviour:
   objectives:
   - ObjectiveID: TalkChef
     Description: Talk to the chef in the kitchen
-    Type: 0
+    Type: 1
     RequiredAmount: 1
     TargetID: Hoofd-Chef
     SceneName: Kitchen

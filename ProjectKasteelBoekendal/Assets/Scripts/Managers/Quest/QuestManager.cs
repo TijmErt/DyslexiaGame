@@ -14,8 +14,6 @@ namespace Managers.Quest
         public List<QuestProgress> Quests = new List<QuestProgress>();
         private Dictionary<string, QuestProgress> QuestsDictionary = new Dictionary<string, QuestProgress>();
         
-        private List<QuestInfoSO> _allQuests = new List<QuestInfoSO>();
-        
         public List<QuestProgress> _activeQuests = new();
 
         private void Awake()
@@ -37,7 +35,7 @@ namespace Managers.Quest
 
         private void Initialize()
         {
-            _allQuests =
+            List<QuestInfoSO> _allQuests =
                 Resources.LoadAll<QuestInfoSO>("Quest")
                     .ToList();
 
@@ -153,14 +151,91 @@ namespace Managers.Quest
 
         public object CaptureState()
         {
-            throw new System.NotImplementedException();
+            QuestManagerSaveData saveData = new();
+
+            foreach (QuestProgress quest in Quests)
+            {
+                QuestSaveData questSave = new()
+                {
+                    QuestID = quest.QuestInfo.QuestID,
+                    QuestState = quest.QuestState
+                };
+
+                foreach (ObjectiveProgress objective in quest.Objectives)
+                {
+                    questSave.Objectives.Add(
+                        new ObjectiveSaveData
+                        {
+                            ObjectiveID = objective.Objective.ObjectiveID,
+                            CurrentAmount = objective.CurrentAmount
+                        });
+                }
+
+                saveData.Quests.Add(questSave);
+            }
+
+            return saveData;
         }
 
         public void RestoreState(string state)
         {
-            throw new System.NotImplementedException();
+            QuestManagerSaveData saveData = JsonUtility.FromJson<QuestManagerSaveData>(state);
+
+            _activeQuests.Clear();
+
+            foreach (QuestSaveData savedQuest in saveData.Quests)
+            {
+                QuestProgress quest =
+                    GetQuest(savedQuest.QuestID);
+
+                if (quest == null)
+                    continue;
+
+                quest.QuestState = savedQuest.QuestState;
+
+                foreach (ObjectiveSaveData savedObjective in savedQuest.Objectives)
+                {
+                    ObjectiveProgress objective =
+                        quest.Objectives.Find(
+                            o => o.Objective.ObjectiveID ==
+                                 savedObjective.ObjectiveID);
+
+                    if (objective == null)
+                        continue;
+
+                    objective.CurrentAmount =
+                        savedObjective.CurrentAmount;
+                }
+
+                if (quest.QuestState ==
+                    QuestEnums.QuestState.Active)
+                {
+                    _activeQuests.Add(quest);
+                }
+            }
+        }
+        
+        [Serializable]
+        public class QuestManagerSaveData
+        {
+            public List<QuestSaveData> Quests = new();
         }
 
+        [Serializable]
+        public class QuestSaveData
+        {
+            public string QuestID;
+            public QuestEnums.QuestState QuestState;
+
+            public List<ObjectiveSaveData> Objectives = new();
+        }
+
+        [Serializable]
+        public class ObjectiveSaveData
+        {
+            public string ObjectiveID;
+            public int CurrentAmount;
+        }
         #endregion
 
     }

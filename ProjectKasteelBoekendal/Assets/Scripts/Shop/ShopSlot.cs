@@ -14,8 +14,9 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
     public Image shopItemImage;
     public Image currencyIconImage;
     [SerializeField] private ShopManager shopManager;
+    private bool purchased;
+    public bool Purchased => purchased;
     private int price;
-
     public int Price => price;
 
     public void Initialize(CurrencyData currencyData, ShopItemSO shopItemSO, int price)
@@ -42,6 +43,9 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnSlotClicked()
     {
+        if (purchased)
+        return;
+        
         if (shopManager != null)
         {
             shopManager.SelectShopItem(this);
@@ -52,4 +56,15 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
     {
         OnSlotClicked();
     }
+
+    public void MarkAsPurchased()
+    {
+        purchased = true;
+
+        var image = GetComponent<Image>();
+        if (image != null)
+        {
+            image.color = Color.gray;
+        }
+}
 }

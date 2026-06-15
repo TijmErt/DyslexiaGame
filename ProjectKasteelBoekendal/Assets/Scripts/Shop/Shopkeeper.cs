@@ -1,10 +1,44 @@
 using UnityEngine;
+using TMPro;
 
 public class Shopkeeper : MonoBehaviour
 {
     public CanvasGroup shopCanvasGroup;
     private PlayerMovement currentPlayer;
     private bool playerInRange;
+    public TMP_Text dialogueText;
+
+    [Header("Dialogue Lines")]
+    [TextArea] public string[] greetings =
+    {
+        "Hoi! Wil je ruilen?",
+        "Hallo! Kijk je mee?",
+        "Ik heb leuke spullen.",
+        "Zullen we ruilen?",
+        "Wat zoek jij?"
+    };
+
+    [TextArea] public string[] successLines =
+    {
+        "Dank je!",
+        "Goed geruild!",
+        "Dat is mooi!",
+        "Fijne ruil!"
+    };
+
+    [TextArea] public string[] noMoneyLines =
+    {
+        "Je hebt te weinig.",
+        "Dat kan nog niet."
+    };
+
+    [TextArea] public string[] alreadyBoughtLines =
+    {
+        "Die heb je al.",
+        "Dat heb je al.",
+        "Je hebt dit al.",
+        "Niet nog één."
+    };
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -27,6 +61,8 @@ public class Shopkeeper : MonoBehaviour
             currentPlayer.enabled = false; // Disable player movement while the shop is open
         }
 
+        SayRandom(greetings);
+
     }
 
     public void CloseShop(){
@@ -39,5 +75,32 @@ public class Shopkeeper : MonoBehaviour
             currentPlayer.enabled = true; // Re-enable player movement when the shop is closed
             currentPlayer = null; // Clear the reference to the current player
         }
+    }
+
+    // -------------------------
+    // Dialogue system
+    // -------------------------
+
+    public void SayRandom(string[] lines)
+    {
+        if (dialogueText == null || lines == null || lines.Length == 0)
+            return;
+
+        dialogueText.text = lines[Random.Range(0, lines.Length)];
+    }
+
+    public void SaySuccess()
+    {
+        SayRandom(successLines);
+    }
+
+    public void SayNoMoney()
+    {
+        SayRandom(noMoneyLines);
+    }
+
+    public void SayAlreadyBought()
+    {
+        SayRandom(alreadyBoughtLines);
     }
 }

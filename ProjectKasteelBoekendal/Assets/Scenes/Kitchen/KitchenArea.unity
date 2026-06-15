@@ -7410,7 +7410,7 @@ GameObject:
   - component: {fileID: 549914243}
   - component: {fileID: 549914242}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24007,6 +24007,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shopkeeper
   shopCanvasGroup: {fileID: 2059219529}
+  dialogueText: {fileID: 549914242}
+  greetings:
+  - Hoi! Wil je ruilen?
+  - Hallo! Kijk je mee?
+  - Ik heb leuke spullen.
+  - Zullen we ruilen?
+  - Wat zoek jij?
+  successLines:
+  - Dank je!
+  - Goed geruild!
+  - Dat is mooi!
+  - Fijne ruil!
+  noMoneyLines:
+  - Je hebt te weinig.
+  - Dat kan nog niet.
+  alreadyBoughtLines:
+  - Die heb je al.
+  - Dat heb je al.
+  - Je hebt dit al.
+  - "Niet nog \xE9\xE9n."
 --- !u!1001 &1576713987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32888,6 +32908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c4831486ed7544a95065108b6b3ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  shopkeeper: {fileID: 1573500731}
   shopItems:
   - shopItemSO: {fileID: 11400000, guid: 4563a68e11095764e80fb8251143c738, type: 2}
     price: 0

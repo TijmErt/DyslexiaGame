@@ -6,6 +6,7 @@ using Managers.Currency;
 
 public class ShopManager : MonoBehaviour
 {
+    [SerializeField] private Shopkeeper shopkeeper;
     [SerializeField] private List<ShopItems> shopItems;
 
     [SerializeField] private ShopSlot[] shopSlots;
@@ -47,11 +48,13 @@ public class ShopManager : MonoBehaviour
         {
             currencyMediator.RemoveCurrency(currencyData.currencyID, price);
             Debug.Log($"Shop buy succeeded: '{shopItemSO.shopItemName}' bought for {price} {currencyData.currencyID}.");
+            selectedSlot.MarkAsPurchased();
+            shopkeeper.SaySuccess();
             //TODO: Add the item to the player's inventory
             return;
         }
 
-        Debug.LogWarning($"Shop buy failed: not enough '{currencyData.currencyID}' for '{shopItemSO.shopItemName}'. Needed {price}.");
+        shopkeeper.SayNoMoney();
     }
 
     public void SelectShopItem(ShopSlot shopSlot)
@@ -65,13 +68,18 @@ public class ShopManager : MonoBehaviour
     public void BuySelectedItem()
     {
         if (selectedSlot == null)
+        return;
+
+        if (selectedSlot.Purchased)
         {
-            Debug.LogWarning("Buy button clicked but no shop slot is selected.");
+            shopkeeper.SayAlreadyBought();
             return;
         }
 
-        Debug.Log($"Buy button clicked for selected item: {selectedSlot.shopItemSO?.shopItemName}");
         TryBuyItem(selectedSlot.currencyData, selectedSlot.shopItemSO, selectedSlot.Price);
+
+        Debug.Log($"Buy button clicked for selected item: {selectedSlot.shopItemSO?.shopItemName}");
+        
     }
 }
 

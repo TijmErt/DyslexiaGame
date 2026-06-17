@@ -32915,7 +32915,7 @@ MonoBehaviour:
     currencyData: {fileID: 11400000, guid: dc3b45e236ee1344b80a53c3e2033eee, type: 2}
   - shopItemSO: {fileID: 11400000, guid: 8aadbd8af64b65b438367bc1f42a5a7e, type: 2}
     price: 200
-    currencyData: {fileID: 11400000, guid: aef46106f657ea04786c0797abe9f45b, type: 2}
+    currencyData: {fileID: 11400000, guid: dc3b45e236ee1344b80a53c3e2033eee, type: 2}
   shopSlots:
   - {fileID: 7956044578353577003}
   - {fileID: 70175983}

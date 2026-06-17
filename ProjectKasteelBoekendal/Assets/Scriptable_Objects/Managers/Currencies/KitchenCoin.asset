@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: KitchenCoin
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Currency.CurrencyData
   currencyID: KitchCoin
-  displayName: Goude Chefs
-  icon: {fileID: 0}
+  displayName: Baguette
+  icon: {fileID: 21300000, guid: 59f94d92aa3f32745ac650fc69c6e5dd, type: 3}

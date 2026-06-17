@@ -12,10 +12,8 @@ public class Shopkeeper : MonoBehaviour
     [TextArea] public string[] greetings =
     {
         "Hoi! Wil je ruilen?",
-        "Hallo! Kijk je mee?",
-        "Ik heb leuke spullen.",
-        "Zullen we ruilen?",
-        "Wat zoek jij?"
+        "Ik heb leuke spullen om te ruilen.",
+        "Zullen we ruilen?"
     };
 
     [TextArea] public string[] successLines =

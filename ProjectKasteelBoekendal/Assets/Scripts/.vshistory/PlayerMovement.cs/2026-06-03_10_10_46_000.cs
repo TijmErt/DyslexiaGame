@@ -103,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnMove(Vector2 input)
     {
         movementInput = input;
+        Debug.Log($"Move Input: {input}");
     }
 
     private void CheckPlayerInteraction()

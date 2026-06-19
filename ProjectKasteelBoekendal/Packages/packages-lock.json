@@ -62,6 +62,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.device-simulator.devices": {
+      "version": "1.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ext.nunit": {
       "version": "2.0.5",
       "depth": 1,
@@ -241,13 +248,6 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
-    },
-    "dev.bolt.addons": {
-      "version": "https://github.com/RealityStop/Bolt.Addons.Community.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "853fe7f214388aa0dc255db053e18b0ce24e3439"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

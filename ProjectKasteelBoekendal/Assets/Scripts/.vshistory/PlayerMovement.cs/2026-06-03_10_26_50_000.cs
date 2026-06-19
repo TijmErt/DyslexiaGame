@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 movementInput;
     private Vector3 finalMoveDirection;
+    private bool useDirectGamepad;
 
     private void OnEnable()
     {
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        HandleGamepadFallback();
         HandleRotation();
     }
 
@@ -103,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnMove(Vector2 input)
     {
         movementInput = input;
+        Debug.Log($"Move Input: {input}");
     }
 
     private void CheckPlayerInteraction()

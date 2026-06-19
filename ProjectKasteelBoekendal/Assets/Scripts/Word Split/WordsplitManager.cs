@@ -13,19 +13,25 @@ public class WordsplitManager : MonoBehaviour
     [field: SerializeField] public GameObject Vegetable { get; set; }
 	[field: SerializeField] public GameObject HealthBar { get; set; }
     [field: SerializeField] public GameObject ScoreBar { get; set; }
+    [field: SerializeField] public GameObject CutButton { get; set; }
 
     private int Score { get; set; } = 0;
     private int Health { get; set; } = 3;
     
     private List<string> CurrentWord { get; set; }
+    private bool FeedbackActive { get; set; } = false;
     
     /// <summary>
     /// Gets a random word from the word list
     /// </summary>
-    /// <returns>The randomly selected word in a list of its syllables</returns>
+    /// <returns>The randomly selected word in a list of its syllables, cannot return the same word twice in a row</returns>
     private List<string> GetRandomWord() {
         var word = this.WordList.words[Random.Range(0, this.WordList.words.Count - 1)];
-        return word.syllablesParts;
+
+        if (this.CurrentWord == null || this.CurrentWord.Count == 0) return word.syllablesParts;
+        
+        return string.Join("", this.CurrentWord) == string.Join("", word.syllablesParts) ? this.GetRandomWord() : word.syllablesParts;
+
     }
 
     void Start() {
@@ -36,15 +42,23 @@ public class WordsplitManager : MonoBehaviour
     public void PerformCut() {
         var vegetableManager = this.Vegetable.GetComponent<VegetableManager>();
 
-        if (vegetableManager.CheckIfCorrect(this.CurrentWord)) {
+        if (this.FeedbackActive) {
+            this.HideFeedback();
+            
+            this.CurrentWord = this.GetRandomWord();
+            this.ShowWord(string.Join("", this.CurrentWord));
+            return;
+        }
+        
+        var correctCheck = vegetableManager.CheckIfCorrect(this.CurrentWord);
+        if (correctCheck.check) {
             this.IncreaseScore();
         }
         else {
             this.DecreaseHealth();
         }
-        
-        this.CurrentWord = this.GetRandomWord();
-        this.ShowWord(string.Join("", this.CurrentWord));
+
+        this.ShowFeedback(correctCheck);
     }
 
     private void ShowWord(string word) {
@@ -69,5 +83,19 @@ public class WordsplitManager : MonoBehaviour
 
     private void FinishGame() {
         print("Prointjjkghbaejhbkjvh");
+    }
+
+    private void ShowFeedback((bool check, string answer, string correct) correctCheck) {
+        this.FeedbackActive = true;
+        
+        this.CutButton.GetComponentInChildren<TextMeshProUGUI>().text = "Verder";
+        this.Vegetable.GetComponent<VegetableManager>().ShowFeedback(correctCheck);
+    }
+    
+    private void HideFeedback() {
+        this.FeedbackActive = false;
+        
+        this.CutButton.GetComponentInChildren<TextMeshProUGUI>().text = "Snij";
+        this.Vegetable.GetComponent<VegetableManager>().HideFeedback();
     }
 }

@@ -259,8 +259,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Snij
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a3d4ac6685b54241a5da5c5c966cd0a, type: 2}
+  m_sharedMaterial: {fileID: 7625088118160106633, guid: 2a3d4ac6685b54241a5da5c5c966cd0a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
+  m_fontSize: 71.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308249406}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1421,10 +1421,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69860c03830002948a2812a48c3081cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WordsplitManager
-  <WordList>k__BackingField: {fileID: 11400000, guid: c62f6eda5385f044583c27e8c9410b57, type: 2}
+  <WordList>k__BackingField: {fileID: 11400000, guid: 7cb9f381b270e4149abffc1e00483604, type: 2}
   <Vegetable>k__BackingField: {fileID: 11696083}
   <HealthBar>k__BackingField: {fileID: 919320360}
   <ScoreBar>k__BackingField: {fileID: 15157949}
+  <CutButton>k__BackingField: {fileID: 784149174}
 --- !u!4 &1287041547
 Transform:
   m_ObjectHideFlags: 0
@@ -1761,6 +1762,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1237864785512734063, guid: a5fed2677afcf4247bc908faa6d8f1f5, type: 3}
+      propertyPath: <Font>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a3d4ac6685b54241a5da5c5c966cd0a, type: 2}
+    - target: {fileID: 1237864785512734063, guid: a5fed2677afcf4247bc908faa6d8f1f5, type: 3}
+      propertyPath: <Checkmark>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 42babd30081b5b846bfc4f4196830cb2, type: 3}
+    - target: {fileID: 1237864785512734063, guid: a5fed2677afcf4247bc908faa6d8f1f5, type: 3}
+      propertyPath: <WrongCheckmark>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b7ea2e81f0c63a4a80251069474a4f1, type: 3}
+    - target: {fileID: 1237864785512734063, guid: a5fed2677afcf4247bc908faa6d8f1f5, type: 3}
+      propertyPath: <MissingCheckmark>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e0f136a5411aec41ac91d5d8c574b56, type: 3}
     - target: {fileID: 3847139494838713915, guid: a5fed2677afcf4247bc908faa6d8f1f5, type: 3}
       propertyPath: m_Layer
       value: 5

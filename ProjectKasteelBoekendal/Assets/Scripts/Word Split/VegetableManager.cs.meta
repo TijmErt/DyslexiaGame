@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: 24c9cf12b328c0d4ea26466e7c399196
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - <Checkmark>k__BackingField: {instanceID: 0}
+  - <WrongCheckmark>k__BackingField: {instanceID: 0}
+  - <Font>k__BackingField: {fileID: 11400000, guid: 2a3d4ac6685b54241a5da5c5c966cd0a, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

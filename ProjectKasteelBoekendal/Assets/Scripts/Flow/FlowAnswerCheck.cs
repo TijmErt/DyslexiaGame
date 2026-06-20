@@ -37,6 +37,7 @@ public class FlowAnswerCheck : MonoBehaviour
         if (name1.Contains("Start") && name2.Contains("Start") || name1.Contains("End") && name2.Contains("End"))
         {
             flowLine.ResetLine();
+            return;
         }
         
         wordpart1 = point1.GetComponentInChildren<TMPro.TMP_Text>().text;

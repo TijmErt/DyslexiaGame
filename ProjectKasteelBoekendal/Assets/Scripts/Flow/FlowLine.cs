@@ -80,10 +80,18 @@ public class FlowLine : MonoBehaviour
     public void CorrectLine(Image endPoint)
     {
         var randomColor = flowList.colorList[Random.Range(0, flowList.colorList.Count)];
+        while (flowList.usedColors.Contains(randomColor))
+        {
+            randomColor = flowList.colorList[Random.Range(0, flowList.colorList.Count)];
+        }
+
+        flowList.usedColors.Add(randomColor);
+        
         foreach (var square in coloredSquares)
         {
             square.color = randomColor;
         }
+
         coloredSquares.Clear();
         lineActive = false;
 
@@ -133,6 +141,7 @@ public class FlowLine : MonoBehaviour
             {
                 if (part.name.Contains("Empty"))
                 {
+                    flowList.usedColors.Remove(part.transform.GetChild(0).GetComponent<Image>().color);
                     part.transform.GetChild(0).GetComponent<Image>().color = Color.clear;
                 }
                 searchingDictionary.Remove(part);

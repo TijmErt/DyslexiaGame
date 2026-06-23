@@ -30,7 +30,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
      */
     
     private Dictionary<string, bool> eventFlagDictionary= new Dictionary<string, bool>();
-
+    public event Action<string, bool> OnFlagChanged;
     private void Awake()
     {
         if (instance != null)
@@ -87,7 +87,8 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         if (eventFlagDictionary.ContainsKey(flagName))
         {
             eventFlagDictionary[flagName] = enabled;
-
+            OnFlagChanged?.Invoke(flagName, enabled);
+            
             int index = eventFlags.FindIndex(flag => flag.Name == flagName);
             if (index >= 0)
             {

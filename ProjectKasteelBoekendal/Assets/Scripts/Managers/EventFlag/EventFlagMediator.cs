@@ -26,7 +26,6 @@ public class EventFlagMediator : MonoBehaviour
      and UI events without requiring direct manager access.
 
     */
-    public static EventFlagMediator instance;
     public void enableFlag(string flagName)
     {
         EventFlagManager.instance.ChangeFLagState(flagName, true);

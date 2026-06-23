@@ -10,7 +10,14 @@ public class MP_CardsController : MonoBehaviour
     [SerializeField] private WordCollection wordCollection;
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
-
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
+    [SerializeField] private AudioClip wrongSound;
+    [SerializeField] private AudioClip correctSound;
+    
+    
     private Dictionary<Transform, MP_Card> cards = new Dictionary<Transform, MP_Card>();
 
     private List<CardData> cardList;
@@ -24,12 +31,15 @@ public class MP_CardsController : MonoBehaviour
     private bool isChecking;
     private void Start()
     {
+        if(UIAudio.Source) Debug.Log("UIAudioManager Prefab Not Present for use");
+        
         PrepareCards();
         CreateCards();
     }
 
     public void ShowCardAtTransform(Transform transform) {
         this.cards[transform].Show();
+        UIAudio.Play(openSound);
     }
     
     private void PrepareCards()
@@ -45,7 +55,7 @@ public class MP_CardsController : MonoBehaviour
             {
                 matchKey = entry.id.ToString(),
                 word = entry.word,
-                isImage = false
+                isImage = false,
             });
 
             // IMAGE card
@@ -55,7 +65,7 @@ public class MP_CardsController : MonoBehaviour
                 {
                     matchKey = entry.id.ToString(),
                     image = entry.image,
-                    isImage = true
+                    isImage = true,
                 });
             }
             else
@@ -65,7 +75,8 @@ public class MP_CardsController : MonoBehaviour
                 {
                     matchKey = entry.id.ToString(),
                     word = entry.word,
-                    isImage = false
+                    isImage = false,
+
                 });
             }
         }
@@ -133,7 +144,9 @@ public class MP_CardsController : MonoBehaviour
         if (isChecking || card.isSelected) return;
 
         card.Show();
-
+        
+        UIAudio.Play(openSound);
+        
         if (firstSelected == null)
         {
             firstSelected = card;
@@ -150,12 +163,14 @@ public class MP_CardsController : MonoBehaviour
     IEnumerator CheckMatching(MP_Card a, MP_Card b)
     {
         isChecking = true;
-
+        
+        yield return new WaitForSeconds(1.25f);
+        
         Debug.Log(a.MatchKey + " is " + b.MatchKey);
         if (a.MatchKey == b.MatchKey)
         {
             matchCounts++;
-
+            UIAudio.Play(correctSound);
             if (matchCounts >= cardList.Count / 2)
             {
                 minigameEndMenu.SetActive(true);
@@ -163,10 +178,13 @@ public class MP_CardsController : MonoBehaviour
         }
         else
         {
+            UIAudio.Play(wrongSound);
             yield return new WaitForSeconds(1.25f);
             
             a.Hide();
             b.Hide();
+            UIAudio.Play(closeSound);
+            Debug.Log("Sound Closing is Playing");
         }
 
         isChecking = false;

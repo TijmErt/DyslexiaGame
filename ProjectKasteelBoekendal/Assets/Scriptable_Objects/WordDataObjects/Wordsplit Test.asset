@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b47bda8f37b1044db6581fec3bde29a, type: 3}
+  m_Name: Wordsplit Test
+  m_EditorClassIdentifier: Assembly-CSharp::WordCollection
+  words:
+  - word: appel
+    syllablesCount: 2
+    syllablesParts:
+    - ap
+    - pel
+    image: {fileID: 21300000, guid: badd011ff7edfd345a13368f6e0626e5, type: 3}
+  - word: auto
+    syllablesCount: 2
+    syllablesParts:
+    - au
+    - to
+    image: {fileID: 21300000, guid: cef453ea83ccc844fa1fc846ad8b0caf, type: 3}
+  - word: school
+    syllablesCount: 1
+    syllablesParts:
+    - school
+    image: {fileID: 21300000, guid: e3960578c0d229d4f87c67d765b1f577, type: 3}
+  - word: boom
+    syllablesCount: 1
+    syllablesParts:
+    - boom
+    image: {fileID: 21300000, guid: d7dbba1bd17222146a5084eb7c6bad8e, type: 3}
+  - word: bom
+    syllablesCount: 1
+    syllablesParts:
+    - boom
+    image: {fileID: 21300000, guid: db31b61896542744098dae94eaff0e55, type: 3}
+  - word: bommen
+    syllablesCount: 2
+    syllablesParts:
+    - bom
+    - men
+    image: {fileID: 21300000, guid: db31b61896542744098dae94eaff0e55, type: 3}
+  - word: citroen
+    syllablesCount: 2
+    syllablesParts:
+    - ci
+    - troen
+    image: {fileID: 0}
+  - word: bezuinig
+    syllablesCount: 3
+    syllablesParts:
+    - be
+    - zui
+    - nig
+    image: {fileID: 0}
+  - word: paraplu
+    syllablesCount: 3
+    syllablesParts:
+    - pa
+    - ra
+    - plu
+    image: {fileID: 0}
+  - word: ondersteboven
+    syllablesCount: 5
+    syllablesParts:
+    - on
+    - der
+    - ste
+    - bo
+    - ven
+    image: {fileID: 0}

@@ -33279,10 +33279,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2349125095617858839, guid: dd68af1b3000cbb49bc25a2a71469af5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0fcf60a21a3dc449b414dd1ef9887de, type: 3}
+    - target: {fileID: 3463813414911591507, guid: dd68af1b3000cbb49bc25a2a71469af5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0655a52df071574597b46ed6c563d77, type: 3}
     - target: {fileID: 4423879377813967303, guid: dd68af1b3000cbb49bc25a2a71469af5, type: 3}
       propertyPath: m_Name
       value: HUDCollection
       objectReference: {fileID: 0}
+    - target: {fileID: 9051543724979382285, guid: dd68af1b3000cbb49bc25a2a71469af5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fdc44af90a898b34bb15a49b8cf845a5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -20,6 +20,10 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
     // Reference to the ShopManager that handles item selection and trading.
     [SerializeField] private ShopManager shopManager;
 
+    // Audio source for playing button sounds
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip buttonSound;
+
     // Tracks whether this item has already been traded for.
     // Once purchased, the slot becomes unavailable.
     private bool purchased;
@@ -80,6 +84,7 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
         {
             shopManager.SelectShopItem(this);
         }
+        audioSource.PlayOneShot(buttonSound);
     }
 
     /// <summary>

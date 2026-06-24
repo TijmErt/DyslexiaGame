@@ -24,6 +24,10 @@ public class ShopManager : MonoBehaviour
 
     // Currently selected shop slot.
     private ShopSlot selectedSlot;
+    // Sound
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip buySuccesfullSound;
+    [SerializeField] private AudioClip buyFailedSound;
 
     private void Start()
     {
@@ -82,12 +86,16 @@ public class ShopManager : MonoBehaviour
             // Shopkeeper reacts positively to the successful trade.
             shopkeeper.SaySuccess();
 
+            //Play sound effect.
+            audioSource.PlayOneShot(buySuccesfullSound);
+
             // TODO: Add the traded item to the player's inventory.
             return;
         }
 
         // Shopkeeper reacts when the player does not have enough currency.
         shopkeeper.SayNoMoney();
+        audioSource.PlayOneShot(buyFailedSound);
     }
 
     /// <summary>
@@ -120,6 +128,7 @@ public class ShopManager : MonoBehaviour
         if (selectedSlot.Purchased)
         {
             shopkeeper.SayAlreadyBought();
+            audioSource.PlayOneShot(buyFailedSound);
             return;
         }
 

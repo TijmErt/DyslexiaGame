@@ -29,8 +29,10 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         then use the collective name of that hierarchy for the dictionary.
      */
     
-    private Dictionary<string, bool> eventFlagDictionary= new Dictionary<string, bool>();
+    
     public event Action<string, bool> OnFlagChanged;
+    private Dictionary<string, Flag> eventFlagDictionary= new Dictionary<string, Flag>();
+
     private void Awake()
     {
         if (instance != null)
@@ -43,21 +45,6 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         DontDestroyOnLoad(gameObject);
         InitializeDictionary();
     }
-    private void OnValidate()
-    {
-        RevalidateDictionary();
-    }
-
-    private void RevalidateDictionary()
-    {
-        foreach (Flag flag in eventFlags)
-        {
-            if (eventFlagDictionary.ContainsKey(flag.Name))
-            {
-                eventFlagDictionary[flag.Name] = flag.Enabled;
-            }
-        }
-    }
     private void InitializeDictionary()
     {
         eventFlagDictionary.Clear();
@@ -66,7 +53,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         {
             if (!eventFlagDictionary.ContainsKey(flag.Name))
             {
-                eventFlagDictionary.Add(flag.Name, flag.Enabled);
+                eventFlagDictionary.Add(flag.Name, flag);
             }
         }
         Debug.Log(eventFlagDictionary);
@@ -75,9 +62,9 @@ public class EventFlagManager : MonoBehaviour, ISaveable
 
     public bool IsFlagEnabled(string flagName)
     {
-        if (eventFlagDictionary.TryGetValue(flagName, out bool value))
+        if (eventFlagDictionary.TryGetValue(flagName, out Flag flag))
         {
-            return value;
+            return flag.Enabled;
         }
         return false;
     }
@@ -86,14 +73,14 @@ public class EventFlagManager : MonoBehaviour, ISaveable
     {
         if (eventFlagDictionary.ContainsKey(flagName))
         {
-            eventFlagDictionary[flagName] = enabled;
+            eventFlagDictionary[flagName].Enabled = enabled;
             OnFlagChanged?.Invoke(flagName, enabled);
-            
-            int index = eventFlags.FindIndex(flag => flag.Name == flagName);
-            if (index >= 0)
-            {
-                eventFlags[index].Enabled = enabled;
-            }
+
+            // int index = eventFlags.FindIndex(flag => flag.Name == flagName);
+            // if (index >= 0)
+            // {
+            //     eventFlags[index].Enabled = enabled;
+            // }
         }
         else
         {
@@ -106,16 +93,15 @@ public class EventFlagManager : MonoBehaviour, ISaveable
     {
         EventFlagData data = new EventFlagData
         {
-            Flags = new List<Flag>()
+            Flags = new List<string>()
         };
 
         foreach (Flag flag in eventFlags)
         {
-            data.Flags.Add(new Flag
+            if (flag.Enabled)
             {
-                Name = flag.Name,
-                Enabled = flag.Enabled
-            });
+                data.Flags.Add(flag.Name);
+            }
         }
 
         return data;
@@ -128,24 +114,29 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         if (data.Flags == null)
             return;
 
-        eventFlags.Clear();
-        eventFlagDictionary.Clear();
-
-        foreach (Flag flag in data.Flags)
+        // First reset all flags to false
+        foreach (Flag flag in eventFlags)
         {
-            eventFlags.Add(new Flag
-            {
-                Name = flag.Name,
-                Enabled = flag.Enabled
-            });
+            flag.Enabled = false;
+        }
 
-            eventFlagDictionary[flag.Name] = flag.Enabled;
+        // Then enable only the saved ones
+        foreach (string flagName in data.Flags)
+        {
+            if (eventFlagDictionary.TryGetValue(flagName, out Flag flag))
+            {
+                flag.Enabled = true;
+            }
+            else
+            {
+                Debug.LogWarning($"Saved flag '{flagName}' does not exist in EventFlagManager.");
+            }
         }
     }
 
     private struct EventFlagData
     {
-        public List<Flag> Flags;
+        public List<string> Flags;
     }
 }
 

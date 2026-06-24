@@ -13,6 +13,10 @@ public class Shopkeeper : MonoBehaviour
     // Text field used for shopkeeper dialogue.
     public TMP_Text dialogueText;
 
+    // Sound for button
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip closeButtonSound;
+
     [Header("Dialogue Lines")]
 
     // Random greeting shown when the player starts trading.
@@ -89,6 +93,7 @@ public class Shopkeeper : MonoBehaviour
     /// </summary>
     public void CloseShop()
     {
+        audioSource.PlayOneShot(closeButtonSound);
         shopCanvasGroup.alpha = 0f;
         shopCanvasGroup.interactable = false;
         shopCanvasGroup.blocksRaycasts = false;

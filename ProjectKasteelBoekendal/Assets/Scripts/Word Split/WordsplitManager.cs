@@ -19,6 +19,7 @@ public class WordsplitManager : MonoBehaviour
     private int Health { get; set; } = 3;
     
     private AudioSource AudioSource { get; set; }
+    private SceneMediator SceneMediator { get; set; }
     
     private List<string> CurrentWord { get; set; }
     private bool FeedbackActive { get; set; } = false;
@@ -38,6 +39,7 @@ public class WordsplitManager : MonoBehaviour
 
     void Start() {
         this.AudioSource = this.GetComponent<AudioSource>();
+        this.SceneMediator = FindFirstObjectByType<SceneMediator>();
         
         this.CurrentWord = this.GetRandomWord();
         this.ShowWord(string.Join("", this.CurrentWord));
@@ -92,7 +94,7 @@ public class WordsplitManager : MonoBehaviour
     }
 
     private void FinishGame() {
-        print("Prointjjkghbaejhbkjvh");
+        this.SceneMediator.LoadPreviousScene();
     }
 
     private void ShowFeedback((bool check, string answer, string correct) correctCheck) {

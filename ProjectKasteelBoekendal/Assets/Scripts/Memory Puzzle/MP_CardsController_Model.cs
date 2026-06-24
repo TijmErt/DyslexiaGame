@@ -14,6 +14,13 @@ public class MP_CardsController_Model : MonoBehaviour
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
     [SerializeField] private int roundsToPlay = 3;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
+    [SerializeField] private AudioClip wrongSound;
+    [SerializeField] private AudioClip correctSound;
+    
     private int roundsPlayed = 0;
 
     private List<CardData> cardList;
@@ -118,7 +125,7 @@ public class MP_CardsController_Model : MonoBehaviour
 
         card.Hide();
         card.isSelected = true;
-
+        UIAudio.Play(closeSound);
         if (firstSelected == null)
         {
             firstSelected = card;
@@ -140,7 +147,9 @@ public class MP_CardsController_Model : MonoBehaviour
         if (a.MatchKey == b.MatchKey)
         {
             matchCounts++;
-
+            
+            UIAudio.Play(correctSound);
+            
             if (matchCounts >= cardList.Count / 2)
             {
                 roundsPlayed++;
@@ -157,12 +166,15 @@ public class MP_CardsController_Model : MonoBehaviour
         }
         else
         {
+            UIAudio.Play(wrongSound);
+            
+            yield return new WaitForSeconds(1.25f);
             a.Show();
             b.Show();
 
             a.isSelected = false;
             b.isSelected = false;
-
+            UIAudio.Play(openSound);
             a.GetComponent<Button>().interactable = true;
             b.GetComponent<Button>().interactable = true;
         }

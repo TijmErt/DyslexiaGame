@@ -15,7 +15,7 @@ MonoBehaviour:
   QuestID: Kitchen.TalkTo.Chef
   QuestName: Talk to the Chef
   CompletionEventFlag: 
-  RequiredEventFlag: Kitchen.MiniG.MemPuz.Tut.Open
+  RequiredEventFlag: 
   objectives:
   - ObjectiveID: TalkChef
     Description: Talk to the chef in the kitchen

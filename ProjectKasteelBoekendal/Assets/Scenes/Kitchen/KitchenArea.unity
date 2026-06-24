@@ -532,40 +532,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2078276509}
-        m_TargetAssemblyTypeName: Managers.Quest.QuestMediator, Assembly-CSharp
-        m_MethodName: SetTargetID
+      - m_Target: {fileID: 2078276510}
+        m_TargetAssemblyTypeName: EventFlagMediator, Assembly-CSharp
+        m_MethodName: enableFlag
         m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hoofd-Chef
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2078276509}
-        m_TargetAssemblyTypeName: Managers.Quest.QuestMediator, Assembly-CSharp
-        m_MethodName: SetTypeInteract
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2078276509}
-        m_TargetAssemblyTypeName: Managers.Quest.QuestMediator, Assembly-CSharp
-        m_MethodName: NotifyQuest
-        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Kitchen.MiniG.MemPuz.Tut.Open
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &24391804
@@ -20485,6 +20461,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5804492534205568635, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5843218425456098392, guid: b7780ed80a4700f439115ea5a1f7a628, type: 3}
       propertyPath: m_Name
       value: Player
@@ -31402,17 +31382,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7663e8b22bd194bb54accfcf5a972b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyMediator
---- !u!114 &2078276509 stripped
+--- !u!114 &2078276510 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -2025599780383820199, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7051401876370791110, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
   m_PrefabInstance: {fileID: 1391607121}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078276504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8654dbe62d39644d86c2d80f6d21473, type: 3}
+  m_Script: {fileID: 11500000, guid: cefc6b59f55df8f40b385dce444711bc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::EventFlagMediator
 --- !u!1 &2088706656 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1438641afea096542bb4d0b56aa602c8, type: 3}

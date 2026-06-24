@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestInfoSO
   QuestID: Kitchen.TalkTo.Chef
   QuestName: Talk to the Chef
-  CompletionEventFlag: Kitchen.MiniG.MemPuz.Tut.Open
-  RequiredEventFlag: 
+  CompletionEventFlag: 
+  RequiredEventFlag: Kitchen.MiniG.MemPuz.Tut.Open
   objectives:
   - ObjectiveID: TalkChef
     Description: Talk to the chef in the kitchen

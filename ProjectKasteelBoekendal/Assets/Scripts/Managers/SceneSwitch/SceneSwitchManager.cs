@@ -15,14 +15,9 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
+
         currentScene = SceneManager.GetActiveScene().name;
     }
 

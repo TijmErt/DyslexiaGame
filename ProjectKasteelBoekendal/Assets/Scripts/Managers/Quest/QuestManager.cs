@@ -15,17 +15,13 @@ namespace Managers.Quest
         private Dictionary<string, QuestProgress> QuestsDictionary = new Dictionary<string, QuestProgress>();
         
         public List<QuestProgress> _activeQuests = new();
+        
+        public event Action OnFlagChanged; // Main usage is for other scripts to detect when the quest manager does something.
 
+        private bool QuestChanged = false;
         private void Awake()
         {
-            if (instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-        
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
@@ -54,39 +50,59 @@ namespace Managers.Quest
             CheckAvailability();
         }
 
+        #region Action EventFlag
+        //The purpose of this region is to listen in to changes in the EventFlagManager, this is to ensure that if a outside force triggers a flag, the quest associated to that flag will also become available.
+        
+        private void OnEnable()
+        {
+            EventFlagManager.instance.OnFlagChanged += HandleFlagChanged;
+        }
+
+        private void OnDisable()
+        {
+            if (EventFlagManager.instance != null) 
+                EventFlagManager.instance.OnFlagChanged -= HandleFlagChanged;
+        }
+
+        private void HandleFlagChanged(string flagName, bool enabled)
+        {
+            CheckAvailability();
+        }
+        #endregion
         private void CheckAvailability()
         {
             foreach (QuestProgress quest in Quests)
             {
-                if (quest.QuestState != QuestEnums.QuestState.Inactive)
+                if (quest.QuestState != QuestEnums.QuestState.Inactive) // Will only continue further if the quest isn't active or completed.
                     continue;
 
-                if (string.IsNullOrEmpty(
-                        quest.QuestInfo.RequiredEventFlag))
+                if (string.IsNullOrEmpty(quest.QuestInfo.RequiredEventFlag)) //Will Activate the quest if has no activation Requirement
                 {
                     ActivateQuest(quest.QuestInfo.QuestID);
                     continue;
                 }
 
-                if (EventFlagManager.instance
-                    .IsFlagEnabled(quest.QuestInfo.RequiredEventFlag))
+                if (EventFlagManager.instance.IsFlagEnabled(quest.QuestInfo.RequiredEventFlag)) // Will activate the quest if the activation requirement has been met
                 {
                     ActivateQuest(quest.QuestInfo.QuestID);
                 }
             }
+            
+            if(QuestChanged) OnFlagChanged?.Invoke(); // This is done so that after the Quest Manager has updated which quests are active, other scripts that rely on it will be notified of it
+            QuestChanged = false;
         }
 
         private void CompleteQuest(string questID)
         {
-            if (!QuestsDictionary.TryGetValue(questID, out QuestProgress quest))
+            if (!QuestsDictionary.TryGetValue(questID, out QuestProgress quest)) //Checks whether Quest with ID exists
                 return;
 
-            if (quest.QuestState == QuestEnums.QuestState.Completed)
+            if (quest.QuestState == QuestEnums.QuestState.Completed) //Checks if the Quest hasn't been completed before yet
                 return;
 
-            quest.QuestState = QuestEnums.QuestState.Completed;
+            quest.QuestState = QuestEnums.QuestState.Completed; 
             
-            if (!string.IsNullOrEmpty(quest.QuestInfo.CompletionEventFlag))
+            if (!string.IsNullOrEmpty(quest.QuestInfo.CompletionEventFlag)) // Checks whether this quests triggers a EventFlag, if it does it sets this to true.
             {
                 EventFlagManager.instance.ChangeFLagState(
                     quest.QuestInfo.CompletionEventFlag,true);
@@ -97,16 +113,30 @@ namespace Managers.Quest
 
         private void ActivateQuest(string questID)
         {
-            if (!QuestsDictionary.TryGetValue(questID, out QuestProgress quest))
+            if (!QuestsDictionary.TryGetValue(questID, out QuestProgress quest))  //Checks whether Quest with ID exists
                 return;
 
-            if (quest.QuestState != QuestEnums.QuestState.Inactive)
+            if (quest.QuestState != QuestEnums.QuestState.Inactive) //Checks if the Quest is currently inactive
                 return;
 
             quest.QuestState = QuestEnums.QuestState.Active;
             _activeQuests.Add(quest);
+            QuestChanged = true;
         }
 
+        /// <summary>
+        /// Reports progress to all currently active quests. Any objectives that match
+        /// the provided ObjectiveType and TargetID will be advanced by the given amount.
+        /// If a quest becomes completed after the update, it is marked as completed and
+        /// removed from the active quest list. Afterwards, the system checks if any new
+        /// quests have become available.
+        /// </summary>
+        /// <param name="objectiveType">  The type of objective that generated the progress update. </param>
+        /// <param name="targetID">
+        /// The ID of the target associated with the progress update.
+        /// Only objectives with a matching TargetID can be advanced.
+        /// </param>
+        /// <param name="amount">The amount of progress to add to matching objectives.</param>
         public void ReportProgress(QuestEnums.ObjectiveType objectiveType, string targetID, int amount)
         {
             List<QuestProgress> completedQuests = new();

@@ -13,6 +13,10 @@ public class EventFlagManager : MonoBehaviour, ISaveable
 {
     public static EventFlagManager instance;
     [SerializeField]private List<Flag> eventFlags; 
+    
+    private Dictionary<string, Flag> eventFlagDictionary = new Dictionary<string, Flag>();
+    
+    public event Action<string, bool> OnFlagChanged;
     public string UID => "EventFlagManager";
     /*
         Potential alternative. Swapping this our with a hierarchy system 
@@ -30,19 +34,12 @@ public class EventFlagManager : MonoBehaviour, ISaveable
      */
     
     
-    public event Action<string, bool> OnFlagChanged;
-    private Dictionary<string, Flag> eventFlagDictionary= new Dictionary<string, Flag>();
+
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
         instance = this;
-        DontDestroyOnLoad(gameObject);
+
         InitializeDictionary();
     }
     private void InitializeDictionary()
@@ -56,8 +53,6 @@ public class EventFlagManager : MonoBehaviour, ISaveable
                 eventFlagDictionary.Add(flag.Name, flag);
             }
         }
-        Debug.Log(eventFlagDictionary);
-        Debug.Log(eventFlagDictionary.Count);
     }
 
     public bool IsFlagEnabled(string flagName)
@@ -75,12 +70,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         {
             eventFlagDictionary[flagName].Enabled = enabled;
             OnFlagChanged?.Invoke(flagName, enabled);
-
-            // int index = eventFlags.FindIndex(flag => flag.Name == flagName);
-            // if (index >= 0)
-            // {
-            //     eventFlags[index].Enabled = enabled;
-            // }
+            
         }
         else
         {
@@ -89,6 +79,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
     }
 
 
+    #region Saving
     public object CaptureState()
     {
         EventFlagData data = new EventFlagData
@@ -96,9 +87,10 @@ public class EventFlagManager : MonoBehaviour, ISaveable
             Flags = new List<string>()
         };
 
-        foreach (Flag flag in eventFlags)
+        //This only saves the flags that are already triggered, which will save on space and iteration
+        foreach (Flag flag in eventFlags) 
         {
-            if (flag.Enabled)
+            if (flag.Enabled) 
             {
                 data.Flags.Add(flag.Name);
             }
@@ -138,6 +130,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
     {
         public List<string> Flags;
     }
+    #endregion
 }
 
 

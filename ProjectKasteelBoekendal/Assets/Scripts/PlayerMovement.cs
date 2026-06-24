@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource runningSound;
 
     private Vector2 movementInput;
     private Vector3 finalMoveDirection;
@@ -31,13 +33,17 @@ public class PlayerMovement : MonoBehaviour
         CheckPlayerInteraction();
         CheckRigidbody();
 
-        // IMPORTANT: ensure physics behaves correctly
         rb.freezeRotation = true;
 
-        // If you still have NavMeshAgent on the object, fully disable it
         var agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         if (agent != null)
             agent.enabled = false;
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
+
+        if (runningSound == null)
+            runningSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -60,7 +66,24 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
 
-        if (moveDirection.sqrMagnitude > 0.01f)
+        bool isMoving = moveDirection.sqrMagnitude > 0.01f;
+
+        animator.SetBool("IsMoving", isMoving);
+
+        // RUNNING SOUND
+        if (isMoving)
+        {
+            if (!runningSound.isPlaying)
+                runningSound.Play();
+        }
+        else
+        {
+            if (runningSound.isPlaying)
+                runningSound.Stop();
+        }
+
+
+        if (isMoving)
         {
             Camera cam = Camera.main;
 
@@ -77,8 +100,10 @@ public class PlayerMovement : MonoBehaviour
                 cameraForward * moveDirection.z +
                 cameraRight * moveDirection.x;
 
-            rb.MovePosition(rb.position +
-                finalMoveDirection * movementSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(
+                rb.position +
+                finalMoveDirection * movementSpeed * Time.fixedDeltaTime
+            );
         }
         else
         {

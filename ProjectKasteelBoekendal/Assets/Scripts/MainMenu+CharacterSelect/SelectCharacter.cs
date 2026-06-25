@@ -9,7 +9,7 @@ public class SelectCharacter : MonoBehaviour, ISaveable
     public GameObject[] characters; // Array to hold character GameObjects
     public int Number; // Index of the currently selected character
     public GameObject confirmationPanel; // Panel to confirm character selection
-
+    [SerializeField] private AudioSource buttonClickSound;
     public string UID => "SelectCharacter";
     
     private void Start()
@@ -23,26 +23,35 @@ public class SelectCharacter : MonoBehaviour, ISaveable
         Number = PlayerPrefs.GetInt("SelectedCharacter");
         ShowCharacter(); // Display the currently selected character
     }
-    
+    private void PlayButtonSound()
+    {
+        if (buttonClickSound != null)
+        {
+            buttonClickSound.Play();
+        }
+    }
     public void ChangeCharacter(int Num)
     {
+        PlayButtonSound();
+
         for (int i = 0; i < characters.Length; i++)
         {
-            characters[i].SetActive(false); // Deactivate all characters
+            characters[i].SetActive(false);
         }
-        
-        Number += Num; // Update the character index
 
-        if (Number > characters.Length -1)
+        Number += Num;
+
+        if (Number > characters.Length - 1)
         {
-            Number = 0; // Wrap around to the first character
+            Number = 0;
         }
+
         if (Number < 0)
         {
-            Number = characters.Length -1; // Wrap around to the last character
+            Number = characters.Length - 1;
         }
 
-        characters[Number].SetActive(true); // Activate the selected character
+        characters[Number].SetActive(true);
     }
 
     void ShowCharacter()
@@ -59,6 +68,7 @@ public class SelectCharacter : MonoBehaviour, ISaveable
 
     public void ConfirmCharacter()
     {
+        PlayButtonSound();
         // Only show panel if it exists
         if (confirmationPanel != null)
         {
@@ -68,11 +78,13 @@ public class SelectCharacter : MonoBehaviour, ISaveable
 
     public void ConfirmSelection()
     {
+        PlayButtonSound();
         PlayerPrefs.SetInt("SelectedCharacter", Number); // Save the selected character index
         SceneManager.LoadScene("KitchenArea"); // Load the first area scene
     }
     public void CancelSelection()
     {
+        PlayButtonSound();
         // Only hide panel if it exists
         if (confirmationPanel != null)
         {

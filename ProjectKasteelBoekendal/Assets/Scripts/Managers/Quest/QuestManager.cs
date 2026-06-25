@@ -6,6 +6,11 @@ using UnityEngine;
 
 namespace Managers.Quest
 {
+    /// <summary>
+    /// Manages quest initialization, progression, activation, completion,
+    /// and persistence. Quests are loaded from resources and can be unlocked
+    /// through event flags.
+    /// </summary>
     public class QuestManager : MonoBehaviour, ISaveable
     {
         public static QuestManager instance;
@@ -16,7 +21,7 @@ namespace Managers.Quest
         
         public List<QuestProgress> _activeQuests = new();
         
-        public event Action OnFlagChanged; // Main usage is for other scripts to detect when the quest manager does something.
+        public event Action OnQuestChanged; // Main usage is for other scripts to detect when the quest manager does something.
 
         private bool QuestChanged = false;
         private void Awake()
@@ -29,6 +34,10 @@ namespace Managers.Quest
             Initialize();
         }
 
+        /// <summary>
+        /// Loads all quest definitions, creates their runtime progress data,
+        /// and determines which quests should be available at startup.
+        /// </summary>
         private void Initialize()
         {
             List<QuestInfoSO> _allQuests =
@@ -53,22 +62,39 @@ namespace Managers.Quest
         #region Action EventFlag
         //The purpose of this region is to listen in to changes in the EventFlagManager, this is to ensure that if a outside force triggers a flag, the quest associated to that flag will also become available.
         
+        /// <summary>
+        /// Subscribes to EventFlagManager events so quest availability can be
+        /// re-evaluated when event flags change.
+        /// </summary>
         private void OnEnable()
         {
             EventFlagManager.instance.OnFlagChanged += HandleFlagChanged;
         }
-
+        
+        /// <summary>
+        /// Unsubscribes from EventFlagManager events.
+        /// </summary>
         private void OnDisable()
         {
             if (EventFlagManager.instance != null) 
                 EventFlagManager.instance.OnFlagChanged -= HandleFlagChanged;
         }
-
+        
+        /// <summary>
+        /// Handles event flag changes by checking whether any quests have become available.
+        /// </summary>
+        /// <param name="flagName">The name of the flag that changed.</param>
+        /// <param name="enabled">The new state of the flag.</param>
         private void HandleFlagChanged(string flagName, bool enabled)
         {
             CheckAvailability();
         }
         #endregion
+        
+        /// <summary>
+        /// Evaluates all inactive quests and activates those whose requirements
+        /// have been met. If the active quest list changes, listeners are notified.
+        /// </summary>
         private void CheckAvailability()
         {
             foreach (QuestProgress quest in Quests)
@@ -88,10 +114,15 @@ namespace Managers.Quest
                 }
             }
             
-            if(QuestChanged) OnFlagChanged?.Invoke(); // This is done so that after the Quest Manager has updated which quests are active, other scripts that rely on it will be notified of it
+            if(QuestChanged) OnQuestChanged?.Invoke(); // This is done so that after the Quest Manager has updated which quests are active, other scripts that rely on it will be notified of it
             QuestChanged = false;
         }
 
+        /// <summary>
+        /// Marks a quest as completed and triggers its completion event flag,
+        /// if one has been configured.
+        /// </summary>
+        /// <param name="questID">The ID of the quest to complete.</param>
         private void CompleteQuest(string questID)
         {
             if (!QuestsDictionary.TryGetValue(questID, out QuestProgress quest)) //Checks whether Quest with ID exists
@@ -104,13 +135,17 @@ namespace Managers.Quest
             
             if (!string.IsNullOrEmpty(quest.QuestInfo.CompletionEventFlag)) // Checks whether this quests triggers a EventFlag, if it does it sets this to true.
             {
-                EventFlagManager.instance.ChangeFLagState(
+                EventFlagManager.instance.ChangeFlagState(
                     quest.QuestInfo.CompletionEventFlag,true);
             }
 
 
         }
 
+        /// <summary>
+        /// Activates a quest and adds it to the list of active quests.
+        /// </summary>
+        /// <param name="questID">The ID of the quest to activate.</param>
         private void ActivateQuest(string questID)
         {
             if (!QuestsDictionary.TryGetValue(questID, out QuestProgress quest))  //Checks whether Quest with ID exists
@@ -161,6 +196,13 @@ namespace Managers.Quest
             CheckAvailability();
         }
 
+        /// <summary>
+        /// Retrieves a quest by its unique identifier.
+        /// </summary>
+        /// <param name="questID">The ID of the quest to retrieve.</param>
+        /// <returns>
+        /// The matching QuestProgress instance, or null if no quest exists with the specified ID.
+        /// </returns>
         public QuestProgress GetQuest(string questID)
         {
             QuestsDictionary.TryGetValue(
@@ -170,6 +212,13 @@ namespace Managers.Quest
             return quest;
         }
 
+        /// <summary>
+        /// Retrieves all quests currently in the specified state.
+        /// </summary>
+        /// <param name="questState">The quest state to filter by.</param>
+        /// <returns>
+        /// A list containing all quests that match the specified state.
+        /// </returns>
         public List<QuestProgress> GetQuestsByState(QuestEnums.QuestState questState)
         {
             return Quests

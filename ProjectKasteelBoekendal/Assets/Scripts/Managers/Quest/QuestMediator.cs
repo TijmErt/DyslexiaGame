@@ -8,24 +8,24 @@ namespace Managers.Quest
         private QuestEnums.ObjectiveType _type;
         private string _targetID;
         
-        public event Action OnFlagChanged; // Main usage is for other scripts to detect when the quest manager does something.
+        public event Action OnQuestChanged; // Main usage is for other scripts to detect when the quest manager does something.
 
         #region ActionEvent
 
         private void OnEnable()
         {
-            QuestManager.instance.OnFlagChanged += HandleFlagChanged;
+            QuestManager.instance.OnQuestChanged += HandleFlagChanged;
         }
 
         private void OnDisable()
         {
             if (QuestManager.instance != null) 
-                QuestManager.instance.OnFlagChanged -= HandleFlagChanged;
+                QuestManager.instance.OnQuestChanged -= HandleFlagChanged;
         }
 
         private void HandleFlagChanged()
         {
-            OnFlagChanged?.Invoke();
+            OnQuestChanged?.Invoke();
         }
 
         #endregion

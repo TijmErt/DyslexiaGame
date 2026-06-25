@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages scene transitions while preserving the player's location and orientation.
+/// Also stores scene navigation data for returning from minigames and supports save/load functionality.
+/// </summary>
 public class SceneSwitchManager : MonoBehaviour, ISaveable
 {
     public static SceneSwitchManager instance;
@@ -20,14 +24,21 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
 
         currentScene = SceneManager.GetActiveScene().name;
     }
-
+    
+    /// <summary>
+    /// Saves the player's current position and rotation for later restoration.
+    /// </summary>
     private void SavePlayerTransform()
     {
         Transform player = GameObject.FindGameObjectWithTag("Player1").transform;
         PlayerPosition = player.position;
         PlayerRotation = player.rotation;
     }
-
+    /// <summary>
+    /// Restores the player's saved position and rotation.
+    /// If a NavMeshAgent is present, it is warped to the restored position
+    /// to prevent navigation-related position corrections.
+    /// </summary>
     private void SetPlayerTransform()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player1");
@@ -46,6 +57,11 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
     }
     #region MinigameScene
 
+    /// <summary>
+    /// Loads a minigame scene while storing the current scene and player transform
+    /// so they can be restored when returning.
+    /// </summary>
+    /// <param name="sceneName">Name of the minigame scene to load.</param>
     public void LoadMinigameScene(string sceneName)
     {
         previousScene = string.IsNullOrEmpty(currentScene)
@@ -58,6 +74,12 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
         SceneManager.LoadScene(sceneName);
     }
 
+    /// <summary>
+    /// Called when a minigame scene has finished loading.
+    /// Updates the current scene reference and unregisters the load callback.
+    /// </summary>
+    /// <param name="scene">The loaded scene.</param>
+    /// <param name="mode">The scene loading mode.</param>
     private void OnMinigameLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnMinigameLoaded;
@@ -68,6 +90,9 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
 
     #region PreviousScene
 
+    /// <summary>
+    /// Returns to the previously loaded scene.
+    /// </summary>
     public void LoadPreviousScene()
     {
         //swaps values around as the previous scene will become the current scene and vice versa
@@ -76,6 +101,12 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
         SceneManager.LoadScene(previousScene);
     }
 
+    /// <summary>
+    /// Called when the previous scene has finished loading.
+    /// Restores the player's transform and updates the scene references.
+    /// </summary>
+    /// <param name="scene">The loaded scene.</param>
+    /// <param name="mode">The scene loading mode.</param>
     private void OnPreviousSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnPreviousSceneLoaded;
@@ -88,6 +119,9 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
 
     #endregion
 
+    /// <summary>
+    /// Reloads the currently tracked scene.
+    /// </summary>
     public void ReloadScene()
     {
         SceneManager.LoadScene(currentScene);

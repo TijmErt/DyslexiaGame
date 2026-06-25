@@ -19,7 +19,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
     public event Action<string, bool> OnFlagChanged;
     public string UID => "EventFlagManager";
     /*
-        Potential alternative. Swapping this our with a hierarchy system 
+        Potential alternative. Swapping this out with a hierarchy system 
         
         example class
         
@@ -31,6 +31,12 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         
         Scene->Type (think area or npc)->name-> subtype (main, tutorial, etc.) -> state 
         then use the collective name of that hierarchy for the dictionary.
+        
+        AT the moment we have it listed as
+        Kitchen.MiniG.MemPuz.Tut.Open
+        
+        This could be changed to have each word be their own FlagComp. The reason for this is mainly to increase readability, as you can group for example all kitchen events under kitchen and so forth. making it work more like a tree then a list.
+        These I would suggest to intialize as a dictionary or something similar.
      */
     
     
@@ -42,6 +48,10 @@ public class EventFlagManager : MonoBehaviour, ISaveable
 
         InitializeDictionary();
     }
+    
+    /// <summary>
+    /// Initializes the List of Flags into a dictionary for better and more performative lookup of the eventflag when needing to change a value.
+    /// </summary>
     private void InitializeDictionary()
     {
         eventFlagDictionary.Clear();
@@ -54,7 +64,14 @@ public class EventFlagManager : MonoBehaviour, ISaveable
             }
         }
     }
-
+    
+    /// <summary>
+    /// Checks whether a flag exists and is currently enabled.
+    /// </summary>
+    /// <param name="flagName">Name of the flag to check.</param>
+    /// <returns>
+    /// True if the flag exists and is enabled; otherwise false.
+    /// </returns>
     public bool IsFlagEnabled(string flagName)
     {
         if (eventFlagDictionary.TryGetValue(flagName, out Flag flag))
@@ -63,8 +80,13 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         }
         return false;
     }
-
-    public void ChangeFLagState(string flagName, bool enabled)
+    
+    /// <summary>
+    /// Changes the enabled state of a flag and notifies any listeners that the flag has changed.
+    /// </summary>
+    /// <param name="flagName">Name of the flag to modify.</param>
+    /// <param name="enabled">The new state of the flag.</param>
+    public void ChangeFlagState(string flagName, bool enabled)
     {
         if (eventFlagDictionary.ContainsKey(flagName))
         {

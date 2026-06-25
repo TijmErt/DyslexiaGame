@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -20,6 +21,7 @@ public class WordsplitManager : MonoBehaviour
     
     private AudioSource AudioSource { get; set; }
     private SceneMediator SceneMediator { get; set; }
+    private EventFlagMediator EventFlagMediator { get; set; }
     
     private List<string> CurrentWord { get; set; }
     private bool FeedbackActive { get; set; } = false;
@@ -40,6 +42,7 @@ public class WordsplitManager : MonoBehaviour
     void Start() {
         this.AudioSource = this.GetComponent<AudioSource>();
         this.SceneMediator = FindFirstObjectByType<SceneMediator>();
+        this.EventFlagMediator = FindFirstObjectByType<EventFlagMediator>();
         
         this.CurrentWord = this.GetRandomWord();
         this.ShowWord(string.Join("", this.CurrentWord));
@@ -78,14 +81,10 @@ public class WordsplitManager : MonoBehaviour
     }
 
     private void DecreaseHealth() {
-        var children = this.HealthBar.GetComponentsInChildren<Image>();
-
-        if (children.Length == 1) {
-            this.FinishGame();
-            return;
-        }
+        var children = this.HealthBar.GetComponentsInChildren<Image>().Reverse().ToList();
         
-        children[this.Health - 2].gameObject.SetActive(false);
+        children[this.Health - 1].gameObject.SetActive(false);
+        this.Health -= 1;
     }
 
     private void IncreaseScore() {
@@ -94,6 +93,7 @@ public class WordsplitManager : MonoBehaviour
     }
 
     private void FinishGame() {
+        this.EventFlagMediator.enableFlag("Kitchen.Main.NPC.Soes.Helped");
         this.SceneMediator.LoadPreviousScene();
     }
 
@@ -109,5 +109,11 @@ public class WordsplitManager : MonoBehaviour
         
         this.CutButton.GetComponentInChildren<TextMeshProUGUI>().text = "Snij";
         this.Vegetable.GetComponent<VegetableManager>().HideFeedback();
+        
+        Debug.Log(this.Health);
+
+        if (this.Health != 0) return;
+        
+        this.FinishGame();
     }
 }

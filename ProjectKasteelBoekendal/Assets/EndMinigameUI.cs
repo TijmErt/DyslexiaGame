@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EndMInigameUI : MonoBehaviour
+public class EndMinigameUI : MonoBehaviour
 {
-    public void ExitMinigame()
+    public void ExitMinigame(string flag)
     {
+        FindFirstObjectByType<EventFlagMediator>().enableFlag(flag);
         SceneSwitchManager.instance.LoadPreviousScene();
     }
     public void RestartMinigame()

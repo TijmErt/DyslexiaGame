@@ -141,4 +141,8 @@ public class PlayerMovement : MonoBehaviour
         if (rb == null)
             Debug.LogError("PlayerMovement: No Rigidbody found on Player.");
     }
+    public void SetAnimator(Animator newAnimator)
+    {
+        animator = newAnimator;
+    }
 }

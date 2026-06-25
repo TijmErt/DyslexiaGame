@@ -61,3 +61,29 @@ MonoBehaviour:
     Enabled: 0
   - Name: Kitchen.MiniG.WordSp.Main.Finish
     Enabled: 0
+  - Name: Kitchen.Main.NPC.Karel.HadFirstTalk
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Karel.HadSecondTalk
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Karel.Helped
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Soes.HadFirstTalk
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Soes.Helped
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Henk.HadFirstTalk
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Henk.Helped
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Harrie.HadFirstTalk
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Harrie.Helped
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Omar.HadFirstTalk
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Omar.Helped
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Pleun.HadFirstTalk
+    Enabled: 0
+  - Name: Kitchen.Main.NPC.Pleun.Helped
+    Enabled: 0

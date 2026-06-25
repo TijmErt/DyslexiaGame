@@ -44,6 +44,11 @@ public class EventFlagManager : MonoBehaviour, ISaveable
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
 
         InitializeDictionary();

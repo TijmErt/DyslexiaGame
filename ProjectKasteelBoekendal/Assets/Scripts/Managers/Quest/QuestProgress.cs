@@ -62,7 +62,10 @@ namespace Managers.Quest
         /// </returns>
         public bool CheckCompletion()
         {
-            return Objectives.All(objective => objective.IsCompleted);
+            bool completed;
+            if(Objectives == null || Objectives.Count == 0)  completed = true;
+            else completed =Objectives.All(objective => objective.IsCompleted);
+            return completed;
         }
     }
 }

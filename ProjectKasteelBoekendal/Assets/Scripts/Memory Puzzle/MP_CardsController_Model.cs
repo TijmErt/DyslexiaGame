@@ -171,7 +171,7 @@ public class MP_CardsController_Model : MonoBehaviour
                 else
                 {
                     NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
-                    _CurrencyMediator.AddCurrency("KitchenCoin",10);
+                    _CurrencyMediator.AddCurrency("KitchCoin",10);
                     minigameEndMenu.SetActive(true);
                 }
             }

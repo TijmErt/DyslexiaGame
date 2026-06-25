@@ -1,4 +1,5 @@
 using System;
+using Managers.Quest;
 using Managers.Saving;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,6 +21,11 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
     private void Awake()
     {
 
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
 
         currentScene = SceneManager.GetActiveScene().name;
@@ -84,6 +90,7 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
     {
         SceneManager.sceneLoaded -= OnMinigameLoaded;
         currentScene = scene.name;
+        QuestManager.instance.CheckAvailability();
     }
 
     #endregion
@@ -112,6 +119,7 @@ public class SceneSwitchManager : MonoBehaviour, ISaveable
         SceneManager.sceneLoaded -= OnPreviousSceneLoaded;
 
         SetPlayerTransform();
+        QuestManager.instance.CheckAvailability();
 
         previousScene = currentScene;
         currentScene = SceneManager.GetActiveScene().name;

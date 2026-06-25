@@ -109,9 +109,8 @@ public class WordsplitManager : MonoBehaviour
     }
 
     private void FinishGame() {
-        this.EventFlagMediator.enableFlag("Kitchen.Main.NPC.Soes.Helped");
         NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
-        _CurrencyMediator.AddCurrency("KitchenCoin",10);
+        _CurrencyMediator.AddCurrency("KitchCoin",10);
         this.SceneMediator.LoadPreviousScene();
     }
 
@@ -137,6 +136,6 @@ public class WordsplitManager : MonoBehaviour
     
     private void NotifyQuest(QuestEnums.ObjectiveType type,int amount)
     {
-        _QuestMediator.NotifyQuest(type, "",amount);
+        _QuestMediator.NotifyQuest(type, _QuestTarget.targetID,amount);
     }
 }

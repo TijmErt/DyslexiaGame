@@ -14,12 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestInfoSO
   QuestID: TalkToKarelAfterSoes
   QuestName: Talk to Karel after Soes
-  CompletionEventFlag: 
+  CompletionEventFlag: Kitchen.Main.NPC.Karel.HadSecondTalk
   RequiredEventFlag: Kitchen.Main.NPC.Soes.Helped
   objectives:
   - ObjectiveID: TalkChef
-    Description: Praat met Karel de Kok
+    Description: Ga weer naar Karel de Kok
     Type: 1
+    RequiredAmount: 1
+    TargetID: Karel de Kok
+    SceneName: Kitchen
+  - ObjectiveID: TalkChef
+    Description: Praat weer met Karel de Kok
+    Type: 0
     RequiredAmount: 1
     TargetID: Karel de Kok
     SceneName: Kitchen

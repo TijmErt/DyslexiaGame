@@ -17,13 +17,20 @@ namespace Managers.Quest
         public void Register(QuestTarget target)
         {
             if (!targets.ContainsKey(target.targetID))
-                targets.Add(target.targetID, target);
+            {
+                targets.Add(target.targetID, target); 
+                Debug.Log( "Registered Target: " + target.targetID);
+            }
         }
 
         public void Unregister(QuestTarget target)
         {
             if (targets.ContainsKey(target.targetID))
-                targets.Remove(target.targetID);
+            {
+                targets.Remove(target.targetID); 
+                Debug.Log( "UnRegistered Target: " + target.targetID);
+            }
+                
         }
 
         public QuestTarget Get(string id)

@@ -10,16 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf6307260a3c35d458a222be876c57db, type: 3}
-  m_Name: TalkToKarel
+  m_Name: 1_TalkToKarel
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestInfoSO
   QuestID: TalkToKarel
   QuestName: TalkToKarel
-  CompletionEventFlag: 
+  CompletionEventFlag: Kitchen.Main.NPC.Karel.HadFirstTalk
   RequiredEventFlag: 
   objectives:
   - ObjectiveID: TalkChef
-    Description: Praat met Karel de Kok
+    Description: Ga naar Karel de Kok
     Type: 1
+    RequiredAmount: 1
+    TargetID: Karel de Kok
+    SceneName: Kitchen
+  - ObjectiveID: TalkChef
+    Description: Praat met Karel de Kok
+    Type: 0
     RequiredAmount: 1
     TargetID: Karel de Kok
     SceneName: Kitchen

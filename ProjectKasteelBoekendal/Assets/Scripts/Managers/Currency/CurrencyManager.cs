@@ -33,6 +33,11 @@ namespace Managers.Currency
 
       private void Awake()
       {
+         if (instance != null)
+         {
+            Destroy(gameObject);
+            return;
+         }
          instance = this;
       }
       

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class MissionTracker : MonoBehaviour
 {
@@ -15,26 +16,42 @@ public class MissionTracker : MonoBehaviour
     [SerializeField] private QuestMediator questMediator;
     
     private readonly List<GameObject> spawnedObjects = new();
-    private void Start()
+
+    private void Awake()
     {
         questMediator = GameObject.FindFirstObjectByType<QuestMediator>();
-        
+    }
+
+    private void Start()
+    {
         if (questMediator == null)
         {
             Debug.LogError("questMediator is not assigned!");
             return;
         }
 
-        questMediator.OnQuestChanged += RebuildUI;
+        questMediator.OnQuestChanged += RebuildUI; Debug.Log("Subscribed to OnQuestChanged event");
+    }
+
+    private void OnEnable()
+    {
+        if (questMediator == null)
+        {
+            Debug.LogError("questMediator is not assigned!");
+            return;
+        }
+
+        questMediator.OnQuestChanged += RebuildUI; Debug.Log("Subscribed to OnQuestChanged event");
 
         if (spawnedObjects.Count == 0)
         {
             RebuildUI();
         }
     }
+
     private void OnDisable()
     {
-        if (questMediator != null) questMediator.OnQuestChanged -= RebuildUI;
+        if (questMediator != null) questMediator.OnQuestChanged -= RebuildUI; Debug.Log("UnSubscribed to OnQuestChanged event");
     }
     
     private void RebuildUI()
@@ -44,8 +61,10 @@ public class MissionTracker : MonoBehaviour
         
         foreach (QuestProgress questProgress in questMediator.GetQuestsByState(QuestEnums.QuestState.Active))
         {
+            Debug.Log("Current Quest : " + questProgress.QuestInfo.QuestID);
             foreach (ObjectiveProgress objective in questProgress.Objectives)
             {
+                Debug.Log("Objective : " + objective.Objective.TargetID);
                 CreatObjectiveUI(objective);
             }
         }
@@ -73,14 +92,14 @@ public class MissionTracker : MonoBehaviour
         {
             QuestTarget target = QuestTargetRegistry.Instance.Get(objectiveProgress.Objective.TargetID);
 
-            if (target != null)
+            if (target != null && SceneManager.GetActiveScene().name.Contains(objectiveProgress.Objective.SceneName))
             {
                 Vector3 targetLocation = target.FocusQuestTarget(); //This can be used later to make a pointer towards the target.
             }
             else
             {
                 //This can later contain a feature to look into what scene it can be found in. Only really useful if a quest requires backtracking or if player backtracks
-                Debug.LogError($"{objectiveProgress.Objective.TargetID} not found within Scene!");
+                Debug.Log($"{objectiveProgress.Objective.TargetID} not found within Scene ["+ SceneManager.GetActiveScene().name +"]!");
             }
         }
     }

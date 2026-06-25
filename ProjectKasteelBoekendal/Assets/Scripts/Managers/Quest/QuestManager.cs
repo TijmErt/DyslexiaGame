@@ -26,6 +26,11 @@ namespace Managers.Quest
         private bool QuestChanged = false;
         private void Awake()
         {
+            if (instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
             instance = this;
             Initialize();
         }
@@ -97,7 +102,7 @@ namespace Managers.Quest
         /// Evaluates all inactive quests and activates those whose requirements
         /// have been met. If the active quest list changes, listeners are notified.
         /// </summary>
-        private void CheckAvailability()
+        public void CheckAvailability()
         {
             foreach (QuestProgress quest in Quests)
             {
@@ -224,7 +229,7 @@ namespace Managers.Quest
         /// </returns>
         public List<QuestProgress> GetQuestsByState(QuestEnums.QuestState questState)
         {
-            if(questState == QuestEnums.QuestState.Completed) return _activeQuests;
+            if(questState == QuestEnums.QuestState.Active) return _activeQuests;
             
             return Quests
                 .Where(q => q.QuestState == questState)

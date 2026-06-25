@@ -13,22 +13,36 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private CurrencyMediator currencyMediator;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         //INSERT CODE: Change playername to player's name
         //INSERT CODE: Change coins to player's current/saved coins
         currencyMediator = FindFirstObjectByType<CurrencyMediator>();
         
+
+    }
+
+    private void Start()
+    {
         if (currencyMediator == null)
         {
             Debug.LogError("CurrencyMediator is not assigned!");
             return;
         }
 
-        currencyMediator.OnCurrencyChanged += UpdateCoinsUI;
+        currencyMediator.OnCurrencyChanged += UpdateCoinsUI; Debug.Log("Subscribed to OnCurrencyChanged event");
     }
-    
 
+    private void OnEnable()
+    {
+        if (currencyMediator == null)
+        {
+            Debug.LogError("CurrencyMediator is not assigned!");
+            return;
+        }
+
+        currencyMediator.OnCurrencyChanged += UpdateCoinsUI; Debug.Log("Subscribed to OnCurrencyChanged event");
+    }
     private void OnDisable()
     {
         if(currencyMediator != null) currencyMediator.OnCurrencyChanged -= UpdateCoinsUI; Debug.Log("UnSubscribed to OnCurrencyChanged event");

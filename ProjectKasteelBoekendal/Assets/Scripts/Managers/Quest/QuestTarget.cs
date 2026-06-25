@@ -19,12 +19,10 @@ namespace Managers.Quest
             _questMediator = FindFirstObjectByType<QuestMediator>();
             questTargetLocation = this.gameObject.transform.position;
             
-            if(QuestTargetRegistry.Instance) 
-                QuestTargetRegistry.Instance.Register(this);
         }
 
 
-        private void Start()
+        private void OnEnable()
         {
             if(QuestTargetRegistry.Instance) 
                 QuestTargetRegistry.Instance.Register(this);

@@ -1,57 +1,98 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Managers.Quest;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class MissionTracker : MonoBehaviour
 {
     public Transform objectiveList;
     public GameObject objectiveText;
-    public GameObject markerPrefab;
-    private Dictionary<string, GameObject> objectives = new Dictionary<string, GameObject>(); 
-    private Dictionary<string, GameObject> markers = new Dictionary<string, GameObject>(); 
-
-    void Start()
+    
+    [SerializeField] private QuestMediator questMediator;
+    
+    private readonly List<GameObject> spawnedObjects = new();
+    private void Start()
     {
+        questMediator = GameObject.FindFirstObjectByType<QuestMediator>();
         
-    }
+        if (questMediator == null)
+        {
+            Debug.LogError("questMediator is not assigned!");
+            return;
+        }
 
-    // Update is called once per frame
-    void Update()
+        questMediator.OnQuestChanged += RebuildUI;
+
+        if (spawnedObjects.Count == 0)
+        {
+            RebuildUI();
+        }
+    }
+    private void OnDisable()
     {
+        if (questMediator != null) questMediator.OnQuestChanged -= RebuildUI;
+    }
+    
+    private void RebuildUI()
+    {
+        Debug.Log("Rebuilding UI");
+        ClearUI();
         
+        foreach (QuestProgress questProgress in questMediator.GetQuestsByState(QuestEnums.QuestState.Active))
+        {
+            foreach (ObjectiveProgress objective in questProgress.Objectives)
+            {
+                CreatObjectiveUI(objective);
+            }
+        }
     }
+    
 
-    public void AddObjective(string objectiveDescription, GameObject target)
-    {
-        if (objectives.ContainsKey(objectiveDescription)) return;
-
+    private void CreatObjectiveUI(ObjectiveProgress objectiveProgress)
+    { 
         GameObject objEntry = Instantiate(objectiveText, objectiveList);
 
-        objEntry.GetComponent<TMP_Text>().text = objectiveDescription;
-        objectives[objectiveDescription] = objEntry;
-
-        if (target != null)
+        TextMeshProUGUI objEntryText = objEntry.GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault();
+        if (objectiveProgress.IsCompleted)
         {
-            Vector3 spawnPos = target.transform.position + Vector3.up * 4f;
-            GameObject marker = Instantiate(markerPrefab, spawnPos, Quaternion.Euler(0, 180, 0));
-            marker.transform.SetParent(target.transform);
-            markers[objectiveDescription] = marker;
+            objEntryText.text = $"<s>{objectiveProgress.Objective.Description} ({objectiveProgress.CurrentAmount}/{objectiveProgress.Objective.RequiredAmount}) </s>";
+        }
+        else
+        {
+            objEntryText.text = $"{objectiveProgress.Objective.Description} ({objectiveProgress.CurrentAmount}/{objectiveProgress.Objective.RequiredAmount})";
+        }
+        
+        
+        spawnedObjects.Add(objEntry);
+        
+        if (!string.IsNullOrEmpty(objectiveProgress.Objective.TargetID))
+        {
+            var target = QuestTargetRegistry.Instance.Get(objectiveProgress.Objective.TargetID);
+
+            if (target != null)
+            {
+                target.FocusQuestTarget();
+            }
+            else
+            {
+                //This can later contain a feature to look into what scene it can be found in. Only really useful if a quest requires backtracking or if player backtracks
+                Debug.LogError($"{objectiveProgress.Objective.TargetID} not found within Scene!");
+            }
         }
     }
-
-    public void RemoveObjective(string objectiveDescription)
+    
+    private void ClearUI()
     {
-        if (!objectives.ContainsKey(objectiveDescription)) return;
+        foreach (GameObject spawnedObject in spawnedObjects)
+            Destroy(spawnedObject);
 
-        GameObject objEntry = objectives[objectiveDescription];
-        Destroy(objEntry);
-        objectives.Remove(objectiveDescription);
-
-        if (markers.TryGetValue(objectiveDescription, out GameObject marker))
-        {
-            Destroy(marker);
-            markers.Remove(objectiveDescription);
-        }
+        spawnedObjects.Clear();
     }
+    
+    
+    
 }

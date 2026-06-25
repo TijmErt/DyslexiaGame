@@ -14,12 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestInfoSO
   QuestID: Kitchen.TalkTo.Chef
   QuestName: Talk to the Chef
-  CompletionEventFlag: Kitchen.MiniG.MemPuz.Tut.Open
+  CompletionEventFlag: 
   RequiredEventFlag: 
   objectives:
   - ObjectiveID: TalkChef
-    Description: Talk to the chef in the kitchen
+    Description: Ga naar de Hoofd Chef
     Type: 1
+    RequiredAmount: 1
+    TargetID: Hoofd-Chef
+    SceneName: Kitchen
+  - ObjectiveID: TalkChef
+    Description: Praat met de Hoofd Chef en vraag naar richard
+    Type: 0
     RequiredAmount: 1
     TargetID: Hoofd-Chef
     SceneName: Kitchen

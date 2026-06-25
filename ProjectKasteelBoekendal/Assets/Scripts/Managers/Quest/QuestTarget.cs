@@ -17,8 +17,14 @@ namespace Managers.Quest
         {
             _questMediator = FindFirstObjectByType<QuestMediator>();
             questTargetLocation = this.gameObject.transform.position;
+            
+            QuestTargetRegistry.Instance.Register(this);
         }
 
+        private void OnDestroy()
+        {
+            QuestTargetRegistry.Instance.Unregister(this);
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (isFocusOfQuest && other.CompareTag("Player1"))
@@ -30,14 +36,19 @@ namespace Managers.Quest
         public Vector3 FocusQuestTarget( )
         {
             isFocusOfQuest = true;
-            questMarker.SetActive(true);
+
+            if (questMarker != null)
+                questMarker.SetActive(true);
+            
             return questTargetLocation; // We return a Vector so that it can be used for a pointer element in the UI that points towards this QuestTarget
         }
 
         public void UnFocusQuestTarget()
         {
             isFocusOfQuest = false;
-            questMarker.SetActive(false);
+     
+            if (questMarker != null)
+                questMarker.SetActive(false);
         }
     }
 }

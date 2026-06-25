@@ -1,29 +1,45 @@
+using System;
 using System.Collections.Generic;
+using Managers.Currency;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class HUDManager : MonoBehaviour
 {
     public Image playerInfoLabel;
+    
+    [SerializeField] private CurrencyMediator currencyMediator;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //INSERT CODE: Change playername to player's name
         //INSERT CODE: Change coins to player's current/saved coins
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        currencyMediator = FindFirstObjectByType<CurrencyMediator>();
         
+        if (currencyMediator == null)
+        {
+            Debug.LogError("CurrencyMediator is not assigned!");
+            return;
+        }
+
+        currencyMediator.OnCurrencyChanged += UpdateCoinsUI;
+    }
+    
+
+    private void OnDisable()
+    {
+        if(currencyMediator != null) currencyMediator.OnCurrencyChanged -= UpdateCoinsUI; Debug.Log("UnSubscribed to OnCurrencyChanged event");
     }
 
-    public void UpdateCoinsUI(int coins)
+    public void UpdateCoinsUI(string currencyID ,int currentAmount)
     {
-        string coinText = coins.ToString();
-        playerInfoLabel.transform.Find("coinsamount").GetComponent<TMP_Text>().text = coinText;
+        Debug.Log(currencyID + " : " + currentAmount);
+        //Add featuure to update specific Coin shown, if the coin is shown
+        string coinAmountText = currentAmount.ToString();
+        playerInfoLabel.transform.Find("coinsamount").GetComponent<TMP_Text>().text = coinAmountText;
     }
 
     public void LoadPauseMenu()

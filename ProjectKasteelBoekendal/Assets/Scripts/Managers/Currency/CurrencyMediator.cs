@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Managers.Currency
@@ -17,6 +18,28 @@ namespace Managers.Currency
     {
         [SerializeField] private string currentCurrencyID = "";
 
+        public event Action<string, int> OnCurrencyChanged;
+        
+        #region ActionEvent
+        private void OnEnable()
+        {
+            CurrencyManager.instance.OnCurrencyChanged += HandleFlagChanged; Debug.Log("Subscribed to OnCurrencyChanged event - Mediator");
+        }
+
+        private void OnDisable()
+        {
+            if (CurrencyManager.instance != null) 
+                CurrencyManager.instance.OnCurrencyChanged -= HandleFlagChanged;
+        }
+
+        private void HandleFlagChanged(string id, int currentAmount)
+        {
+            Debug.Log("Invoked");
+            OnCurrencyChanged?.Invoke(id, currentAmount); 
+            
+        }
+        #endregion
+        
         #region UI Methods
         /*
     

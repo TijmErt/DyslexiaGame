@@ -13,9 +13,13 @@ public class EventFlagManager : MonoBehaviour, ISaveable
 {
     public static EventFlagManager instance;
     [SerializeField]private List<Flag> eventFlags; 
+    
+    private Dictionary<string, Flag> eventFlagDictionary = new Dictionary<string, Flag>();
+    
+    public event Action<string, bool> OnFlagChanged;
     public string UID => "EventFlagManager";
     /*
-        Potential alternative. Swapping this our with a hierarchy system 
+        Potential alternative. Swapping this out with a hierarchy system 
         
         example class
         
@@ -27,22 +31,27 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         
         Scene->Type (think area or npc)->name-> subtype (main, tutorial, etc.) -> state 
         then use the collective name of that hierarchy for the dictionary.
+        
+        AT the moment we have it listed as
+        Kitchen.MiniG.MemPuz.Tut.Open
+        
+        This could be changed to have each word be their own FlagComp. The reason for this is mainly to increase readability, as you can group for example all kitchen events under kitchen and so forth. making it work more like a tree then a list.
+        These I would suggest to intialize as a dictionary or something similar.
      */
     
-    private Dictionary<string, Flag> eventFlagDictionary= new Dictionary<string, Flag>();
+    
+
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
         instance = this;
-        DontDestroyOnLoad(gameObject);
+
         InitializeDictionary();
     }
+    
+    /// <summary>
+    /// Initializes the List of Flags into a dictionary for better and more performative lookup of the eventflag when needing to change a value.
+    /// </summary>
     private void InitializeDictionary()
     {
         eventFlagDictionary.Clear();
@@ -54,10 +63,15 @@ public class EventFlagManager : MonoBehaviour, ISaveable
                 eventFlagDictionary.Add(flag.Name, flag);
             }
         }
-        Debug.Log(eventFlagDictionary);
-        Debug.Log(eventFlagDictionary.Count);
     }
-
+    
+    /// <summary>
+    /// Checks whether a flag exists and is currently enabled.
+    /// </summary>
+    /// <param name="flagName">Name of the flag to check.</param>
+    /// <returns>
+    /// True if the flag exists and is enabled; otherwise false.
+    /// </returns>
     public bool IsFlagEnabled(string flagName)
     {
         if (eventFlagDictionary.TryGetValue(flagName, out Flag flag))
@@ -66,18 +80,19 @@ public class EventFlagManager : MonoBehaviour, ISaveable
         }
         return false;
     }
-
-    public void ChangeFLagState(string flagName, bool enabled)
+    
+    /// <summary>
+    /// Changes the enabled state of a flag and notifies any listeners that the flag has changed.
+    /// </summary>
+    /// <param name="flagName">Name of the flag to modify.</param>
+    /// <param name="enabled">The new state of the flag.</param>
+    public void ChangeFlagState(string flagName, bool enabled)
     {
         if (eventFlagDictionary.ContainsKey(flagName))
         {
             eventFlagDictionary[flagName].Enabled = enabled;
-
-            // int index = eventFlags.FindIndex(flag => flag.Name == flagName);
-            // if (index >= 0)
-            // {
-            //     eventFlags[index].Enabled = enabled;
-            // }
+            OnFlagChanged?.Invoke(flagName, enabled);
+            
         }
         else
         {
@@ -86,6 +101,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
     }
 
 
+    #region Saving
     public object CaptureState()
     {
         EventFlagData data = new EventFlagData
@@ -93,9 +109,10 @@ public class EventFlagManager : MonoBehaviour, ISaveable
             Flags = new List<string>()
         };
 
-        foreach (Flag flag in eventFlags)
+        //This only saves the flags that are already triggered, which will save on space and iteration
+        foreach (Flag flag in eventFlags) 
         {
-            if (flag.Enabled)
+            if (flag.Enabled) 
             {
                 data.Flags.Add(flag.Name);
             }
@@ -135,6 +152,7 @@ public class EventFlagManager : MonoBehaviour, ISaveable
     {
         public List<string> Flags;
     }
+    #endregion
 }
 
 

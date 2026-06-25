@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Managers.Quest
@@ -6,6 +8,28 @@ namespace Managers.Quest
     {
         private QuestEnums.ObjectiveType _type;
         private string _targetID;
+        
+        public event Action OnQuestChanged; // Main usage is for other scripts to detect when the quest manager does something.
+
+        #region ActionEvent
+
+        private void Start()
+        {
+            QuestManager.instance.OnQuestChanged += HandleFlagChanged;
+        }
+
+        private void OnDisable()
+        {
+            if (QuestManager.instance != null) 
+                QuestManager.instance.OnQuestChanged -= HandleFlagChanged;
+        }
+
+        private void HandleFlagChanged()
+        {
+            OnQuestChanged?.Invoke();
+        }
+
+        #endregion
 
         public void SetTypeReachLocation()
         {
@@ -39,6 +63,11 @@ namespace Managers.Quest
                 type,
                 targetID,
                 amount);
+        }
+
+        public List<QuestProgress> GetQuestsByState(QuestEnums.QuestState state)
+        {
+            return QuestManager.instance.GetQuestsByState(state);
         }
         
     }

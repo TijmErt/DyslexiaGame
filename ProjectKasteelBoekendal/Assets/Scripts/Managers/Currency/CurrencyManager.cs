@@ -15,6 +15,11 @@ namespace Managers.Currency
       public int amount;
       
    }
+   
+   /// <summary>
+   /// Manages all player currencies, including adding, removing,
+   /// querying amounts, and saving/loading currency data.
+   /// </summary>
    public class CurrencyManager : MonoBehaviour, ISaveable
    {
       public string UID => "CurrencyManager";
@@ -22,21 +27,20 @@ namespace Managers.Currency
       public static CurrencyManager instance; 
       
       [SerializeField] private List<CurrencyEntry> currencies;
+      
+      public event Action<string,int> OnCurrencyChanged;
 
 
       private void Awake()
       {
-         if (instance != null)
-         {
-            Destroy(gameObject);
-            return;
-         }
-        
          instance = this;
-         DontDestroyOnLoad(gameObject);
       }
       
-      
+      /// <summary>
+      /// Adds the specified amount to a currency.
+      /// </summary>
+      /// <param name="id">The unique identifier of the currency.</param>
+      /// <param name="amount">The amount to add.</param>
       public void AddCurrency(string id, int amount)
       {
             CurrencyEntry entry = GetCurrency(id);
@@ -48,8 +52,16 @@ namespace Managers.Currency
             }
 
             entry.amount += amount;
+            
+            OnCurrencyChanged?.Invoke(id, entry.amount);
       }
       
+      /// <summary>
+      /// Removes the specified amount from a currency.
+      /// Currency values are clamped to a minimum of zero.
+      /// </summary>
+      /// <param name="id">The unique identifier of the currency.</param>
+      /// <param name="amount">The amount to remove.</param>
       public void RemoveCurrency(string id, int amount)
       {
          CurrencyEntry entry = GetCurrency(id);
@@ -65,14 +77,30 @@ namespace Managers.Currency
          // Prevent negative currency
          if (entry.amount < 0)
             entry.amount = 0;
+         
+         OnCurrencyChanged?.Invoke(id, entry.amount);
       }
 
+      /// <summary>
+      /// Retrieves the current amount of a currency.
+      /// </summary>
+      /// <param name="id">The unique identifier of the currency.</param>
+      /// <returns>
+      /// The current amount of the currency, or 0 if the currency does not exist.
+      /// </returns>
       public int GetCurrencyAmount(string id)
       {
          CurrencyEntry entry = GetCurrency(id);
          return entry?.amount ?? 0; //returns amount '0' if entry doesn't exist or matches give id
       }
 
+      /// <summary>
+      /// Retrieves a currency entry by its identifier.
+      /// </summary>
+      /// <param name="id">The unique identifier of the currency.</param>
+      /// <returns>
+      /// The matching CurrencyEntry, or null if no matching currency exists.
+      /// </returns>
       public CurrencyEntry GetCurrency(string id)
       {
          return currencies.Find(entry =>

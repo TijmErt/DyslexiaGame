@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private InputReader inputReader = default;
-    [SerializeField] private PlayerInteraction playerInteraction;
     [SerializeField] private Rigidbody rb;
 
     [Header("Movement")]
@@ -30,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        CheckPlayerInteraction();
         CheckRigidbody();
 
         // IMPORTANT: ensure physics behaves correctly
@@ -107,16 +105,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movementInput = input;
     }
-
-    private void CheckPlayerInteraction()
-    {
-        if (playerInteraction != null) return;
-
-        playerInteraction = GetComponent<PlayerInteraction>();
-
-        if (playerInteraction == null)
-            Debug.LogError("PlayerMovement: No PlayerInteraction reference found.");
-    }
+    
 
     private void CheckRigidbody()
     {

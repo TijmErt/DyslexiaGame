@@ -21,5 +21,5 @@ MonoBehaviour:
     Description: Talk to the chef in the kitchen
     Type: 0
     RequiredAmount: 1
-    TargetID: Hoofd-Chef
+    TargetID: Karel-Chef
     SceneName: Kitchen

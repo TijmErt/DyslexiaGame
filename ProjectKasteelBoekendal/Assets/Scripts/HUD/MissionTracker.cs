@@ -71,11 +71,11 @@ public class MissionTracker : MonoBehaviour
         
         if (!string.IsNullOrEmpty(objectiveProgress.Objective.TargetID))
         {
-            var target = QuestTargetRegistry.Instance.Get(objectiveProgress.Objective.TargetID);
+            QuestTarget target = QuestTargetRegistry.Instance.Get(objectiveProgress.Objective.TargetID);
 
             if (target != null)
             {
-                target.FocusQuestTarget();
+                Vector3 targetLocation = target.FocusQuestTarget(); //This can be used later to make a pointer towards the target.
             }
             else
             {

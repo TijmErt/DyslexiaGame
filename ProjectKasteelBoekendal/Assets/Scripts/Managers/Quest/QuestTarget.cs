@@ -15,10 +15,19 @@ namespace Managers.Quest
         private QuestMediator _questMediator;
         private void Awake()
         {
+            UnFocusQuestTarget();
             _questMediator = FindFirstObjectByType<QuestMediator>();
             questTargetLocation = this.gameObject.transform.position;
             
-            QuestTargetRegistry.Instance.Register(this);
+            if(QuestTargetRegistry.Instance) 
+                QuestTargetRegistry.Instance.Register(this);
+        }
+
+
+        private void Start()
+        {
+            if(QuestTargetRegistry.Instance) 
+                QuestTargetRegistry.Instance.Register(this);
         }
 
         private void OnDestroy()

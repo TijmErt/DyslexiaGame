@@ -34,10 +34,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 		if (!playerInRange)
 			return;
 
-		if (Keyboard.current.eKey.wasPressedThisFrame)
-		{
-			StartDialogue();
-		} // This should be replaced with a method to that allows the player to start the Dialogue manually
+
+		StartDialogue(); // This should get a method that allows the player to start the Dialogue manually
 	}
 	private void OnTriggerEnter(Collider other)
 	{

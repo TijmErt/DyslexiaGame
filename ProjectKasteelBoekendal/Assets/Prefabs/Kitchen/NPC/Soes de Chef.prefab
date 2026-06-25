@@ -130,9 +130,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9000133426702455833}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8927388847170309704}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
@@ -149,19 +146,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 1116277030436128315}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9000133426702455833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269294426275183466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <InteractionDistance>k__BackingField: 2
 --- !u!136 &8927388847170309704
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -198,13 +182,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.VisualScripting.Core::Unity.VisualScripting.Variables
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":null,"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"WordSplit","$type":"System.String"},"typeHandle":{"Identification":"System.String,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":null,"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
-    _objectReferences:
-    - {fileID: 0}
-    - {fileID: 0}
+    _objectReferences: []
 --- !u!114 &696256545181940304
 MonoBehaviour:
   m_ObjectHideFlags: 0

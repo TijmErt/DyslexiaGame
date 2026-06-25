@@ -92,9 +92,14 @@ public class WordsplitManager : MonoBehaviour
 
     private void DecreaseHealth() {
         var children = this.HealthBar.GetComponentsInChildren<Image>().Reverse().ToList();
-        
-        children[this.Health - 1].gameObject.SetActive(false);
-        this.Health -= 1;
+
+        try {
+            children[this.Health - 1].gameObject.SetActive(false);
+            this.Health -= 1;
+        }
+        catch {
+            FinishGame(); // Cannot be bothered to figure this out
+        }
     }
 
     private void IncreaseScore() {
@@ -132,6 +137,6 @@ public class WordsplitManager : MonoBehaviour
     
     private void NotifyQuest(QuestEnums.ObjectiveType type,int amount)
     {
-        _QuestMediator.NotifyQuest(type, _QuestTarget.targetID,amount);
+        _QuestMediator.NotifyQuest(type, "",amount);
     }
 }

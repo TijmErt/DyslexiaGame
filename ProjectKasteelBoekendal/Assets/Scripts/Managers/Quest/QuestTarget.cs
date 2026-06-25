@@ -39,6 +39,7 @@ namespace Managers.Quest
             if (isFocusOfQuest && other.CompareTag("Player1"))
             {
                 _questMediator.NotifyQuest(QuestEnums.ObjectiveType.ReachLocation,targetID,1);
+                EventBus.Trigger(new EventHook("OnDialogueStart", gameObject));
             }
         }
 

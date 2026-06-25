@@ -130,9 +130,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 534624458472623635}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8413964369213714155}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
       insertIndex: -1
@@ -154,19 +151,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c56cd60b0ba7fdb6ba191ed1bf570112, type: 3}
   m_PrefabInstance: {fileID: 3840137099139094917}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &534624458472623635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4146550309062255828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aacb7ddf2a860c940bf1c6976080b30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  <InteractionDistance>k__BackingField: 2
 --- !u!136 &8413964369213714155
 CapsuleCollider:
   m_ObjectHideFlags: 0

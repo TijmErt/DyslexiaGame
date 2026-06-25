@@ -14967,6 +14967,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3371539736124240060, guid: dd68af1b3000cbb49bc25a2a71469af5, type: 3}
+      propertyPath: m_text
+      value: Bob
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371539736124240060, guid: dd68af1b3000cbb49bc25a2a71469af5, type: 3}
+      propertyPath: m_fontSize
+      value: 66.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4423879377813967303, guid: dd68af1b3000cbb49bc25a2a71469af5, type: 3}
       propertyPath: m_Name
       value: HUDCollection
@@ -31203,11 +31211,16 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
+    - target: {fileID: 4338531985992283514, guid: 34cb660095374e54585db0ea3369951c, type: 3}
+      propertyPath: targetID
+      value: Harrie het Hulpje
+      objectReference: {fileID: 0}
     - target: {fileID: 4552916544921927718, guid: 34cb660095374e54585db0ea3369951c, type: 3}
       propertyPath: m_Name
-      value: Harrie de Helper
+      value: Harrie het Hulpje
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3889799914809262871, guid: 34cb660095374e54585db0ea3369951c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -31220,8 +31233,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1058594640}
     m_Modifications:
+    - target: {fileID: 4011891682228284283, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5024676279875643818, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
       propertyPath: m_Name
+      value: Karel de Kok
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277565716611086333, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
+      propertyPath: targetID
       value: Karel de Kok
       objectReference: {fileID: 0}
     - target: {fileID: 5688306746119025424, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
@@ -31339,6 +31360,10 @@ PrefabInstance:
     - target: {fileID: 1111637162805876725, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086515983663899819, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
+      propertyPath: targetID
+      value: Pleun de Poetser
       objectReference: {fileID: 0}
     - target: {fileID: 5428881221828698096, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
       propertyPath: _data._json
@@ -31766,6 +31791,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1058594640}
     m_Modifications:
+    - target: {fileID: 1884724138275202007, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
+      propertyPath: targetID
+      value: Henk het Hulpje
+      objectReference: {fileID: 0}
     - target: {fileID: 2197988826128861540, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
       propertyPath: _data._json
       value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
@@ -31827,7 +31856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4146550309062255828, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
       propertyPath: m_Name
-      value: Henk de Helper
+      value: Henk het Hulpje
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31842,6 +31871,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3128187914370855703, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
+      propertyPath: Quests.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3128187914370855703, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
+      propertyPath: _activeQuests.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3128187914370855703, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
+      propertyPath: Quests.Array.data[0].QuestInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: da053118c011b4b43a3934891b5e3f7b, type: 2}
+    - target: {fileID: 3128187914370855703, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
+      propertyPath: Quests.Array.data[0].QuestState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3128187914370855703, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
+      propertyPath: _activeQuests.Array.data[0].QuestInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: da053118c011b4b43a3934891b5e3f7b, type: 2}
+    - target: {fileID: 3128187914370855703, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
+      propertyPath: _activeQuests.Array.data[0].QuestState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3128187914370855703, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
+      propertyPath: Quests.Array.data[0].Objectives.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8156590974346038577, guid: 2f0cc4b8445fdee4db92f8796161e344, type: 3}
       propertyPath: m_Name
       value: ManagerCollection
@@ -31944,6 +32001,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2656769446717390306, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"WordSplit","$type":"System.String"},"typeHandle":{"Identification":"System.String,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656769446717390306, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656769446717390306, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 2078276504}
@@ -31951,7 +32019,12 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
-    m_RemovedComponents: []
+    - target: {fileID: 4755315989206826754, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+      propertyPath: targetID
+      value: Soes de Chef
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9000133426702455833, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -32025,6 +32098,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7597702780929453142, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
       propertyPath: m_Name
+      value: Omar de Ober
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189052779011282541, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
+      propertyPath: targetID
       value: Omar de Ober
       objectReference: {fileID: 0}
     m_RemovedComponents: []

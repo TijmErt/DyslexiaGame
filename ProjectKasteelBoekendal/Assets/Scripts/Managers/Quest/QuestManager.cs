@@ -27,12 +27,12 @@ namespace Managers.Quest
         private void Awake()
         {
             instance = this;
+            Initialize();
         }
 
         private void Start()
         {
             EventFlagManager.instance.OnFlagChanged += HandleFlagChanged;
-            Initialize();
             
         }
 

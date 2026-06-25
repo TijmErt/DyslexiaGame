@@ -10,22 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf6307260a3c35d458a222be876c57db, type: 3}
-  m_Name: KitchenTalkToChef
+  m_Name: TalkToHenk
   m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestInfoSO
-  QuestID: Kitchen.TalkTo.Chef
-  QuestName: Talk to the Chef
+  QuestID: TalkToHenk
+  QuestName: Talk to Henk
   CompletionEventFlag: 
-  RequiredEventFlag: 
+  RequiredEventFlag: Kitchen.Main.NPC.Soes.HadFirstTalk
   objectives:
   - ObjectiveID: TalkChef
-    Description: Ga naar de Hoofd Chef
+    Description: Praat met Henk het Hulpje
     Type: 1
     RequiredAmount: 1
-    TargetID: Karel-Chef
-    SceneName: Kitchen
-  - ObjectiveID: TalkChef
-    Description: Praat met de Hoofd Chef en vraag naar richard
-    Type: 0
-    RequiredAmount: 1
-    TargetID: Karel-Chef
+    TargetID: Henk het Hulpje
     SceneName: Kitchen

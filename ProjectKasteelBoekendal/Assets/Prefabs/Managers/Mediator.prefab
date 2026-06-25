@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7196338137247801785}
   - component: {fileID: -488468365066254563}
   - component: {fileID: -2025599780383820199}
+  - component: {fileID: 9112705243989010619}
   m_Layer: 0
   m_Name: Mediator
   m_TagString: Untagged
@@ -84,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7663e8b22bd194bb54accfcf5a972b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyMediator
+  currentCurrencyID: 
 --- !u!114 &-2025599780383820199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,3 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8654dbe62d39644d86c2d80f6d21473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &9112705243989010619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849529065349217275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302decf9355f46bf9ebf139ed2786696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestTargetRegistry

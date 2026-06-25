@@ -16,7 +16,7 @@ namespace Managers.Quest
         public static QuestManager instance;
         public string UID => "QuestManager";
 
-        public List<QuestProgress> Quests = new List<QuestProgress>();
+        [SerializeField] private List<QuestProgress> Quests = new List<QuestProgress>();
         private Dictionary<string, QuestProgress> QuestsDictionary = new Dictionary<string, QuestProgress>();
         
         public List<QuestProgress> _activeQuests = new();
@@ -31,7 +31,9 @@ namespace Managers.Quest
 
         private void Start()
         {
+            EventFlagManager.instance.OnFlagChanged += HandleFlagChanged;
             Initialize();
+            
         }
 
         /// <summary>
@@ -68,7 +70,7 @@ namespace Managers.Quest
         /// </summary>
         private void OnEnable()
         {
-            EventFlagManager.instance.OnFlagChanged += HandleFlagChanged;
+           
         }
         
         /// <summary>
@@ -138,8 +140,7 @@ namespace Managers.Quest
                 EventFlagManager.instance.ChangeFlagState(
                     quest.QuestInfo.CompletionEventFlag,true);
             }
-
-
+            QuestChanged = true;
         }
 
         /// <summary>
@@ -177,11 +178,13 @@ namespace Managers.Quest
             List<QuestProgress> completedQuests = new();
             foreach (QuestProgress quest in _activeQuests)
             {
-                quest.TryAdvanceObjective(
+                bool changed = quest.TryAdvanceObjective(
                     objectiveType,
                     targetID,
                     amount);
-
+   
+                if(changed) QuestChanged = true;
+                
                 if (quest.CheckCompletion())
                 {
                     completedQuests.Add(quest);
@@ -221,6 +224,8 @@ namespace Managers.Quest
         /// </returns>
         public List<QuestProgress> GetQuestsByState(QuestEnums.QuestState questState)
         {
+            if(questState == QuestEnums.QuestState.Completed) return _activeQuests;
+            
             return Quests
                 .Where(q => q.QuestState == questState)
                 .ToList();

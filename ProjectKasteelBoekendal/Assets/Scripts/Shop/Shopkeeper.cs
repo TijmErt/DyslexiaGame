@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem.OnScreen;
+using Random = UnityEngine.Random;
 
 public class Shopkeeper : MonoBehaviour
 {
@@ -9,6 +12,8 @@ public class Shopkeeper : MonoBehaviour
     // Reference to the player currently interacting with the shopkeeper.
     // Used to disable and re-enable movement while trading.
     private PlayerMovement currentPlayer;
+    private GameObject joycon;
+    private GameObject hudManager;
 
     // Text field used for shopkeeper dialogue.
     public TMP_Text dialogueText;
@@ -53,6 +58,12 @@ public class Shopkeeper : MonoBehaviour
         "Niet nog één."
     };
 
+    private void Start()
+    {
+        joycon = GameObject.Find("Jocon_UI");
+        hudManager = GameObject.Find("HUDCollection");
+    }
+
     /// <summary>
     /// Opens the trading interface when a player enters the shopkeeper's trigger.
     /// Supports both Player1 and Player2.
@@ -64,7 +75,7 @@ public class Shopkeeper : MonoBehaviour
             currentPlayer =
                 collision.GetComponent<PlayerMovement>() ??
                 collision.GetComponentInParent<PlayerMovement>();
-
+            
             OpenShop();
         }
     }
@@ -82,6 +93,15 @@ public class Shopkeeper : MonoBehaviour
         if (currentPlayer != null)
         {
             currentPlayer.enabled = false;
+        }
+
+        if (joycon != null){
+            joycon.SetActive(false);
+        }
+
+        if (hudManager != null)
+        {
+            hudManager.SetActive(false);
         }
 
         SayRandom(greetings);
@@ -102,6 +122,14 @@ public class Shopkeeper : MonoBehaviour
         {
             currentPlayer.enabled = true;
             currentPlayer = null;
+        }
+        if (joycon != null)
+        {
+            joycon.SetActive(true);
+        }
+        if (hudManager != null)
+        {
+            hudManager.SetActive(true);
         }
     }
 

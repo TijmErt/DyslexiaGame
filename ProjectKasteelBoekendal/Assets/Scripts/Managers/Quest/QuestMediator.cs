@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Managers.Quest
@@ -12,7 +13,7 @@ namespace Managers.Quest
 
         #region ActionEvent
 
-        private void OnEnable()
+        private void Start()
         {
             QuestManager.instance.OnQuestChanged += HandleFlagChanged;
         }
@@ -62,6 +63,11 @@ namespace Managers.Quest
                 type,
                 targetID,
                 amount);
+        }
+
+        public List<QuestProgress> GetQuestsByState(QuestEnums.QuestState state)
+        {
+            return QuestManager.instance.GetQuestsByState(state);
         }
         
     }

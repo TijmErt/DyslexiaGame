@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         inputReader.moveEvent -= OnMove;
+        OnMove(Vector2.zero);
     }
 
     private void Awake()
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
     }
+    
 
     private void HandleMovement()
     {

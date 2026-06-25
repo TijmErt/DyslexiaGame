@@ -22,7 +22,15 @@ namespace Managers.Quest
 
         public void AdvanceAmount(int amount)
         {
-            CurrentAmount += amount;
+            if (Objective.RequiredAmount == 1 && ( Objective.Type == QuestEnums.ObjectiveType.ReachLocation || Objective.Type == QuestEnums.ObjectiveType.Interact  ))
+            {
+                CurrentAmount = 1;
+            }
+            else
+            {
+                CurrentAmount += amount;
+            }
+
         }
     }
 }

@@ -37,8 +37,9 @@ namespace Managers.Quest
         /// <param name="objectiveType">The type of objective being progressed.</param>
         /// <param name="targetID">The identifier of the target associated with the objective.</param>
         /// <param name="amount">The amount of progress to add.</param>
-        public void TryAdvanceObjective(QuestEnums.ObjectiveType objectiveType, string targetID, int amount)
+        public bool TryAdvanceObjective(QuestEnums.ObjectiveType objectiveType, string targetID, int amount)
         {
+            bool changes = false;
             foreach (ObjectiveProgress objective in Objectives)
             {
                 if (objective.Objective.Type != objectiveType)
@@ -48,7 +49,9 @@ namespace Managers.Quest
                     continue;
 
                 objective.AdvanceAmount(amount);
+                changes = true;
             }
+            return changes;
         }
         
         /// <summary>

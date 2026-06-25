@@ -23,7 +23,7 @@ namespace Managers.Currency
         #region ActionEvent
         private void OnEnable()
         {
-            CurrencyManager.instance.OnCurrencyChanged += HandleFlagChanged;
+            CurrencyManager.instance.OnCurrencyChanged += HandleFlagChanged; Debug.Log("Subscribed to OnCurrencyChanged event - Mediator");
         }
 
         private void OnDisable()
@@ -34,7 +34,9 @@ namespace Managers.Currency
 
         private void HandleFlagChanged(string id, int currentAmount)
         {
-            OnCurrencyChanged?.Invoke(id, currentAmount);
+            Debug.Log("Invoked");
+            OnCurrencyChanged?.Invoke(id, currentAmount); 
+            
         }
         #endregion
         

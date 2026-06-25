@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -80,14 +81,10 @@ public class WordsplitManager : MonoBehaviour
     }
 
     private void DecreaseHealth() {
-        var children = this.HealthBar.GetComponentsInChildren<Image>();
-
-        if (children.Length == 1) {
-            this.FinishGame();
-            return;
-        }
+        var children = this.HealthBar.GetComponentsInChildren<Image>().Reverse().ToList();
         
-        children[this.Health - 2].gameObject.SetActive(false);
+        children[this.Health - 1].gameObject.SetActive(false);
+        this.Health -= 1;
     }
 
     private void IncreaseScore() {
@@ -112,5 +109,11 @@ public class WordsplitManager : MonoBehaviour
         
         this.CutButton.GetComponentInChildren<TextMeshProUGUI>().text = "Snij";
         this.Vegetable.GetComponent<VegetableManager>().HideFeedback();
+        
+        Debug.Log(this.Health);
+
+        if (this.Health != 0) return;
+        
+        this.FinishGame();
     }
 }

@@ -1244,6 +1244,8 @@ MonoBehaviour:
   minigameEndMenu: {fileID: 158157274}
   openSound: {fileID: 8300000, guid: 2ab088a5a449ee04cad931a61d78ebf7, type: 3}
   closeSound: {fileID: 8300000, guid: 46f29d5a4c3387842aa38bb94619c51e, type: 3}
+  wrongSound: {fileID: 0}
+  correctSound: {fileID: 0}
 --- !u!4 &284961583
 Transform:
   m_ObjectHideFlags: 0
@@ -1880,8 +1882,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 57177769}
     m_Modifications:
     - target: {fileID: 3363670210815829973, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3363670210815829973, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EndMinigameUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3363670210815829973, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Alchemy_Room
+      value: Kitchen.Main.NPC.Pleun.Helped
       objectReference: {fileID: 0}
     - target: {fileID: 3635877665322728446, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_Pivot.x

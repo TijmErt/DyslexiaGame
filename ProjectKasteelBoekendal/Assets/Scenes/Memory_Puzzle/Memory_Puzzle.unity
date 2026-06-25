@@ -1044,7 +1044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3363670210815829973, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Kitchen.Main.NPC.Henk.Helped
+      value: Kitchen.Main.NPC.Karel.Helped
       objectReference: {fileID: 0}
     - target: {fileID: 3635877665322728446, guid: fcd79309f05ec2944a008d2c63b7b5da, type: 3}
       propertyPath: m_Pivot.x

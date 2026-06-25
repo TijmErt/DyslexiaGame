@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Managers.Currency;
 using Managers.Quest;
 using TMPro;
 using Unity.VisualScripting;
@@ -24,6 +25,7 @@ public class WordsplitManager : MonoBehaviour
     private AudioSource AudioSource { get; set; }
     private SceneMediator SceneMediator { get; set; }
     private EventFlagMediator EventFlagMediator { get; set; }
+    private CurrencyMediator _CurrencyMediator { get; set; }
     
     private QuestMediator _QuestMediator;
     private QuestTarget _QuestTarget;
@@ -48,6 +50,7 @@ public class WordsplitManager : MonoBehaviour
         this.AudioSource = this.GetComponent<AudioSource>();
         if(_QuestTarget == null) _QuestTarget = GetComponent<QuestTarget>();
         if(_QuestMediator == null) _QuestMediator = FindFirstObjectByType<QuestMediator>();
+        if(_CurrencyMediator == null) _CurrencyMediator = FindFirstObjectByType<CurrencyMediator>();
         this.SceneMediator = FindFirstObjectByType<SceneMediator>();
         this.EventFlagMediator = FindFirstObjectByType<EventFlagMediator>();
         
@@ -103,6 +106,7 @@ public class WordsplitManager : MonoBehaviour
     private void FinishGame() {
         this.EventFlagMediator.enableFlag("Kitchen.Main.NPC.Soes.Helped");
         NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
+        _CurrencyMediator.AddCurrency("KitchenCoin",10);
         this.SceneMediator.LoadPreviousScene();
     }
 

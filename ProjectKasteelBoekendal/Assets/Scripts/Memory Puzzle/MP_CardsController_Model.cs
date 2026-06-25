@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Managers.Audio;
+using Managers.Currency;
 using Managers.Quest;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,6 +20,7 @@ public class MP_CardsController_Model : MonoBehaviour
     
     [SerializeField] private QuestTarget _QuestTarget;
     [SerializeField] private QuestMediator _QuestMediator;
+    [SerializeField] private CurrencyMediator _CurrencyMediator;
 
     [Header("Audio")]
     [SerializeField] private AudioClip openSound;
@@ -39,6 +41,7 @@ public class MP_CardsController_Model : MonoBehaviour
     {
         if(_QuestTarget == null) _QuestTarget = GetComponent<QuestTarget>();
         if(_QuestMediator == null) _QuestMediator = FindFirstObjectByType<QuestMediator>();
+        if(_CurrencyMediator == null) _CurrencyMediator = FindFirstObjectByType<CurrencyMediator>();
         PrepareCards();
         CreateCards();
     }
@@ -168,6 +171,7 @@ public class MP_CardsController_Model : MonoBehaviour
                 else
                 {
                     NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
+                    _CurrencyMediator.AddCurrency("KitchenCoin",10);
                     minigameEndMenu.SetActive(true);
                 }
             }

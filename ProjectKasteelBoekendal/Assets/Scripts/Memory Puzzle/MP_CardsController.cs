@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers.Audio;
+using Managers.Quest;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +12,17 @@ public class MP_CardsController : MonoBehaviour
     [SerializeField] private WordCollection wordCollection;
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
-
+    
+    [SerializeField] private QuestTarget _QuestTarget;
+    [SerializeField] private QuestMediator _QuestMediator;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
+    [SerializeField] private AudioClip wrongSound;
+    [SerializeField] private AudioClip correctSound;
+    
+    
     private Dictionary<Transform, MP_Card> cards = new Dictionary<Transform, MP_Card>();
 
     private List<CardData> cardList;
@@ -24,12 +36,16 @@ public class MP_CardsController : MonoBehaviour
     private bool isChecking;
     private void Start()
     {
+        if(UIAudio.Source) Debug.Log("UIAudioManager Prefab Not Present for use");
+        if(_QuestTarget == null) _QuestTarget = GetComponent<QuestTarget>();
+        if(_QuestMediator == null) _QuestMediator = FindFirstObjectByType<QuestMediator>();
         PrepareCards();
         CreateCards();
     }
 
     public void ShowCardAtTransform(Transform transform) {
         this.cards[transform].Show();
+        UIAudio.Play(openSound);
     }
     
     private void PrepareCards()
@@ -45,7 +61,7 @@ public class MP_CardsController : MonoBehaviour
             {
                 matchKey = entry.id.ToString(),
                 word = entry.word,
-                isImage = false
+                isImage = false,
             });
 
             // IMAGE card
@@ -55,7 +71,7 @@ public class MP_CardsController : MonoBehaviour
                 {
                     matchKey = entry.id.ToString(),
                     image = entry.image,
-                    isImage = true
+                    isImage = true,
                 });
             }
             else
@@ -65,7 +81,8 @@ public class MP_CardsController : MonoBehaviour
                 {
                     matchKey = entry.id.ToString(),
                     word = entry.word,
-                    isImage = false
+                    isImage = false,
+
                 });
             }
         }
@@ -133,7 +150,9 @@ public class MP_CardsController : MonoBehaviour
         if (isChecking || card.isSelected) return;
 
         card.Show();
-
+        
+        UIAudio.Play(openSound);
+        
         if (firstSelected == null)
         {
             firstSelected = card;
@@ -150,23 +169,30 @@ public class MP_CardsController : MonoBehaviour
     IEnumerator CheckMatching(MP_Card a, MP_Card b)
     {
         isChecking = true;
-
+        
+        yield return new WaitForSeconds(1.25f);
+        
         Debug.Log(a.MatchKey + " is " + b.MatchKey);
         if (a.MatchKey == b.MatchKey)
         {
             matchCounts++;
-
+            NotifyQuest(QuestEnums.ObjectiveType.CompleteAmount, 1);
+            UIAudio.Play(correctSound);
             if (matchCounts >= cardList.Count / 2)
             {
+                NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
                 minigameEndMenu.SetActive(true);
             }
         }
         else
         {
+            UIAudio.Play(wrongSound);
             yield return new WaitForSeconds(1.25f);
             
             a.Hide();
             b.Hide();
+            UIAudio.Play(closeSound);
+            Debug.Log("Sound Closing is Playing");
         }
 
         isChecking = false;
@@ -188,5 +214,9 @@ public class MP_CardsController : MonoBehaviour
             int rand = Random.Range(0, i + 1);
             (list[i], list[rand]) = (list[rand], list[i]);
         }
+    }
+    private void NotifyQuest(QuestEnums.ObjectiveType type,int amount)
+    {
+        _QuestMediator.NotifyQuest(type, _QuestTarget.targetID,amount);
     }
 }

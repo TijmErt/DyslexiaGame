@@ -2,9 +2,9 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    Vector3 GetPlayerPosPoint(PlayerInteraction player);
+    Vector3 GetPlayerPosPoint();
 
-    void Interact(PlayerInteraction player);
+    void Interact();
     float InteractionDistance { get; set; }
     
 }

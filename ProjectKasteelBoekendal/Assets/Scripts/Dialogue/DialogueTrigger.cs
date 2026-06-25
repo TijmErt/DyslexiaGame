@@ -10,27 +10,32 @@ using UnityEngine.UIElements;
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
 	[field: SerializeField] public float InteractionDistance { get; set; } = 2f;
-	[field: SerializeField] public GameObject DialogueOverlay { get; set; }
 	private bool playerInRange;
-	public Vector3 GetPlayerPosPoint(PlayerInteraction player)
+	public Vector3 GetPlayerPosPoint()
 	{
 		return transform.position;
 	}
 
-	public void Interact(PlayerInteraction player)
+	public void Interact()
 	{
+		if (!playerInRange)
+			return;
 		// Trigger dialogue to start
-		EventBus.Trigger(new EventHook("OnDialogueStart", this.gameObject));
+		StartDialogue();
 	}
+
+	private void StartDialogue()
+	{
+		EventBus.Trigger(new EventHook("OnDialogueStart", gameObject));
+	}
+	
 	private void Update()
 	{
 		if (!playerInRange)
 			return;
 
-		if (Keyboard.current.eKey.wasPressedThisFrame)
-		{
-			EventBus.Trigger(new EventHook("OnDialogueStart", gameObject));
-		}
+
+		StartDialogue(); // This should get a method that allows the player to start the Dialogue manually
 	}
 	private void OnTriggerEnter(Collider other)
 	{

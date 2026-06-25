@@ -86,6 +86,7 @@ public class SaveMenuUI : MonoBehaviour
     public void LoadSave(string saveName)
     {
         savingMediator.LoadSave(saveName);
+        saveNameInput.text = saveName;
     }
 
     public void DeleteSave(string saveName)

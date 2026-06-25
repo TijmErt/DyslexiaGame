@@ -3,6 +3,9 @@ using NUnit.Framework;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Managers.Audio;
+using Managers.Currency;
+using Managers.Quest;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +17,17 @@ public class MP_CardsController_Model : MonoBehaviour
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
     [SerializeField] private int roundsToPlay = 3;
+    
+    [SerializeField] private QuestTarget _QuestTarget;
+    [SerializeField] private QuestMediator _QuestMediator;
+    [SerializeField] private CurrencyMediator _CurrencyMediator;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
+    [SerializeField] private AudioClip wrongSound;
+    [SerializeField] private AudioClip correctSound;
+    
     private int roundsPlayed = 0;
 
     private List<CardData> cardList;
@@ -25,6 +39,9 @@ public class MP_CardsController_Model : MonoBehaviour
     private bool isChecking;
     private void Start()
     {
+        if(_QuestTarget == null) _QuestTarget = GetComponent<QuestTarget>();
+        if(_QuestMediator == null) _QuestMediator = FindFirstObjectByType<QuestMediator>();
+        if(_CurrencyMediator == null) _CurrencyMediator = FindFirstObjectByType<CurrencyMediator>();
         PrepareCards();
         CreateCards();
     }
@@ -118,7 +135,7 @@ public class MP_CardsController_Model : MonoBehaviour
 
         card.Hide();
         card.isSelected = true;
-
+        UIAudio.Play(closeSound);
         if (firstSelected == null)
         {
             firstSelected = card;
@@ -140,7 +157,9 @@ public class MP_CardsController_Model : MonoBehaviour
         if (a.MatchKey == b.MatchKey)
         {
             matchCounts++;
-
+            NotifyQuest(QuestEnums.ObjectiveType.CompleteAmount, 1);
+            UIAudio.Play(correctSound);
+            
             if (matchCounts >= cardList.Count / 2)
             {
                 roundsPlayed++;
@@ -151,18 +170,23 @@ public class MP_CardsController_Model : MonoBehaviour
                 }
                 else
                 {
+                    NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
+                    _CurrencyMediator.AddCurrency("KitchCoin",10);
                     minigameEndMenu.SetActive(true);
                 }
             }
         }
         else
         {
+            UIAudio.Play(wrongSound);
+            
+            yield return new WaitForSeconds(1.25f);
             a.Show();
             b.Show();
 
             a.isSelected = false;
             b.isSelected = false;
-
+            UIAudio.Play(openSound);
             a.GetComponent<Button>().interactable = true;
             b.GetComponent<Button>().interactable = true;
         }
@@ -200,5 +224,10 @@ public class MP_CardsController_Model : MonoBehaviour
 
         PrepareCards();
         CreateCards();
+    }
+
+    private void NotifyQuest(QuestEnums.ObjectiveType type,int amount)
+    {
+        _QuestMediator.NotifyQuest(type, _QuestTarget.targetID,amount);
     }
 }

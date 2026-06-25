@@ -17,6 +17,9 @@ public class SetDialogue : Unit
     [DoNotSerialize] public ValueInput Name;
     
     [DoNotSerialize] public ValueOutput DialogueOverlayOutput;
+    [DoNotSerialize] public ValueOutput TextOutput;
+    [DoNotSerialize] public ValueOutput CharacterOutput;
+    [DoNotSerialize] public ValueOutput NameOutput;
     
     protected override void Definition()
     {
@@ -31,6 +34,9 @@ public class SetDialogue : Unit
         this.Name = ValueInput<string>(nameof(this.Name), string.Empty);
         
         this.DialogueOverlayOutput = ValueOutput<GameObject>(nameof(this.DialogueOverlayOutput), (flow) => flow.GetValue<GameObject>(this.DialogueOverlay));
+        this.TextOutput = ValueOutput<string>(nameof(this.TextOutput), (flow) => flow.GetValue<string>(this.Text));
+        this.CharacterOutput = ValueOutput<Sprite>(nameof(this.CharacterOutput), (flow) => flow.GetValue<Sprite>(this.Character));
+        this.NameOutput = ValueOutput<string>(nameof(this.NameOutput), (flow) => flow.GetValue<string>(this.Name));
         
         Succession(this.InputTrigger, this.OutputTrigger);
     }

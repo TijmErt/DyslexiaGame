@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private InputReader inputReader = default;
-    [SerializeField] private PlayerInteraction playerInteraction;
     [SerializeField] private Rigidbody rb;
 
     [Header("Movement")]
@@ -26,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         inputReader.moveEvent -= OnMove;
+        OnMove(Vector2.zero);
     }
 
     private void Awake()
     {
-        CheckPlayerInteraction();
         CheckRigidbody();
 
         rb.freezeRotation = true;
@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
     }
+    
 
     private void HandleMovement()
     {
@@ -129,16 +130,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movementInput = input;
     }
-
-    private void CheckPlayerInteraction()
-    {
-        if (playerInteraction != null) return;
-
-        playerInteraction = GetComponent<PlayerInteraction>();
-
-        if (playerInteraction == null)
-            Debug.LogError("PlayerMovement: No PlayerInteraction reference found.");
-    }
+    
 
     private void CheckRigidbody()
     {

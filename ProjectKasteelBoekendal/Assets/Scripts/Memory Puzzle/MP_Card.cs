@@ -12,6 +12,7 @@ public class BookTheme
 
 public class MP_Card : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] private TextMeshProUGUI iconImage;
     [SerializeField] private Image imageDisplay;
 
@@ -20,15 +21,18 @@ public class MP_Card : MonoBehaviour
     [SerializeField] private Vector2 closedSize;
     [SerializeField] private Vector2 openSize;
 
+    
     private string matchKey;
     private bool isImageCard;
     
+    [Header("UI State")]
     public string hiddenCardText;
     public string cardText;
     private BookTheme selectedTheme;
 
     public bool isSelected;
 
+    [Header("Controller")]
     public MP_CardsController cardController;
     public string MatchKey => matchKey;
     public void Setup(CardData data)
@@ -71,8 +75,9 @@ public class MP_Card : MonoBehaviour
 
         bookIcon.sprite = selectedTheme.openBook;
         bookIcon.rectTransform.sizeDelta = openSize;
-
+        
         isSelected = true;
+        
     }
 
     public void Hide()
@@ -84,5 +89,5 @@ public class MP_Card : MonoBehaviour
         bookIcon.rectTransform.sizeDelta = closedSize;
 
         isSelected = false;
-    }
+    }    
 }

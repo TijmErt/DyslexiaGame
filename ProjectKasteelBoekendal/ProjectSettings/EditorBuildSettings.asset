@@ -6,8 +6,69 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu+Character/MainMenu.unity
+    guid: cb9f7b42d6cee8c428a09d147a762d61
+  - enabled: 1
+    path: Assets/Scenes/MainMenu+Character/CharacterSelect.unity
+    guid: 473023671639e3049b340680ab387cf5
+  - enabled: 1
+    path: Assets/Scenes/Kitchen/KitchenArea.unity
+    guid: 1748f79dd9e4ed644b7c65ede51c935f
+  - enabled: 1
+    path: Assets/Scenes/Combine_17-12_Playtest_Throneroom.unity
+    guid: 4ec26b184c0ea4e4dbe9ba25d929cafb
+  - enabled: 1
+    path: Assets/Scenes/Combined.unity
+    guid: f6e7d4f0b93d4aec784ed796e972f38b
+  - enabled: 1
+    path: Assets/Scenes/Cooking_Minigame.unity
+    guid: 20a91534b9abe104f9f7ea4af4ddf712
+  - enabled: 1
+    path: Assets/Scenes/WordRepair.unity
+    guid: e68a04af05ca17b909378fcfd83f6d22
+  - enabled: 1
+    path: Assets/Scenes/Combine_17-12_Playtest_Kitchen.unity
+    guid: 095a7944947eac94a92ddfba9784e498
+  - enabled: 1
+    path: Assets/Scenes/Combine_17-12_Playtest_Blacksmith.unity
+    guid: 6cdc50f287e0dab4f97326ad1cebe786
+  - enabled: 1
+    path: Assets/Scenes/Doodle_Jump.unity
+    guid: e83efe1051705334a8fbcf6f75e3b0e8
+  - enabled: 1
+    path: Assets/Scenes/Flappy_Rhymes.unity
+    guid: a5bce616d09004242a1d4e7a71beed53
+  - enabled: 1
+    path: Assets/Scenes/Memory_Puzzle/Memory_Puzzle.unity
+    guid: 9946af2a01543dd4fa6bd7e849c74ff0
+  - enabled: 1
+    path: Assets/Scenes/Library.unity
+    guid: 97ae8a78f4be14c4ba666ea9d7dcefae
+  - enabled: 1
+    path: Assets/Scenes/Baracks.unity
+    guid: eae5da9491a27df4e8b4df960311e5cc
+  - enabled: 1
+    path: Assets/Scenes/Alchemy_Room.unity
+    guid: d897a9b577abf35459d32cdf35970aa0
+  - enabled: 1
+    path: Assets/Scenes/Word Split/WordSplit.unity
+    guid: 472194fddd940894e9dbdedb397d3fc3
+  - enabled: 0
+    path: Assets/Scenes/Word Split/WordSplit ModP2.unity
+    guid: fda837e00f135174ea5e8ad68ff33ae8
+  - enabled: 1
+    path: Assets/Scenes/Memory_Puzzle/Memory_Puzzle_Model.unity
+    guid: 4900453b10960ad4c89c723c52dfa8e4
+  - enabled: 1
+    path: Assets/Scenes/Memory_Puzzle/Memory_Puzzle_Tutorial.unity
+    guid: b0356fab5388883469693022eb5b023b
+  - enabled: 1
+    path: Assets/Scenes/Kitchen/KitchenArea.unity
+    guid: 1748f79dd9e4ed644b7c65ede51c935f
   m_configObjects:
+    com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: 52cba5b31df3cc74b80f5bbecad2b357, type: 2}
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6e4ae210701dfc14686f5fc00db89862, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d433c0470eee1a24497baddccdeb9e3f, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: e2918c008e1ff144a80a18ac053cbf61, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

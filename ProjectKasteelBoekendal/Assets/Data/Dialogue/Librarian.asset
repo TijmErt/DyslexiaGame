@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ac7be785f01ce47a96fdc4979f49ba, type: 3}
+  m_Name: Librarian
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueCharacter
+  characterName: Librarian
+  currentState: Before
+  IsSpokenTo: 0
+  entries:
+  - State: Before
+    Text: Jij! Je ziet eruit alsof je instructies kunt opvolgen. Die schurk, Fopselik,
+      heeft al mijn boeken door elkaar gehaald en gestolen. Vind de gestolen boeken
+      en maak ze alsjeblieft weer netjes voor mij.
+  - State: Found
+    Text: Oh, dank je! Ik had het niet zonder jou gekund! Je bent een ware held in
+      deze bibliotheek.
+  - State: Not Found
+    Text: Het is hier nog steeds een puinhoop. Help me alsjeblieft de boeken te ordenen.

@@ -314,6 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 284961583}
   - component: {fileID: 284961584}
+  - component: {fileID: 284961585}
   m_Layer: 0
   m_Name: CardsController
   m_TagString: Untagged
@@ -366,10 +367,28 @@ MonoBehaviour:
   pairCount: 3
   minigameEndMenu: {fileID: 158157274}
   roundsToPlay: 2
+  _QuestTarget: {fileID: 284961585}
+  _QuestMediator: {fileID: 389846149}
   openSound: {fileID: 8300000, guid: 2ab088a5a449ee04cad931a61d78ebf7, type: 3}
   closeSound: {fileID: 8300000, guid: 46f29d5a4c3387842aa38bb94619c51e, type: 3}
   wrongSound: {fileID: 8300000, guid: ec0d6163b7411784083d5f77254f984a, type: 3}
   correctSound: {fileID: 8300000, guid: 9d66f329437644d438b0890d01c1e90c, type: 3}
+--- !u!114 &284961585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284961581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aad261f2f4d2942a3db6742a387838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestTarget
+  targetID: MemPuz-Model
+  isFocusOfQuest: 1
+  questMarker: {fileID: 0}
+  questTargetLocation: {x: 0, y: 0, z: 0}
 --- !u!1 &305727340
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +481,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
+--- !u!114 &389846149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2025599780383820199, guid: b1a01abf9a41c524c9dbadc99196bdb8, type: 3}
+  m_PrefabInstance: {fileID: 389846148}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8654dbe62d39644d86c2d80f6d21473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &423316642
 PrefabInstance:
   m_ObjectHideFlags: 0

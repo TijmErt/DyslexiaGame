@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Managers.Audio;
+using Managers.Quest;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +16,9 @@ public class MP_CardsController_Model : MonoBehaviour
     [SerializeField] private int pairCount = 4;
     [SerializeField] private GameObject minigameEndMenu;
     [SerializeField] private int roundsToPlay = 3;
+    
+    [SerializeField] private QuestTarget _QuestTarget;
+    [SerializeField] private QuestMediator _QuestMediator;
 
     [Header("Audio")]
     [SerializeField] private AudioClip openSound;
@@ -33,6 +37,8 @@ public class MP_CardsController_Model : MonoBehaviour
     private bool isChecking;
     private void Start()
     {
+        if(_QuestTarget == null) _QuestTarget = GetComponent<QuestTarget>();
+        if(_QuestMediator == null) _QuestMediator = FindFirstObjectByType<QuestMediator>();
         PrepareCards();
         CreateCards();
     }
@@ -148,7 +154,7 @@ public class MP_CardsController_Model : MonoBehaviour
         if (a.MatchKey == b.MatchKey)
         {
             matchCounts++;
-            
+            NotifyQuest(QuestEnums.ObjectiveType.CompleteAmount, 1);
             UIAudio.Play(correctSound);
             
             if (matchCounts >= cardList.Count / 2)
@@ -161,6 +167,7 @@ public class MP_CardsController_Model : MonoBehaviour
                 }
                 else
                 {
+                    NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
                     minigameEndMenu.SetActive(true);
                 }
             }
@@ -213,5 +220,10 @@ public class MP_CardsController_Model : MonoBehaviour
 
         PrepareCards();
         CreateCards();
+    }
+
+    private void NotifyQuest(QuestEnums.ObjectiveType type,int amount)
+    {
+        _QuestMediator.NotifyQuest(type, _QuestTarget.targetID,amount);
     }
 }

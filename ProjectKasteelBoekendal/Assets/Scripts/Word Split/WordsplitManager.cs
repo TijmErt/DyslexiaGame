@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Managers.Quest;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class WordsplitManager : MonoBehaviour
 	[field: SerializeField] public GameObject HealthBar { get; set; }
     [field: SerializeField] public GameObject ScoreBar { get; set; }
     [field: SerializeField] public GameObject CutButton { get; set; }
+    
 
     private int Score { get; set; } = 0;
     private int Health { get; set; } = 3;
@@ -22,6 +24,9 @@ public class WordsplitManager : MonoBehaviour
     private AudioSource AudioSource { get; set; }
     private SceneMediator SceneMediator { get; set; }
     private EventFlagMediator EventFlagMediator { get; set; }
+    
+    private QuestMediator _QuestMediator;
+    private QuestTarget _QuestTarget;
     
     private List<string> CurrentWord { get; set; }
     private bool FeedbackActive { get; set; } = false;
@@ -41,6 +46,8 @@ public class WordsplitManager : MonoBehaviour
 
     void Start() {
         this.AudioSource = this.GetComponent<AudioSource>();
+        if(_QuestTarget == null) _QuestTarget = GetComponent<QuestTarget>();
+        if(_QuestMediator == null) _QuestMediator = FindFirstObjectByType<QuestMediator>();
         this.SceneMediator = FindFirstObjectByType<SceneMediator>();
         this.EventFlagMediator = FindFirstObjectByType<EventFlagMediator>();
         
@@ -89,11 +96,13 @@ public class WordsplitManager : MonoBehaviour
 
     private void IncreaseScore() {
         this.Score++;
+        NotifyQuest(QuestEnums.ObjectiveType.CompleteAmount, 1);
         this.ScoreBar.GetComponentInChildren<TextMeshProUGUI>().text = this.Score.ToString();
     }
 
     private void FinishGame() {
         this.EventFlagMediator.enableFlag("Kitchen.Main.NPC.Soes.Helped");
+        NotifyQuest(QuestEnums.ObjectiveType.Interact, 1);
         this.SceneMediator.LoadPreviousScene();
     }
 
@@ -115,5 +124,10 @@ public class WordsplitManager : MonoBehaviour
         if (this.Health != 0) return;
         
         this.FinishGame();
+    }
+    
+    private void NotifyQuest(QuestEnums.ObjectiveType type,int amount)
+    {
+        _QuestMediator.NotifyQuest(type, _QuestTarget.targetID,amount);
     }
 }

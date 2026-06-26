@@ -31044,6 +31044,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3921138571801429664, guid: 34cb660095374e54585db0ea3369951c, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"WordSplit_Model","$type":"System.String"},"typeHandle":{"Identification":"System.String,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"QuestTarget","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"Managers.Quest.QuestTarget,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921138571801429664, guid: 34cb660095374e54585db0ea3369951c, type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921138571801429664, guid: 34cb660095374e54585db0ea3369951c, type: 3}
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 2078276504}
@@ -31051,6 +31063,10 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
+    - target: {fileID: 3921138571801429664, guid: 34cb660095374e54585db0ea3369951c, type: 3}
+      propertyPath: '_data._objectReferences.Array.data[2]'
+      value: 
+      objectReference: {fileID: 460630313730527550}
     - target: {fileID: 4552916544921927718, guid: 34cb660095374e54585db0ea3369951c, type: 3}
       propertyPath: m_Name
       value: Harrie het Hulpje
@@ -31060,6 +31076,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34cb660095374e54585db0ea3369951c, type: 3}
+--- !u!114 &460630313730527550 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4338531985992283514, guid: 34cb660095374e54585db0ea3369951c, type: 3}
+  m_PrefabInstance: {fileID: 460630313730527549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aad261f2f4d2942a3db6742a387838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestTarget
 --- !u!1001 &1951302349391675161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31113,6 +31140,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7830091502739023851, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"Memory_Puzzle","$type":"System.String"},"typeHandle":{"Identification":"System.String,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"QuestTarget","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"Managers.Quest.QuestTarget,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830091502739023851, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830091502739023851, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 2078276504}
@@ -31120,11 +31159,26 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
+    - target: {fileID: 7830091502739023851, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
+      propertyPath: '_data._objectReferences.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1951302349391675162}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
+--- !u!114 &1951302349391675162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5277565716611086333, guid: 79543b9fee784b34cb3d6356d6945dc3, type: 3}
+  m_PrefabInstance: {fileID: 1951302349391675161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aad261f2f4d2942a3db6742a387838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestTarget
 --- !u!1001 &2252514365951704059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31178,6 +31232,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5428881221828698096, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"Memory_Puzzle_Tutorial","$type":"System.String"},"typeHandle":{"Identification":"System.String,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"QuestTarget","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"Managers.Quest.QuestTarget,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428881221828698096, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428881221828698096, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 2078276504}
@@ -31185,11 +31251,26 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
+    - target: {fileID: 5428881221828698096, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
+      propertyPath: '_data._objectReferences.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2252514365951704060}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
+--- !u!114 &2252514365951704060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5086515983663899819, guid: 66a0190dccb627245a2f63d257bf5727, type: 3}
+  m_PrefabInstance: {fileID: 2252514365951704059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aad261f2f4d2942a3db6742a387838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestTarget
 --- !u!1001 &2788915878059795906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31593,6 +31674,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1058594640}
     m_Modifications:
     - target: {fileID: 2197988826128861540, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"WordSplit_Tutorial","$type":"System.String"},"typeHandle":{"Identification":"System.String,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"QuestTarget","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"Managers.Quest.QuestTarget,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197988826128861540, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197988826128861540, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 2078276504}
@@ -31600,6 +31693,10 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
+    - target: {fileID: 2197988826128861540, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
+      propertyPath: '_data._objectReferences.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6848287629609577735}
     - target: {fileID: 3657012121012633198, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9978714
@@ -31649,6 +31746,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
+--- !u!114 &6848287629609577735 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1884724138275202007, guid: 312e82dc3ea157c449b6ffb3506af6df, type: 3}
+  m_PrefabInstance: {fileID: 6848287629609577734}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aad261f2f4d2942a3db6742a387838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestTarget
 --- !u!1001 &7971851407379592885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31787,6 +31895,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2656769446717390306, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"WordSplit","$type":"System.String"},"typeHandle":{"Identification":"System.String,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"QuestTarget","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"Managers.Quest.QuestTarget,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656769446717390306, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656769446717390306, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 2078276504}
@@ -31794,11 +31914,26 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
+    - target: {fileID: 2656769446717390306, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+      propertyPath: '_data._objectReferences.Array.data[2]'
+      value: 
+      objectReference: {fileID: 7986575903196494689}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+--- !u!114 &7986575903196494689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4755315989206826754, guid: e27c673d48a66c9408b1e674caca0665, type: 3}
+  m_PrefabInstance: {fileID: 7986575903196494688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aad261f2f4d2942a3db6742a387838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestTarget
 --- !u!1001 &8591416334601476336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31808,6 +31943,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1058594640}
     m_Modifications:
     - target: {fileID: 5643968876627201875, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Mediator","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"SceneToLoad","value":{"$content":"Memory_Puzzle_Model","$type":"System.String"},"typeHandle":{"Identification":"System.String,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"DialogueOverlay","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"QuestTarget","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"Managers.Quest.QuestTarget,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643968876627201875, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643968876627201875, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 2078276504}
@@ -31815,6 +31962,10 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[1]'
       value: 
       objectReference: {fileID: 139994996}
+    - target: {fileID: 5643968876627201875, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
+      propertyPath: '_data._objectReferences.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8591416334601476337}
     - target: {fileID: 7078434584466847468, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.000556
@@ -31864,6 +32015,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
+--- !u!114 &8591416334601476337 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8189052779011282541, guid: 1f024d4fa59873247b9000324118bfc0, type: 3}
+  m_PrefabInstance: {fileID: 8591416334601476336}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aad261f2f4d2942a3db6742a387838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Managers.Quest.QuestTarget
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
